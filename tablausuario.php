@@ -50,8 +50,10 @@ $userid=$_SESSION["id"];
                         <th style=\"text-align:center;\">Título del proyecto</th>
                         <th style=\"text-align:left;\">Estado</th>
                      </thead>";
-
 					 while ($linea = $resultado->fetch_assoc()) {
+						if ($linea['subtipo']==1) {
+							break;
+						}
 						echo"
 					 <tbody>
 					 	<tr>

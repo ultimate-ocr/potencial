@@ -47,15 +47,17 @@ $userid=$_SESSION["id"];
                <div class=\"table\">
                   <table id=\"mytable\" class=\"table table-bordred table-stripedt\">
                      <thead>
-                        <th style=\"text-align:center;\">Título del proyecto</th>
+                        <th style=\"text-align:left;\">Título del proyecto</th>
                         <th style=\"text-align:left;\">Estado</th>
                      </thead>";
-
 					 while ($linea = $resultado->fetch_assoc()) {
+						if ($linea['subtipo']!=1) {
+							continue;
+						}
 						echo"
 					 <tbody>
 					 	<tr>
-							<td style=\"text-align:center;\">
+							<td style=\"text-align:left;\">
 								 " . $linea['titulo']."
 							</td>
 							<td>";
@@ -105,17 +107,142 @@ $userid=$_SESSION["id"];
 
 			<div id="collapseA" class="row-fluid collapse in">
                 <div class="span5 offset1">A.2 Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</div> 
-				<div class="offset10"><button style="color:blue; background-color: #ffffff;border: #ffffff" data-toggle="modal" data-target="#newia"> <i class="material-icons">create</i></button>
-									<button style="color:blue; background-color: #ffffff;border: #ffffff"data-toggle="modal" data-target="#newia"><i class="material-icons">delete_sweep</i></button>
-				</div>
+<?php
+			//desde aqui
+			$resultado=getmerito("ia");
+			if ($resultado->num_rows != 0) {
+				echo"
+
+			<div>
+               <div class=\"table\">
+                  <table id=\"mytable\" class=\"table table-bordred table-stripedt\">
+                     <thead>
+                        <th style=\"text-align:left;\">Título del proyecto</th>
+                        <th style=\"text-align:left;\">Estado</th>
+                     </thead>";
+					 while ($linea = $resultado->fetch_assoc()) {
+						if ($linea['subtipo']!=2) {
+							continue;
+						}
+						echo"
+					 <tbody>
+					 	<tr>
+							<td style=\"text-align:left;\">
+								 " . $linea['titulo']."
+							</td>
+							<td>";
+							switch ($linea['estado']) {
+								case 0:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
+									break;
+								case 1:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:green\">fiber_manual_record</i>";
+									break;
+								case 2:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:yellow\">fiber_manual_record</i>";
+									break;
+								case 3:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:red\">fiber_manual_record</i>";
+									break;
+								default:
+									echo 'Su usuario es incorrecto, intente nuevamente.';
+									break;
+							}
+							
+							
+							
+							echo 	$linea['infoestado']
+							
+							
+							
+							
+							."</td>
+							<td style=\"text-align:right;\">
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">create</i></button>
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#newia\"><i class=\"material-icons\">delete_sweep</i></button>
+							</td>
+						 
+						</tr>";
+					 }
+			}
+				  echo"       
+                  </tbody>
+                  </table>
+               </div>
+			</div>";
+			//hasta aqui
+			?>
 			</div>
+
 
 			<div id="collapseA" class="row-fluid collapse in">
                 <div class="span5 offset1">A.3 Proyectos mediante convenios</div> 
-				<div class="offset10"><button style="color:blue; background-color: #ffffff;border: #ffffff" data-toggle="modal" data-target="#newia"> <i class="material-icons">create</i></button>
-									<button style="color:blue; background-color: #ffffff;border: #ffffff"data-toggle="modal" data-target="#newia"><i class="material-icons">delete_sweep</i></button>
-				</div>
-			</div>	
+<?php
+			//desde aqui
+			$resultado=getmerito("ia");
+			if ($resultado->num_rows != 0) {
+				echo"
+
+			<div>
+               <div class=\"table\">
+                  <table id=\"mytable\" class=\"table table-bordred table-stripedt\">
+                     <thead>
+                        <th style=\"text-align:left;\">Título del proyecto</th>
+                        <th style=\"text-align:left;\">Estado</th>
+                     </thead>";
+					 while ($linea = $resultado->fetch_assoc()) {
+						if ($linea['subtipo']!=3) {
+							continue;
+						}
+						echo"
+					 <tbody>
+					 	<tr>
+							<td style=\"text-align:left;\">
+								 " . $linea['titulo']."
+							</td>
+							<td>";
+							switch ($linea['estado']) {
+								case 0:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
+									break;
+								case 1:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:green\">fiber_manual_record</i>";
+									break;
+								case 2:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:yellow\">fiber_manual_record</i>";
+									break;
+								case 3:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:red\">fiber_manual_record</i>";
+									break;
+								default:
+									echo 'Su usuario es incorrecto, intente nuevamente.';
+									break;
+							}
+							
+							
+							
+							echo 	$linea['infoestado']
+							
+							
+							
+							
+							."</td>
+							<td style=\"text-align:right;\">
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">create</i></button>
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#newia\"><i class=\"material-icons\">delete_sweep</i></button>
+							</td>
+						 
+						</tr>";
+					 }
+			}
+				  echo"       
+                  </tbody>
+                  </table>
+               </div>
+			</div>";
+			//hasta aqui
+			?>
+		</div>
 		</div>
 
 			<div class="row-fluid">
