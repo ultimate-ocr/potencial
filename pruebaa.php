@@ -10,6 +10,10 @@
 </head>
 <body>
 
+
+
+
+
 <div class="container">
   <h2>Modal Example</h2>
   <!-- Trigger the modal with a button -->
