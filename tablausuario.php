@@ -39,7 +39,7 @@ $userid=$_SESSION["id"];
 				
 			<?php
 			//desde aqui
-			$resultado=getmerito("ia");
+			$resultado=getmeritoia("1");
 			if ($resultado->num_rows != 0) {
 				echo"
 
@@ -51,11 +51,76 @@ $userid=$_SESSION["id"];
                         <th style=\"text-align:left;\">Estado</th>
                      </thead>";
 					 while ($linea = $resultado->fetch_assoc()) {
-						if ($linea['subtipo']==1) {
-							break;
-						}
 						echo"
 					 <tbody>
+					 	
+							<td style=\"text-align:center;\">
+								 " . $linea['titulo']."
+							</td>
+							<td>";
+							switch ($linea['estado']) {
+								case 0:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
+									break;
+								case 1:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:green\">fiber_manual_record</i>";
+									break;
+								case 2:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:yellow\">fiber_manual_record</i>";
+									break;
+								case 3:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:red\">fiber_manual_record</i>";
+									break;
+								default:
+									echo 'Su usuario es incorrecto, intente nuevamente.';
+									break;
+							}
+							
+							
+							
+							echo 	$linea['infoestado']
+							
+							
+							
+							
+							."</td>
+							<td style=\"text-align:right;\">
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">create</i></button>
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#newia\"><i class=\"material-icons\">delete_sweep</i></button>
+							</td>
+						 
+						";
+					 }
+			}
+				  echo"       
+                  </tbody>
+                  </table>
+               </div>
+			</div>";
+			//hasta aqui
+			?>
+
+
+
+			<div id="collapseA" class="row-fluid collapse in">
+                <div class="span5 offset1">A.2 Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</div> 
+<?php
+			//desde aqui
+			$resultado=getmeritoia("2");
+			if ($resultado->num_rows != 0) {
+				echo"
+
+			
+               <div class=\"table\">
+                  <table id=\"mytable\" class=\"table table-bordred table-stripedt\">
+                     <thead>
+                        <th style=\"text-align:center;\">Título del proyecto</th>
+                        <th style=\"text-align:left;\">Estado</th>
+                     </thead>
+					 <tbody>";
+					 while ($linea = $resultado->fetch_assoc()) {
+						echo"
+
 					 	<tr>
 							<td style=\"text-align:center;\">
 								 " . $linea['titulo']."
@@ -99,18 +164,10 @@ $userid=$_SESSION["id"];
                   </tbody>
                   </table>
                </div>
-			</div>";
+			</div>
+			";
 			//hasta aqui
 			?>
-
-
-
-			<div id="collapseA" class="row-fluid collapse in">
-                <div class="span5 offset1">A.2 Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</div> 
-				<div class="offset10"><button style="color:blue; background-color: #ffffff;border: #ffffff" data-toggle="modal" data-target="#newia"> <i class="material-icons">create</i></button>
-									<button style="color:blue; background-color: #ffffff;border: #ffffff"data-toggle="modal" data-target="#newia"><i class="material-icons">delete_sweep</i></button>
-				</div>
-			</div>
 
 			<div id="collapseA" class="row-fluid collapse in">
                 <div class="span5 offset1">A.3 Proyectos mediante convenios</div> 

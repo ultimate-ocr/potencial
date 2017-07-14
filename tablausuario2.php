@@ -60,7 +60,7 @@ $userid=$_SESSION["id"];
 							<td style=\"text-align:left;\">
 								 " . $linea['titulo']."
 							</td>
-							<td>";
+							<td style=\"text-align:left;\">";
 							switch ($linea['estado']) {
 								case 0:
 									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
@@ -109,7 +109,7 @@ $userid=$_SESSION["id"];
                 <div class="span5 offset1">A.2 Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</div> 
 <?php
 			//desde aqui
-			$resultado=getmerito("ia");
+			$resultado=getmeritoia("2");
 			if ($resultado->num_rows != 0) {
 				echo"
 
@@ -130,7 +130,7 @@ $userid=$_SESSION["id"];
 							<td style=\"text-align:left;\">
 								 " . $linea['titulo']."
 							</td>
-							<td>";
+							<td style=\"text-align:left;\">";
 							switch ($linea['estado']) {
 								case 0:
 									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
@@ -179,8 +179,9 @@ $userid=$_SESSION["id"];
                 <div class="span5 offset1">A.3 Proyectos mediante convenios</div> 
 <?php
 			//desde aqui
-			$resultado=getmerito("ia");
+			$resultado=getmeritoia("3");
 			if ($resultado->num_rows != 0) {
+				
 				echo"
 
 			<div>
@@ -191,9 +192,7 @@ $userid=$_SESSION["id"];
                         <th style=\"text-align:left;\">Estado</th>
                      </thead>";
 					 while ($linea = $resultado->fetch_assoc()) {
-						if ($linea['subtipo']!=3) {
-							continue;
-						}
+
 						echo"
 					 <tbody>
 					 	<tr>
