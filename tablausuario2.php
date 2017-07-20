@@ -38,7 +38,7 @@ $userid=$_SESSION["id"];
 				
 			<?php
 			//desde aqui
-			$resultado=getmerito("ia");
+			$resultado=getmerito("ia",'1');
 			if ($resultado->num_rows != 0) {
 				echo"
 
@@ -107,7 +107,7 @@ $userid=$_SESSION["id"];
 			<div id="collapseA" class="row-fluid collapse in"> 
 <?php
 			//desde aqui
-			$resultado=getmeritoia("2");
+			$resultado=getmerito('ia',"2");
 			if ($resultado->num_rows != 0) {
 				echo"
 
@@ -176,7 +176,7 @@ $userid=$_SESSION["id"];
 			<div id="collapseA" class="row-fluid collapse in">
 <?php
 			//desde aqui
-			$resultado=getmeritoia("3");
+			$resultado=getmerito('ia',"3");
 			if ($resultado->num_rows != 0) {
 				
 				echo"

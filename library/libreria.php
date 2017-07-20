@@ -30,13 +30,13 @@ if (!$resultado = $mysqli->query($query)) {
 return sumaUAD($resultado);
 }
 
-function getmerito($tabla){
+function getmerito($tabla,$subtipo){
 $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
 if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 $userid=$_SESSION["id"];
-$query = "SELECT titulo, subtipo, estado, infoestado FROM $tabla WHERE userid=$userid";
+$query = "SELECT titulo, subtipo, estado, infoestado FROM $tabla WHERE userid=$userid and subtipo=$subtipo";
 
 if (!$resultado = $mysqli->query($query)) {
 	// ¡Oh, no! La consulta falló. 

@@ -14,8 +14,6 @@ $userid=$_SESSION["id"];
 ?>
 
 	<div class="container-fluid">
-		
-
 		<h1 id=titulo>Planificaci&oacuten Acad&eacutemica</h1>
 		<div id="table-responsive">
 			<div class="row-fluid">
@@ -102,7 +100,7 @@ $userid=$_SESSION["id"];
 
 
 
-			<div id="collapseA" class="row-fluid collapse in">
+			<div id="collapseA" class="row-fluid collapse out">
                 <div class="span5 offset1">A.2 Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</div> 
 <?php
 			//desde aqui
