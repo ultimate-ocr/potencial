@@ -74,7 +74,7 @@ function mostrar($tabla){
 
     function mostrar_sub($fichero, $num_linea){
 
-        global $contador, $pre;
+        global $contador, $pre, $tabla;
         $letra=$pre[$contador];
         $linea=$fichero[++$num_linea];
         $primera=1;
@@ -129,8 +129,8 @@ function mostrar($tabla){
 							echo 	$lineaBD['infoestado']
     						."</td>
 							<td style=\"text-align:right;\">
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">create</i></button>
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#newia\"><i class=\"material-icons\">delete_sweep</i></button>
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#modif".$tabla.$pre[$contador]."\"> <i class=\"material-icons\">create</i></button>
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#delete".$tabla.$pre[$contador]."\"><i class=\"material-icons\">delete_sweep</i></button>
 							</td>
 						 
 						</tr>
@@ -187,7 +187,7 @@ if($fichero!=NULL){
                         <div class=\"span8\">".$pre[$contador]."-".$linea."</div>
                         <div class=\"span1\">".$total."</div> </div>
                         <div class=\"offset10\">
-                        <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">add</i></button>
+                        <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>
                         </button>
                     </div>
                 </div>";
@@ -202,7 +202,7 @@ if($fichero!=NULL){
                             <div class=\"span8\">".$pre[$contador].$linea."</div>
                             <div class=\"span1\">".$total."</div> </div>
                             <div class=\"offset10\">
-                            <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">add</i></button>
+                            <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>
                             </button>
                         </div>
                     </div>";
@@ -213,7 +213,916 @@ if($fichero!=NULL){
         }
     }
 }
+
+
 ?>
+
+<div class="modal fade" id="newiA" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ia.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+
+<div class="modal fade" id="newiB" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+
+
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+    <div class="modal fade" id="newiC" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="panel-body">
+                <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/ic.php" method="post" class="form-horizontal" autocomplete="on">
+
+                  <div class="form-group">
+                     <label for="nombre">Nombre del Proyecto</label></p>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                  </div>
+				  <br>
+                  <div class="form-group">
+                    <label for="orgfin">Organización Financiadora</label></p>
+                    <input type="text" class="form-control" id="orgfin" name="orgfin">
+                  </div>
+				  <br>
+				  <div class="form-group">
+                    <label for="entcol">Entidades Colaboradoras</label></p>
+                    <input type="text" class="form-control" id="entcol" name="entcol"  placeholder="Separados por comas">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="fechaini">Fecha inicio</label>
+                    <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                  </div>
+                <div class="col-xs-4">
+                    <label for="fechafin">Fecha finalizaión</label>
+                    <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                  </div>
+                 </div>	
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                    <input type="text" class="form-control" id="subtot" name="subtot" placeholder="€">
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                    <input type="text" class="form-control" id="investigador" name="investigador" >
+                  </div>
+                  <div class="form-group">
+                    <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                    <input type="text" class="form-control" id="numinv" name="numinv" >
+                  </div>
+
+                  <div class="modal-footer">
+                    <input type="submit" name="CVparte2" id="CVparte2" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+         </div>
+         <!-- /.modal-dialog --> 
+      </div></div>
+    </div></div>
+
+
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

@@ -1,0 +1,239 @@
+--------------------    ------------------
+                  DOCENCIA 
+--------------------    ------------------
+
+HECHO  --> A. Encargo Docente 	
+A1. Reconocimiento Docente		
+A2. Docencia presencial en títulos de grado y posgrado		
+A3. Docencia práctica de becarios de investigación		
+
+NO TIENE CAMPOS, ES UN VALOR AUTOCALCULADO.
+
+.....
+
+HECHO -->>B. Tutorías individuales 
+
+NO TIENE CAMPOS, ES UN VALOR AUTOCALCULADO.
+.....
+
+HECHO -->> C. Evaluación 	
+
+NO TIENE CAMPOS, ES UN VALOR AUTOCALCULADO.
+
+.....
+
+HECHO -->> D. Preparación de clases 	
+
+NO TIENE CAMPOS, ES UN VALOR AUTOCALCULADO.
+
+.....
+
+HECHO -->> E. Dirección de trabajos de fin Grado o Máster 	
+E1. Trabajo fin de grado		
+E2. Trabajo fin de máster		
+
+Ver imagen adjunta al correo.
+
+.....
+
+Hecho-->>F. Dirección de tesis doctorales 
+
+Ver imagen adjunta al correo.
+
+.....
+
+HECHO -->>  G. Materiales para la docencia en enseñanza presencial de la ULPGC 
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO D, investigación); tanto en la interfaz como la tabla asociada a la BBDD.
+
+.....
+
+H. Participación en programas, congresos o jornadas de innovación educativa
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO D, investigación); tanto en la interfaz como la tabla asociada a la BBDD.
+
+.....
+
+HECHO -->>  I. Publicaciones de innovación educativa en revistas especializadas
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO C, investigación); tanto en la interfaz como la tabla asociada a la BBDD.
+
+.....
+
+HECHO -->>  J. Participación en la coordinación académica de las enseñanzas en todas las etapas
+
+Una ventana en el que aparezca en un campo "checkbox" para indicar si ha habido participación en la coordinación académica de las enseñanzas.
+
+se puede ver, pero no modificar. Lo mete un evaluador===> fusionar Ly J en el mismo dialogo modal
+.....
+
+K. Participación en programas de intercambio y movilidad internacionales e interuniversitarios con fines docentes
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO H, investigación); tanto en la interfaz como la tabla asociada a la BBDD.
+
+.....
+
+L. Uso del Campus Virtual en la actividad docente 
+
+Una ventana en el que aparezca en un campo "radiobutton" para indicar si ha habido participación  alta, media o baja en el campus virtual.
+
+se puede ver, pero no modificar. Lo mete un evaluador
+--------------------    ------------------
+             INVESTIGACIÓN 
+--------------------    ------------------
+
+HECHO. A. Dirección y ejecución de proyectos de investigación
+A1 Proyectos de convocatoria pública y competitiva concedidos a la ULPGC
+A2. Proyectos de convocatoria pública y competitiva concedidos a otra institución científica
+A3. Proyectos mediante convenios
+
+.....
+
+HECHO -> B. Dirección de los grupos de investigación de la ULPGC, así como participación en ellos
+
+Una ventana en el que aparezca en un campo desplegable todos los grupos de investigación de la ULPGC, y campo "checkbox" para indicar si es dirección de grupo.
+
+Esto se traduce en la BBDD, en una tabla con todos los nombres de los grupos de investigación y otra tabla para establecer la pertenencia al grupo (relación 1:M) y un campo en la tabla del grupo para indicar quién es el director de ese grupo.
+
+.....
+
+HECHO. C. Publicaciones, libros, informes u otros medios establecidos en cada disciplina académica 
+C1. Reconocimiento de la Investigación
+C2. Publicaciones de investigación indexada
+C3. Publicaciones de investigación no indexada
+
+.....
+
+HECHO. D. Dirección, organización y participación en congresos científicos 
+
+.....
+
+HECHO -> E. Gestión y participación en redes de investigación autonómicas, estatales e internacionales
+
+Una ventana en el que aparezca en un campo texto para indicar las redes en la que participa. Este campo irá acompañado de un botón para la insersión en una lista.
+
+Esto se traduce en la BBDD, en una tabla con todos los nombres de las redes a la que pertenece el investigador y otra tabla para establecer la pertenencia al listado de redes (relación 1:M).
+
+.....
+
+HECHO -> F. Evaluación por pares para agencias, universidades y publicaciones científicas
+
+Una ventana en el que aparezca en un campo texto para indicar las las agencias, universidades o revistas en las que se ha revisado. Este campo irá acompañado de un botón para la insersión en una lista.
+
+Esto se traduce en la BBDD, en una tabla con todos los nombres de las agencias, universidades o revistas a la que ha revisado el investigador y otra tabla para establecer la pertenencia al listado y establece la relación 1:M.
+
+.....
+
+HECHO. G. Elaboración de informes para instituciones académicas/científicas y participación en comités de revistas científicas
+
+.....
+
+HECHO. H. Estancias de investigación aprobadas por los órganos de gobierno de la ULPGC
+
+.....
+
+HECHO --> I. Dedicación de los Titulares de Escuela Universitaria y Profesores Colaboradores a la tesis doctoral 
+
+campo checkbox visible pero no manipulable
+
+HECHO --> J. Dedicación de los Ayudantes a la tesis doctoral
+
+ En función de la categoría profesional se le aplicarían distintos descuentos.
+
+Esto se traduce en la BBDD, en una tabla donde están todos los ID's de los profesores que tienen descuento por realización de tesis doctoral.
+
+.....
+
+HECHO. K. Proyectos técnicos y trabajos aplicados científicos, artísticos, sociales y culturales que supongan innovación o transferencia de conocimiento 
+
+.....
+
+HECHO -->  L. Desarrollo y explotación de patentes, licencias, marcas, prototipos y otras formas de protección intelectual e industrial 
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO C); tanto en la interfaz como la tabla asociada a la BBDD.
+
+.....
+
+HECHO--> M. Creación de empresas de base tecnológica de origen académico y basadas en el conocimiento
+
+una ventana con un campo "checkbox" para indicar si se ha creado una empresa de base tecnológica.
+
+Esto se traduce en la BBDD, en una tabla donde están todos los ID's de los profesores que tienen una empresa de base tecnológica.
+
+.....
+
+HECHO. N. Colaboraciones con organismos públicos de investigación, parques científicos y tecnológicos, en proyectos o trabajos de investigación aplicada, desarrollo e innovación
+
+.....
+
+
+HECHO --> Ñ. Coordinación y ejecución de proyectos de cooperación de convocatoria pública, competitiva que hayan sido evaluadas por agencias.
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO A); tanto en la interfaz como la tabla asociada a la BBDD. La única diferencia es que en vez de ser un proyecto de investigación es de cooperación pero los datos son idénticos.
+
+.....
+
+HECHO --> O. Asistencia a cursos y seminarios 
+
+Este mérito es idéntido a la publicación de un artículo (APARTADO D); tanto en la interfaz como la tabla asociada a la BBDD.
+
+.....
+
+
+
+--------------------    ------------------
+                   GESTIÓN  
+--------------------    ------------------
+
+NO HACE FALTA --> A. Desempeñar cargos académicos unipersonales de dirección y gestión 
+
+una ventana con un campo "checkbox" para indicar qué cargo se desempaña, es decir, rector, vicerrector, director de area, director de faculta/escuela, director de departamento, secretario escuela/departamento o vicedirector.
+
+Esto se traduce en la BBDD, en una tabla donde están todos los ID's de los profesores que tiene un cargo.
+
+.....
+
+NO HACE FALTA-->>B. Representación Sindical 
+
+una ventana con un campo "checkbox" para indicar si tiene cargo en CEPDIL o en la JPDI.
+
+Esto se traduce en la BBDD, en una tabla donde están todos los ID's de los profesores que tiene un cargo.
+
+.....
+
+C. Participar en órganos colegiados de gestión y representación 
+
+D. Formar parte de cómites y comisiones académicas
+
+DUDA -->E. Formar parte de tribunales y comisiones de evaluación del PDI 
+
+Fusionar estos tres puntos en una sola ventana, un campo "checkbox" para indicar si tiene Participar en órganos colegiados de gestión y representación,Formar parte de cómites y comisiones académicas, Formar parte de tribunales y comisiones de evaluación del PDI.
+
+Esto se traduce en la BBDD, en una tabla donde están todos los ID's de los profesores que tienen descuento por participación.
+
+.....
+
+NO HACE FALTA---> Gestión de Proyectos de Investigación
+F1. Proyectos de convocatoria pública y competititva concedidos a la ULPGC
+F2. Proyectos mediante Convenios
+
+NO HACE FALTA-> G. Gestión de Proyectos de Cooperación
+
+Fusionar estos dos puntos, F y G, en una sola ventana, donde aparezcan los proyectos de los apartados A y Ñ, de investigación. Se marcarán como un checkbox aquellos en los que se sea director.
+
+.....
+
+HECHO  -> H. Organización de eventos científicos, culturales y artísticos que transmitan a la sociedad los valores y resultados universitarios 
+
+Una ventana con un componente "TextArea" en el que se pueda escribir los eventos en los que se ha participación en su organización.
+
+.....
+
+HECHO -> I. Otras actividades de gestión
+
+Una ventana con un componente "TextArea" en el que se pueda escribir cualquier cosa.
+
+.....
+
+--------------------------------------
+

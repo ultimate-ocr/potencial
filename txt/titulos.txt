@@ -16,7 +16,7 @@ Participación en programas de intercambio y movilidad internacionales e interun
 Uso del Campus Virtual en la actividad docente
 #Reconocimientos. (No contabiliza en Total por estar incorporados a A, B y C
 #Total Actividades de Docencia
-
+<
 -Dirección y ejecución de proyectos de investigación
 .Proyectos de convocatoria pública y competitiva concedidos a la ULPGC
 .Proyectos de convocatoria pública y competitiva concedidos a otra institución científica
@@ -41,7 +41,7 @@ Coordinación y ejecución de proyectos de convocatoria pública, competitiva qu
 Asistencia a cursos y seminarios
 #Reconocimientos
 #Total Actividades Investigación
-
+<
 Desempeñar cargos académicos unipersonales de dirección y gestión
 Representación sindical
 Participar en órganos colegiados de gestión y representación
