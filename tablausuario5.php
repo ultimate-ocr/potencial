@@ -11,8 +11,7 @@ function mostrar($tabla){
     $primera=1;
     global $contador, $pre;
     $letra=$pre[$contador];
-    $tabla='ia';
-    $resultado=getmerito("ia",'1');
+    $resultado=getmerito($tabla,'0');
     while ($lineaBD = $resultado->fetch_assoc()) {
         if ($primera==1){
  echo"
@@ -168,13 +167,14 @@ function borra_entrada($tabla, $id)
             return ($num_linea);
             }
 
-//estoy hay que quitarlo, es solo para pruebas.
+//esto hay que quitarlo, es solo para pruebas.
 $_SESSION["id"]=8;
+////////////////////////////////////////
 include 'library/libreria.php';
 $pre=["A","B","C","D","E","FF","G","H","I","J","K","L","M","NN","NNN","O","P","Q","R","S"];
 $num_linea=0;
 $contador=0;
-$tabla='i';
+$apartado='i';
 $fichero = file('txt/titulos3.txt');
 if($fichero!=NULL){
     $fichero[0] = substr($fichero[0], 3);
@@ -187,9 +187,10 @@ if($fichero!=NULL){
 				<div class=\"span1\">UAD</div>
 			</div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
-        $tabla_total=$tabla.$pre[$contador];
-        $total=mostrar_total('ia');
-        if ($linea['0']=="-"){
+        $tabla_total=$apartado.$pre[$contador];
+        switch ($linea['0']) {
+            case '-':
+            $total=mostrar_total($tabla_total);
             $linea = substr($linea, 1);
             echo "<div class=\"row-fluid\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
@@ -197,35 +198,42 @@ if($fichero!=NULL){
                         <div class=\"span8\">".$pre[$contador]."-".$linea."</div>
                         <div class=\"span1\">".$total."</div> </div>
                         <div class=\"offset10\">
-                        <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>
+                        <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla_total."\"> <i class=\"material-icons\">add</i></button>
                         </button>
                     </div>
                 </div>";
             $num_linea=mostrar_sub($fichero, $num_linea);
             $contador++;
-        }
-        else{
-            if ($linea[0]!='-' and $linea[0]!='.'){
+            break;
+
+            case '#':
+               $contador++;
+            break 2;
+            
+            default;
+                $total=mostrar_total($tabla_total);
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$pre[$contador]."\">
                             <div class=\"span8\">".$pre[$contador].$linea."</div>
                             <div class=\"span1\">".$total."</div> </div>
                             <div class=\"offset10\">
-                            <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>
+                            <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$apartado.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>
                             </button>
                         </div>
                     </div>";
-                mostrar('ia');
+                mostrar($tabla_total);
                 $num_linea++;
                 $contador++;
-            }
+                break;
         }
+
     }
 }
 
 
 ?>
+</div>
 
 
 	<!-- Le javascript

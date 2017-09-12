@@ -55,7 +55,7 @@ function mostrar($tabla){
 							
 							echo 	$lineaBD['infoestado']."</td>
 							<td style=\"text-align:right;\">
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#newia\"> <i class=\"material-icons\">create</i></button>
+								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#edit\"> <i class=\"material-icons\">create</i></button>
 								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#newia\"><i class=\"material-icons\">delete_sweep</i></button>
 							</td>
 						 
@@ -70,7 +70,22 @@ function mostrar($tabla){
     }
 
 
-
+function borra_entrada($tabla, $id)
+  {
+  $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+    if ($mysqli->connect_errno) {
+      echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    }
+  $userid=$_SESSION["id"];
+  $query="SELECT FROM $tabla WHERE userdid=$userid AND id==$id";
+  if ($conn->query($sql) === TRUE) {
+      echo "Record deleted successfully";
+      //recargar la tabla!!!
+  }
+  else {
+      echo "Error deleting record: " . $conn->error;
+  }
+}
 
     function mostrar_sub($fichero, $num_linea){
 
@@ -135,10 +150,6 @@ function mostrar($tabla){
 						 
 						</tr>
                         ";
-
-
-
-
                                 }
                             }
                             echo "
