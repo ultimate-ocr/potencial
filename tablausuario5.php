@@ -6,7 +6,6 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
 <?php
-
 function mostrar($tabla){
     $primera=1;
     global $contador, $pre;
@@ -67,8 +66,6 @@ function mostrar($tabla){
     </div>
     </div>';
     }
-
-
 function borra_entrada($tabla, $id)
   {
   $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
@@ -85,10 +82,8 @@ function borra_entrada($tabla, $id)
       echo "Error deleting record: " . $conn->error;
   }
 }
-
     function mostrar_sub($fichero, $num_linea){
-
-        global $contador, $pre, $tabla;
+        global $contador, $pre, $tabla, $tabla_total;
         $letra=$pre[$contador];
         $linea=$fichero[++$num_linea];
         $primera=1;
@@ -104,7 +99,7 @@ function borra_entrada($tabla, $id)
                <div class=\"table\">
                   <table id=\"mytable\" class=\"table table-bordred table-stripedt\">";
                      for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
-                        $resultado=getmerito("ia",$subtipo);
+                        $resultado=getmerito($tabla_total,$subtipo);
                         
                         echo"<thead>
                         <th style=\"text-align:left;\">".$letra.$subtipo.$linea."</th>
@@ -114,7 +109,6 @@ function borra_entrada($tabla, $id)
                             while ($lineaBD = $resultado->fetch_assoc()) {
                                 if ($lineaBD['subtipo']==$subtipo) {
                                     echo"
-
 					 	<tr>
 							<td style=\"text-align:left;\">
 								 " . $lineaBD['titulo']."
@@ -153,7 +147,6 @@ function borra_entrada($tabla, $id)
                             }
                             echo "
                             </tbody>
-
                             ";
                         }
                         
@@ -166,7 +159,6 @@ function borra_entrada($tabla, $id)
 			      </div>";
             return ($num_linea);
             }
-
 //esto hay que quitarlo, es solo para pruebas.
 $_SESSION["id"]=8;
 ////////////////////////////////////////
@@ -205,7 +197,6 @@ if($fichero!=NULL){
             $num_linea=mostrar_sub($fichero, $num_linea);
             $contador++;
             break;
-
             case '#':
                $contador++;
             break 2;
@@ -227,11 +218,8 @@ if($fichero!=NULL){
                 $contador++;
                 break;
         }
-
     }
 }
-
-
 ?>
 </div>
 
