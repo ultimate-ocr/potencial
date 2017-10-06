@@ -5,7 +5,97 @@
 <link href="getbootstrap/bootstrap-responsive.css" rel="stylesheet">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
+<script src="http://localhost/potencial/library/tablausuario/library/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+
+<script>
+    function ddelete(tabla,id){
+
+      if(confirm('¿Borrar registro seleccionado?'))
+      {
+
+        var parametros = {
+                "tabla" : tabla,
+                "id" : id
+        };
+/*
+     $.ajax({
+                data:  parametros,
+                url:   'http://localhost/potencial/library/tablausuario/delete.php',
+                method:  'post',
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function () {
+                        $("#resultado").html("Dabuti!");
+                }
+        });
+
+
+
+*/
+
+$.ajax({
+    // la URL para la petición
+    url : 'library/tablausuario/delete.php',
+ 
+    // la información a enviar
+    // (también es posible utilizar una cadena de datos)
+    data : { "id" : id, "tabla": tabla },
+ 
+    // especifica si será una petición POST o GET
+    type : 'POST',
+ 
+    // el tipo de información que se espera de respuesta
+    dataType : 'html',
+ 
+    // código a ejecutar si la petición es satisfactoria;
+    // la respuesta es pasada como argumento a la función
+    success : function() {
+      alert('Éxito');
+    },
+ 
+    // código a ejecutar si la petición falla;
+    // son pasados como argumentos a la función
+    // el objeto de la petición en crudo y código de estatus de la petición
+    error : function() {
+        alert('Disculpe, existió un problema');
+    },
+ 
+    // código a ejecutar sin importar si la petición falló o no
+    complete : function() {
+        alert('Petición realizada');
+    }
+}); 
+      /*  $.ajax({
+                data:  {id : id, tabla : tabla},
+                url:   'http://localhost/potencial/library/tablausuario/delete.php',
+                method:  'post',
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function () {
+                        $("#resultado").html("Dabuti!");
+                }
+        });*/
+
+
+
+
+
+
+
+        //  window.location=url;
+      }
+      else
+      {
+        return false;
+      }
+ 
+    }
+    </script>
+
 <?php
+
 function mostrar($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total;
@@ -50,13 +140,14 @@ function mostrar($tabla){
 							}
 							
 							
-							
+
 							echo 	$lineaBD['infoestado']."</td>
-							<td style=\"text-align:right;\">
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#modif.".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#delete".$tabla_total."\"><i class=\"material-icons\">delete_sweep</i></button>
-							</td>
-						 
+              <td style=\"text-align:right;\">
+                <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
+  
+                <button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
+              </form>
+                            </td>						 
 						</tr>
                         ";
         }
@@ -66,7 +157,16 @@ function mostrar($tabla){
     </div>
     </div>';
     }
+?>
 
+    <script>
+    function realizaProceso(valorCaja1, valorCaja2){
+
+        alert("caratortuga");
+    }
+    </script>
+
+<?php
 
   function mostrar_sub($fichero, $num_linea){
         global $contador, $pre, $tabla, $tabla_total;
@@ -449,35 +549,9 @@ if($fichero!=NULL){
 
 //MODALES DE AQUI EN ADELANTE
 
-    //ELIMINAR
+    //ELIMINAR 
+    
 ?>
-
-
-<div class="modal fade" id="deleteia">
-          <div class="modal-dialog">
-             <div class="modal-content">
-                <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                   <h4 class="modal-title custom_align" id="Heading">Borrar entrada</h4>
-
-                   <form id="deleteia" name="deleteia"action="http://localhost/potencial/library/tablausuario/delete.php">
-                    <input type="submit" value="Si" />
-                   </form>
-
-                   <form action="tablausuario5.php">
-                    <input type="submit" value="No" />
-                   </form>
-
-                   <input type="hidden" name="tabla" value="ia" />
-                   <input type="hidden" name="tabla" value="" />
-                </div>
-               </div>
-             </div>
-             <!-- /.modal-content --> 
-          </div>
-          <!-- /.modal-dialog --> 
-       </div></div>
-               </div></div></div>
 
 
 
@@ -504,6 +578,34 @@ if($fichero!=NULL){
        </div></div>
                </div></div>
 
+
+
+
+               <div class="modal fade" id="deleteia">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">Borrar entrada</h4>
+
+                   <form id="deleteia" name="borraria"action="http://localhost/potencial/library/tablausuario/delete.php">
+                    <input type="submit" value="Siii" />
+                   </form>
+
+                   <form action="tablausuario5.php">
+                    <input type="submit" value="No" />
+                   </form>
+
+                   <input type="hidden" name="tabla" value="ia" />
+                   <input type="hidden" name="tabla" value="" />
+                </div>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div></div>
 
 
                <div class="modal fade" id="deleteic">
@@ -553,6 +655,7 @@ if($fichero!=NULL){
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
+
 
 
 

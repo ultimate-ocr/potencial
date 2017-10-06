@@ -6,6 +6,7 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
 <?php
+
 function mostrar($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total;
@@ -52,11 +53,15 @@ function mostrar($tabla){
 							
 							
 							echo 	$lineaBD['infoestado']."</td>
-							<td style=\"text-align:right;\">
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#modif.".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
-								<button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#delete".$tabla_total."\"><i class=\"material-icons\">delete_sweep</i></button>
-							</td>
-						 
+              <td style=\"text-align:right;\">
+              <form id =\"delete\"".$tabla_total."action=\"/delete.php\" method=\"post\">
+              <input type=\"hidden\" name=\"id\" value=\"".$lineaBD['id']."\" />
+              <input type=\"hidden\" name=\"tabla\" value=\"".$tabla_total."\" />
+                <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\"> <i class=\"material-icons\">create</i></button>
+                
+                <button style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" data-target=\"#delete".$tabla_total."\"><i class=\"material-icons\">delete_sweep</i></button>
+              </form>
+                            </td>						 
 						</tr>
                         ";
         }
