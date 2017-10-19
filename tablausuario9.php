@@ -1,9 +1,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="http://localhost/potencial/library/tablausuario/library/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-<link href="getbootstrap/bootstrap.css"	rel="stylesheet">
-<link href="getbootstrap/bootstrap-responsive.css" rel="stylesheet">
+
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
 
@@ -85,12 +83,14 @@ $.ajax({
     type : 'POST',
  
     // el tipo de información que se espera de respuesta
-    dataType : 'html',
+//    dataType : 'html',
  
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success : function(response) {
       jQuery("#resultadooo").html(response);
+      $("#myModal").modal("show");
+      //$('.modal fade').html('show');
     },
  
     // código a ejecutar si la petición falla;
@@ -600,7 +600,10 @@ if($fichero!=NULL){
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="http://getbootstrap.com/2.3.2/assets/js/jquery.js"></script>
-	<script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script>
+
 	<script src="http://getbootstrap.com/2.3.2/assets/js/holder/holder.js"></script>
 	<script src="http://getbootstrap.com/2.3.2/assets/js/google-code-prettify/prettify.js"></script>
 	<script src="http://getbootstrap.com/2.3.2/assets/js/application.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
