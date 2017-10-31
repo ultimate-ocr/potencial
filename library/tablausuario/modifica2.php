@@ -1,13 +1,4 @@
-<head>
-<script src="http://localhost/potencial/library/tablausuario/library/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-
-</head>
 
 <?php
 
@@ -30,34 +21,35 @@ if (!$resultado = $mysqli->query($query)) {
     echo "Errno: " . $mysqli->errno . "\n";
     echo "Error: " . $mysqli->error . "\n";
 	}*/
-//$tabla='ib';
+$tabla='ia';
 
   switch ($tabla) {
     case "ia":
       
 
-    echo"
+    echo'
 
-    <button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#newibb\">Open Modal</button>
-               <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/inserta.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+    <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/update.php" method="post" class="form-horizontal" autocomplete="on">
     
-                 <div class=\"form-group\">
-                    <label for=\"nombre\">Nombre del Grupo de Investigación</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\">
-                 </div>
-                 <br>
-                 <div class=\"form-group\">
-                   <label for=\"orgfin\">Unidades Docentes</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"orgfin\" name=\"orgfin\" value = \"cero\">
-                 </div>
-                 <br>
-                  
-                 <input type=\"hidden\" name=\"tabla\" value=\"ib\" />
-                 <div class=\"modal-footer\">
-                   <input type=\"submit\" name=\"insertaib\" id=\"newib\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-                 </div>
-               </form>
-    ";
+                      <div class="form-group">
+                         <label for="nombre">Nombre del Grupo de Investigación</label></p>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                      </div>
+              <br>
+                      <div class="form-group">
+                        <label for="orgfin">Unidades Docentes</label></p>
+                        <input type="text" class="form-control" id="orgfin" name="orgfin" value = "caratortu">
+                      </div>
+              <br>
+                       
+                      <input type="hidden" name="tabla" value='.$tabla.' />
+                      <input type="hidden" name="id" value='.$id.' />
+                      <div class="modal-footer">
+                        <input type="submit" name="insertaib" id="newib" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                      </div>
+                    </form>
+
+                   ';
 
       break;
     case "ic":

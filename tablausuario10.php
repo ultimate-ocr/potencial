@@ -1,27 +1,14 @@
-<html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="http://localhost/potencial/library/tablausuario/library/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+<link href="getbootstrap/bootstrap.css"	rel="stylesheet">
+<link href="getbootstrap/bootstrap-responsive.css" rel="stylesheet">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
 
 
-
 <script>
-
-
-function modificar(tabla,id){
-             $.ajax({  
-                  url:"library/tablausuario/modifica2.php",  
-                  method:"POST",  
-                  data : { "id" : id, "tabla": tabla }, 
-                  success:function(data){  
-		                $('#modal_comming').html(data);
-		                $('#dataModal').modal('show');
-                  }  
-             });  
-  } 
-
     function ddelete(tabla,id){
 
       if(confirm('¿Borrar registro seleccionado?'))
@@ -76,8 +63,39 @@ $.ajax({
 
 
 
-</script>
+    function modificar(tabla,id){
+
+      if(confirm('¿Borrar registro seleccionado?'))
+      {
+
+        var parametros = {
+                "tabla" : tabla,
+                "id" : id
+        };
+             $.ajax({  
+                  url:"library/tablausuario/modifica2.php",  
+                  method:"POST",  
+                  data : { "id" : id, "tabla": tabla }, 
+                  success:function(data){  
+		                $('#modal_comming').html(data);
+		                $('#dataModal').modal('show');
+                  }  
+             });  
+      }
+      else
+      {
+        return false;
+      }
  
+    }
+
+</script>
+ <div id="dataModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">    
+        <button type="button" class="close" data-dismiss="modal">&times;</button>  
+      <div class="modal-body" id="modal_comming">  
+      </div> 
+      </div> 
+  
 <?php
 
 function mostrar($tabla){
@@ -285,23 +303,7 @@ if($fichero!=NULL){
 }
 ?>
 </div>
-</html>
 
-<div id="dataModal" class="modal fade">  
-  <div class="modal-dialog">  
-    <div class="modal-content">  
-      <div class="modal-header">  
-        <button type="button" class="close" data-dismiss="modal">&times;</button>  
-        <h4 class="modal-title">Employee Details</h4>  
-      </div>  
-      <div class="modal-body" id="modal_comming">  
-      </div>  
-      <div class="modal-footer">  
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-      </div>  
-    </div>  
-  </div>  
-</div>  
 
 <?php 
 
@@ -573,14 +575,12 @@ if($fichero!=NULL){
 
                <div id=\"resultadooo\"></div>
 
+
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="http://getbootstrap.com/2.3.2/assets/js/jquery.js"></script>
-
+	<script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script>
 	<script src="http://getbootstrap.com/2.3.2/assets/js/holder/holder.js"></script>
 	<script src="http://getbootstrap.com/2.3.2/assets/js/google-code-prettify/prettify.js"></script>
 	<script src="http://getbootstrap.com/2.3.2/assets/js/application.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
