@@ -5,12 +5,12 @@
         die("Error: No se pudo conectar");
     }
     $tabla = htmlspecialchars($_POST['tabla']);
+    $userid=8;
 
     switch ($tabla){
         case 'ia':
-            session_start();
-            $userid=$_SESSION["id"];
             $nombre = htmlspecialchars($_POST['nombre']);
+            $subtipo = htmlspecialchars($_POST['subtipo']);
             $orgfin = htmlspecialchars($_POST['orgfin']);
             $entcol = htmlspecialchars($_POST['entcol']);
             $fechaini = htmlspecialchars($_POST['fechaini']);
@@ -19,13 +19,39 @@
             $investigador = htmlspecialchars($_POST['investigador']);
             $numinv = htmlspecialchars($_POST['numinv']);
     
-            $query = "INSERT INTO $tabla (userid, UD, titulo, orgfin, entidades, desde, hasta, subvencion,
-            invprincipal, numinv) VALUES ($userid,'5', '$nombre', '$orgfin', '$entcol', '$fechaini',
+            $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, orgfin, entidades, desde, hasta, subvencion,
+            invprincipal, numinv) VALUES ($userid, $subtipo, '5', '$nombre', '$orgfin', '$entcol', '$fechaini',
             '$fechafin', '$subtot', '$investigador', '$numinv')";
+
+            break;
 
         case 'ib':
 
+        $nombre = htmlspecialchars($_POST['nombre']);
+        $cargo = htmlspecialchars($_POST['cargo']);
+
+        $query = "INSERT INTO $tabla (userid, UD, titulo, cargo) VALUES ($userid,'5', '$nombre', '$cargo')";
+
+        break;
+
         case 'ic':
+
+        $nombre = htmlspecialchars($_POST['nombre']);
+        $ud = 4;
+        $subtipo = htmlspecialchars($_POST['subtipo']);
+        $fechapub = htmlspecialchars($_POST['fechapub']);
+        $autores = htmlspecialchars($_POST['autores']);
+        $revista = htmlspecialchars($_POST['revista']);
+        $ISBN = htmlspecialchars($_POST['ISBN']);
+        $clave = htmlspecialchars($_POST['clave']);
+        $volumen = htmlspecialchars($_POST['volumen']);
+        $impacto = htmlspecialchars($_POST['impacto']);
+        $citas = htmlspecialchars($_POST['citas']);
+        $acta = htmlspecialchars($_POST['editorial']);
+        $lugar = htmlspecialchars($_POST['lugar']);
+
+        $query = "INSERT INTO $tabla (userid, UD, titulo, cargo) VALUES ($userid,'5', '$nombre', '$cargo')";
+        break;
 
         case 'id':
 
@@ -67,7 +93,7 @@ if (!$resultado = $mysqli->query($query)) {
     echo "Error: " . $mysqli->error . "\n";
     exit;
 	}
-    header('location:/potencial/tablausuario5.php');
+    header('location:/potencial/tablausuario9a.php');
 
 
 

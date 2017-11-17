@@ -23,11 +23,11 @@ echo $tabla.$id;
   
   if ($mysqli->query($query) === TRUE) {
       echo "Recorde deleted successfully";
-      //recargar la tabla!!!
+      
   }
   else {
       echo "Error deleting recorde: " . $mysqli->error;
   }
 
-
+  header('location:/potencial/tablausuario9a.php');
 ?>  
