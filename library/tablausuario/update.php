@@ -39,30 +39,37 @@ $tabla = htmlspecialchars($_POST['tabla']);
     $cargo = htmlspecialchars($_POST['cargo']);
 
     $query = "UPDATE $tabla SET titulo='$nombre', cargo='$cargo' WHERE id='$id'";
-
-
         break;
 
-    case "ic":
 
-    $nombre = htmlspecialchars($_POST['nombre']);
-    $ud = 4;
-    $subtipo = htmlspecialchars($_POST['subtipo']);
-    $fechapub = htmlspecialchars($_POST['fechapub']);
-    $autores = htmlspecialchars($_POST['autores']);
-    $revista = htmlspecialchars($_POST['revista']);
-    $ISBN = htmlspecialchars($_POST['ISBN']);
-    $clave = htmlspecialchars($_POST['clave']);
-    $volumen = htmlspecialchars($_POST['volumen']);
-    $impacto = htmlspecialchars($_POST['impacto']);
-    $citas = htmlspecialchars($_POST['citas']);
-    $acta = htmlspecialchars($_POST['editorial']);
-    $lugar = htmlspecialchars($_POST['lugar']);
-    break;
+    case 'ic':
+            $id = htmlspecialchars($_POST['id']);
+            $titulo = htmlspecialchars($_POST['titulo']);
+            $ud = 4;
+            $subtipo = htmlspecialchars($_POST['subtipo']);
+            $fechapub = htmlspecialchars($_POST['fechapub']);
+            $autores = htmlspecialchars($_POST['autores']);
+            $revista = htmlspecialchars($_POST['revista']);
+            $isbn = htmlspecialchars($_POST['isbn']);
+            $clave = htmlspecialchars($_POST['clave']);
+            $pin = htmlspecialchars($_POST['pin']);
+            $pfin = htmlspecialchars($_POST['pfin']);
+            $fecha = htmlspecialchars($_POST['fechapub']);
+            $volumen = htmlspecialchars($_POST['volumen']);
+            $impacto = htmlspecialchars($_POST['impacto']);
+            $citas = htmlspecialchars($_POST['citas']);
+            $editorial = htmlspecialchars($_POST['editorial']);
+            $acta = htmlspecialchars($_POST['acta']);
+            $lugar = htmlspecialchars($_POST['lugar']);
+    
+            $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', subtipo='$subtipo', autores='$autores',
+            revista='$revista', isbn='$isbn', clave='$clave', volumen='$volumen', pin='$pin',
+            pfin='$pfin',fecha='$fecha', impacto='$impacto', citas='$citas', acta='$acta', editorial='$editorial', lugar='$lugar' WHERE id='$id'";
+            break;
   }
 
 
-  if (!$resultado = $mysqli->query($query)) {
+ // if (!$resultado = $mysqli->query($query)) {
 	// ¡Oh, no! La consulta falló. 
     echo "Lo sentimos, este sitio web está experimentando problemas.";
     // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
@@ -71,8 +78,8 @@ $tabla = htmlspecialchars($_POST['tabla']);
     echo "Query: " . $query . "\n";
     echo "Errno: " . $mysqli->errno . "\n";
     echo "Error: " . $mysqli->error . "\n";
-    exit;
-	}
-    header('location:/potencial/tablausuario9a.php');
+    //exit;
+//	}
+    //header('location:/potencial/tablausuario12.php');
 
   ?>
