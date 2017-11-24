@@ -336,7 +336,7 @@ if($fichero!=NULL){
                     <select name="subtipo">    
                       <option value="1" selected="selected">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
                       <option value="2">Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</option>
-                      <option value="3">.Proyectos mediante convenios</option>
+                      <option value="3">Proyectos mediante convenios</option>
                     </select>
           <br>
           <br>
@@ -394,9 +394,7 @@ if($fichero!=NULL){
                 <div class="modal-body">
                     <div class="panel-body">
                  <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
- 
- 				  
-           
+
                    <label for="id">Grupo de Investigación</label></p>
                     <select name="id">
                     <?php
@@ -416,7 +414,7 @@ if($fichero!=NULL){
            
           <br>
                   <div class="form-group">
-                     <label for="orgfin">Cargo</label></p>
+                     <label for="cargo">Cargo</label></p>
                      <input type="text" class="form-control" id="cargo" name="cargo">
                    </div>
           <br>
@@ -596,11 +594,6 @@ if($fichero!=NULL){
                     ?>
                     </select>
            
-          <br>
-                  <div class="form-group">
-                     <label for="orgfin">Nombre de la Red</label></p>
-                     <input type="text" class="form-control" id="red" name="red">
-                   </div>
           <br>
                    <div class="form-group">
                      <label for="orgfin">Unidades Docentes</label></p>

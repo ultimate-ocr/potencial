@@ -81,13 +81,13 @@
         case 'ie':
 
         $id = htmlspecialchars($_POST['id']);
-        $query="SELECT * FROM redinv WHERE redid=$id";
+        $query="SELECT * FROM redinv WHERE id=$id";
         $resultado = $mysqli->query($query);
         $lineaBD = $resultado->fetch_assoc();
         $titulo = $lineaBD['nombre'];
-        $redid = $lineaBD['id'];
 
-        $query = "INSERT INTO $tabla (userid, titulo, UD, redid) VALUES ('$userid', '$titulo', '5', '$redid')";
+        $query = "INSERT INTO $tabla (userid, titulo, UD, redid) VALUES ('$userid', '$titulo', '5', '$id')";
+        echo $query;
         break;
 
         case 'iff':
@@ -177,13 +177,13 @@
         
         $titulo = htmlspecialchars($_POST['titulo']);
         $ud = 4;
-        $fechapub = htmlspecialchars($_POST['fechapub']);
+        $fecha = htmlspecialchars($_POST['fecha']);
         $autores = htmlspecialchars($_POST['autores']);
         $revista = htmlspecialchars($_POST['revista']);
         $isbn = htmlspecialchars($_POST['isbn']);
         $clave = htmlspecialchars($_POST['clave']);
-        $clave = htmlspecialchars($_POST['volumen']);
-        $volumen = htmlspecialchars($_POST['impacto']);
+        $volumen = htmlspecialchars($_POST['volumen']);
+        $impacto = htmlspecialchars($_POST['impacto']);
         $pini = htmlspecialchars($_POST['pini']);
         $pfin = htmlspecialchars($_POST['pfin']);
         $citas = htmlspecialchars($_POST['citas']);
@@ -273,5 +273,5 @@ if (!$resultado = $mysqli->query($query)) {
     echo "Error: " . $mysqli->error . "\n";
     exit;
 	}
-    //header('location:/potencial/tablausuario12.php');
+    header('location:/potencial/tablausuario12.php');
 ?>

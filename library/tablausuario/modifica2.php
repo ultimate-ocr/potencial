@@ -72,29 +72,44 @@ if ($mysqli->connect_errno) {
       break;
 
       case "ib":
-      $query = "SELECT * FROM $tabla WHERE id=$id ";
-      $resultado = $mysqli->query($query);
-      $lineaBD = $resultado->fetch_assoc();
-
       
-     echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+     echo"   <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
      
-                       <div>
-                          <label for=\"nombre\">Nombre del Grupo</label>
-                         <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" value = \"".$lineaBD['titulo']."\">
-                       </div>
+                        <label for=\"id\">Grupo de Investigación</label></p>
+                         <select name=\"select\">";
+                            $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                               if ($mysqli->connect_errno) {
+                                 echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                                 die("Error: No se pudo conectar");
+                               }
+                               $query = "SELECT * FROM grupoinv";
+                               $resultado = $mysqli->query($query);
+                               while ($lineaBD = $resultado->fetch_assoc())
+                           echo"
+                           <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
+                           
+                        echo" </select>";
+                         $query = "SELECT * FROM $tabla WHERE id=$id ";
+                         $resultado = $mysqli->query($query);
+                         $lineaBD = $resultado->fetch_assoc();
+                echo" 
                <br>
-                       <div>
-                         <label for=\"orgfin\">Cargo</label>
-                         <input type=\"text\" class=\"form-control\" id=\"orgfin\" name=\"cargo\" value = \"".$lineaBD['cargo']."\">
-                       </div>
+                       <div class=\"form-group\">
+                          <label for=\"orgfin\">Cargo</label></p>
+                          <input type=\"text\" class=\"form-control\" id=\"cargo\" name=\"cargo\" value =".$lineaBD['cargo'].">
+                        </div>
                <br>
-                       <input type=\"hidden\" name=\"tabla\" value=\"ib\" />
-                       <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
-                       <div class=\"modal-footer\">
-                         <input type=\"submit\" name=\"updateib\" id=\"updateib\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-                       </div>
-                     </form>
+                        <div class=\"form-group\">
+                          <label for=\"orgfin\">Unidades Docentes</label></p>
+                          <input type=\"text\" class=\"form-control\" id=\"orgfin\" name=\"orgfin\" value=".$lineaBD['UD'].">
+                        </div>
+                <br>
+                        <input type=\"hidden\" name=\"tabla\" value=\"ib\" />
+                        <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
+                        <div class=\"modal-footer\">
+                          <input type=\"submit\" name=\"insertaib\" id=\"newib\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+                        </div>
+                      </form>
      ";
  
        break;
@@ -106,61 +121,67 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
 
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    echo"    <form id=\"insertaic\" name=\"newic\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
     
-                      <div>
-                         <label for=\"nombre\">Nombre del Proyecto</label>
-                        <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                      </div>
-              <br>
-                      <div>
-                        <label for=\"orgfin\">Autores</label>
-                        <input type=\"text\" class=\"form-control\" id=\"autores\" name=\"autores\" value = \"".$lineaBD['autores']."\">
-                      </div>
-              <br>
-              <div>
-                        <label for=\"entcol\">Medio de publicación</label>
-                        <input type=\"text\" class=\"form-control\" id=\"entcol\" name=\"entcol\" value = \"".$lineaBD['revista']."\">
-                      </div>
+   
+                         <label for=\"nombre\">Título</label></p>
+                        <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value=".$lineaBD['titulo'].">
+                       <br>
+                        <label for=\"orgfin\">Unidades Docentes</label></p>
+                        <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value=".$lineaBD['UD'].">
                       <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"subtot\">ISBN </label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"subtot\" name=\"subtot\" value = \"".$lineaBD['isbn'].":".$lineaBD['clave'].":".$lineaBD['pin']."-".$lineaBD['pfin']."\">
-                      </div>
+                     <label for=\"subtipo\">Subtipo</label></p>
+                       <select name=\"subtipo\">    
+                         <option value=\"1\" selected=\"selected\">Reconocimiento de la investigación</option>
+                         <option value=\"2\">Publicaciones de investigación indexada</option>
+                         <option value=\"3\">Publicaciones de investigación no indexada</option>
+                       </select>
                       <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"investigador\">Fecha publicacion</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"investigador\" name=\"investigador\" value = \"".$lineaBD['fecha']."\">
-                      </div>
-                      <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"numinv\">Impacto</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['impacto']."\">
-                      </div>
-                      <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"numinv\">Citas</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['citas']."\">
-                      </div>
-                      <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"numinv\">Acta</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['acta']."\">
-                      </div>
-                      <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"numinv\">Editorial</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['editorial']."\">
-                      </div>
-                      <br>
-                      <div>
-                        <p class=\"subtitulo\"><label for=\"numinv\">Lugar de publicación</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['lugar']."\">
-                      </div>
-                      <input type=\"hidden\" name=\"tabla\" value=\"ic\" />
-                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
+   
+                        <label for=\"fechapub\">Fecha de publicación</label>
+                        <input class=\"form-control\" id=\"fechapub\" name=\"fechapub\" type=\"date\"  value=".$lineaBD['fecha'].">
+   
+                        <label for=\"autores\">Autores</label>
+                        <input class=\"form-control\" id=\"autores\" name=\"autores\"type=\"text\"  value=".$lineaBD['autores'].">
+   
+                        <label for=\"revista\">Revista</label>
+                        <input class=\"form-control\" id=\"revista\" name=\"revista\" type=\"text\"  value=".$lineaBD['revista'].">
+   
+                        <label for=\"isbn\">ISBN</label>
+                        <input class=\"form-control\" id=\"isbn\" name=\"isbn\"type=\"text\"  value=".$lineaBD['isbn'].">
+   
+                        <label for=\"clave\">Clave</label>
+                        <input class=\"form-control\" id=\"clave\" name=\"clave\" type=\"text\"  value=".$lineaBD['clave'].">
+   
+                        <label for=\"volumen\">Volumen</label>
+                        <input class=\"form-control\" id=\"volumen\" name=\"volumen\"type=\"text\"  value=".$lineaBD['volumen'].">
+   
+                        <label for=\"pin\">pin</label>
+                        <input class=\"form-control\" id=\"pin\" name=\"pin\"type=\"text\"  value=".$lineaBD['pin'].">
+   
+                        <label for=\"pfin\">pfin</label>
+                        <input class=\"form-control\" id=\"pfin\" name=\"pfin\"type=\"text\"  value=".$lineaBD['pfin'].">
+   
+                        <label for=\"impacto\">Impacto</label>
+                        <input class=\"form-control\" id=\"impacto\" name=\"impacto\" type=\"text\"  value=".$lineaBD['impacto'].">
+   
+                        <label for=\"citas\">Citas</label>
+                        <input class=\"form-control\" id=\"citas\" name=\"citas\"type=\"text\" value=".$lineaBD['citas']." >
+   
+                        <label for=\"acta\">Acta</label>
+                        <input class=\"form-control\" id=\"acta\" name=\"acta\" type=\"text\"  value=".$lineaBD['acta'].">
+   
+                        <label for=\"editorial\">Editorial</label>
+                        <input class=\"form-control\" id=\"editorial\" name=\"editorial\"type=\"text\"  value=".$lineaBD['editorial'].">
+   
+                        <label for=\"lugar\">Lugar</label>
+                        <input class=\"form-control\" id=\"lugar\" name=\"lugar\"type=\"text\"  value=".$lineaBD['lugar'].">
+   
+                        <input type=\"hidden\" name=\"tabla\" value=\"ic\" />
+                        <input type=\"hidden\" name=\"id\" value=\"".$id."\" />                     
+   
                       <div class=\"modal-footer\">
-                        <input type=\"submit\" name=\"updateic\" id=\"updateic\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+                        <input type=\"submit\" name=\"insertaic\" id=\"newic\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
                       </div>
                     </form>
     ";
@@ -172,7 +193,7 @@ if ($mysqli->connect_errno) {
    $resultado = $mysqli->query($query);
    $lineaBD = $resultado->fetch_assoc();
 
-   echo"    <form id=\"insertaid\" name=\"newid\" action=\"library/tablausuario/inserta.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+   echo"    <form id=\"insertaid\" name=\"newid\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
   
                        <label for=\"nombre\">Nombre del Congreso</label>
                        <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
@@ -210,23 +231,36 @@ if ($mysqli->connect_errno) {
    $resultado = $mysqli->query($query);
    $lineaBD = $resultado->fetch_assoc();
 
-   echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+      
+   echo"   <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
    
-                     <div>
-                        <label for=\"nombre\">Nombre Red de Investigación</label>
-                       <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" value = \"".$lineaBD['red']."\">
-                     </div>
+                      <label for=\"id\">Grupo de Investigación</label></p>
+                       <select name=\"select\">";
+                          $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                             if ($mysqli->connect_errno) {
+                               echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                               die("Error: No se pudo conectar");
+                             }
+                             $query = "SELECT * FROM redinv";
+                             $resultado = $mysqli->query($query);
+                             while ($lineaBD = $resultado->fetch_assoc())
+                         echo"
+                         <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
+                         
+                      echo" </select>";
+                       $query = "SELECT * FROM $tabla WHERE id=$id ";
+                       $resultado = $mysqli->query($query);
+                       $lineaBD = $resultado->fetch_assoc();
+              echo" 
              <br>
-                     <div>
-                       <label for=\"orgfin\">Unidades Docentes</label>
-                       <input type=\"text\" class=\"form-control\" id=\"orgfin\" name=\"orgfin\" value = \"".$lineaBD['UD']."\">
-                     </div>
-             <br>
-                     <input type=\"hidden\" name=\"tabla\" value=\"ie\" />
-                     <div class=\"modal-footer\">
-                       <input type=\"submit\" name=\"updateie\" id=\"updateie\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-                     </div>
-                   </form>
+
+                      <input type=\"hidden\" name=\"tabla\" value=\"ie\" />
+                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
+                      <div class=\"modal-footer\">
+                        <input type=\"submit\" name=\"editie\" id=\"editie\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+                      </div>
+                    </form>
+
    ";
 
       break;
@@ -372,20 +406,33 @@ if ($mysqli->connect_errno) {
  $resultado = $mysqli->query($query);
  $lineaBD = $resultado->fetch_assoc();
 
- echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
  
-                   <div>
-                      <label for=\"nombre\">Nombre del Proyecto</label>
-                     <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                   </div>
-
-                   <input type=\"hidden\" name=\"tabla\" value=\"ii\" />
-                   <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
-                  
-                   <div class=\"modal-footer\">
-                     <input type=\"submit\" name=\"updateic\" id=\"updateic\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-                   </div>
-                 </form>
+                    <label for=\"id\">Tesis</label></p>
+                     <select name=\"select\">";
+                        $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                           if ($mysqli->connect_errno) {
+                             echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                             die("Error: No se pudo conectar");
+                           }
+                           $query = "SELECT * FROM tesis";
+                           $resultado = $mysqli->query($query);
+                           while ($lineaBD = $resultado->fetch_assoc())
+                       echo"
+                       <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>";
+                       
+                    echo" </select>";
+                     $query = "SELECT * FROM $tabla WHERE id=$id ";
+                     $resultado = $mysqli->query($query);
+                     $lineaBD = $resultado->fetch_assoc();
+            echo" 
+          
+                    <input type=\"hidden\" name=\"tabla\" value=\"ii\" />
+                    <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
+                    <div class=\"modal-footer\">
+                      <input type=\"submit\" name=\"insertaii\" id=\"newii\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+                    </div>
+                  </form>
  ";
  break;
       
@@ -395,19 +442,33 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
 
-                  <div>
-                     <label for=\"nombre\">Nombre del Proyecto</label>
-                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                  </div>
-
-                  <input type=\"hidden\" name=\"tabla\" value=\"ij\" />
-                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
-                  <div class=\"modal-footer\">
-                    <input type=\"submit\" name=\"updateic\" id=\"updateic\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-                  </div>
-                </form>
+                   <label for=\"id\">Tesis</label></p>
+                    <select name=\"select\">";
+                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                          if ($mysqli->connect_errno) {
+                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                            die("Error: No se pudo conectar");
+                          }
+                          $query = "SELECT * FROM tesis";
+                          $resultado = $mysqli->query($query);
+                          while ($lineaBD = $resultado->fetch_assoc())
+                      echo"
+                      <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>";
+                      
+                   echo" </select>";
+                    $query = "SELECT * FROM $tabla WHERE id=$id ";
+                    $resultado = $mysqli->query($query);
+                    $lineaBD = $resultado->fetch_assoc();
+           echo" 
+         
+                   <input type=\"hidden\" name=\"tabla\" value=\"ij\" />
+                   <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
+                   <div class=\"modal-footer\">
+                     <input type=\"submit\" name=\"insertaii\" id=\"newii\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+                   </div>
+                 </form>
 ";
 break;
       
@@ -436,7 +497,7 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <br>
                  <div>
                    <p class=\"subtitulo\"><label for=\"subtot\">Entidades Colaboradoras </label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"entcol\" name=\"entcol\" value = \"".$lineaBD['entcol']."\">
+                   <input type=\"text\" class=\"form-control\" id=\"entidades\" name=\"entidades\" value = \"".$lineaBD['entidades']."\">
                  </div>
                  <br>
                  <div>
@@ -446,9 +507,13 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <br>
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Fecha de finalización</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"hasta\" name=\"hasta\" value = \"".$lineaBD['hasta']."\">
+                   <input type=\"date\" class=\"form-control\" id=\"hasta\" name=\"hasta\" value = \"".$lineaBD['hasta']."\">
                  </div>
                  <br>
+                 <div>
+                 <p class=\"subtitulo\"><label for=\"numinv\">Investigador principal</label></p>
+                 <input type=\"text\" class=\"form-control\" id=\"invprincipal\" name=\"invresponsable\" value = \"".$lineaBD['numinv']."\">
+               </div>
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Número de investigadores</label></p>
                    <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['numinv']."\">
@@ -522,7 +587,7 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <br>
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Págnia de inicio</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"pin\" name=\"pin\" value = \"".$lineaBD['pin']."\">
+                   <input type=\"text\" class=\"form-control\" id=\"pini\" name=\"pini\" value = \"".$lineaBD['pin']."\">
                  </div>
                  <br>
                  <div>
@@ -579,7 +644,7 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
          <br>
          <div>
                    <label for=\"entcol\">Razón social</label>
-                   <input type=\"text\" class=\"form-control\" id=\"razsocial\" name=\"razsocial\" value = \"".$lineaBD['razsocial']."\">
+                   <input type=\"text\" class=\"form-control\" id=\"razsocial\" name=\"razsocial\" value = \"".$lineaBD['titulo']."\">
                  </div>
 
                  <input type=\"hidden\" name=\"tabla\" value=\"im\" />
@@ -667,13 +732,18 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  </div>
                  <br>
                  <div>
+                 <p class=\"subtitulo\"><label for=\"numinv\">Subvencion</label></p>
+                 <input type=\"text\" class=\"form-control\" id=\"subvencion\" name=\"subvencion\" value = \"".$lineaBD['subvencion']."\">
+               </div>
+               <br>
+                 <div>
                    <p class=\"subtitulo\"><label for=\"investigador\">Fecha de inicio</label></p>
                    <input type=\"date\" class=\"form-control\" id=\"desde\" name=\"desde\" value = \"".$lineaBD['desde']."\">
                  </div>
                  <br>
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Fecha de finalización</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"hasta\" name=\"hasta\" value = \"".$lineaBD['hasta']."\">
+                   <input type=\"date\" class=\"form-control\" id=\"hasta\" name=\"hasta\" value = \"".$lineaBD['hasta']."\">
                  </div>
                  <br>
                  <div>
