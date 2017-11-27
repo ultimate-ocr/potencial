@@ -179,20 +179,13 @@
         $ud = 4;
         $fecha = htmlspecialchars($_POST['fecha']);
         $autores = htmlspecialchars($_POST['autores']);
-        $revista = htmlspecialchars($_POST['revista']);
-        $isbn = htmlspecialchars($_POST['isbn']);
-        $clave = htmlspecialchars($_POST['clave']);
-        $volumen = htmlspecialchars($_POST['volumen']);
-        $impacto = htmlspecialchars($_POST['impacto']);
-        $pini = htmlspecialchars($_POST['pini']);
-        $pfin = htmlspecialchars($_POST['pfin']);
-        $citas = htmlspecialchars($_POST['citas']);
-        $acta = htmlspecialchars($_POST['acta']);
-        $editorial = htmlspecialchars($_POST['editorial']);
-        $lugar = htmlspecialchars($_POST['lugar']);
+        $pais = htmlspecialchars($_POST['pais']);
+        $patente = htmlspecialchars($_POST['patente']);
+        $entidad = htmlspecialchars($_POST['entidad']);
+        $empresa = htmlspecialchars($_POST['empresa']);
 
-        $query = "INSERT INTO $tabla (userid, UD, titulo, fecha, autores, revista, isbn, clave, volumen, impacto, pin, pfin, citas, acta, editorial, lugar)
-                              VALUES ($userid,'5', '$titulo', '$fechapub', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$impacto', '$pini', '$pfin', '$citas', '$acta', '$editorial', '$lugar')";
+        $query = "INSERT INTO $tabla (userid, UD, titulo, fecha, autores, pais, patente, entidad, empresa)
+                              VALUES ($userid,'5', '$titulo', '$fecha', '$autores', '$pais', '$patente', '$entidad', '$empresa')";
 
         break;
         

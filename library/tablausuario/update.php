@@ -176,24 +176,15 @@ $id = htmlspecialchars($_POST['id']);
                     case 'il':
                     
                     $titulo = htmlspecialchars($_POST['titulo']);
-                    $ud = 4;
                     $fecha = htmlspecialchars($_POST['fecha']);
                     $autores = htmlspecialchars($_POST['autores']);
-                    $revista = htmlspecialchars($_POST['revista']);
-                    $isbn = htmlspecialchars($_POST['isbn']);
-                    $clave = htmlspecialchars($_POST['clave']);
-                    $volumen = htmlspecialchars($_POST['volumen']);
-                    $impacto = htmlspecialchars($_POST['impacto']);
-                    $pini = htmlspecialchars($_POST['pini']);
-                    $pfin = htmlspecialchars($_POST['pfin']);
-                    $citas = htmlspecialchars($_POST['citas']);
-                    $acta = htmlspecialchars($_POST['acta']);
-                    $editorial = htmlspecialchars($_POST['editorial']);
-                    $lugar = htmlspecialchars($_POST['lugar']);
+                    $pais = htmlspecialchars($_POST['pais']);
+                    $patente = htmlspecialchars($_POST['patente']);
+                    $entidad = htmlspecialchars($_POST['entidad']);
+                    $empresa = htmlspecialchars($_POST['empresa']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', autores='$autores', revista='$revista', isbn='$isbn',
-                    clave='$clave', volumen='$volumen', impacto='$impacto', pin='$pini', pfin='$pfin', citas='$citas',
-                    acta='$acta', editorial='$editorial', lugar='$lugar' WHERE id='$id'";
+                    $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', autores='$autores', pais='$pais', patente='$patente',
+                    entidad='$entidad', empresa='$empresa' WHERE id='$id'";
             
                     break;
                     
@@ -274,6 +265,6 @@ $id = htmlspecialchars($_POST['id']);
     echo "Error: " . $mysqli->error . "\n";
     //exit;
 	}
-    //header('location:/potencial/tablausuario12.php');
+    header('location:/potencial/tablausuario12.php');
 
   ?>

@@ -538,89 +538,40 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"
+<form id=\"insertail\" name=\"newil\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+<label for=\"nombre\">Título</label></p>
+<input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
+<br>
+<label for=\"orgfin\">Unidades Docentes</label></p>
+<input type=\"text\" class=\"form-control\" id=\"UD\" name=\"orgfin\" value = \"".$lineaBD['UD']."\">
+<br>
+<label for=\"fechapub\">Fecha de concesión</label>
+<input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" value = \"".$lineaBD['fecha']."\">
 
-                 <div>
-                    <label for=\"nombre\">Título</label>
-                   <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
-         <br>
-                 <div>
-                   <label for=\"orgfin\">Unidades Docentes</label>
-                   <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
-                 </div>
-         <br>
-         <div>
-                   <label for=\"entcol\">Fecha de publicación</label>
-                   <input type=\"date\" class=\"form-control\" id=\"fecha\" name=\"fecha\" value = \"".$lineaBD['fecha']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"subtot\">Autores </label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"autores\" name=\"autores\" value = \"".$lineaBD['autores']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"investigador\">Revista</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"revista\" name=\"revista\" value = \"".$lineaBD['revista']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"numinv\">ISBN</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"isbn\" name=\"isbn\" value = \"".$lineaBD['isbn']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"numinv\">Clave</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"clave\" name=\"clave\" value = \"".$lineaBD['clave']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"numinv\">Volumen</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"volumen\" name=\"volumen\" value = \"".$lineaBD['volumen']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"numinv\">Impacto</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"impacto\" name=\"impacto\" value = \"".$lineaBD['impacto']."\">
-                 </div>
-                 <br>
-                 <div>
-                   <p class=\"subtitulo\"><label for=\"numinv\">Págnia de inicio</label></p>
-                   <input type=\"text\" class=\"form-control\" id=\"pini\" name=\"pini\" value = \"".$lineaBD['pin']."\">
-                 </div>
-                 <br>
-                 <div>
-                 <p class=\"subtitulo\"><label for=\"numinv\">Página de finalización</label></p>
-                 <input type=\"text\" class=\"form-control\" id=\"pfin\" name=\"pfin\" value = \"".$lineaBD['pfin']."\">
-               </div>
-               <br>
-               <div>
-                 <p class=\"subtitulo\"><label for=\"numinv\">Citas</label></p>
-                 <input type=\"text\" class=\"form-control\" id=\"citas\" name=\"citas\" value = \"".$lineaBD['citas']."\">
-               </div>
-               <br>
-               <div>
-                 <p class=\"subtitulo\"><label for=\"numinv\">Acta</label></p>
-                 <input type=\"text\" class=\"form-control\" id=\"acta\" name=\"acta\" value = \"".$lineaBD['acta']."\">
-               </div>
-               <br>
-               <div>
-                 <p class=\"subtitulo\"><label for=\"numinv\">Editorial</label></p>
-                 <input type=\"text\" class=\"form-control\" id=\"editorial\" name=\"editorial\" value = \"".$lineaBD['editorial']."\">
-               </div>
-               <br>
-               <div>
-                 <p class=\"subtitulo\"><label for=\"numinv\">Lugar de publicación</label></p>
-                 <input type=\"text\" class=\"form-control\" id=\"lugar\" name=\"lugar\" value = \"".$lineaBD['lugar']."\">
-               </div>
-               <br>
-                 <input type=\"hidden\" name=\"tabla\" value=\"il\" />
-                 <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
-                 <div class=\"modal-footer\">
-                   <input type=\"submit\" name=\"updateic\" id=\"updateic\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-                 </div>
-               </form>
+<label for=\"autores\">Autores</label>
+<input class=\"form-control\" id=\"autores\" name=\"autores\"type=\"text\" value = \"".$lineaBD['autores']."\">
+
+<label for=\"revista\">Pais</label>
+<input class=\"form-control\" id=\"pais\" name=\"pais\" type=\"text\" value = \"".$lineaBD['pais']."\">
+
+<label for=\"ISBN\">Numero de patente</label>
+<input class=\"form-control\" id=\"patente\" name=\"patente\"type=\"text\" value = \"".$lineaBD['patente']."\">
+
+<label for=\"clave\">Entidad titular</label>
+<input class=\"form-control\" id=\"entidad\" name=\"entidad\" type=\"text\" value = \"".$lineaBD['entidad']."\">
+
+<label for=\"volumen\">Empresa explotadora</label>
+<input class=\"form-control\" id=\"empresa\" name=\"empresa\"type=\"text\" value = \"".$lineaBD['empresa']."\">
+
+<input type=\"hidden\" name=\"tabla\" value=\"il\" />
+<input type=\"hidden\" name=\"id\" value=\"".$id."\" />                    
+
+<div class=\"modal-footer\">
+<input type=\"submit\" name=\"insertail\" id=\"newil\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+</div>
+</form>
+
 ";
 break;
       

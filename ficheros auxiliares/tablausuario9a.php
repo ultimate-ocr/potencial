@@ -3,8 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap-responsive.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="style.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="styles.css"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
 
@@ -87,7 +87,6 @@ function mostrar($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total;
     $letra=$pre[$contador];
-    
     $resultado=getmerito($tabla,'0');
     while ($lineaBD = $resultado->fetch_assoc()) {
         if ($primera==1){
@@ -151,9 +150,7 @@ function mostrar($tabla){
 <?php
 
   function mostrar_sub($fichero, $num_linea){
-
         global $contador, $pre, $tabla, $tabla_total;
-        
         $letra=$pre[$contador];
         $linea=$fichero[++$num_linea];
         $primera=1;
@@ -167,9 +164,8 @@ function mostrar($tabla){
 			echo"
 			<div>
                <div class=\"table\">
-                  <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";   
-                  for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
-
+                  <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";
+                     for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
                         $resultado=getmerito($tabla_total,$subtipo);
                         
                         echo"<thead>
@@ -238,30 +234,21 @@ $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q
 $pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];
 $num_linea=0;
 $contador=0;
-$apartado="d";
-
-$fichero = file('txt/titulos.txt');
+$apartado='i';
+$fichero = file('txt/titulos3.txt');
 if($fichero!=NULL){
     $fichero[0] = substr($fichero[0], 3);
     echo"
     <div id=\"resultadooo\"></div>
     <div class=\"container-fluid\" >
-    <h1 id=\"titulo\">Planificaci&oacuten Acad&eacutemica</h1>";
-    
-    
-
-
-
-    echo"<div>hola</div>
+		<h1 id=titulo>Planificaci&oacuten Acad&eacutemica</h1>
 		<div class=\"col-sm-10\" align=\"center\">CONCEPTO</div>
         <div class=\"col-sm-1\">UAD</div>
         </div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
         $tabla_total=$apartado.$pre[$contador];
-        echo $linea[0]."----".$tabla_total;
         switch ($linea['0']) {
             case '-':
-            
             $total=mostrar_total($tabla_total);
             $linea = substr($linea, 1);
             echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
@@ -276,26 +263,9 @@ if($fichero!=NULL){
             $num_linea=mostrar_sub($fichero, $num_linea);
             $contador++;
             break;
-
-            case '<':
-              if ($apartado=="d"){
-                $apartado="i";
-
-              }
-
-              if ($apartado=="i"){
-                $apartado="g";
-                
-              }
-              $num_linea++;
-              $contador=0;
-              break;
-
             case '#':
-
-            $num_linea++;
-            break;
-
+               $contador++;
+            break 2;
             
             default;
                 $total=mostrar_total($tabla_total);
@@ -316,7 +286,6 @@ if($fichero!=NULL){
         }
     }
 }
-echo "fin";
 ?>
 </div>
 </html>
@@ -367,7 +336,7 @@ echo "fin";
                     <select name="subtipo">    
                       <option value="1" selected="selected">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
                       <option value="2">Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</option>
-                      <option value="3">Proyectos mediante convenios</option>
+                      <option value="3">.Proyectos mediante convenios</option>
                     </select>
           <br>
           <br>
@@ -425,27 +394,14 @@ echo "fin";
                 <div class="modal-body">
                     <div class="panel-body">
                  <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
-
-                   <label for="id">Grupo de Investigación</label></p>
-                    <select name="id">
-                    <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
-                          $query = "SELECT * FROM grupoinv";
-                          $resultado = $mysqli->query($query);
-                          while ($lineaBD = $resultado->fetch_assoc())
-                      echo"
-                      <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>
-                      ";
-                    ?>
-                    </select>
-           
-          <br>
+ 
+                   <div class="form-group">
+                      <label for="nombre">Nombre del Grupo de Investigación</label></p>
+                     <input type="text" class="form-control" id="nombre" name="nombre">
+                   </div>
+ 				  <br>
                   <div class="form-group">
-                     <label for="cargo">Cargo</label></p>
+                     <label for="orgfin">Cargo</label></p>
                      <input type="text" class="form-control" id="cargo" name="cargo">
                    </div>
           <br>
@@ -454,6 +410,7 @@ echo "fin";
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
                    </div>
  				  <br>
+                    
                    <input type="hidden" name="tabla" value="ib" />
                    <div class="modal-footer">
                      <input type="submit" name="insertaib" id="newib" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -482,14 +439,14 @@ echo "fin";
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaic" name="newic" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
 
                       <label for="nombre">Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
  				           <br>
                      <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
+                     <input type="text" class="form-control" id="UD" name="orgfin">
  				          <br>
                   <label for="subtipo">Subtipo</label></p>
                     <select name="subtipo">    
@@ -508,20 +465,14 @@ echo "fin";
                      <label for="revista">Revista</label>
                      <input class="form-control" id="revista" name="revista" type="text" >
 
-                     <label for="isbn">ISBN</label>
-                     <input class="form-control" id="isbn" name="isbn"type="text" >
+                     <label for="ISBN">ISBN</label>
+                     <input class="form-control" id="ISBN" name="ISBN"type="text" >
 
                      <label for="clave">Clave</label>
                      <input class="form-control" id="clave" name="clave" type="text" >
 
                      <label for="volumen">Volumen</label>
                      <input class="form-control" id="volumen" name="volumen"type="text" >
-
-                     <label for="pin">pin</label>
-                     <input class="form-control" id="pin" name="pin"type="text" >
-
-                     <label for="pfin">pfin</label>
-                     <input class="form-control" id="pfin" name="pfin"type="text" >
 
                      <label for="impacto">Impacto</label>
                      <input class="form-control" id="impacto" name="impacto" type="text" >
@@ -553,51 +504,7 @@ echo "fin";
                </div></div>
 
 
-               <div class="modal fade" id="newid" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
-                     </div>
-                     <div class="modal-body">
-                         <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
- 
-                     <label for="nombre">Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
-
-                     <label for="fechapub">Fecha</label>
-                     <input class="form-control" id="fecha" name="fecha" type="date" >
-
-                     <label for="participacion">Participación</label>
-                     <input class="form-control" id="participacion" name="participacion" type="text" >
-
-                     <label for="regional">Regional</label>
-                     <input class="form-control" id="regional" name="regional" type="text" >
-
-                     <label for="lugar">Lugar</label>
-                     <input class="form-control" id="lugar" name="lugar"type="text" >
-
-                     <input type="hidden" name="tabla" value="id" >                     
-
-
-                     <div class="modal-footer">
-                     <input type="submit" name="insertaid" id="newid" class="btn btn-success" style="width:100%;" value="Guardar"/>
-                   </div>
-                 </form>
-               </div>
-             </div>
-             <!-- /.modal-content --> 
-          </div>
-          <!-- /.modal-dialog --> 
-       </div></div>
-               </div></div>
-
-               <div class="modal fade" id="newie" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+        <div class="modal fade" id="newid" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
@@ -606,36 +513,40 @@ echo "fin";
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
- 				  
-           
-                   <label for="id">Red de Investigación</label></p>
-                    <select name="id">
-                    <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
-                          $query = "SELECT * FROM redinv";
-                          $resultado = $mysqli->query($query);
-                          while ($lineaBD = $resultado->fetch_assoc())
-                      echo"<option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
-                    ?>
-                    </select>
-           
-          <br>
-                   <div class="form-group">
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
+
                      <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="orgfin" name="orgfin">
-                   </div>
- 				  <br>
-                   <input type="hidden" name="tabla" value="ie" />
+                     <input type="text" class="form-control" id="UD" name="orgfin">
+
+                     <label for="fechapub">Fecha</label>
+                     <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                     <label for="autores">Autores</label>
+                     <input class="form-control" id="autores" name="autores"type="text" >
+
+                     <label for="participacion">Participación</label>
+                     <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                     <label for="congreso">Congreso</label>
+                     <input class="form-control" id="congreso" name="congreso"type="text" >
+
+                     <label for="regional">Regional</label>
+                     <input class="form-control" id="regional" name="regional" type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="id" />                     
+
                    <div class="modal-footer">
-                     <input type="submit" name="insertaie" id="newie" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                     <input type="submit" name="insertaid" id="newid" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                 </form>
+
+
+
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -643,6 +554,7 @@ echo "fin";
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
+
 
 
         <div class="modal fade" id="newiff" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
@@ -654,18 +566,17 @@ echo "fin";
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaid" name="newiff" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label for="nombre">Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
 
                      <input type="hidden" name="tabla" value="iff" />                     
 
-                     <div class="modal-footer">
-                     <input type="submit" name="insertaiff" id="newiff" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaid" id="newid" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                 </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -673,7 +584,6 @@ echo "fin";
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
-               
 
 
 
@@ -690,7 +600,7 @@ echo "fin";
                  <form id="insertaid" name="newig" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label>Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <label>Unidades Docentes</label></p>
                      <input type="text" class="form-control" id="UD" name="UD">
@@ -707,21 +617,23 @@ echo "fin";
                      <label>Impacto</label>
                      <input class="form-control" id="impacto" name="impacto">
 
+                     <label>Congreso</label>
+                     <input class="form-control" id="congreso" name="congreso"type="text" >
+
                      <label>Nacional</label>
                      <input class="form-control" id="nacional" name="nacional" type="text" >
 
                      <label>Desde</label>
-                     <input class="form-control" id="desde" name="desde"type="date" >
+                     <input class="form-control" id="desde" name="desde"type="text" >
 
                      <label>Hasta</label>
-                     <input class="form-control" id="hasta" name="hasta" type="date" >
+                     <input class="form-control" id="hasta" name="hasta" type="text" >
 
                      <input type="hidden" name="tabla" value="ig" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaig" id="newig" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -729,7 +641,6 @@ echo "fin";
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
-
 
 
                <div class="modal fade" id="newih" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
@@ -744,7 +655,7 @@ echo "fin";
                  <form id="insertaid" name="newih" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label for="nombre">Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <label for="orgfin">Unidades Docentes</label></p>
                      <input type="text" class="form-control" id="UD" name="UD">
@@ -769,7 +680,6 @@ echo "fin";
                    <div class="modal-footer">
                      <input type="submit" name="insertaih" id="newih" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -788,33 +698,15 @@ echo "fin";
                 <div class="modal-body">
                     <div class="panel-body">
                  <form id="insertaid" name="newii" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
-
-
-                     <label for="id">Titulo de la tesis</label></p>
-                    <select name="id">
-                     <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
-                          $query = "SELECT * FROM tesis";
-                          $resultado = $mysqli->query($query);
-                          while ($lineaBD = $resultado->fetch_assoc())
-                      echo"
-                      <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>
-                      ";
-                    ?>
-                    </select>
-
-
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">  
 
                      <input type="hidden" name="tabla" value="ii" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaii" id="newii" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -835,29 +727,14 @@ echo "fin";
                     <div class="panel-body">
                  <form id="insertaid" name="newij" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
-                 <label for="id">Titulo de la tesis</label></p>
-                 <select name="id">
-                  <?php
-                    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                       if ($mysqli->connect_errno) {
-                         echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                         die("Error: No se pudo conectar");
-                       }
-                       $query = "SELECT * FROM tesis";
-                       $resultado = $mysqli->query($query);
-                       while ($lineaBD = $resultado->fetch_assoc())
-                   echo"
-                   <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>
-                   ";
-                 ?>
-                 </select>
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <input type="hidden" name="tabla" value="ij" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaij" id="newij" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -879,7 +756,7 @@ echo "fin";
                  <form id="insertaik" name="newik" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label>Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <label>Unidades Docentes</label></p>
                      <input type="text" class="form-control" id="UD" name="UD">
@@ -910,7 +787,6 @@ echo "fin";
                    <div class="modal-footer">
                      <input type="submit" name="insertaik" id="newik" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -931,28 +807,43 @@ echo "fin";
                          <div class="panel-body">
                       <form id="insertail" name="newil" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
                            <label for="nombre">Título</label></p>
-                          <input type="text" class="form-control" id="titulo" name="titulo">
+                          <input type="text" class="form-control" id="tiitulo" name="titulo">
                          <br>
                           <label for="orgfin">Unidades Docentes</label></p>
                           <input type="text" class="form-control" id="UD" name="orgfin">
                         <br>
-                          <label for="fechapub">Fecha de concesión</label>
-                          <input class="form-control" id="fecha" name="fecha" type="date" >
-
+                          <label for="fechapub">Fecha de publicación</label>
+                          <input class="form-control" id="fechapub" name="fechapub" type="date" >
+     
                           <label for="autores">Autores</label>
                           <input class="form-control" id="autores" name="autores"type="text" >
      
-                          <label for="revista">Pais</label>
-                          <input class="form-control" id="pais" name="pais" type="text" >
+                          <label for="revista">Revista</label>
+                          <input class="form-control" id="revista" name="revista" type="text" >
      
-                          <label for="ISBN">Numero de patente</label>
-                          <input class="form-control" id="patente" name="patente"type="text" >
+                          <label for="ISBN">ISBN</label>
+                          <input class="form-control" id="ISBN" name="ISBN"type="text" >
      
-                          <label for="clave">Entidad titular</label>
-                          <input class="form-control" id="entidad" name="entidad" type="text" >
+                          <label for="clave">Clave</label>
+                          <input class="form-control" id="clave" name="clave" type="text" >
      
-                          <label for="volumen">Empresa explotadora</label>
-                          <input class="form-control" id="empresa" name="empresa"type="text" >
+                          <label for="volumen">Volumen</label>
+                          <input class="form-control" id="volumen" name="volumen"type="text" >
+     
+                          <label for="impacto">Impacto</label>
+                          <input class="form-control" id="impacto" name="impacto" type="text" >
+     
+                          <label for="citas">Citas</label>
+                          <input class="form-control" id="citas" name="citas"type="text" >
+     
+                          <label for="acta">Acta</label>
+                          <input class="form-control" id="acta" name="acta" type="text" >
+     
+                          <label for="editorial">Editorial</label>
+                          <input class="form-control" id="editorial" name="editorial"type="text" >
+     
+                          <label for="lugar">Lugar</label>
+                          <input class="form-control" id="lugar" name="lugar"type="text" >
      
                           <input type="hidden" name="tabla" value="il" />                     
      
@@ -980,17 +871,19 @@ echo "fin";
                     <div class="panel-body">
                  <form id="insertaim" name="newim" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
-                    <label>Razón social</label></p>
-                    <input type="text" class="form-control" id="razsocial" name="razsocial">
-                    <input type="hidden" name="tabla" value="im" /> 
+                     <label>Nombre de la empresa</label></p>
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <label>CIF</label></p>
-                     <input type="text" class="form-control" id="CIF" name="CIF">                    
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Razón social</label></p>
+                     <input type="text" class="form-control" id="investigador" name="investigador">
+                     <input type="hidden" name="tabla" value="im" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaim" id="newim" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -1011,19 +904,16 @@ echo "fin";
                  <form id="insertainn" name="newinn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label>Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label>Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <label>Investigadores</label></p>
-                     <input type="text" class="form-control" id="investigadores" name="investigadores">
+                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label>Entidades</label></p>
-                     <input type="text" class="form-control" id="entidad" name="entidad">
+                     <input type="text" class="form-control" id="investigador" name="investigador">
 
                      <label>Tema</label>
-                     <input class="form-control" id="tema" name="tema">
+                     <input class="form-control" id="fecha" name="fecha">
 
                      <label>Fecha </label>
                      <input class="form-control" id="fecha" name="fecha"  type="date">
@@ -1033,7 +923,6 @@ echo "fin";
                    <div class="modal-footer">
                      <input type="submit" name="insertainn" id="newinn" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -1054,38 +943,34 @@ echo "fin";
                  <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label>Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
-                     <label>Unidades Docentes</label></p>
+                     <label>Organización financiadora</label></p>
                      <input type="text" class="form-control" id="UD" name="UD">
 
-                     <label>Organizacion Financiadora</label></p>
-                     <input type="text" class="form-control" id="orgfin" name="orgfin">
-
                      <label>Entidades financiadoras</label></p>
-                     <input type="text" class="form-control" id="entfin" name="entfin">
+                     <input type="text" class="form-control" id="investigador" name="investigador">
 
                      <label>Fecha de inicio</label>
-                     <input class="form-control" id="fechaini" name="fechaini" type="date">
+                     <input class="form-control" id="editor" name="editor" type="date">
 
                      <label>Fecha de finalización</label>
-                     <input class="form-control" id="fechafin" name="fechafin" type="date">
+                     <input class="form-control" id="revista" name="revista" type="date">
 
                      <label>Subvención</label>
-                     <input class="form-control" id="subvencion" name="subvencion">
+                     <input class="form-control" id="impacto" name="impacto">
 
                      <label>Investigador principal</label>
-                     <input class="form-control" id="invprincipal" name="invprincipal"type="text" >
+                     <input class="form-control" id="congreso" name="congreso"type="text" >
 
                      <label>Numero de investigadores</label>
-                     <input class="form-control" id="numinv" name="numinv" type="text" >
+                     <input class="form-control" id="nacional" name="nacional" type="text" >
 
-                     <input type="hidden" name="tabla" value="innn" />                     
+                     <input type="hidden" name="tabla" value="ig" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertainnn" id="newinnn" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -1105,32 +990,31 @@ echo "fin";
                  <form id="insertaio" name="newio" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label>Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                     <input type="text" class="form-control" id="tiitulo" name="titulo">
 
                      <label>Autores</label></p>
                      <input type="text" class="form-control" id="autores" name="UD">
 
                      <label>Participación</label></p>
-                     <input type="text" class="form-control" id="participacion" name="participacion">
+                     <input type="text" class="form-control" id="investigador" name="investigador">
 
                      <label>Congreso</label>
-                     <input class="form-control" id="congreso" name="congreso">
+                     <input class="form-control" id="editor" name="editor">
 
                      <label>Regional</label>
-                     <input class="form-control" id="regional" name="regional">
+                     <input class="form-control" id="revista" name="revista">
 
-                     <label>Lugar de celebración</label>
-                     <input class="form-control" id="lugar" name="lugar">
+                     <label>Lugar</label>
+                     <input class="form-control" id="impacto" name="impacto">
 
-                     <label>Fecha de celebración</label>
-                     <input class="form-control" id="fecha" name="fecha"type="date" >
+                     <label>Fecha</label>
+                     <input class="form-control" id="congreso" name="congreso"type="date" >
 
                      <input type="hidden" name="tabla" value="io" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaio" id="newio" class="btn btn-success" style="width:100%;" value="Guardar"/>
                    </div>
-                   </form>
                </div>
              </div>
              <!-- /.modal-content --> 
@@ -1138,6 +1022,15 @@ echo "fin";
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
+
+
+<?php 
+
+//MODALES DE AQUI EN ADELANTE
+
+    //ELIMINAR 
+    
+?>
 
 	<!-- Le javascript
     ================================================== -->

@@ -85,14 +85,14 @@ $.ajax({
 
 function mostrar($tabla){
     $primera=1;
-    global $contador, $pre, $tabla_total;
+    global $contador, $pre, $tabla_total, $apartado;
     $letra=$pre[$contador];
     
     $resultado=getmerito($tabla,'0');
     while ($lineaBD = $resultado->fetch_assoc()) {
         if ($primera==1){
  echo"
-    <div id=\"collapse".$letra."\" class=\"row-fluid collapse out\">
+    <div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">
 			<div>
                <div class=\"table\">
                   <table id=\"tablenosub\" class=\"table table-bordred table-stripedt\">
@@ -152,17 +152,18 @@ function mostrar($tabla){
 
   function mostrar_sub($fichero, $num_linea){
 
-        global $contador, $pre, $tabla, $tabla_total;
+        global $contador, $pre, $pret, $tabla, $tabla_total, $apartado;
         
         $letra=$pre[$contador];
+        $letrat=$pret[$contador];
         $linea=$fichero[++$num_linea];
         $primera=1;
         
         while ($linea[0]=="."){
             if ($primera!=1)
-                echo"<div id=\"collapse".$letra."\" class=\"row-fluid collapse in\">";  
+                echo"<div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse in\">";  
             if ($primera=1){
-                echo"<div id=\"collapse".$letra."\" class=\"row-fluid collapse out\">"; 
+                echo"<div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">"; 
                 $primera=0;}    
 			echo"
 			<div>
@@ -173,7 +174,7 @@ function mostrar($tabla){
                         $resultado=getmerito($tabla_total,$subtipo);
                         
                         echo"<thead>
-                        <th style=\"text-align:left;\">".$letra.$subtipo.$linea."</th>
+                        <th style=\"text-align:left;\">".$letrat.$subtipo.$linea."</th>
                         <th style=\"text-align:left;\">Estado</th>
                      </thead>";
                         echo "<tbody>";
@@ -252,21 +253,21 @@ if($fichero!=NULL){
 
 
 
-    echo"<div>hola</div>
+    echo"
 		<div class=\"col-sm-10\" align=\"center\">CONCEPTO</div>
         <div class=\"col-sm-1\">UAD</div>
         </div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
         $tabla_total=$apartado.$pre[$contador];
-        echo $linea[0]."----".$tabla_total;
         switch ($linea['0']) {
             case '-':
             
             $total=mostrar_total($tabla_total);
             $linea = substr($linea, 1);
+            
             echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
-                        data-target=\"#collapse".$pre[$contador]."\">
+                        data-target=\"#collapse".$apartado.$pre[$contador]."\">
                         <div class=\"col-sm-10\"  id=\"titulotabla\" >".$pret[$contador]."-".$linea."</div>
                         <div class=\"col-sm-1\">".$total."</div> </div>
                         <div class=\"col-sm-1\">
@@ -278,17 +279,16 @@ if($fichero!=NULL){
             break;
 
             case '<':
-              if ($apartado=="d"){
-                $apartado="i";
-
-              }
-
-              if ($apartado=="i"){
-                $apartado="g";
                 
-              }
-              $num_linea++;
-              $contador=0;
+                if ($apartado=="i"){
+                    $apartado="g";
+                }
+                if ($apartado=="d"){
+                    $apartado="i";
+                }
+                $num_linea++;
+                $contador=0;
+                echo"</br><div>hola</div>";
               break;
 
             case '#':
@@ -301,7 +301,7 @@ if($fichero!=NULL){
                 $total=mostrar_total($tabla_total);
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\">
-                        <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$pre[$contador]."\">
+                        <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
                             <div class=\"col-sm-10\"  id=\"titulotabla\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\">".$total."</div> </div>
                             <div class=\"col-sm-1\">

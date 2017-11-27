@@ -1,0 +1,31 @@
+
+
+#titulotabla {
+    /*background-color: #33ccff;*/
+    font-size: 16px;
+    border: 44 ;
+  /*  border: 1.5px solid #000;*/
+}
+
+#tablenosub {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+    
+    width: 1100px;
+    margin: 0 auto;
+    /*border: 1px solid #000;*/
+}
+
+#tablesub {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+    
+    width: 1100px;
+    margin: 0 auto;  
+  /*  border: 1px solid #000; */
+}
+
+h1{
+    text-align: center;
+    background-color: #FFCC66;
+}
