@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2017 a las 11:55:00
+-- Tiempo de generación: 29-11-2017 a las 11:15:44
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -100,10 +100,20 @@ INSERT INTO `comments` (`id`, `groupid`, `user`, `name`, `surname`, `texto`, `cr
 CREATE TABLE `da` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(250) NOT NULL,
   `UD` int(3) NOT NULL,
   `subtipo` int(1) NOT NULL DEFAULT '0',
-  `estado` int(1) NOT NULL DEFAULT '0'
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(250) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `da`
+--
+
+INSERT INTO `da` (`id`, `userid`, `titulo`, `UD`, `subtipo`, `estado`, `infoestado`) VALUES
+(1, 8, 'Unidades docentes: 8', 8, 1, 1, 'Correcto'),
+(2, 8, 'Unidades Docentes: 12', 12, 2, 1, 'Correcto');
 
 -- --------------------------------------------------------
 
@@ -114,9 +124,20 @@ CREATE TABLE `da` (
 CREATE TABLE `db` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `estado` int(1) NOT NULL
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `db`
+--
+
+INSERT INTO `db` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -127,9 +148,20 @@ CREATE TABLE `db` (
 CREATE TABLE `dc` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '0'
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `dc`
+--
+
+INSERT INTO `dc` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -140,9 +172,20 @@ CREATE TABLE `dc` (
 CREATE TABLE `dd` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '0'
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `dd`
+--
+
+INSERT INTO `dd` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -159,16 +202,17 @@ CREATE TABLE `de` (
   `codirectores` text CHARACTER SET utf8 NOT NULL,
   `año` int(4) NOT NULL,
   `calificacion` int(2) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '0'
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(150) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `df`
+-- Estructura de tabla para la tabla `dff`
 --
 
-CREATE TABLE `df` (
+CREATE TABLE `dff` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `titulo` varchar(500) CHARACTER SET utf8 NOT NULL,
@@ -177,7 +221,8 @@ CREATE TABLE `df` (
   `codirectores` text CHARACTER SET utf8 NOT NULL,
   `año` int(4) NOT NULL,
   `calificacion` int(2) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '0'
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(100) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
@@ -190,6 +235,7 @@ CREATE TABLE `dg` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `UD` int(3) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastmod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `lastupdateid` int(11) NOT NULL,
@@ -214,6 +260,7 @@ CREATE TABLE `dh` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `UD` int(3) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastmod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `lastupdateid` int(11) NOT NULL,
@@ -238,6 +285,7 @@ CREATE TABLE `di` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `UD` int(3) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastmod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `lastupdateid` int(11) NOT NULL,
@@ -263,48 +311,48 @@ CREATE TABLE `di` (
 -- Volcado de datos para la tabla `di`
 --
 
-INSERT INTO `di` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `autores`, `titulo`, `revista`, `isbn`, `clave`, `volumen`, `pin`, `pfin`, `fecha`, `impacto`, `citas`, `acta`, `editorial`, `estado`, `infoestado`, `lugar`) VALUES
-(27, 12, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '2012', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(28, 12, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '2011', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
-(29, 12, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '2007', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(30, 12, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '2000', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(31, 12, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Javier SÃ¡nchez, AgustÃ­n Salgado, Nelson MonzÃ³n', 'Computing Inverse Optical Flow', 'Pattern Recognition Letters', '0167-8655', 'A', '52', '32', '39', 'december/2014', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
-(32, 12, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Nelson MonzÃ³n, AgustÃ­n Salgado, Javier SÃ¡nchez', 'Discontinuity preserving in TV-L1 optical flow methods', 'CTIM Technical Report', '2254-2353', 'A', '5', '1', '37', 'november/2014', '', '', '', 'Universidad de Las Palmas de Gran Canaria', 0, 'No ha sido evaluado todavía.', 'Las Palmas de Gran Canaria'),
-(33, 12, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'MonzÃ³n, Nelson and SÃ¡nchez, Javier and Salgado, AgustÃ­n', 'Efficient Mechanism for Discontinuity Preserving in Optical Flow Methods', 'Image and Signal Processing', '978-3-319-07997-4', 'CR', '8509', '425', '432', 'october/2014', '', '', '', 'Springer International Publishing', 0, 'No ha sido evaluado todavía.', 'Switzerland'),
-(34, 12, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Nelson MonzÃ³n, Javier SÃ¡nchez, AgustÃ­n Salgado', 'Implementation of a Robust Optical Flow Method for Color Images', 'CTIM Technical Report', '2254-2353', 'A', '4', '1', '14', 'september/2014', '', '', '', 'Universidad de Las Palmas de Gran Canaria', 0, 'No ha sido evaluado todavía.', 'Las Palmas de Gran Canaria'),
-(35, 12, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Simon Baker and Daniel Scharstein and J. P. Lewis and Stefan Roth and Michael J. Black and Richard Szeliski', 'A Database and Evaluation Methodology for Optical Flow', 'International Conference on Computer Vision', '', 'Li', '', '1', '8', '2007', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(36, 12, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Huber, P.J.', '', 'Robust Statistics', '9780471650720', 'B', '', '', '', '2004', '', '', '', 'Wiley', 0, 'No ha sido evaluado todavía.', ''),
-(37, 12, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Hartley, R.Â I. and Zisserman, A.', '', 'Multiple View Geometry in Computer Vision', '', 'B', '', '', '', '2004', '', '', '', 'Cambridge University Press, ISBN: 0521540518', 0, 'No ha sido evaluado todavía.', ''),
-(38, 12, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Irani, Michal and Anandan, P', 'Robust multi-sensor image alignment', 'Computer Vision, 1998. Sixth International Conference on', '', 'Li', '', '959', '966', '1998', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(39, 12, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Odobez, Jean-Marc and Bouthemy, Patrick', 'Robust multiresolution estimation of parametric motion models', 'Journal of visual communication and image representation', '4', 'A', '6', '348', '365', '1995', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
-(40, 12, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Lucas, Bruce D and Kanade, Takeo', 'An iterative image registration technique with an application to stereo vision.', 'IJCAI', '', 'Li', '81', '674', '679', '1981', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(41, 12, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '2012', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(42, 12, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '2011', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
-(43, 12, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '2007', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(44, 12, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '2000', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(45, 12, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '2012', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(46, 12, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '2011', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
-(47, 12, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '2007', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(48, 12, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '2000', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(56, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'SÃ¡nchez, Javier and MonzÃ³n, Nelson and Salgado, AgustÃ­n', 'Robust Optical Flow Estimation', 'Image Processing On Line', '', 'A', '3', '252', '270', '2013', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(57, 8, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'SÃ¡nchez, Javier and Meinhardt-Llopis, Enric and Facciolo, Gabriele', 'TV-L1 Optical Flow Estimation', 'Image Processing On Line', '', 'A', '3', '137', '150', '2013', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(58, 8, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Meinhardt-Llopis, Enric and SÃ¡nchez, Javier and Kondermann, Daniel', 'Horn-Schunck Optical Flow with a Multi-Scale Strategy', 'Image Processing On Line', '', 'A', '3', '151', '172', '2013', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(59, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Szeliski, Richard', '', 'Computer vision algorithms and applications', '9781848829343 1848829345 ', 'L', '', '', '', '2011', '', '', '', 'Springer', 0, 'No ha sido evaluado todavía.', 'London; New York'),
-(60, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Evangelidis, Georgios D and Psarakis, Emmanouil Z', 'Parametric image alignment using enhanced correlation coefficient maximization', 'Pattern Analysis and Machine Intelligence, IEEE Transactions on', '10', 'A', '30', '1858', '1865', '2008', '', '', '', 'IEEE', 0, 'No ha sido evaluado todavía.', ''),
-(61, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Daniel Scharstein and J. P. Lewis and Stefan Roth and Michael J. Black and Richard Szeliski', 'A Database and Evaluation Methodology for Optical Flow', 'International Conference on Computer Vision', '', 'Li', '', '1', '8', '2007', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(62, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Raju Patil and Kong Man Cheung and Iain Matthews', 'Lucas-Kanade 20 Years On: Part 5', '', 'cmu-ri-tr-04-64', 'S', '', '', '', 'November/2004', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(63, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 4', '', 'cmu-ri-tr-04-14', 'S', '', '', '', 'February/2004', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(64, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Huber, P.J.', '', 'Robust Statistics', '9780471650720', 'L', '', '', '', '2004', '', '', '', 'Wiley', 0, 'No ha sido evaluado todavía.', ''),
-(65, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Baker, Simon and Matthews, Iain', 'Lucas-kanade 20 years on: A unifying framework', 'International Journal of Computer Vision', '3', 'A', '56', '221', '255', '2004', '', '', '', 'Springer', 0, 'No ha sido evaluado todavía.', ''),
-(66, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Hartley, R.Â I. and Zisserman, A.', '', 'Multiple View Geometry in Computer Vision', '', 'L', '', '', '', '2004', '', '', '', 'Cambridge University Press, ISBN: 0521540518', 0, 'No ha sido evaluado todavía.', ''),
-(67, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 3', '', 'cmu-ri-tr-03-35', 'S', '', '', '', 'November/2003', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(68, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews and Takahiro Ishikawa', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 2', '', 'cmu-ri-tr-03-01', 'S', '', '', '', 'February/2003', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(69, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 1', '', 'cmu-ri-tr-02-16', 'S', '', '', '', 'July/2002', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(70, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Baker, Simon and Matthews, Iain', 'Equivalence and efficiency of image alignment algorithms', 'Computer Vision and Pattern Recognition, 2001. CVPR 2001. Proceedings of the 2001 IEEE Computer Society Conference on', '', 'Li', '1', '1', '1090', '2001', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(71, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Irani, Michal and Anandan, P', 'Robust multi-sensor image alignment', 'Computer Vision, 1998. Sixth International Conference on', '', 'Li', '', '959', '966', '1998', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(72, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Michael J. Black and P. Anandan', 'The Robust Estimation of Multiple Motions: Parametric and Piecewise-Smooth Flow Fields', 'Computer Vision and Image Understanding', '1077-3142', 'A', '63', '75', '104', '1996', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(73, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Odobez, Jean-Marc and Bouthemy, Patrick', 'Robust multiresolution estimation of parametric motion models', 'Journal of visual communication and image representation', '4', 'A', '6', '348', '365', '1995', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
-(74, 12, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Lucas, Bruce D and Kanade, Takeo', 'An iterative image registration technique with an application to stereo vision.', 'IJCAI', '', 'Li', '81', '674', '679', '1981', '', '', '', '', 0, 'No ha sido evaluado todavía.', '');
+INSERT INTO `di` (`id`, `userid`, `UD`, `subtipo`, `creation`, `lastmod`, `lastupdateid`, `autores`, `titulo`, `revista`, `isbn`, `clave`, `volumen`, `pin`, `pfin`, `fecha`, `impacto`, `citas`, `acta`, `editorial`, `estado`, `infoestado`, `lugar`) VALUES
+(27, 12, 0, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '2012', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(28, 12, 0, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '2011', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
+(29, 12, 0, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '2007', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
+(30, 12, 0, 0, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '2000', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
+(31, 12, 0, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Javier SÃ¡nchez, AgustÃ­n Salgado, Nelson MonzÃ³n', 'Computing Inverse Optical Flow', 'Pattern Recognition Letters', '0167-8655', 'A', '52', '32', '39', 'december/2014', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
+(32, 12, 0, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Nelson MonzÃ³n, AgustÃ­n Salgado, Javier SÃ¡nchez', 'Discontinuity preserving in TV-L1 optical flow methods', 'CTIM Technical Report', '2254-2353', 'A', '5', '1', '37', 'november/2014', '', '', '', 'Universidad de Las Palmas de Gran Canaria', 0, 'No ha sido evaluado todavía.', 'Las Palmas de Gran Canaria'),
+(33, 12, 0, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'MonzÃ³n, Nelson and SÃ¡nchez, Javier and Salgado, AgustÃ­n', 'Efficient Mechanism for Discontinuity Preserving in Optical Flow Methods', 'Image and Signal Processing', '978-3-319-07997-4', 'CR', '8509', '425', '432', 'october/2014', '', '', '', 'Springer International Publishing', 0, 'No ha sido evaluado todavía.', 'Switzerland'),
+(34, 12, 0, 0, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Nelson MonzÃ³n, Javier SÃ¡nchez, AgustÃ­n Salgado', 'Implementation of a Robust Optical Flow Method for Color Images', 'CTIM Technical Report', '2254-2353', 'A', '4', '1', '14', 'september/2014', '', '', '', 'Universidad de Las Palmas de Gran Canaria', 0, 'No ha sido evaluado todavía.', 'Las Palmas de Gran Canaria'),
+(35, 12, 0, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Simon Baker and Daniel Scharstein and J. P. Lewis and Stefan Roth and Michael J. Black and Richard Szeliski', 'A Database and Evaluation Methodology for Optical Flow', 'International Conference on Computer Vision', '', 'Li', '', '1', '8', '2007', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(36, 12, 0, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Huber, P.J.', '', 'Robust Statistics', '9780471650720', 'B', '', '', '', '2004', '', '', '', 'Wiley', 0, 'No ha sido evaluado todavía.', ''),
+(37, 12, 0, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Hartley, R.Â I. and Zisserman, A.', '', 'Multiple View Geometry in Computer Vision', '', 'B', '', '', '', '2004', '', '', '', 'Cambridge University Press, ISBN: 0521540518', 0, 'No ha sido evaluado todavía.', ''),
+(38, 12, 0, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Irani, Michal and Anandan, P', 'Robust multi-sensor image alignment', 'Computer Vision, 1998. Sixth International Conference on', '', 'Li', '', '959', '966', '1998', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(39, 12, 0, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Odobez, Jean-Marc and Bouthemy, Patrick', 'Robust multiresolution estimation of parametric motion models', 'Journal of visual communication and image representation', '4', 'A', '6', '348', '365', '1995', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
+(40, 12, 0, 0, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Lucas, Bruce D and Kanade, Takeo', 'An iterative image registration technique with an application to stereo vision.', 'IJCAI', '', 'Li', '81', '674', '679', '1981', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(41, 12, 0, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '2012', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(42, 12, 0, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '2011', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
+(43, 12, 0, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '2007', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
+(44, 12, 0, 0, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '2000', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
+(45, 12, 0, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '2012', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(46, 12, 0, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '2011', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
+(47, 12, 0, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '2007', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
+(48, 12, 0, 0, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '2000', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
+(56, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'SÃ¡nchez, Javier and MonzÃ³n, Nelson and Salgado, AgustÃ­n', 'Robust Optical Flow Estimation', 'Image Processing On Line', '', 'A', '3', '252', '270', '2013', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(57, 8, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'SÃ¡nchez, Javier and Meinhardt-Llopis, Enric and Facciolo, Gabriele', 'TV-L1 Optical Flow Estimation', 'Image Processing On Line', '', 'A', '3', '137', '150', '2013', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(58, 8, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Meinhardt-Llopis, Enric and SÃ¡nchez, Javier and Kondermann, Daniel', 'Horn-Schunck Optical Flow with a Multi-Scale Strategy', 'Image Processing On Line', '', 'A', '3', '151', '172', '2013', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(59, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Szeliski, Richard', '', 'Computer vision algorithms and applications', '9781848829343 1848829345 ', 'L', '', '', '', '2011', '', '', '', 'Springer', 0, 'No ha sido evaluado todavía.', 'London; New York'),
+(60, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Evangelidis, Georgios D and Psarakis, Emmanouil Z', 'Parametric image alignment using enhanced correlation coefficient maximization', 'Pattern Analysis and Machine Intelligence, IEEE Transactions on', '10', 'A', '30', '1858', '1865', '2008', '', '', '', 'IEEE', 0, 'No ha sido evaluado todavía.', ''),
+(61, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Daniel Scharstein and J. P. Lewis and Stefan Roth and Michael J. Black and Richard Szeliski', 'A Database and Evaluation Methodology for Optical Flow', 'International Conference on Computer Vision', '', 'Li', '', '1', '8', '2007', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(62, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Raju Patil and Kong Man Cheung and Iain Matthews', 'Lucas-Kanade 20 Years On: Part 5', '', 'cmu-ri-tr-04-64', 'S', '', '', '', 'November/2004', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
+(63, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 4', '', 'cmu-ri-tr-04-14', 'S', '', '', '', 'February/2004', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
+(64, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Huber, P.J.', '', 'Robust Statistics', '9780471650720', 'L', '', '', '', '2004', '', '', '', 'Wiley', 0, 'No ha sido evaluado todavía.', ''),
+(65, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Baker, Simon and Matthews, Iain', 'Lucas-kanade 20 years on: A unifying framework', 'International Journal of Computer Vision', '3', 'A', '56', '221', '255', '2004', '', '', '', 'Springer', 0, 'No ha sido evaluado todavía.', ''),
+(66, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Hartley, R.Â I. and Zisserman, A.', '', 'Multiple View Geometry in Computer Vision', '', 'L', '', '', '', '2004', '', '', '', 'Cambridge University Press, ISBN: 0521540518', 0, 'No ha sido evaluado todavía.', ''),
+(67, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 3', '', 'cmu-ri-tr-03-35', 'S', '', '', '', 'November/2003', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
+(68, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews and Takahiro Ishikawa', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 2', '', 'cmu-ri-tr-03-01', 'S', '', '', '', 'February/2003', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
+(69, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 1', '', 'cmu-ri-tr-02-16', 'S', '', '', '', 'July/2002', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
+(70, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Baker, Simon and Matthews, Iain', 'Equivalence and efficiency of image alignment algorithms', 'Computer Vision and Pattern Recognition, 2001. CVPR 2001. Proceedings of the 2001 IEEE Computer Society Conference on', '', 'Li', '1', '1', '1090', '2001', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(71, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Irani, Michal and Anandan, P', 'Robust multi-sensor image alignment', 'Computer Vision, 1998. Sixth International Conference on', '', 'Li', '', '959', '966', '1998', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(72, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Michael J. Black and P. Anandan', 'The Robust Estimation of Multiple Motions: Parametric and Piecewise-Smooth Flow Fields', 'Computer Vision and Image Understanding', '1077-3142', 'A', '63', '75', '104', '1996', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(73, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Odobez, Jean-Marc and Bouthemy, Patrick', 'Robust multiresolution estimation of parametric motion models', 'Journal of visual communication and image representation', '4', 'A', '6', '348', '365', '1995', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
+(74, 12, 0, 0, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Lucas, Bruce D and Kanade, Takeo', 'An iterative image registration technique with an application to stereo vision.', 'IJCAI', '', 'Li', '81', '674', '679', '1981', '', '', '', '', 0, 'No ha sido evaluado todavía.', '');
 
 -- --------------------------------------------------------
 
@@ -315,9 +363,20 @@ INSERT INTO `di` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `
 CREATE TABLE `dj` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `hecho` int(1) NOT NULL DEFAULT '0'
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `dj`
+--
+
+INSERT INTO `dj` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -328,6 +387,8 @@ CREATE TABLE `dj` (
 CREATE TABLE `dk` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(200) CHARACTER SET utf32 NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
   `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastmod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -345,8 +406,8 @@ CREATE TABLE `dk` (
 -- Volcado de datos para la tabla `dk`
 --
 
-INSERT INTO `dk` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `investigador`, `centro`, `pais`, `inicio`, `fin`, `estado`, `infoestado`) VALUES
-(1, 12, 0, '2016-11-12 11:11:04', '2016-11-12 11:11:14', 15, 'Antonio Natale Consalvo', '', '', '', '', 0, 'No ha sido evaluado todavía.');
+INSERT INTO `dk` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `creation`, `lastmod`, `lastupdateid`, `investigador`, `centro`, `pais`, `inicio`, `fin`, `estado`, `infoestado`) VALUES
+(1, 8, '', 0, 0, '2016-11-12 11:11:04', '2016-11-12 11:11:14', 15, 'Antonio Natale Consalvo', '', '', '', '', 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
 
@@ -357,34 +418,188 @@ INSERT INTO `dk` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `
 CREATE TABLE `dl` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `valor` int(1) NOT NULL DEFAULT '0',
-  `estado` int(1) NOT NULL
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `dl`
+--
+
+INSERT INTO `dl` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresas`
+-- Estructura de tabla para la tabla `ga`
 --
 
-CREATE TABLE `empresas` (
-  `cif` varchar(9) NOT NULL,
-  `nombre` text NOT NULL,
-  `userid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `evaluacion`
---
-
-CREATE TABLE `evaluacion` (
-  `entidad` int(11) NOT NULL,
+CREATE TABLE `ga` (
+  `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `nombre` varchar(150) NOT NULL
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `ga`
+--
+
+INSERT INTO `ga` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adiossss', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gb`
+--
+
+CREATE TABLE `gb` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gb`
+--
+
+INSERT INTO `gb` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gc`
+--
+
+CREATE TABLE `gc` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gc`
+--
+
+INSERT INTO `gc` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gd`
+--
+
+CREATE TABLE `gd` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gd`
+--
+
+INSERT INTO `gd` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ge`
+--
+
+CREATE TABLE `ge` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `ge`
+--
+
+INSERT INTO `ge` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gff`
+--
+
+CREATE TABLE `gff` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gff`
+--
+
+INSERT INTO `gff` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gg`
+--
+
+CREATE TABLE `gg` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gg`
+--
+
+INSERT INTO `gg` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -395,11 +610,20 @@ CREATE TABLE `evaluacion` (
 CREATE TABLE `gh` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastmod` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `text` varchar(1000) CHARACTER SET utf8 NOT NULL
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gh`
+--
+
+INSERT INTO `gh` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -410,11 +634,44 @@ CREATE TABLE `gh` (
 CREATE TABLE `gi` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
-  `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastmod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `text` varchar(1000) CHARACTER SET utf8 NOT NULL
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gi`
+--
+
+INSERT INTO `gi` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gj`
+--
+
+CREATE TABLE `gj` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtipo` int(1) NOT NULL DEFAULT '0',
+  `UD` int(3) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '0',
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `gj`
+--
+
+INSERT INTO `gj` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -438,19 +695,18 @@ CREATE TABLE `gparticipacion` (
 
 CREATE TABLE `grupoinv` (
   `id` int(11) NOT NULL,
-  `groupid` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `UAD` int(3) NOT NULL,
+  `grupoid` varchar(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `director` varchar(250) NOT NULL
+  `director` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Volcado de datos para la tabla `grupoinv`
 --
 
-INSERT INTO `grupoinv` (`id`, `groupid`, `userid`, `UAD`, `nombre`, `director`) VALUES
-(1, 4, 8, 2, 'Investigando mucho', 'Leopoldo el Oso');
+INSERT INTO `grupoinv` (`id`, `grupoid`, `nombre`, `director`) VALUES
+(1, 'ulpgcjhvj', 'uyguyg', 8),
+(2, 'jj', 'jamones jabugo', 2);
 
 -- --------------------------------------------------------
 
@@ -468,11 +724,11 @@ CREATE TABLE `ia` (
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `orgfin` varchar(100) CHARACTER SET latin1 NOT NULL,
   `entidades` varchar(150) CHARACTER SET latin1 NOT NULL,
-  `desde` varchar(10) CHARACTER SET latin1 NOT NULL,
-  `hasta` varchar(10) CHARACTER SET latin1 NOT NULL,
-  `subvencion` text NOT NULL,
+  `desde` date NOT NULL,
+  `hasta` date NOT NULL,
+  `subvencion` int(11) NOT NULL,
   `invprincipal` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `numinv` text CHARACTER SET latin1 NOT NULL,
+  `numinv` int(11) NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavia.',
   `lastupdateid` int(11) DEFAULT NULL
@@ -483,19 +739,18 @@ CREATE TABLE `ia` (
 --
 
 INSERT INTO `ia` (`id`, `userid`, `UD`, `creation`, `lastmod`, `titulo`, `subtipo`, `orgfin`, `entidades`, `desde`, `hasta`, `subvencion`, `invprincipal`, `numinv`, `estado`, `infoestado`, `lastupdateid`) VALUES
-(1, 12, 0, '2016-11-09 23:28:37', '0000-00-00 00:00:00', 'Proyecto DELL', 1, 'ULPGC', 'ULPGC', '27/11/2016', '02/12/2016', '120â‚¬', 'Rita Sebastiani', '2', 0, 'No ha sido evaluado todavía.', 15),
-(2, 12, 0, '2016-11-13 00:54:42', '2016-11-13 00:54:59', '', 0, 'ULPGC', '', '23/11/2016', '01/12/2016', 'â‚¬', 'Antonio Natale Consalvo', '4', 0, 'No ha sido evaluado todavía.', 15),
-(3, 12, 0, '2016-11-13 01:14:14', '2016-11-13 01:15:36', 'FI-WARE: Future Internet Core Platform', 0, '', '', '', '', 'â‚¬', 'Juan', '2', 0, 'No ha sido evaluado todavía.', 15),
-(4, 12, 0, '2017-06-27 12:31:09', '0000-00-00 00:00:00', 'VÃ­ctor Daniel', 0, 'ULPGC', 'ULL', '2017-12-31', '2017-12-31', '200', 'VÃ­ctor Daniel RodrÃ­guez PÃ©rez', '4', 0, 'No ha sido evaluado todavía.', NULL),
-(5, 11, 0, '2017-06-27 12:32:17', '0000-00-00 00:00:00', 'VÃ­ctor Daniel', 0, 'ULPGC', 'ULL', '2015-09-29', '2017-12-31', '2000', 'pedro', '4', 0, 'No ha sido evaluado todavía.', NULL),
-(6, 12, 0, '2017-06-27 12:35:21', '0000-00-00 00:00:00', '', 0, '', '', '', '', '', '', '', 0, 'No ha sido evaluado todavía.', NULL),
-(7, 12, 0, '2017-06-28 08:41:59', '0000-00-00 00:00:00', 'jo', 0, 'ULPGC', 'ULL', '2016-11-09', '2017-06-16', '2000', 'Maria MaxÃ© Campos', 'vituuu@hotmail.com', 0, 'No ha sido evaluado todavía.', NULL),
-(15, 8, 5, '2017-09-15 11:21:35', '0000-00-00 00:00:00', 'kalinda', 2, 'enterprises', 'inc', '2015-09-30', '2017-12-30', '2', 'yo', '3', 0, 'No ha sido evaluado todavia.', NULL),
-(17, 8, 5, '2017-11-10 12:29:33', '0000-00-00 00:00:00', 'kalinda', 0, 'enterprises', 'inc', '2016-10-30', '2017-12-30', '2', 'VÃ­ctor Daniel RdrÃ­guez PÃ©rez', 'vituuu@hotmail.com', 0, 'No ha sido evaluado todavia.', NULL),
-(19, 8, 5, '2017-11-13 12:09:26', '0000-00-00 00:00:00', 'tercer subtupo', 3, '', '', '', '', '', '', '', 0, 'No ha sido evaluado todavia.', NULL),
-(20, 8, 5, '2017-11-15 09:54:37', '0000-00-00 00:00:00', 'PFc', 1, 'ULPgc', '89595', '', '', '7576', 'ihgug', '7', 0, 'No ha sido evaluado todavia.', NULL),
-(21, 8, 5, '2017-11-17 11:11:05', '0000-00-00 00:00:00', 'pfpf', 1, 'ksdfokn', 'lksnmdflkn', '2015-11-30', '2014-10-28', '34535', 'adolfito', '4', 0, 'No ha sido evaluado todavia.', NULL),
-(22, 8, 5, '2017-11-21 12:17:14', '0000-00-00 00:00:00', '', 1, '', '', '', '', '', '', '', 0, 'No ha sido evaluado todavia.', NULL);
+(1, 12, 0, '2016-11-09 23:28:37', '0000-00-00 00:00:00', 'Proyecto DELL', 1, 'ULPGC', 'ULPGC', '0000-00-00', '0000-00-00', 120, 'Rita Sebastiani', 2, 0, 'No ha sido evaluado todavía.', 15),
+(2, 12, 0, '2016-11-13 00:54:42', '2016-11-13 00:54:59', '', 0, 'ULPGC', '', '0000-00-00', '0000-00-00', 0, 'Antonio Natale Consalvo', 4, 0, 'No ha sido evaluado todavía.', 15),
+(3, 12, 0, '2016-11-13 01:14:14', '2016-11-13 01:15:36', 'FI-WARE: Future Internet Core Platform', 0, '', '', '0000-00-00', '0000-00-00', 0, 'Juan', 2, 0, 'No ha sido evaluado todavía.', 15),
+(4, 12, 0, '2017-06-27 12:31:09', '0000-00-00 00:00:00', 'VÃ­ctor Daniel', 0, 'ULPGC', 'ULL', '2017-12-31', '2017-12-31', 200, 'VÃ­ctor Daniel RodrÃ­guez PÃ©rez', 4, 0, 'No ha sido evaluado todavía.', NULL),
+(5, 11, 0, '2017-06-27 12:32:17', '0000-00-00 00:00:00', 'VÃ­ctor Daniel', 0, 'ULPGC', 'ULL', '2015-09-29', '2017-12-31', 2000, 'pedro', 4, 0, 'No ha sido evaluado todavía.', NULL),
+(6, 12, 0, '2017-06-27 12:35:21', '0000-00-00 00:00:00', '', 0, '', '', '0000-00-00', '0000-00-00', 0, '', 0, 0, 'No ha sido evaluado todavía.', NULL),
+(7, 12, 0, '2017-06-28 08:41:59', '0000-00-00 00:00:00', 'jo', 0, 'ULPGC', 'ULL', '2016-11-09', '2017-06-16', 2000, 'Maria MaxÃ© Campos', 0, 0, 'No ha sido evaluado todavía.', NULL),
+(15, 8, 5, '2017-09-15 11:21:35', '0000-00-00 00:00:00', 'kalinda', 2, 'enterprises', 'inc', '2015-09-30', '2017-12-30', 2, 'yo', 3, 0, 'No ha sido evaluado todavia.', NULL),
+(17, 8, 5, '2017-11-10 12:29:33', '0000-00-00 00:00:00', 'kalinda', 0, 'enterprises', 'inc', '2016-10-30', '2017-12-30', 2, 'VÃ­ctor Daniel RdrÃ­guez PÃ©rez', 0, 0, 'No ha sido evaluado todavia.', NULL),
+(19, 8, 5, '2017-11-13 12:09:26', '0000-00-00 00:00:00', 'tercer subtupo', 3, '', '', '0000-00-00', '0000-00-00', 0, '', 0, 0, 'No ha sido evaluado todavia.', NULL),
+(21, 8, 5, '2017-11-17 11:11:05', '0000-00-00 00:00:00', 'pfpf', 1, 'ksdfokn', 'lksnmdflkn', '2015-11-30', '2014-10-28', 34535, 'adolfito', 4, 0, 'No ha sido evaluado todavia.', NULL),
+(22, 8, 5, '2017-11-21 12:17:14', '0000-00-00 00:00:00', 'jj', 1, 'jj', 'jj', '2017-12-31', '2017-12-31', 0, 'kjkj', 0, 0, 'No ha sido evaluado todavia.', NULL);
 
 -- --------------------------------------------------------
 
@@ -520,8 +775,11 @@ CREATE TABLE `ib` (
 --
 
 INSERT INTO `ib` (`id`, `userid`, `groupid`, `titulo`, `cargo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
-(1, 8, 8, 'Todo lo bueno', 'suplentetete', 0, 4, 0, 'No ha sido evaluado todavia.'),
-(2, 0, 8, 'Todo lo bueno', '', 0, 4, 0, 'No ha sido evaluado todavia.');
+(1, 8, 2, 'jamones jabugo', 'u', 0, 5, 0, 'No ha sido evaluado todavia.'),
+(2, 8, 2, 'jamones jabugo', 'docente', 0, 5, 0, 'No ha sido evaluado todavia.'),
+(3, 8, 1, 'uyguyg', 'aaaa', 0, 5, 0, 'No ha sido evaluado todavia.'),
+(4, 8, 1, 'uyguyg', 'presi', 0, 5, 0, 'No ha sido evaluado todavia.'),
+(5, 8, 1, 'uyguyg', 'sss', 0, 5, 0, 'No ha sido evaluado todavia.');
 
 -- --------------------------------------------------------
 
@@ -545,7 +803,7 @@ CREATE TABLE `ic` (
   `volumen` varchar(10) CHARACTER SET latin1 NOT NULL,
   `pin` varchar(25) CHARACTER SET latin1 NOT NULL,
   `pfin` varchar(25) CHARACTER SET latin1 NOT NULL,
-  `fecha` varchar(10) NOT NULL,
+  `fecha` date NOT NULL,
   `impacto` varchar(30) NOT NULL,
   `citas` varchar(20) NOT NULL,
   `acta` varchar(15) NOT NULL,
@@ -560,54 +818,9 @@ CREATE TABLE `ic` (
 --
 
 INSERT INTO `ic` (`id`, `userid`, `UD`, `subtipo`, `creation`, `lastmod`, `lastupdateid`, `autores`, `titulo`, `revista`, `isbn`, `clave`, `volumen`, `pin`, `pfin`, `fecha`, `impacto`, `citas`, `acta`, `editorial`, `estado`, `infoestado`, `lugar`) VALUES
-(27, 12, 0, 1, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(28, 12, 0, 1, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '0000-00-00', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
-(29, 12, 0, 1, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '0000-00-00', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(30, 8, 5, 3, '2016-11-12 10:51:54', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(31, 12, 6, 1, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Javier SÃ¡nchez, AgustÃ­n Salgado, Nelson MonzÃ³n', 'Computing Inverse Optical Flow', 'Pattern Recognition Letters', '0167-8655', 'A', '52', '32', '39', '0000-00-00', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
-(32, 12, 0, 1, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Nelson MonzÃ³n, AgustÃ­n Salgado, Javier SÃ¡nchez', 'Discontinuity preserving in TV-L1 optical flow methods', 'CTIM Technical Report', '2254-2353', 'A', '5', '1', '37', '0000-00-00', '', '', '', 'Universidad de Las Palmas de Gran Canaria', 0, 'No ha sido evaluado todavía.', 'Las Palmas de Gran Canaria'),
-(33, 12, 0, 1, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'MonzÃ³n, Nelson and SÃ¡nchez, Javier and Salgado, AgustÃ­n', 'Efficient Mechanism for Discontinuity Preserving in Optical Flow Methods', 'Image and Signal Processing', '978-3-319-07997-4', 'CR', '8509', '425', '432', '0000-00-00', '', '', '', 'Springer International Publishing', 0, 'No ha sido evaluado todavía.', 'Switzerland'),
-(34, 12, 0, 1, '2016-11-12 11:27:56', '0000-00-00 00:00:00', 15, 'Nelson MonzÃ³n, Javier SÃ¡nchez, AgustÃ­n Salgado', 'Implementation of a Robust Optical Flow Method for Color Images', 'CTIM Technical Report', '2254-2353', 'A', '4', '1', '14', '0000-00-00', '', '', '', 'Universidad de Las Palmas de Gran Canaria', 0, 'No ha sido evaluado todavía.', 'Las Palmas de Gran Canaria'),
-(35, 12, 0, 1, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Simon Baker and Daniel Scharstein and J. P. Lewis and Stefan Roth and Michael J. Black and Richard Szeliski', 'A Database and Evaluation Methodology for Optical Flow', 'International Conference on Computer Vision', '', 'Li', '', '1', '8', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(36, 12, 0, 1, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Huber, P.J.', '', 'Robust Statistics', '9780471650720', 'B', '', '', '', '0000-00-00', '', '', '', 'Wiley', 0, 'No ha sido evaluado todavía.', ''),
-(37, 8, 3, 1, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Hartley, R.Â I. and Zisserman, A.', '', 'Multiple View Geometry in Computer Vision', '', 'B', '', '', '', '0000-00-00', '', '', '', 'Cambridge University Press, ISBN: 0521540518', 0, 'No ha sido evaluado todavía.', ''),
-(38, 12, 0, 1, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Irani, Michal and Anandan, P', 'Robust multi-sensor image alignment', 'Computer Vision, 1998. Sixth International Conference on', '', 'Li', '', '959', '966', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(39, 12, 0, 1, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Odobez, Jean-Marc and Bouthemy, Patrick', 'Robust multiresolution estimation of parametric motion models', 'Journal of visual communication and image representation', '4', 'A', '6', '348', '365', '0000-00-00', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
-(40, 12, 0, 1, '2016-11-12 23:58:28', '0000-00-00 00:00:00', 15, 'Lucas, Bruce D and Kanade, Takeo', 'An iterative image registration technique with an application to stereo vision.', 'IJCAI', '', 'Li', '81', '674', '679', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(41, 12, 0, 1, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(42, 12, 0, 1, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '0000-00-00', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
-(43, 12, 0, 1, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '0000-00-00', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(44, 12, 0, 1, '2016-11-13 00:36:05', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '0000-00-00', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(45, 12, 0, 1, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Xu, Li and Jia, Jiaya and Matsushita, Yasuyuki', 'Motion Detail Preserving Optical Flow Estimation.', 'IEEE Trans. Pattern Anal. Mach. Intell.', '9', 'A', '34', '1744', '1757', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(46, 12, 0, 1, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Thomas Brox and Jitendra Malik', 'Large Displacement Optical Flow: Descriptor Matching in Variational Motion Estimation', 'IEEE PAMI', '0162-8828', 'A', '33', '500', '513', '0000-00-00', '', '', '', 'IEEE Computer Society', 0, 'No ha sido evaluado todavía.', 'Los Alamitos, CA, USA'),
-(47, 12, 0, 1, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Rachid Deriche and ThÃ©odore Papadopoulo and Javier SÃ¡nchez', 'Symmetrical Dense Optical Flow Estimation with Occlusions Detection', 'International Journal of Computer Vision', '0920-5691', 'A', '75', '371', '385', '0000-00-00', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(48, 12, 0, 1, '2016-11-13 01:10:52', '0000-00-00 00:00:00', 15, 'Luis Ãlvarez and Joachim Weickert and Javier SÃ¡nchez', 'Reliable Estimation of Dense Optical Flow Fields with Large Displacements', 'International Journal of Computer Vision', '1', 'A', '39', '41', '56', '0000-00-00', '', '', '', 'Kluwer Academic Publishers', 0, 'No ha sido evaluado todavía.', 'Hingham, MA, USA'),
-(56, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'SÃ¡nchez, Javier and MonzÃ³n, Nelson and Salgado, AgustÃ­n', 'Robust Optical Flow Estimation', 'Image Processing On Line', '', 'A', '3', '252', '270', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(57, 8, 0, 2, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'SÃ¡nchez, Javier and Meinhardt-Llopis, Enric and Facciolo, Gabriele', 'TV-L1 Optical Flow Estimation', 'Image Processing On Line', '', 'A', '3', '137', '150', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(58, 8, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Meinhardt-Llopis, Enric and SÃ¡nchez, Javier and Kondermann, Daniel', 'Horn-Schunck Optical Flow with a Multi-Scale Strategy', 'Image Processing On Line', '', 'A', '3', '151', '172', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(59, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Szeliski, Richard', '', 'Computer vision algorithms and applications', '9781848829343 1848829345 ', 'L', '', '', '', '0000-00-00', '', '', '', 'Springer', 0, 'No ha sido evaluado todavía.', 'London; New York'),
-(60, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Evangelidis, Georgios D and Psarakis, Emmanouil Z', 'Parametric image alignment using enhanced correlation coefficient maximization', 'Pattern Analysis and Machine Intelligence, IEEE Transactions on', '10', 'A', '30', '1858', '1865', '0000-00-00', '', '', '', 'IEEE', 0, 'No ha sido evaluado todavía.', ''),
-(61, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Daniel Scharstein and J. P. Lewis and Stefan Roth and Michael J. Black and Richard Szeliski', 'A Database and Evaluation Methodology for Optical Flow', 'International Conference on Computer Vision', '', 'Li', '', '1', '8', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(62, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Raju Patil and Kong Man Cheung and Iain Matthews', 'Lucas-Kanade 20 Years On: Part 5', '', 'cmu-ri-tr-04-64', 'S', '', '', '', '0000-00-00', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(63, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 4', '', 'cmu-ri-tr-04-14', 'S', '', '', '', '0000-00-00', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(64, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Huber, P.J.', '', 'Robust Statistics', '9780471650720', 'L', '', '', '', '0000-00-00', '', '', '', 'Wiley', 0, 'No ha sido evaluado todavía.', ''),
-(65, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Baker, Simon and Matthews, Iain', 'Lucas-kanade 20 years on: A unifying framework', 'International Journal of Computer Vision', '3', 'A', '56', '221', '255', '0000-00-00', '', '', '', 'Springer', 0, 'No ha sido evaluado todavía.', ''),
-(66, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Hartley, R.Â I. and Zisserman, A.', '', 'Multiple View Geometry in Computer Vision', '', 'L', '', '', '', '0000-00-00', '', '', '', 'Cambridge University Press, ISBN: 0521540518', 0, 'No ha sido evaluado todavía.', ''),
-(67, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 3', '', 'cmu-ri-tr-03-35', 'S', '', '', '', '0000-00-00', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(68, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Ralph Gross and Iain Matthews and Takahiro Ishikawa', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 2', '', 'cmu-ri-tr-03-01', 'S', '', '', '', '0000-00-00', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(69, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Simon Baker and Iain Matthews', 'Lucas-Kanade 20 Years On: A Unifying Framework: Part 1', '', 'cmu-ri-tr-02-16', 'S', '', '', '', '0000-00-00', '', '', '', 'Institution: Robotics Institute', 0, 'No ha sido evaluado todavía.', 'Pittsburgh, PA'),
-(70, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Baker, Simon and Matthews, Iain', 'Equivalence and efficiency of image alignment algorithms', 'Computer Vision and Pattern Recognition, 2001. CVPR 2001. Proceedings of the 2001 IEEE Computer Society Conference on', '', 'Li', '1', '1', '1090', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(71, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Irani, Michal and Anandan, P', 'Robust multi-sensor image alignment', 'Computer Vision, 1998. Sixth International Conference on', '', 'Li', '', '959', '966', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(72, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Michael J. Black and P. Anandan', 'The Robust Estimation of Multiple Motions: Parametric and Piecewise-Smooth Flow Fields', 'Computer Vision and Image Understanding', '1077-3142', 'A', '63', '75', '104', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(73, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Odobez, Jean-Marc and Bouthemy, Patrick', 'Robust multiresolution estimation of parametric motion models', 'Journal of visual communication and image representation', '4', 'A', '6', '348', '365', '0000-00-00', '', '', '', 'Elsevier', 0, 'No ha sido evaluado todavía.', ''),
-(74, 12, 0, 1, '2016-12-18 10:20:23', '0000-00-00 00:00:00', 15, 'Lucas, Bruce D and Kanade, Takeo', 'An iterative image registration technique with an application to stereo vision.', 'IJCAI', '', 'Li', '81', '674', '679', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(75, 8, 5, 2, '2017-11-21 11:12:40', '0000-00-00 00:00:00', 0, 'pjk', 'jkjpoj', 'knlkn', '', '0u07', '8908k', '', '', '', 'lkmlkm', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, 'No ha sido evaluado todavía.', 'lkmlkm'),
-(76, 8, 5, 2, '2017-11-21 11:29:17', '0000-00-00 00:00:00', 0, 'ljkbkjb', '', 'jkbkjb', '', 'lkmlk', 'mlkmlkm', '098', '098', '', 'pkpok', 'pokp', 'pok', 'pok', 0, 'No ha sido evaluado todavía.', 'pok'),
-(77, 8, 5, 2, '2017-11-21 11:30:45', '0000-00-00 00:00:00', 0, 'Giorgio Rossi, ', '', 'knlkn', '', 'lkmlk', '8908k', '35212', '098', '', 'lkmlkm', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, 'No ha sido evaluado todavía.', 'Telde'),
-(78, 8, 5, 2, '2017-11-21 11:33:45', '0000-00-00 00:00:00', 0, 'dsf', 'esta es la ultima prueba en esta tabla coÃ±o', 'knlkn', '23424', 'lkmlk', '8908k', '35212', '098', '', 'lkmlkm', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, 'No ha sido evaluado todavía.', 'Telde'),
-(79, 8, 5, 3, '2017-11-21 11:35:36', '0000-00-00 00:00:00', 0, 'Giorgio Rossi, ', 'coÃ±o yaaa', 'knlkn', '23424', 'lkmlk', '8908k', '35212', '098', '2017-12-31', 'lkmlkm', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, 'No ha sido evaluado todavía.', 'Telde'),
-(80, 8, 5, 1, '2017-11-21 12:17:35', '0000-00-00 00:00:00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
-(81, 8, 5, 1, '2017-11-21 12:24:17', '0000-00-00 00:00:00', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'No ha sido evaluado todavía.', '');
+(1, 8, 4, 3, '2017-11-23 16:47:41', '0000-00-00 00:00:00', 0, 'Giorgio Rossi, ', 'joventum', 'knlkn', '', '', '', '', '', '0000-00-00', '', '', '', '', 0, 'No ha sido evaluado todavía.', ''),
+(2, 8, 4, 1, '2017-11-24 09:50:07', '0000-00-00 00:00:00', 0, 'Giorgio', 'pjsdpspspspsp', 'knlkn', '23424', 'lkmlk', '8908k', '35212', '098', '2017-12-31', 'lkmlkm', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, 'No ha sido evaluado todavía.', 'Telde'),
+(3, 8, 4, 2, '2017-11-24 10:07:52', '0000-00-00 00:00:00', 0, 'yo', 'jk', 'abc', '1111', '1111', '11111', '35212222', '999', '2016-11-30', 'abc', 'abc', 'abc', 'abc', 0, 'No ha sido evaluado todavía.', 'abc');
 
 -- --------------------------------------------------------
 
@@ -627,7 +840,7 @@ CREATE TABLE `id` (
   `participacion` varchar(25) NOT NULL,
   `regional` varchar(20) NOT NULL,
   `lugar` varchar(250) NOT NULL,
-  `fecha` varchar(10) NOT NULL,
+  `fecha` date NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -637,13 +850,20 @@ CREATE TABLE `id` (
 --
 
 INSERT INTO `id` (`id`, `userid`, `UD`, `subtipo`, `creation`, `lastmod`, `lastupdateid`, `titulo`, `participacion`, `regional`, `lugar`, `fecha`, `estado`, `infoestado`) VALUES
-(1, 8, 4, 0, '2017-11-09 13:06:02', '0000-00-00 00:00:00', 0, 'Congresio Regional de Cancer de Mama', 'Ponente', 'Regional', 'Maspalomas', '01/02/17', 0, 'No ha sido evaluado todavía.'),
-(2, 8, 5, 0, '2017-11-21 12:37:10', '0000-00-00 00:00:00', 0, '', '', '', '', '', 0, 'No ha sido evaluado todavía.'),
-(3, 8, 5, 0, '2017-11-21 12:44:02', '0000-00-00 00:00:00', 0, '', '', '', '', '', 0, 'No ha sido evaluado todavía.'),
-(4, 8, 5, 0, '2017-11-21 12:46:19', '0000-00-00 00:00:00', 0, '', '', '', '', '', 0, 'No ha sido evaluado todavía.'),
-(5, 8, 5, 0, '2017-11-21 12:48:54', '0000-00-00 00:00:00', 0, '', '', '', '', '', 0, 'No ha sido evaluado todavía.'),
-(6, 8, 5, 0, '2017-11-21 12:52:17', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 'Si', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
-(7, 8, 5, 0, '2017-11-21 12:53:01', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 'Si', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.');
+(1, 8, 4, 0, '2017-11-09 13:06:02', '0000-00-00 00:00:00', 0, 'cba', 'a', 'a', 'a', '2017-12-31', 1, 'No ha sido evaluado todavía.'),
+(2, 8, 4, 0, '2017-11-21 12:37:10', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(3, 8, 4, 0, '2017-11-21 12:44:02', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(4, 8, 4, 0, '2017-11-21 12:46:19', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(5, 8, 4, 0, '2017-11-21 12:48:54', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(6, 8, 4, 0, '2017-11-21 12:52:17', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(7, 8, 4, 0, '2017-11-21 12:53:01', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(8, 8, 4, 0, '2017-11-22 12:05:57', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(9, 8, 4, 0, '2017-11-22 12:06:28', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(10, 8, 4, 0, '2017-11-22 13:02:26', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(11, 8, 4, 0, '2017-11-22 13:02:38', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(12, 8, 4, 0, '2017-11-24 09:39:54', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(13, 8, 4, 0, '2017-11-24 09:41:37', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(14, 8, 4, 0, '2017-11-24 09:42:08', '0000-00-00 00:00:00', 0, 'jj', 'traje', '35212', 'Telde', '2017-12-31', 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
 
@@ -654,7 +874,7 @@ INSERT INTO `id` (`id`, `userid`, `UD`, `subtipo`, `creation`, `lastmod`, `lastu
 CREATE TABLE `ie` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `red` int(11) NOT NULL,
+  `redid` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
@@ -666,8 +886,11 @@ CREATE TABLE `ie` (
 -- Volcado de datos para la tabla `ie`
 --
 
-INSERT INTO `ie` (`id`, `userid`, `red`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
-(4, 8, 8, 'REDPARA', 0, 5, 0, '');
+INSERT INTO `ie` (`id`, `userid`, `redid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(7, 8, 3, 'universida de la laguna', 0, 5, 0, ''),
+(8, 8, 2, 'uiversidadae', 0, 5, 0, ''),
+(9, 8, 2, 'uiversidadae', 0, 5, 0, ''),
+(10, 8, 2, 'uiversidadae', 0, 5, 0, '');
 
 -- --------------------------------------------------------
 
@@ -682,8 +905,16 @@ CREATE TABLE `iff` (
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
-  `infoestado` varchar(1000) NOT NULL
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.	'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `iff`
+--
+
+INSERT INTO `iff` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(5, 8, 'adios', 0, 5, 0, ''),
+(6, 8, 'jese', 0, 5, 0, 'No ha sido evaluado todavía.	');
 
 -- --------------------------------------------------------
 
@@ -705,8 +936,8 @@ CREATE TABLE `ig` (
   `revista` varchar(250) NOT NULL,
   `impacto` varchar(2) NOT NULL,
   `nacional` varchar(15) NOT NULL,
-  `desde` varchar(10) NOT NULL,
-  `hasta` varchar(10) NOT NULL,
+  `desde` date NOT NULL,
+  `hasta` date NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -716,12 +947,13 @@ CREATE TABLE `ig` (
 --
 
 INSERT INTO `ig` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `creation`, `lastmod`, `lastupdateid`, `investigador`, `editor`, `revista`, `impacto`, `nacional`, `desde`, `hasta`, `estado`, `infoestado`) VALUES
-(1, 12, '', 0, 0, '2016-11-12 11:14:04', '2016-11-12 11:14:19', 15, 'Juan', '', '', 'No', 'Nacional', '', '', 0, 'No ha sido evaluado todavía.'),
-(2, 12, '', 0, 0, '2016-11-12 11:15:38', '2016-11-12 11:15:56', 15, 'Maria', '', '', 'Si', 'Internacional', '', '', 0, 'No ha sido evaluado todavía.'),
-(4, 8, 'comite ejecutivo', 0, 5, '2016-11-12 11:17:28', '2016-11-12 11:17:39', 15, 'Antonio Natale Consalvo', '', '', 'Si', 'Internacional', '', '', 0, 'No ha sido evaluado todavía.'),
-(5, 11, '', 0, 0, '2016-11-18 19:45:52', '0000-00-00 00:00:00', 13, 'Giorgio Rossi', 'Revisor', '', 'Si', 'Internacional', '', '', 0, 'No ha sido evaluado todavía.'),
+(1, 12, '', 0, 0, '2016-11-12 11:14:04', '2016-11-12 11:14:19', 15, 'Juan', '', '', 'No', 'Nacional', '0000-00-00', '0000-00-00', 0, 'No ha sido evaluado todavía.'),
+(2, 12, '', 0, 0, '2016-11-12 11:15:38', '2016-11-12 11:15:56', 15, 'Maria', '', '', 'Si', 'Internacional', '0000-00-00', '0000-00-00', 0, 'No ha sido evaluado todavía.'),
+(4, 8, 'comite directivo', 0, 5, '2016-11-12 11:17:28', '2016-11-12 11:17:39', 15, 'a', 'a', 'a', 'a', 'a', '2017-01-01', '2017-01-01', 0, 'No ha sido evaluado todavía.'),
+(5, 11, '', 0, 0, '2016-11-18 19:45:52', '0000-00-00 00:00:00', 13, 'Giorgio Rossi', 'Revisor', '', 'Si', 'Internacional', '0000-00-00', '0000-00-00', 0, 'No ha sido evaluado todavía.'),
 (6, 8, 'esta es la ultima prueba en esta tabla coÃ±o', 0, 5, '2017-11-21 17:56:05', '0000-00-00 00:00:00', 0, '', 'joel', 'knlkn', 'lk', 'EspaÃ±a', '2016-11-30', '2016-12-30', 0, 'No ha sido evaluado todavía.'),
-(7, 8, 'esta es la ultima prueba en esta tabla coÃ±o', 0, 5, '2017-11-21 18:04:49', '0000-00-00 00:00:00', 0, 'VÃ­ctor Daniel RdrÃ­guez PÃ©rez', 'joel', 'knlkn', 'lk', 'EspaÃ±a', '2016-11-30', '2016-12-30', 0, 'No ha sido evaluado todavía.');
+(7, 8, 'esta es la ultima prueba en esta tabla coÃ±o', 0, 5, '2017-11-21 18:04:49', '0000-00-00 00:00:00', 0, 'VÃ­ctor Daniel RdrÃ­guez PÃ©rez', 'joel', 'knlkn', 'lk', 'EspaÃ±a', '2016-11-30', '2016-12-30', 0, 'No ha sido evaluado todavía.'),
+(8, 8, 'antonio', 0, 5, '2017-11-23 17:24:17', '0000-00-00 00:00:00', 0, 'yo', 'yo', 'yo', 'yo', 'yo', '2017-12-31', '2017-12-30', 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
 
@@ -741,8 +973,8 @@ CREATE TABLE `ih` (
   `investigador` varchar(250) CHARACTER SET utf8 NOT NULL,
   `centro` varchar(500) CHARACTER SET utf8 NOT NULL,
   `pais` varchar(150) CHARACTER SET utf8 NOT NULL,
-  `inicio` varchar(10) CHARACTER SET utf8 NOT NULL,
-  `fin` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `inicio` date NOT NULL,
+  `fin` date NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -752,8 +984,9 @@ CREATE TABLE `ih` (
 --
 
 INSERT INTO `ih` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `creation`, `lastmod`, `lastupdateid`, `investigador`, `centro`, `pais`, `inicio`, `fin`, `estado`, `infoestado`) VALUES
-(1, 12, '', 0, 0, '2016-11-12 11:11:04', '2016-11-12 11:11:14', 15, 'Antonio Natale Consalvo', '', '', '', '', 0, 'No ha sido evaluado todavía.'),
-(2, 8, 'esta es la ultima prueba en esta tabla coÃ±o', 0, 5, '2017-11-21 18:08:12', '0000-00-00 00:00:00', 0, 'VÃ­ctor Daniel RdrÃ­guez PÃ©rez', 'derecha', 'francia', '2016-11-30', '2016-11-30', 0, 'No ha sido evaluado todavía.');
+(1, 12, '', 0, 0, '2016-11-12 11:11:04', '2016-11-12 11:11:14', 15, 'Antonio Natale Consalvo', '', '', '0000-00-00', '0000-00-00', 0, 'No ha sido evaluado todavía.'),
+(2, 8, 'aa', 0, 5, '2017-11-21 18:08:12', '0000-00-00 00:00:00', 0, 'aa', 'a', 'a', '2017-11-30', '2017-11-30', 0, 'No ha sido evaluado todavía.'),
+(3, 8, 'javier', 0, 5, '2017-11-23 17:24:41', '0000-00-00 00:00:00', 0, '4', '4', '4', '0004-04-04', '0004-04-04', 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
 
@@ -763,14 +996,22 @@ INSERT INTO `ih` (`id`, `userid`, `titulo`, `subtipo`, `UD`, `creation`, `lastmo
 
 CREATE TABLE `ii` (
   `id` int(11) NOT NULL,
-  `groupinv` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `tesisid` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `ii`
+--
+
+INSERT INTO `ii` (`id`, `userid`, `tesisid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(3, 8, 2, 'comida sana para todos', 0, 5, 0, ''),
+(4, 8, 2, 'comida sana para todos', 0, 5, 0, '');
 
 -- --------------------------------------------------------
 
@@ -780,14 +1021,22 @@ CREATE TABLE `ii` (
 
 CREATE TABLE `ij` (
   `id` int(11) NOT NULL,
-  `groupinv` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `tesisid` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `ij`
+--
+
+INSERT INTO `ij` (`id`, `userid`, `tesisid`, `titulo`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(2, 8, 2, 'comida sana para todos', 0, 5, 0, ''),
+(3, 8, 1, 'asasasssss', 0, 5, 0, '');
 
 -- --------------------------------------------------------
 
@@ -806,8 +1055,8 @@ CREATE TABLE `ik` (
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `orgfin` text CHARACTER SET utf8 NOT NULL,
   `entidades` text CHARACTER SET utf8 NOT NULL,
-  `desde` varchar(10) CHARACTER SET utf8 NOT NULL,
-  `hasta` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `desde` date NOT NULL,
+  `hasta` date NOT NULL,
   `invresponsable` varchar(250) CHARACTER SET utf8 NOT NULL,
   `numinv` text CHARACTER SET utf8 NOT NULL,
   `subvencion` varchar(50) CHARACTER SET utf8 NOT NULL,
@@ -820,9 +1069,9 @@ CREATE TABLE `ik` (
 --
 
 INSERT INTO `ik` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `titulo`, `subtipo`, `orgfin`, `entidades`, `desde`, `hasta`, `invresponsable`, `numinv`, `subvencion`, `estado`, `infoestado`) VALUES
-(3, 12, 0, '2016-11-12 11:04:37', '0000-00-00 00:00:00', 15, '', 0, '', '', '', '', 'test test', '2', 'â‚¬', 0, 'No ha sido evaluado todavía.'),
-(4, 12, 0, '2016-11-12 11:07:48', '2016-11-12 11:07:59', 15, 'Primer titulo', 0, '', '', '', '', 'Pepe', '2', 'â‚¬', 0, 'No ha sido evaluado todavía.'),
-(5, 8, 5, '2017-11-21 18:11:35', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 0, '4', 'Bankia', '2017-12-31', '2017-12-31', 'Agustin', '4', '908345098â‚¬', 0, 'No ha sido evaluado todavía.');
+(3, 12, 0, '2016-11-12 11:04:37', '0000-00-00 00:00:00', 15, '', 0, '', '', '0000-00-00', '0000-00-00', 'test test', '2', 'â‚¬', 0, 'No ha sido evaluado todavía.'),
+(4, 12, 0, '2016-11-12 11:07:48', '2016-11-12 11:07:59', 15, 'Primer titulo', 0, '', '', '0000-00-00', '0000-00-00', 'Pepe', '2', 'â‚¬', 0, 'No ha sido evaluado todavía.'),
+(5, 8, 5, '2017-11-21 18:11:35', '0000-00-00 00:00:00', 0, 'aa', 0, 'aa', 'aa', '2017-12-08', '2017-12-10', '12', '11', '11', 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
 
@@ -840,31 +1089,24 @@ CREATE TABLE `il` (
   `autores` varchar(250) CHARACTER SET utf8 NOT NULL,
   `titulo` varchar(250) CHARACTER SET utf8 NOT NULL,
   `subtipo` int(1) NOT NULL DEFAULT '0',
-  `revista` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `isbn` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `clave` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `volumen` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `pin` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `pfin` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `impacto` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `citas` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `acta` varchar(15) CHARACTER SET utf8 NOT NULL,
-  `editorial` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `fecha` date NOT NULL,
+  `pais` varchar(50) NOT NULL,
+  `patente` int(12) NOT NULL,
+  `entidad` varchar(150) NOT NULL,
+  `empresa` varchar(150) NOT NULL,
   `estado` int(1) NOT NULL,
-  `infoestado` varchar(1000) CHARACTER SET utf8 NOT NULL DEFAULT 'No ha sido evaluado todavia.',
-  `lugar` varchar(250) CHARACTER SET utf8 NOT NULL
+  `infoestado` varchar(1000) CHARACTER SET utf8 NOT NULL DEFAULT 'No ha sido evaluado todavia.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Volcado de datos para la tabla `il`
 --
 
-INSERT INTO `il` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `autores`, `titulo`, `subtipo`, `revista`, `isbn`, `clave`, `volumen`, `pin`, `pfin`, `fecha`, `impacto`, `citas`, `acta`, `editorial`, `estado`, `infoestado`, `lugar`) VALUES
-(1, 8, 5, '2017-11-21 18:13:36', '2017-11-21 18:13:36', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, 'people', '', '98', '989', '78', '79', '2017-09-29 23:00:00', '', 'si', 'actual', 'loruouse', 0, '', 'Telde'),
-(2, 8, 5, '2017-11-21 18:19:53', '2017-11-21 18:19:53', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, 'knlkn', '', '8908k', 'lkmlkm', '78', '098', '2017-12-30 00:00:00', '', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, '', 'Telde'),
-(3, 8, 5, '2017-11-21 18:20:53', '2017-11-21 18:20:53', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, 'knlkn', '', '8908k', 'lkmlkm', '78', '098', '2016-11-30 00:00:00', '', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, '', 'Telde'),
-(4, 8, 5, '2017-11-21 18:21:38', '2017-11-21 18:21:38', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, 'knlkn', '23424', '8908k', 'lkmlkm', '78', '098', '2017-12-30 00:00:00', '', 'lkmlkm', 'lkmlkm', 'lkmlkm', 0, '', 'Telde');
+INSERT INTO `il` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `autores`, `titulo`, `subtipo`, `fecha`, `pais`, `patente`, `entidad`, `empresa`, `estado`, `infoestado`) VALUES
+(1, 8, 5, '2017-11-21 18:13:36', '2017-11-21 18:13:36', 0, 'bb', 'bb', 0, '2017-12-31', 'bb', 9999, 'bb', 'bb', 0, ''),
+(2, 8, 5, '2017-11-21 18:19:53', '2017-11-21 18:19:53', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, '2017-12-30', '', 0, '', '', 0, ''),
+(3, 8, 5, '2017-11-21 18:20:53', '2017-11-21 18:20:53', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, '2016-11-30', '', 0, '', '', 0, ''),
+(4, 8, 5, '2017-11-21 18:21:38', '2017-11-21 18:21:38', 0, 'Giorgio Rossi, ', 'esta es la ultima prueba en esta tabla coÃ±o', 0, '2017-12-30', '', 0, '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -877,12 +1119,20 @@ CREATE TABLE `im` (
   `userid` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `CIF` varchar(9) NOT NULL,
-  `razonsocial` varchar(50) NOT NULL,
   `subtipo` int(1) NOT NULL DEFAULT '0',
   `UD` int(3) NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
-  `infoestado` varchar(1000) NOT NULL
+  `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `im`
+--
+
+INSERT INTO `im` (`id`, `userid`, `titulo`, `CIF`, `subtipo`, `UD`, `estado`, `infoestado`) VALUES
+(3, 8, 'aa', '1', 0, 5, 0, 'No ha sido evaluado todavía.'),
+(6, 8, 'fghfgh', 'dfhg', 0, 5, 0, 'No ha sido evaluado todavía.'),
+(7, 8, 'jj', 'a', 0, 5, 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
 
@@ -912,7 +1162,7 @@ CREATE TABLE `inn` (
 --
 
 INSERT INTO `inn` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `titulo`, `subtipo`, `investigadores`, `entidad`, `tema`, `fecha`, `estado`, `infoestado`) VALUES
-(1, 8, 5, '2017-11-21 18:23:44', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 0, '', '', 'jjjj', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
+(1, 8, 5, '2017-11-21 18:23:44', '0000-00-00 00:00:00', 0, 'bb', 0, 'bb', 'bb', 'bb', '2017-12-22', 0, 'No ha sido evaluado todavía.'),
 (2, 8, 5, '2017-11-21 18:24:39', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 0, '', '', 'jjjj', '2017-11-30', 0, 'No ha sido evaluado todavía.'),
 (3, 8, 5, '2017-11-21 18:26:33', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 0, '', '', 'jjjj', '2016-11-30', 0, 'No ha sido evaluado todavía.'),
 (4, 8, 5, '2017-11-21 18:26:58', '0000-00-00 00:00:00', 0, 'esta es la ultima prueba en esta tabla coÃ±o', 0, 'Jose', 'Bankia', 'asdasd', '2016-11-30', 0, 'No ha sido evaluado todavía.');
@@ -933,8 +1183,8 @@ CREATE TABLE `innn` (
   `subtipo` int(1) NOT NULL,
   `orgfin` varchar(100) CHARACTER SET utf8 NOT NULL,
   `entidades` varchar(150) CHARACTER SET utf8 NOT NULL,
-  `desde` datetime NOT NULL,
-  `hasta` datetime NOT NULL,
+  `desde` date NOT NULL,
+  `hasta` date NOT NULL,
   `subvencion` int(6) NOT NULL,
   `invprincipal` varchar(100) NOT NULL,
   `numinv` int(3) NOT NULL,
@@ -948,7 +1198,7 @@ CREATE TABLE `innn` (
 --
 
 INSERT INTO `innn` (`id`, `userid`, `UD`, `creation`, `lastmod`, `titulo`, `subtipo`, `orgfin`, `entidades`, `desde`, `hasta`, `subvencion`, `invprincipal`, `numinv`, `estado`, `infoestado`, `lastuptadteid`) VALUES
-(1, 8, 5, '2017-11-21 18:32:48', '2017-11-21 18:32:48', 'esta es la ultima prueba en esta tabla coÃ±o', 0, '', 'Bankia', '2017-12-31 00:00:00', '2017-12-31 00:00:00', 9083450, 'Jose', 5, 0, '', 0);
+(1, 8, 5, '2017-11-21 18:32:48', '2017-11-21 18:32:48', 'bb', 0, 'bb', 'bb', '2017-12-02', '2017-12-02', 2, 'bb', 2, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -970,7 +1220,7 @@ CREATE TABLE `io` (
   `congreso` varchar(500) NOT NULL,
   `regional` varchar(20) NOT NULL,
   `lugar` varchar(250) NOT NULL,
-  `fecha` varchar(10) NOT NULL,
+  `fecha` date NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '0',
   `infoestado` varchar(1000) NOT NULL DEFAULT 'No ha sido evaluado todavía.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -980,7 +1230,7 @@ CREATE TABLE `io` (
 --
 
 INSERT INTO `io` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `autores`, `titulo`, `subtipo`, `participacion`, `congreso`, `regional`, `lugar`, `fecha`, `estado`, `infoestado`) VALUES
-(1, 8, 5, '2017-11-17 18:51:47', '2017-11-16 11:26:27', 0, 'dfgdfg', 'dfgdfgqq', 0, 'dfgdfgq', 'sdfsdfsdf', 'dgdfg', 'fghfghfg', 'dfgdfgdfg', 0, 'No ha sido evaluado todavía.'),
+(1, 8, 5, '2017-11-17 18:51:47', '2017-11-16 11:26:27', 0, 'aa', 'aa', 0, 'aa', 'aa', 'aa', 'aa', '2017-12-31', 0, 'No ha sido evaluado todavía.'),
 (2, 8, 5, '2017-11-21 18:33:30', '0000-00-00 00:00:00', 0, '', 'esta es la ultima prueba en esta tabla coÃ±o', 0, 'Si', 'isi', '35212', 'Telde', '2017-12-29', 0, 'No ha sido evaluado todavía.');
 
 -- --------------------------------------------------------
@@ -990,18 +1240,19 @@ INSERT INTO `io` (`id`, `userid`, `UD`, `creation`, `lastmod`, `lastupdateid`, `
 --
 
 CREATE TABLE `redinv` (
-  `groupid` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `redid` varchar(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
-  `gestor` int(1) NOT NULL
+  `gestor` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Volcado de datos para la tabla `redinv`
 --
 
-INSERT INTO `redinv` (`groupid`, `userid`, `nombre`, `gestor`) VALUES
-(1, 8, 'Red para', 0);
+INSERT INTO `redinv` (`id`, `redid`, `nombre`, `gestor`) VALUES
+(2, 'ulpgc', 'uiversidadae', 'antonojose'),
+(3, 'ul', 'universida de la laguna', 'antoñito');
 
 -- --------------------------------------------------------
 
@@ -1024,10 +1275,17 @@ CREATE TABLE `sindical` (
 
 CREATE TABLE `tesis` (
   `id` int(11) NOT NULL,
-  `nombre` text NOT NULL,
-  `userid` int(11) NOT NULL,
-  `PROFOAYUD` int(1) NOT NULL
+  `titulo` varchar(200) NOT NULL,
+  `autor` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Volcado de datos para la tabla `tesis`
+--
+
+INSERT INTO `tesis` (`id`, `titulo`, `autor`) VALUES
+(1, 'asasasssss', 'sssss'),
+(2, 'comida sana para todos', 'yo mismo');
 
 -- --------------------------------------------------------
 
@@ -1133,9 +1391,9 @@ ALTER TABLE `de`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `df`
+-- Indices de la tabla `dff`
 --
-ALTER TABLE `df`
+ALTER TABLE `dff`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1175,18 +1433,46 @@ ALTER TABLE `dl`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `empresas`
+-- Indices de la tabla `ga`
 --
-ALTER TABLE `empresas`
-  ADD PRIMARY KEY (`cif`),
-  ADD KEY `userid` (`userid`);
+ALTER TABLE `ga`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `evaluacion`
+-- Indices de la tabla `gb`
 --
-ALTER TABLE `evaluacion`
-  ADD PRIMARY KEY (`entidad`),
-  ADD KEY `userid` (`userid`);
+ALTER TABLE `gb`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gc`
+--
+ALTER TABLE `gc`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gd`
+--
+ALTER TABLE `gd`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ge`
+--
+ALTER TABLE `ge`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gff`
+--
+ALTER TABLE `gff`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gg`
+--
+ALTER TABLE `gg`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `gh`
@@ -1201,6 +1487,12 @@ ALTER TABLE `gi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `gj`
+--
+ALTER TABLE `gj`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `gparticipacion`
 --
 ALTER TABLE `gparticipacion`
@@ -1211,8 +1503,7 @@ ALTER TABLE `gparticipacion`
 -- Indices de la tabla `grupoinv`
 --
 ALTER TABLE `grupoinv`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `userid` (`userid`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `ia`
@@ -1225,7 +1516,7 @@ ALTER TABLE `ia`
 --
 ALTER TABLE `ib`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`groupid`);
+  ADD KEY `groupid` (`groupid`);
 
 --
 -- Indices de la tabla `ic`
@@ -1244,14 +1535,13 @@ ALTER TABLE `id`
 --
 ALTER TABLE `ie`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`red`) USING BTREE;
+  ADD KEY `redid` (`redid`);
 
 --
 -- Indices de la tabla `iff`
 --
 ALTER TABLE `iff`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `ig`
@@ -1270,14 +1560,14 @@ ALTER TABLE `ih`
 --
 ALTER TABLE `ii`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD KEY `tesisid` (`tesisid`);
 
 --
 -- Indices de la tabla `ij`
 --
 ALTER TABLE `ij`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD KEY `tesisid` (`tesisid`);
 
 --
 -- Indices de la tabla `ik`
@@ -1295,8 +1585,7 @@ ALTER TABLE `il`
 -- Indices de la tabla `im`
 --
 ALTER TABLE `im`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `inn`
@@ -1320,8 +1609,7 @@ ALTER TABLE `io`
 -- Indices de la tabla `redinv`
 --
 ALTER TABLE `redinv`
-  ADD PRIMARY KEY (`groupid`),
-  ADD KEY `userid` (`userid`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `sindical`
@@ -1333,8 +1621,7 @@ ALTER TABLE `sindical`
 -- Indices de la tabla `tesis`
 --
 ALTER TABLE `tesis`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `user_profile`
@@ -1360,31 +1647,31 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT de la tabla `da`
 --
 ALTER TABLE `da`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `db`
 --
 ALTER TABLE `db`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `dc`
 --
 ALTER TABLE `dc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `dd`
 --
 ALTER TABLE `dd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `de`
 --
 ALTER TABLE `de`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `df`
+-- AUTO_INCREMENT de la tabla `dff`
 --
-ALTER TABLE `df`
+ALTER TABLE `dff`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `dg`
@@ -1405,7 +1692,7 @@ ALTER TABLE `di`
 -- AUTO_INCREMENT de la tabla `dj`
 --
 ALTER TABLE `dj`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `dk`
 --
@@ -1415,22 +1702,57 @@ ALTER TABLE `dk`
 -- AUTO_INCREMENT de la tabla `dl`
 --
 ALTER TABLE `dl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de la tabla `evaluacion`
+-- AUTO_INCREMENT de la tabla `ga`
 --
-ALTER TABLE `evaluacion`
-  MODIFY `entidad` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ga`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gb`
+--
+ALTER TABLE `gb`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gc`
+--
+ALTER TABLE `gc`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gd`
+--
+ALTER TABLE `gd`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `ge`
+--
+ALTER TABLE `ge`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gff`
+--
+ALTER TABLE `gff`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gg`
+--
+ALTER TABLE `gg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `gh`
 --
 ALTER TABLE `gh`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `gi`
 --
 ALTER TABLE `gi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gj`
+--
+ALTER TABLE `gj`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `gparticipacion`
 --
@@ -1440,7 +1762,7 @@ ALTER TABLE `gparticipacion`
 -- AUTO_INCREMENT de la tabla `grupoinv`
 --
 ALTER TABLE `grupoinv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ia`
 --
@@ -1450,47 +1772,47 @@ ALTER TABLE `ia`
 -- AUTO_INCREMENT de la tabla `ib`
 --
 ALTER TABLE `ib`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `ic`
 --
 ALTER TABLE `ic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `id`
 --
 ALTER TABLE `id`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `ie`
 --
 ALTER TABLE `ie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `iff`
 --
 ALTER TABLE `iff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `ig`
 --
 ALTER TABLE `ig`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `ih`
 --
 ALTER TABLE `ih`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ii`
 --
 ALTER TABLE `ii`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `ij`
 --
 ALTER TABLE `ij`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ik`
 --
@@ -1505,7 +1827,7 @@ ALTER TABLE `il`
 -- AUTO_INCREMENT de la tabla `im`
 --
 ALTER TABLE `im`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `inn`
 --
@@ -1525,7 +1847,7 @@ ALTER TABLE `io`
 -- AUTO_INCREMENT de la tabla `redinv`
 --
 ALTER TABLE `redinv`
-  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `sindical`
 --
@@ -1535,7 +1857,7 @@ ALTER TABLE `sindical`
 -- AUTO_INCREMENT de la tabla `tesis`
 --
 ALTER TABLE `tesis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `user_profile`
 --
@@ -1552,64 +1874,28 @@ ALTER TABLE `cargo`
   ADD CONSTRAINT `cargo_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user_profile` (`id`);
 
 --
--- Filtros para la tabla `empresas`
---
-ALTER TABLE `empresas`
-  ADD CONSTRAINT `empresas_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user_profile` (`id`);
-
---
 -- Filtros para la tabla `gparticipacion`
 --
 ALTER TABLE `gparticipacion`
   ADD CONSTRAINT `gparticipacion_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user_profile` (`id`);
 
 --
--- Filtros para la tabla `grupoinv`
---
-ALTER TABLE `grupoinv`
-  ADD CONSTRAINT `grupoinv_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user_profile` (`id`);
-
---
 -- Filtros para la tabla `ib`
 --
 ALTER TABLE `ib`
-  ADD CONSTRAINT `ib_ibfk_1` FOREIGN KEY (`groupid`) REFERENCES `grupoinv` (`userid`);
+  ADD CONSTRAINT `ib_ibfk_1` FOREIGN KEY (`groupid`) REFERENCES `grupoinv` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `ie`
 --
 ALTER TABLE `ie`
-  ADD CONSTRAINT `ie_ibfk_1` FOREIGN KEY (`red`) REFERENCES `redinv` (`userid`);
-
---
--- Filtros para la tabla `iff`
---
-ALTER TABLE `iff`
-  ADD CONSTRAINT `iff_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `evaluacion` (`userid`);
+  ADD CONSTRAINT `ie_ibfk_1` FOREIGN KEY (`redid`) REFERENCES `redinv` (`id`);
 
 --
 -- Filtros para la tabla `ii`
 --
 ALTER TABLE `ii`
-  ADD CONSTRAINT `ii_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `tesis` (`userid`);
-
---
--- Filtros para la tabla `ij`
---
-ALTER TABLE `ij`
-  ADD CONSTRAINT `ij_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `tesis` (`userid`);
-
---
--- Filtros para la tabla `im`
---
-ALTER TABLE `im`
-  ADD CONSTRAINT `im_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `empresas` (`userid`);
-
---
--- Filtros para la tabla `tesis`
---
-ALTER TABLE `tesis`
-  ADD CONSTRAINT `tesis_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user_profile` (`id`);
+  ADD CONSTRAINT `ii_ibfk_1` FOREIGN KEY (`tesisid`) REFERENCES `tesis` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
