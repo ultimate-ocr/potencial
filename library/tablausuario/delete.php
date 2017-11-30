@@ -21,7 +21,7 @@ echo $tabla.$id;
   $query="DELETE FROM $tabla WHERE userid='$userid' AND id='$id'";
   echo $query;
   
-  if ($mysqli->query($query) === TRUE) {
+  if ($mysqli->query($query)) {
       echo "Recorde deleted successfully";
       
   }
@@ -29,5 +29,5 @@ echo $tabla.$id;
       echo "Error deleting recorde: " . $mysqli->error;
   }
 
-  header('location:/potencial/tablausuario9a.php');
+  //header('location:/potencial/tablausuario12am.php');
 ?>  

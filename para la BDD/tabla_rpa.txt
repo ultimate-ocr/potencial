@@ -54,11 +54,20 @@ Este mérito es idéntido a la publicación de un artículo (APARTADO D, investigaci
 
 .....
 
+
+
+
 HECHO -->>  I. Publicaciones de innovación educativa en revistas especializadas
 
 Este mérito es idéntido a la publicación de un artículo (APARTADO C, investigación); tanto en la interfaz como la tabla asociada a la BBDD.
 
 .....
+
+
+
+
+
+
 
 HECHO -->>  J. Participación en la coordinación académica de las enseñanzas en todas las etapas
 
@@ -213,7 +222,7 @@ Esto se traduce en la BBDD, en una tabla donde están todos los ID's de los profe
 
 .....
 
-NO HACE FALTA---> Gestión de Proyectos de Investigación
+NO HACE FALTA---> F. Gestión de Proyectos de Investigación
 F1. Proyectos de convocatoria pública y competititva concedidos a la ULPGC
 F2. Proyectos mediante Convenios
 

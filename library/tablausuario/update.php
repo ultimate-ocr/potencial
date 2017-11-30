@@ -14,6 +14,94 @@ if ($mysqli->connect_errno) {
 $tabla = htmlspecialchars($_POST['tabla']);
 $id = htmlspecialchars($_POST['id']);
   switch ($tabla) {
+
+    case "de":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $subtipo = htmlspecialchars($_POST['subtipo']);
+        $codirectores = htmlspecialchars($_POST['codirectores']);
+        $universidad = htmlspecialchars($_POST['universidad']);
+        $anno = htmlspecialchars($_POST['anno']);
+        $calificacion = htmlspecialchars($_POST['calificacion']);
+        $premios = htmlspecialchars($_POST['premios']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', subtipo='$subtipo', codirectores='$codirectores', universidad='$universidad',
+                                    anno='$anno', calificacion='$calificacion', premios='$premios' WHERE id='$id'";
+
+        break;
+
+    case "dff":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $codirectores = htmlspecialchars($_POST['codirectores']);
+        $universidad = htmlspecialchars($_POST['universidad']);
+        $anno = htmlspecialchars($_POST['anno']);
+        $calificacion = htmlspecialchars($_POST['calificacion']);
+        $doctoradoeuropeo = htmlspecialchars($_POST['doctoradoeuropeo']);
+        $menciondecalidad = htmlspecialchars($_POST['menciondecalidad']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', codirectores='$codirectores', universidad='$universidad',
+        anno='$anno', calificacion='$calificacion', doctoradoeuropeo='$doctoradoeuropeo', menciondecalidad='$menciondecalidad' WHERE id='$id'";
+
+        break;
+
+    case "dg":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $participacion = htmlspecialchars($_POST['participacion']);
+        $regional = htmlspecialchars($_POST['regional']);
+        $lugar = htmlspecialchars($_POST['lugar']);
+        $fecha = htmlspecialchars($_POST['fecha']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', participacion='$participacion', regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id='$id'";
+
+        break;
+
+    case "dh":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $participacion = htmlspecialchars($_POST['participacion']);
+        $regional = htmlspecialchars($_POST['regional']);
+        $lugar = htmlspecialchars($_POST['lugar']);
+        $fecha = htmlspecialchars($_POST['fecha']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', participacion='$participacion', regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id='$id'";
+        echo $query;
+        break;
+
+    case "di":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $subtipo = htmlspecialchars($_POST['subtipo']);
+        $autores = htmlspecialchars($_POST['autores']);
+        $revista = htmlspecialchars($_POST['revista']);
+        $isbn = htmlspecialchars($_POST['isbn']);
+        $clave = htmlspecialchars($_POST['clave']);
+        $pin = htmlspecialchars($_POST['pin']);
+        $pfin = htmlspecialchars($_POST['pfin']);
+        $fecha = htmlspecialchars($_POST['fecha']);
+        $volumen = htmlspecialchars($_POST['volumen']);
+        $impacto = htmlspecialchars($_POST['impacto']);
+        $citas = htmlspecialchars($_POST['citas']);
+        $editorial = htmlspecialchars($_POST['editorial']);
+        $acta = htmlspecialchars($_POST['acta']);
+        $lugar = htmlspecialchars($_POST['lugar']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', subtipo ='$subtipo', autores='$autores', revista='$revista', isbn='$isbn', clave='$clave',
+        pin='$pin', pfin='$pfin', fecha='$fecha', volumen='$volumen', impacto='$impacto', citas='$citas', editorial='$editorial', acta='$acta', lugar='$lugar'
+         WHERE id='$id'";
+
+        break;
+
+    case "dk":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+        $investigador = htmlspecialchars($_POST['investigador']);
+        $centro = htmlspecialchars($_POST['centro']);
+        $pais = htmlspecialchars($_POST['pais']);
+        $inicio = htmlspecialchars($_POST['inicio']);
+        $fin = htmlspecialchars($_POST['fin']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro', pais='$pais', 
+        inicio='$inicio', fin='$fin' WHERE id='$id'";
+
+        break;
+
     case "ia":
         $nombre = htmlspecialchars($_POST['titulo']);
         $orgfin = htmlspecialchars($_POST['orgfin']);
@@ -23,12 +111,11 @@ $id = htmlspecialchars($_POST['id']);
         $subtot = htmlspecialchars($_POST['subtot']);
         $investigador = htmlspecialchars($_POST['investigador']);
         $numinv = htmlspecialchars($_POST['numinv']);
+        $director = htmlspecialchars($_POST['director']);
 
-
-        echo $id,$nombre;
-       
+      
         $query = "UPDATE $tabla SET titulo='$nombre', orgfin='$orgfin', entidades='$entcol', desde='$fechaini', hasta='$fechafin', subvencion='$subtot',
-        invprincipal='$investigador', numinv='$numinv' WHERE id='$id'";
+        invprincipal='$investigador', numinv='$numinv', director='$director' WHERE id='$id'";
         
         break;
 
@@ -225,9 +312,10 @@ $id = htmlspecialchars($_POST['id']);
                     $subvencion = htmlspecialchars($_POST['subvencion']);
                     $invprincipal = htmlspecialchars($_POST['invprincipal']);
                     $numinv = htmlspecialchars($_POST['numinv']);
+                    $gestor = htmlspecialchars($_POST['gestor']);
             
                     $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
-                    subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv' WHERE id='$id'";
+                    subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', gestor='$gestor' WHERE id='$id'";
             
                     break;
             
@@ -247,10 +335,106 @@ $id = htmlspecialchars($_POST['id']);
                     regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id='$id'";
             
                     break;
+
+    case "ga":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+
+        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
+
+        break;
+
+    case "gb":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+
+        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
+
+        break;
+
+    case "gc":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+
+        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
+
+        break;
+
+    case "gd":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+
+        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
+
+        break;
+
+    case "ge":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+
+        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
+
+        break;
+
+    case "gff":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $director = htmlspecialchars($_POST['director']);
+        $subtipo = htmlspecialchars($_POST['subtipo']);
+        $orgfin = htmlspecialchars($_POST['orgfin']);
+        $entidades = htmlspecialchars($_POST['entidades']);
+        $desde = htmlspecialchars($_POST['desde']);
+        $hasta = htmlspecialchars($_POST['hasta']);
+        $subvencion = htmlspecialchars($_POST['subvencion']);
+        $invprincipal = htmlspecialchars($_POST['invprincipal']);
+        $numinv = htmlspecialchars($_POST['numinv']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', director='$director', subtipo='$subtipo', orgfin='$orgfin', entidades='$entidades', desde='$desde',
+        hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv'WHERE id='$id'";
+        echo $query;
+        break;
+
+    case "gg":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+        $gestor = htmlspecialchars($_POST['gestor']);
+        $orgfin = htmlspecialchars($_POST['orgfin']);
+        $entidades = htmlspecialchars($_POST['entidades']);
+        $desde = htmlspecialchars($_POST['desde']);
+        $hasta = htmlspecialchars($_POST['hasta']);
+        $subvencion = htmlspecialchars($_POST['subvencion']);
+        $invprincipal = htmlspecialchars($_POST['invprincipal']);
+        $numinv = htmlspecialchars($_POST['numinv']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', gestor='$gestor', orgfin='$orgfin', entidades='$entidades', desde='$desde',
+        hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv' WHERE id='$id' ";
+
+        break;
+
+    case "gh":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+        $fecha = htmlspecialchars($_POST['fecha']);
+        $lugar = htmlspecialchars($_POST['lugar']);
+        $descripcion = htmlspecialchars($_POST['descripcion']);
+
+        $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', lugar='$lugar', descripcion='$descripcion' WHERE id='$id'";
+
+        break;
+
+    case "gi":
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $ud = 4;
+        $descripcion = htmlspecialchars($_POST['descripcion']);
+        
+        $query = "UPDATE $tabla SET titulo='$titulo', descripcion='$descripcion' WHERE id='$id'";
+
+        break;
+
+
             
-                    default:
-                        echo "ha fallado la inserción, pruebe de nuevo";
-                //fin del switch.
+    default:
+        echo "ha fallado la inserción, pruebe de nuevo";
+//fin del switch.
                     }
 
 
@@ -265,6 +449,6 @@ $id = htmlspecialchars($_POST['id']);
     echo "Error: " . $mysqli->error . "\n";
     //exit;
 	}
-    header('location:/potencial/tablausuario12.php');
+    //header('location:/potencial/tablausuario12am.php');
 
   ?>

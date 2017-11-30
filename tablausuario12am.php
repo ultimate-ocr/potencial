@@ -52,7 +52,7 @@ $.ajax({
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success : function() {
-      alert('Exito:' + $id);
+      location.reload(true);
     },
  
     // código a ejecutar si la petición falla;
@@ -64,7 +64,7 @@ $.ajax({
  
     // código a ejecutar sin importar si la petición falló o no
     complete : function() {
-        alert('Petición realizada');
+        alert('Registro borrado satisfactoriamente');
     }
 }); 
 
@@ -130,10 +130,13 @@ function mostrar($tabla){
 							
 
 							echo 	$lineaBD['infoestado']."</td>
-              <td style=\"text-align:right;\">
-                <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
-  
-                <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
+              <td style=\"text-align:right;\">";
+              if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
+                echo"
+                  <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
+                  <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>";
+
+                echo"
               </form>
                             </td>						 
 						</tr>
@@ -207,12 +210,15 @@ function mostrar($tabla){
 							
 							
 							echo 	$lineaBD['infoestado']
-    						."</td>
+                ."</td>";
+                if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
+                echo"
 							<td style=\"text-align:right;\">
                                 <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
                                 <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
-							</td>
-						 
+              </td>";
+              
+						 echo"
 						</tr>
                         ";
                                 }
@@ -270,8 +276,10 @@ if($fichero!=NULL){
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">
                         <div class=\"col-sm-10\"  id=\"titulotabla\" >".$pret[$contador]."-".$linea."</div>
                         <div class=\"col-sm-1\">".$total."</div> </div>
-                        <div class=\"col-sm-1\">
-                        <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla_total."\"> <i class=\"material-icons\">add</i></button>
+                        <div class=\"col-sm-1\">";
+                        if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
+                            echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla_total."\"> <i class=\"material-icons\">add</i></button>";
+                    echo"
                     </div>
                 </div>";
             $num_linea=mostrar_sub($fichero, $num_linea);
@@ -288,7 +296,6 @@ if($fichero!=NULL){
                 }
                 $num_linea++;
                 $contador=0;
-                echo"</br><div>hola</div>";
               break;
 
             case '#':
@@ -304,9 +311,10 @@ if($fichero!=NULL){
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
                             <div class=\"col-sm-10\"  id=\"titulotabla\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\">".$total."</div> </div>
-                            <div class=\"col-sm-1\">
-                            <button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$apartado.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>
-                            </button>
+                            <div class=\"col-sm-1\">";
+                            if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
+                                echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$apartado.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>";
+                        echo"
                         </div>
                     </div>";
                 mostrar($tabla_total);
@@ -316,7 +324,6 @@ if($fichero!=NULL){
         }
     }
 }
-echo "fin";
 ?>
 </div>
 </html>
@@ -344,7 +351,322 @@ echo "fin";
     //AÑADIR
 ?>
 
+<div class="modal fade" id="newde" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
 
+                     <label for="subtipo">Subtipo</label></p>
+                    <select name="subtipo">    
+                      <option value="1" selected="selected">Trabajo fin de Grado</option>
+                      <option value="2">Trabajo fin de Máster</option>
+                    </select>
+                    <br>
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Codirectores</label>
+                     <input class="form-control" id="codirectores" name="codirectores" type="text" >
+
+                     <label for="participacion">Universidad</label>
+                     <input class="form-control" id="universidad" name="universidad" type="text" >
+
+                     <label for="regional">Año</label>
+                     <input class="form-control" id="anno" name="anno" type="text" >
+
+                     <label for="lugar">Calificacion</label>
+                     <input class="form-control" id="calificacion" name="calificacion"type="text" >
+
+                     <label for="lugar">Premios y Menciones de Calidad recibidos</label>
+                     <input class="form-control" id="premios" name="premios"type="text" >
+
+                     <input type="hidden" name="tabla" value="de" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertade" id="newde" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+          <div class="modal fade" id="newdff" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+    
+                    <label for="nombre">Título</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <label for="orgfin">Unidades Docentes</label></p>
+                    <input type="text" class="form-control" id="UD" name="UD">
+
+                    <label for="fechapub">Codirectores</label>
+                    <input class="form-control" id="codirectores" name="codirectores" type="text" >
+
+                    <label for="participacion">Universidad</label>
+                    <input class="form-control" id="universidad" name="universidad" type="text" >
+
+                    <label for="regional">Año</label>
+                    <input class="form-control" id="anno" name="anno" type="text" >
+
+                    <label for="lugar">Calificacion</label>
+                    <input class="form-control" id="calificacion" name="calificacion"type="text" >
+
+                    <label for="lugar">Doctorado Europeo</label>
+                    <input id="doctoradoeuropeo" name="doctoradoeuropeo"type="checkbox" value="1">
+                    <br>
+                    <label for="lugar">Mención de Calidad</label>
+                    <input id="menciondecalidad" name="menciondecalidad"type="checkbox" value="1">
+
+                     <input type="hidden" name="tabla" value="dff" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadff" id="newdff" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+        
+        <div class="modal fade" id="newdg" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Fecha</label>
+                     <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                     <label for="participacion">Participación</label>
+                     <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                     <label for="regional">Regional</label>
+                     <input class="form-control" id="regional" name="regional" type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="dg" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadg" id="newdg" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+               
+          <div class="modal fade" id="newdh" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Fecha</label>
+                     <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                     <label for="participacion">Participación</label>
+                     <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                     <label for="regional">Regional</label>
+                     <input class="form-control" id="regional" name="regional" type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="dh" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadh" id="newdh" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+               
+        <div class="modal fade" id="newdi" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                 <label for="nombre">Título</label></p>
+                 <input type="text" class="form-control" id="titulo" name="titulo">
+                <br>
+                 <label for="orgfin">Unidades Docentes</label></p>
+                 <input type="text" class="form-control" id="UD" name="UD">
+               <br>
+              <label for="subtipo">Subtipo</label></p>
+                <select name="subtipo">    
+                  <option value="1" selected="selected">Reconocimiento de la investigación</option>
+                  <option value="2">Publicaciones de investigación indexada</option>
+                  <option value="3">Publicaciones de investigación no indexada</option>
+                </select>
+               <br>
+
+                 <label for="fechapub">Fecha de publicación</label>
+                 <input class="form-control" id="fechapub" name="fechapub" type="date" >
+
+                 <label for="autores">Autores</label>
+                 <input class="form-control" id="autores" name="autores"type="text" >
+
+                 <label for="revista">Revista</label>
+                 <input class="form-control" id="revista" name="revista" type="text" >
+
+                 <label for="isbn">ISBN</label>
+                 <input class="form-control" id="isbn" name="isbn"type="text" >
+
+                 <label for="clave">Clave</label>
+                 <input class="form-control" id="clave" name="clave" type="text" >
+
+                 <label for="volumen">Volumen</label>
+                 <input class="form-control" id="volumen" name="volumen"type="text" >
+
+                 <label for="pin">pin</label>
+                 <input class="form-control" id="pin" name="pin"type="text" >
+
+                 <label for="pfin">pfin</label>
+                 <input class="form-control" id="pfin" name="pfin"type="text" >
+
+                 <label for="impacto">Impacto</label>
+                 <input class="form-control" id="impacto" name="impacto" type="text" >
+
+                 <label for="citas">Citas</label>
+                 <input class="form-control" id="citas" name="citas"type="text" >
+
+                 <label for="acta">Acta</label>
+                 <input class="form-control" id="acta" name="acta" type="text" >
+
+                 <label for="editorial">Editorial</label>
+                 <input class="form-control" id="editorial" name="editorial"type="text" >
+
+                 <label for="lugar">Lugar</label>
+                 <input class="form-control" id="lugar" name="lugar"type="text" >
+                     <input type="hidden" name="tabla" value="di" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadi" id="newdi" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+        <div class="modal fade" id="newdk" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                 <label for="nombre">Título</label></p>
+                 <input type="text" class="form-control" id="titulo" name="titulo">
+
+                 <label for="orgfin">Investigador</label></p>
+                 <input type="text" class="form-control" id="investigador" name="investigador">
+
+                 <label for="fechapub">Centro</label>
+                 <input class="form-control" id="centro" name="centro" type="text" >
+
+                 <label for="participacion">País</label>
+                 <input class="form-control" id="pais" name="pais" type="text" >
+
+                 <label for="regional">Fecha de inicio</label>
+                 <input class="form-control" id="inicio" name="inicio" type="date" >
+
+                 <label for="lugar">Fecha de finalización</label>
+                 <input class="form-control" id="fin" name="fin"type="date" >
+
+                     <input type="hidden" name="tabla" value="dk" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadk" id="newdk" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
 
 
   <div class="modal fade" id="newia" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
@@ -359,7 +681,7 @@ echo "fin";
  
                    <div class="form-group">
                       <label for="nombre">Nombre del Proyecto</label></p>
-                     <input type="text" class="form-control" id="nombre" name="nombre">
+                     <input type="text" class="form-control" id="titulo" name="titulo">
                    </div>
  				  <br>
 
@@ -371,7 +693,9 @@ echo "fin";
                     </select>
           <br>
           <br>
-
+                     <label>Es Director</label></p>
+                     <input id="director" name="director"type="checkbox" value="1">
+                     <br>
                    <div class="form-group">
                      <label for="orgfin">Organización Financiadora</label></p>
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
@@ -484,7 +808,6 @@ echo "fin";
                     <div class="panel-body">
                  <form id="insertaic" name="newic" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
-
                       <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
  				           <br>
@@ -743,26 +1066,23 @@ echo "fin";
                     <div class="panel-body">
                  <form id="insertaid" name="newih" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
  
-                     <label for="nombre">Título</label></p>
-                     <input type="text" class="form-control" id="titulo" name="titulo">
+                 <label for="nombre">Título</label></p>
+                 <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
+                 <label for="orgfin">Unidades Docentes</label></p>
+                 <input type="text" class="form-control" id="UD" name="UD">
 
-                     <label for="orgfin">Investigador Principal</label></p>
-                     <input type="text" class="form-control" id="investigador" name="investigador">
+                 <label for="fechapub">Fecha</label>
+                 <input class="form-control" id="fecha" name="fecha" type="date" >
 
-                     <label for="fechapub">Centro</label>
-                     <input class="form-control" id="centro" name="centro" >
+                 <label for="participacion">Participación</label>
+                 <input class="form-control" id="participacion" name="participacion" type="text" >
 
-                     <label for="autores">Pais</label>
-                     <input class="form-control" id="pais" name="pais">
+                 <label for="regional">Regional</label>
+                 <input class="form-control" id="regional" name="regional" type="text" >
 
-                     <label for="lugar">Fecha de inicio</label>
-                     <input class="form-control" id="inicio" name="inicio"type="date" >
-
-                     <label for="regional">Fecha de finalización</label>
-                     <input class="form-control" id="fin" name="fin" type="date" >
+                 <label for="lugar">Lugar</label>
+                 <input class="form-control" id="lugar" name="lugar"type="text" >
 
                      <input type="hidden" name="tabla" value="ih" />                     
 
@@ -1061,7 +1381,10 @@ echo "fin";
 
                      <label>Organizacion Financiadora</label></p>
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
-
+                     <br>
+                     <label>Es Gestor</label></p>
+                     <input id="gestor" name="gestor"type="checkbox" value="1">
+                     <br>
                      <label>Entidades financiadoras</label></p>
                      <input type="text" class="form-control" id="entfin" name="entfin">
 
@@ -1093,6 +1416,8 @@ echo "fin";
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
+
+
                <div class="modal fade" id="newio" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
           <div class="modal-dialog">
              <div class="modal-content">
@@ -1138,6 +1463,347 @@ echo "fin";
           <!-- /.modal-dialog --> 
        </div></div>
                </div></div>
+
+          <div class="modal fade" id="newga" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Cargo</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="ga" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertaga" id="newga" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+               
+
+              <div class="modal fade" id="newgb" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Cargo sindical</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="gb" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagb" id="newgb" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              
+              <div class="modal fade" id="newgc" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Nombre del órgano</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="gc" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagc" id="newgc" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              <div class="modal fade" id="newgd" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Nombre del comité/comisión</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="gd" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagd" id="newgd" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              <div class="modal fade" id="newge" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Nombre del tribunal/comisión de evaluación del PDI</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="ge" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertage" id="newge" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              
+              
+              <div class="modal fade" id="newgff" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post'>
+ 
+                   <div class="form-group">
+                      <label for="nombre">Nombre del Proyecto</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+                   </div>
+ 				  <br>
+
+                 <label for="subtipo">Subtipo</label></p>
+                    <select name="subtipo">    
+                      <option value="1" selected="selected">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
+                      <option value="2">Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</option>
+                      <option value="3">Proyectos mediante convenios</option>
+                    </select>
+          <br>
+          <br>
+                     <label>Es Director</label></p>
+                     <input id="director" name="director"type="checkbox" value="1">
+                     <br>
+                   <div class="form-group">
+                     <label for="orgfin">Organización Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                   </div>
+ 				  <br>
+ 				  <div class="form-group">
+                     <label for="entcol">Entidades Colaboradoras</label></p>
+                     <input type="text" class="form-control" id="entcol" name="entcol">
+                   </div>
+                   <br>
+                   <div class="form-group">
+                     <label for="fechaini">Fecha inicio</label>
+                     <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                   </div>
+                     <label for="fechafin">Fecha finalización</label>
+                     <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                     <input type="text" class="form-control" id="subtot" name="subtot">
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                     <input type="text" class="form-control" id="investigador" name="investigador" >
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                     <input type="text" class="form-control" id="numinv" name="numinv" >
+                   </div>
+                   <input type="hidden" name="tabla" value="gff" />
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaia" id="newia" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+
+              <div class="modal fade" id="newgg" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Organizacion Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                     <br>
+                     <label>Es Gestor</label></p>
+                     <input id="gestor" name="gestor"type="checkbox" value="1">
+                     <br>
+                     <label>Entidades financiadoras</label></p>
+                     <input type="text" class="form-control" id="entfin" name="entfin">
+
+                     <label>Fecha de inicio</label>
+                     <input class="form-control" id="fechaini" name="fechaini" type="date">
+
+                     <label>Fecha de finalización</label>
+                     <input class="form-control" id="fechafin" name="fechafin" type="date">
+
+                     <label>Subvención</label>
+                     <input class="form-control" id="subvencion" name="subvencion">
+
+                     <label>Investigador principal</label>
+                     <input class="form-control" id="invprincipal" name="invprincipal"type="text" >
+
+                     <label>Numero de investigadores</label>
+                     <input class="form-control" id="numinv" name="numinv" type="text" >
+
+                     <input type="hidden" name="tabla" value="gg" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertagg" id="newgg" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+
+              <div class="modal fade" id="newgh" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Título</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <label for="orgfin">Fecha</label></p>
+                    <input type="date" class="form-control" id="fecha" name="fecha">
+
+                    <label for="fechapub">Lugar</label>
+                    <input class="form-control" id="lugar" name="lugar" type="text" >
+
+                    <label for="participacion">Descripcion</label>
+                    <input class="form-control" id="descripcion" name="descripcion" type="text" >
+
+                    <input type="hidden" name="tabla" value="gh" >                     
+
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagh" id="newgh" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+
+              <div class="modal fade" id="newgi" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Título</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <label for="orgfin">Descripcion</label></p>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+
+                    <input type="hidden" name="tabla" value="gi" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagi" id="newgi" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
 
 	<!-- Le javascript
     ================================================== -->

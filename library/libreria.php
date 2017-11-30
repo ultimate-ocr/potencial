@@ -36,7 +36,7 @@ if ($mysqli->connect_errno) {
     echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 $userid=$_SESSION["id"];
-$query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE userid=$userid and subtipo=$subtipo";
+$query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE userid=$userid";
 
 if (!$resultado = $mysqli->query($query)) {
 	// ¡Oh, no! La consulta falló. 
