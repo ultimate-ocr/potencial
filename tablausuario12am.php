@@ -470,20 +470,26 @@ if($fichero!=NULL){
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
+                     <label for="orgfin">Autores</label></p>
+                     <input type="text" class="form-control" id="autores" name="autores">
 
-                     <label for="fechapub">Fecha</label>
-                     <input class="form-control" id="fecha" name="fecha" type="date" >
+                     <label for="fechapub">Tipo de publicación</label>
+                     <input class="form-control" id="tipo" name="tipo" type="text" >
 
-                     <label for="participacion">Participación</label>
-                     <input class="form-control" id="participacion" name="participacion" type="text" >
+                     <label for="participacion">Página de inicio</label>
+                     <input class="form-control" id="pin" name="pin" type="text" >
 
-                     <label for="regional">Regional</label>
-                     <input class="form-control" id="regional" name="regional" type="text" >
+                     <label for="regional">Página de finalización</label>
+                     <input class="form-control" id="pfin" name="pfin" type="text" >
 
-                     <label for="lugar">Lugar</label>
-                     <input class="form-control" id="lugar" name="lugar"type="text" >
+                     <label for="lugar">Editorial</label>
+                     <input class="form-control" id="editorial" name="editorial"type="text" >
+                     
+                     <label for="regional">Año</label>
+                     <input class="form-control" id="anno" name="anno" type="text" >
+
+                     <label for="lugar">ISBN</label>
+                     <input class="form-control" id="isbn" name="isbn"type="text" >
 
                      <input type="hidden" name="tabla" value="dg" >                     
 

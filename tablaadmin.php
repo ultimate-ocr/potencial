@@ -1,296 +1,1756 @@
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema de Gestión de los CV’s de los Grupos de Investigación de la ULPGC</title>
-    <link rel="stylesheet" href="CSS/group.css">
-    <link href="CSS/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/3.1.2/jquery.bootstrap-touchspin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/3.1.2/jquery.bootstrap-touchspin.min.css">
-    <link rel="stylesheet" href="jquery-ui-1.11.4/jquery-ui.min.css" type="text/css" media="all">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-    <link href="CSS/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
-      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-      <script src="JS/bootstrap.min.js"></script>
-    </head>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap-responsive.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+</head>
 
 
-<!--FORM CON ACCORDION-->
-          <div id="accordion" class="text-center">
-            <h3>Participación en Proyectos de I+D financiados en Convocatorias públicas</h3>
-            <!--FORMULARIO PARTE 1-->
-            <div><p>
-              <div class="panel-body">
-                 <div class="container-fluid">
-                <p class="text-right"><button class="btn btn-success btn-xs" data-title="Nuevo" data-toggle="modal" data-target="#new" >
-                <span class="glyphicon glyphicon-plus"></span></button></p>
-                </div>
-                <div class="container-fluid">
-            <div>
-               <div class="table-responsive">
-                  <table id="mytable" class="table table-bordred table-stripedt">
-                     <thead class="bg-info">
-                        <!--th style="text-align:center;"><input type="checkbox" id="checkall" /></th-->
-                        <th style="text-align:center;">Título del proyecto</th>
-                        <th style="text-align:center;">Organismo financiador</th>
-                        <!--th>Cuantía de la subvención</th-->
-                        <!--th>Investigador principal</th-->
-                        <!--th>Investigadores Participantes</th-->
-                        <th style="text-align:center;">Editar</th>
-                        <th style="text-align:center;">Eliminar</th>
-                        <th style="text-align:center;">Duplicar</th>
-                     </thead>
-                     <tbody>
-                       
-                        <?php $cont=0;
-           if($resultp1!=NULL){ 
-            foreach ($resultp1 as $itemp1){
-              if($cont==0){
-                echo'<tr class="active">';
-                $cont=1;
-              }
-                else {
-                    echo' <tr>';
-                    $cont=0;
-                }
-                         echo'<!--td><input type="checkbox" class="checkthis" /></td-->
-                           <td>'.$itemp1['titulo'].'</td>
-                           <td>'.$itemp1['orgfin'].'</td>
-                           <!--td>'.$itemp1['subvencion'].'</td-->
-                           <!--td>'.$itemp1['invprincipal'].'</td-->
-                           <!--td>'.$itemp1['numinv'].'</td-->
-                           <td>
-                              <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit'.$itemp1['id'].'" ><span class="glyphicon glyphicon-pencil"></span></button></p>
-                           </td>
-                           <td>
-                              <p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete'.$itemp1['id'].'" ><span class="glyphicon glyphicon-trash"></span></button></p>
-                           </td> 
-                           <td>
-                              <p data-placement="top" data-toggle="tooltip" title="Duplicate"><button class="btn btn-info btn-xs" data-title="Duplicate" data-toggle="modal" data-target="#dupli'.$itemp1['id'].'" ><span class="glyphicon glyphicon-copy"></span></button></p>
-                           </td></tr>
-                          ';
-               
-                       
-                 echo'    
-                  <!--
-                     <div class="clearfix"></div>
-                     <ul class="pagination pull-right">
-                       <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                       <li class="active"><a href="#">1</a></li>
-                       <li><a href="#">2</a></li>
-                       <li><a href="#">3</a></li>
-                       <li><a href="#">4</a></li>
-                       <li><a href="#">5</a></li>
-                       <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                     </ul><!-->
 
-      <!-- /.EDITAR --> ';
+<script>
+
+
+function corregir(tabla,id){
+    $.ajax({  
+         url:"library/tablaadmin/corregi2.php",  
+         method:"POST",  
+         data : { "id" : id, "tabla": tabla }, 
+         success:function(data){  
+               $('#modal_comming').html(data);
+               $('#dataModal').modal('show');
+         }  
+    });  
+} 
+
+</script>
  
-        echo'<div class="modal fade" id="edit'.$itemp1['id'].'" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                  <h4 class="modal-title custom_align" id="Heading">Editar</h4>
-               </div>
-               <div class="modal-body">
-                   <div class="panel-body">
-                <form id="form_Cv_1_edit" name="form_Cv_1_edit" action="Model/cv1edit.php" method="post" class="form-horizontal" autocomplete="on">
-                <input type="hidden" name="idp1" value="' . $itemp1['id'] . '">
-                  <div class="form-group">
-                    <p class="subtitulo"><label for="pname">Título del proyecto</label></p>';
-                 echo' <input type="text" class="form-control" id="pname" name="pname" value="'.$itemp1['titulo'].'">
-                  </div>
-                  <div class="form-group">
-                     <p class="subtitulo"><label for="orgfina">Organismo financiador</label></p>
-                    <input type="text" class="form-control" id="orgfina" name="orgfina" value="'.$itemp1['orgfin'].'">
-                  </div>
-                  <div class="form-group">
-                    <p class="subtitulo"><label for="entidades">Entidades participantes</label></p>
-                    <input type="text" class="form-control" id="entidadese" name="entidadese" value="'.$itemp1['entidades'].'">
-                  </div>
-                  <div class="form-group">
-                    <p class="subtitulo"><label>Duración</label></p>
-                    <div class="col-xs-6">
-                      <div class="input-group input-append date" id="datetimepickerp1e">
-                        <input type="date" class="form-control" name="date11e" value="'.$itemp1['desde'].'"/>
-                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                      </div>
-                   </div>
-                  <div class="col-xs-6">
-                      <div class="input-group input-append date" id="datetimepickerp11e">
-                        <input type="date" class="form-control" name="date12e" value="'.$itemp1['hasta'].'"/>
-                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                      </div>
-                  </div>
-                 </div>
-                  <div class="form-group">
-                      <label for="subvencion">Cuantía de la subvención</label></p>
-                    <input type="text" class="form-control" id="subvencion" name="subvencion" value="'.$itemp1['subvencion'].'">
-                  </div>
-                 <div class="form-group"> 
-                   <div class="col-xs-6">
-                    <p class="subtitulo"><label for="investigadorp">Investigador Principal</label></p>
-                    <select name="investigadorp" class="form-control" id="investigadorp">
-                    <option default>'.$itemp1['invprincipal'].'</option>';
-                      foreach ($grmembers as $resultmemb){
-                      echo'<option>'.$resultmemb['name'].' '.$resultmemb['surname'].'</option>';}
-                    echo'<input type="text" class="form-control" id="investigadorpr" name="investigadorpr" placeholder="Añadir aquí si no está en la lista" >';
-                    echo'</select>
-                     </div>
-                     <div class="col-xs-6">
-                      <p class="subtitulo"><label for="numeroinved">Investigadores Participantes</label></p>
-                      <input id="numeroinved" type="text" class="form-control" value="'.$itemp1['numinv'].'" name="numeroinved"><hr>
-                   </div></div>
-                  <div class="modal-footer"> 
-                    <input type="submit" name="CVparte1_edit" id="CVparte1_edit" class="btn btn-success" style="width:100%;" value="Editar"/>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <!-- /.modal-content --> 
-         </div>
-         <!-- /.modal-dialog --> 
-      </div></div>
-      
-      <!--DUPLICAR-->
-      <div class="modal fade" id="dupli'.$itemp1['id'].'" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                  <h4 class="modal-title custom_align" id="Heading">Duplicar</h4>
-               </div>
-               <div class="modal-body">
-                   <div class="panel-body">
-                <form id="form_Cv_1_dup" name="form_Cv_1_dup" action="Model/cv1.php" method="post" class="form-horizontal" autocomplete="on">
-                <input type="hidden" name="idp1" value="' . $itemp1['id'] . '">
-                  
-                 <input type="hidden" class="form-control" id="pname" name="pname" value="'.$itemp1['titulo'].'">
-                 
-                    <input type="hidden" class="form-control" id="orgfina" name="orgfina" value="'.$itemp1['orgfin'].'">
-                 
-                    <input type="hidden" class="form-control" id="entidadesd" name="entidadesd" value="'.$itemp1['entidades'].'">
-                  
-                        <input type="hidden" class="form-control" name="date11e" value="'.$itemp1['desde'].'"/>
-                       
-                        <input type="hidden" class="form-control" name="date12e" value="'.$itemp1['hasta'].'"/>
+<?php
+
+function mostrar_pendientes($tabla){
+    $primera=1;
+    global $contador, $pre, $tabla_total, $apartado;
+    $letra=$pre[$contador];
+    
+    $resultado=getmerito_pendiente($tabla,'0');
+    while ($lineaBD = $resultado->fetch_assoc()) {
+        if ($primera==1){
+ echo"
+    <div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">
+			<div>
+               <div class=\"table\">
+                  <table id=\"tablenosub\" class=\"table table-bordred table-stripedt\">
+                  <thead>
+                    <th style=\"text-align:left;\">Titulo</th>
+                    <th style=\"text-align:left;\">Estado</th>
+                  </thead>";
+        $primera=0;
+        }
+        echo "
+        <tbody>
+            <tr>
+							<td style=\"text-align:left;\">
+								 " . $lineaBD['titulo']."
+							</td>
+							<td style=\"text-align:left;\">";
+							switch ($lineaBD['estado']) {
+								case 0:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
+									break;
+								case 1:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:green\">fiber_manual_record</i>";
+									break;
+								case 2:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:yellow\">fiber_manual_record</i>";
+									break;
+								case 3:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:red\">fiber_manual_record</i>";
+									break;
+								default:
+									echo 'Su usuario es incorrecto, intente nuevamente.';
+									break;
+							}
+							
+							
+
+              echo 	$lineaBD['infoestado']
+              ."</td>";
+              if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
+              echo"
+            <td style=\"text-align:right;\">
+                              <button onclick=\"corregir('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">arrow_forward</i></button>
+            </td>";
+
+                echo"
+              </form>
+                            </td>						 
+						</tr>
+                        ";
+        }
+    echo'</tbody>
+    </table>
+    </div>
+    </div>
+    </div>';
+    }
+?>
+
+
+<?php
+
+  function mostrar_sub_pendientes($fichero, $num_linea){
+
+        global $contador, $pre, $pret, $tabla, $tabla_total, $apartado;
+        
+        $letra=$pre[$contador];
+        $letrat=$pret[$contador];
+        $linea=$fichero[++$num_linea];
+        $primera=1;
+        
+        while ($linea[0]=="."){
+            if ($primera!=1)
+                echo"<div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse in\">";  
+            if ($primera=1){
+                echo"<div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">"; 
+                $primera=0;}    
+			echo"
+			<div>
+               <div class=\"table\">
+                  <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";   
+                  for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
+
+                        $resultado=getmerito_pendiente($tabla_total,$subtipo);
                         
-                    <input type="hidden" class="form-control" id="subvencion" name="subvencion" value="'.$itemp1['subvencion'].'">
-                    
-                      <input type="hidden" class="form-control" id="investigadorp" name="investigadorp" value="'.$itemp1['invprincipal'].'">
-                 
-                      <input id="numeroinved" type="hidden" class="form-control" value="'.$itemp1['numinv'].'" name="numeroinved"><hr>
+                        echo"<thead>
+                        <th style=\"text-align:left;\">".$letrat.$subtipo.$linea."</th>
+                        <th style=\"text-align:left;\">Estado</th>
+                     </thead>";
+                        echo "<tbody>";
+                            while ($lineaBD = $resultado->fetch_assoc()) {
+                                if ($lineaBD['subtipo']==$subtipo) {
+                                    echo"
+					 	<tr>
+							<td style=\"text-align:left;\">
+								 " . $lineaBD['titulo']."
+							</td>
+							<td style=\"text-align:left;\">";
+							switch ($lineaBD['estado']) {
+								case 0:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
+									break;
+								case 1:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:green\">fiber_manual_record</i>";
+									break;
+								case 2:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:yellow\">fiber_manual_record</i>";
+									break;
+								case 3:
+									echo"<i class=\"material-icons\" style=\"font-size:24px;color:red\">fiber_manual_record</i>";
+                  break;
                   
-                  <div class="modal-footer">
-                    <input type="submit" name="CVparte1_dupli" id="CVparte1_dupli" class="btn btn-success" style="width:100%;" value="Duplicar"/>
+								default:
+									echo 'Su usuario es incorrecto, intente nuevamente.';
+									break;
+							}
+							
+              echo 	$lineaBD['infoestado']
+              ."</td>";
+              if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
+              echo"
+            <td style=\"text-align:right;\">
+                              <button onclick=\"corregir('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">arrow_forward</i></button>
+            </td>";
+            
+           echo"
+						</tr>
+                        ";
+                                }
+                            }
+                            echo "
+                            </tbody>
+                            ";
+                        }
+                        
+                  echo"
+                  </table>       
                   </div>
-                </form>
-              </div>
-            </div>
-            <!-- /.modal-content --> 
-         </div>
-         <!-- /.modal-dialog --> 
-      </div></div>
-      
-      
-      <!--ELIMINAR-->
-      <div class="modal fade" id="delete'.$itemp1['id'].'" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                  <h4 class="modal-title custom_align" id="Heading">Eliminar Fila</h4>
-               </div>
-               <div class="modal-body">
-                  <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>¿Estás seguro?</div>
-               </div>
-               <div class="modal-footer ">
-                <form id="form_Cv_1_delete" name="form_Cv_1_delete" action="Model/cv1delete.php" method="post">
-                <input type="hidden" name="idp1d" value="' . $itemp1['id'] . '">
-                  <input type="submit" class="btn btn-success" name="Cv_1_delete" id="Cv_1_delete" value="Si"/> 
-                </form>
-                  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-               </div>
-            </div>
-            <!-- /.modal-content --> 
-         </div>
-         <!-- /.modal-dialog --> 
-      </div>';
-                  }}; 
-               ?>        
-                  </tbody>
-                  </table>
-               </div>
-            </div>
-      </div>
-            <!-- /.CREAR --> 
-      <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                  <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
-               </div>
-               <div class="modal-body">
-                   <div class="panel-body">
-                <form id="form_Cv_1" name="form_Cv_1" action="Model/cv1.php" method="post" class="form-horizontal" autocomplete="on">
-                  <div class="form-group">
-                    <p class="subtitulo"><label for="pname">Título del proyecto</label></p>
-                    <input type="text" class="form-control" id="pname" name="pname" placeholder="" >
-                  </div>
-                  <div class="form-group">
-                     <p class="subtitulo"><label for="orgfin">Organismo financiador</label></p>
-                    <input type="text" class="form-control" id="orgfin" name="orgfin" placeholder="" >
-                  </div>
-                  <div class="form-group">
-                    <p class="subtitulo"><label for="entidades1">Entidades participantes</label></p>
-                    <input type="text" class="form-control" id="entidades1" name="entidades1" placeholder="" >
-                  </div>
-                  <div class="form-group">
-                    <p class="subtitulo"><label>Duración</label></p>
-                    <div class="col-xs-6">
-                      <div class="input-group input-append date" id="datetimepickerp31">
-                        <input type="date" class="form-control" name="date1" placeholder="Desde"/>
-                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                      </div>
-                   </div>
-                  <div class="col-xs-6">
-                      <div class="input-group input-append date" id="datetimepickerp32">
-                        <input type="date" class="form-control" name="date2" placeholder="Hasta" />
-                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                      </div>
-                  </div>
-                 </div>
-                  <div class="form-group">
-                      <label for="subvencion">Cuantía de la subvención</label></p>
-                    <input type="text" class="form-control" id="subvencion" name="subvencion" value="€" >
-                  </div>
-                 <div class="form-group"> 
-                   <div class="col-xs-6">
-                    <p class="subtitulo"><label for="investigadorp">Investigador Principal</label></p>
-                    <select name="investigadorp" class="form-control" id="investigadorp">
-                      <?php foreach ($grmembers as $resultmemb){
-                      echo'<option>'.$resultmemb['name'].' '.$resultmemb['surname'].'</option>';}
-                     echo'<input type="text" class="form-control" id="investigadorpr" name="investigadorpr" placeholder="Añadir aquí si no está en la lista" >';
-                      ?>
+			      </div>";
+                    }
+            echo"</div>
+			      </div>";
+            return ($num_linea);
+            }
+//esto hay que quitarlo, es solo para pruebas.
+$_SESSION["id"]=8;
+////////////////////////////////////////
+include 'library/libreria.php';
+$pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
+$pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];
+$num_linea=0;
+$contador=0;
+$apartado="d";
+
+$fichero = file('txt/titulos.txt');
+if($fichero!=NULL){
+    $fichero[0] = substr($fichero[0], 3);
+    echo"
+    <div id=\"resultadooo\"></div>
+    <div class=\"container-fluid\" >
+    <h1 id=\"titulo\">Planificaci&oacuten Acad&eacutemica</h1>";
+    
+    
+
+
+
+    echo"
+		<div class=\"col-sm-10\" align=\"center\">CONCEPTO</div>
+        </div>";
+    for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
+        $tabla_total=$apartado.$pre[$contador];
+        switch ($linea['0']) {
+            case '-':
+            
+            $linea = substr($linea, 1);
+            
+            echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
+                    <div class=\"accordion-toggle\" data-toggle=\"collapse\"
+                        data-target=\"#collapse".$apartado.$pre[$contador]."\">
+                        <div class=\"col-sm-10\"  id=\"titulotabla\" >".$pret[$contador]."-".$linea."</div>
+                        <div class=\"col-sm-1\"></div> </div>
+                        <div class=\"col-sm-1\">";
+                    echo"
+                    </div>
+                </div>";
+            $num_linea=mostrar_sub_pendientes($fichero, $num_linea);
+            $contador++;
+            break;
+
+            case '<':
+                
+                if ($apartado=="i"){
+                    $apartado="g";
+                }
+                if ($apartado=="d"){
+                    $apartado="i";
+                }
+                $num_linea++;
+                $contador=0;
+              break;
+
+            case '#':
+
+            $num_linea++;
+            break;
+
+            
+            default;
+                $linea = '-'.$linea;
+                echo   "<div class=\"row-fluid\">
+                        <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
+                            <div class=\"col-sm-10\"  id=\"titulotabla\">".$pret[$contador].$linea."</div>
+                            <div class=\"col-sm-1\"></div> </div>
+                            <div class=\"col-sm-1\">";
+                        echo"
+                        </div>
+                    </div>";
+                mostrar_pendientes($tabla_total);
+                $num_linea++;
+                $contador++;
+                break;
+        }
+    }
+}
+?>
+</div>
+</html>
+
+<div id="dataModal" class="modal fade" data-backdrop="static">  
+  <div class="modal-dialog">  
+    <div class="modal-content">  
+      <div class="modal-header">    
+        <h4 class="modal-title">Employee Details <button type="button" class="btn btn-default" data-dismiss="modal" style="Position:relative; left:60%">Close</button></h4>  
+        
+      </div>  
+      <div class="modal-body" id="modal_comming">  
+      </div>  
+      <div class="modal-footer">  
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+      </div>  
+    </div>  
+  </div>  
+</div>  
+
+<?php 
+
+//MODALES DE AQUI EN ADELANTE
+
+    //AÑADIR
+?>
+
+<div class="modal fade" id="newde" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="subtipo">Subtipo</label></p>
+                    <select name="subtipo">    
+                      <option value="1" selected="selected">Trabajo fin de Grado</option>
+                      <option value="2">Trabajo fin de Máster</option>
                     </select>
-                    </div>
-                     <div class="col-xs-6">
-                      <p class="subtitulo"><label for="numeroinv">Investigadores Participantes</label></p>
-                      <input id="numeroinv" type="text" value="2" name="numeroinv">
+                    <br>
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Codirectores</label>
+                     <input class="form-control" id="codirectores" name="codirectores" type="text" >
+
+                     <label for="participacion">Universidad</label>
+                     <input class="form-control" id="universidad" name="universidad" type="text" >
+
+                     <label for="regional">Año</label>
+                     <input class="form-control" id="anno" name="anno" type="text" >
+
+                     <label for="lugar">Calificacion</label>
+                     <input class="form-control" id="calificacion" name="calificacion"type="text" >
+
+                     <label for="lugar">Premios y Menciones de Calidad recibidos</label>
+                     <input class="form-control" id="premios" name="premios"type="text" >
+
+                     <input type="hidden" name="tabla" value="de" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertade" id="newde" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+          <div class="modal fade" id="newdff" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+    
+                    <label for="nombre">Título</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <label for="orgfin">Unidades Docentes</label></p>
+                    <input type="text" class="form-control" id="UD" name="UD">
+
+                    <label for="fechapub">Codirectores</label>
+                    <input class="form-control" id="codirectores" name="codirectores" type="text" >
+
+                    <label for="participacion">Universidad</label>
+                    <input class="form-control" id="universidad" name="universidad" type="text" >
+
+                    <label for="regional">Año</label>
+                    <input class="form-control" id="anno" name="anno" type="text" >
+
+                    <label for="lugar">Calificacion</label>
+                    <input class="form-control" id="calificacion" name="calificacion"type="text" >
+
+                    <label for="lugar">Doctorado Europeo</label>
+                    <input id="doctoradoeuropeo" name="doctoradoeuropeo"type="checkbox" value="1">
+                    <br>
+                    <label for="lugar">Mención de Calidad</label>
+                    <input id="menciondecalidad" name="menciondecalidad"type="checkbox" value="1">
+
+                     <input type="hidden" name="tabla" value="dff" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadff" id="newdff" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+        
+        <div class="modal fade" id="newdg" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Fecha</label>
+                     <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                     <label for="participacion">Participación</label>
+                     <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                     <label for="regional">Regional</label>
+                     <input class="form-control" id="regional" name="regional" type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="dg" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadg" id="newdg" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+               
+          <div class="modal fade" id="newdh" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Fecha</label>
+                     <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                     <label for="participacion">Participación</label>
+                     <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                     <label for="regional">Regional</label>
+                     <input class="form-control" id="regional" name="regional" type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="dh" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadh" id="newdh" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+               
+        <div class="modal fade" id="newdi" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                 <label for="nombre">Título</label></p>
+                 <input type="text" class="form-control" id="titulo" name="titulo">
+                <br>
+                 <label for="orgfin">Unidades Docentes</label></p>
+                 <input type="text" class="form-control" id="UD" name="UD">
+               <br>
+              <label for="subtipo">Subtipo</label></p>
+                <select name="subtipo">    
+                  <option value="1" selected="selected">Reconocimiento de la investigación</option>
+                  <option value="2">Publicaciones de investigación indexada</option>
+                  <option value="3">Publicaciones de investigación no indexada</option>
+                </select>
+               <br>
+
+                 <label for="fechapub">Fecha de publicación</label>
+                 <input class="form-control" id="fechapub" name="fechapub" type="date" >
+
+                 <label for="autores">Autores</label>
+                 <input class="form-control" id="autores" name="autores"type="text" >
+
+                 <label for="revista">Revista</label>
+                 <input class="form-control" id="revista" name="revista" type="text" >
+
+                 <label for="isbn">ISBN</label>
+                 <input class="form-control" id="isbn" name="isbn"type="text" >
+
+                 <label for="clave">Clave</label>
+                 <input class="form-control" id="clave" name="clave" type="text" >
+
+                 <label for="volumen">Volumen</label>
+                 <input class="form-control" id="volumen" name="volumen"type="text" >
+
+                 <label for="pin">pin</label>
+                 <input class="form-control" id="pin" name="pin"type="text" >
+
+                 <label for="pfin">pfin</label>
+                 <input class="form-control" id="pfin" name="pfin"type="text" >
+
+                 <label for="impacto">Impacto</label>
+                 <input class="form-control" id="impacto" name="impacto" type="text" >
+
+                 <label for="citas">Citas</label>
+                 <input class="form-control" id="citas" name="citas"type="text" >
+
+                 <label for="acta">Acta</label>
+                 <input class="form-control" id="acta" name="acta" type="text" >
+
+                 <label for="editorial">Editorial</label>
+                 <input class="form-control" id="editorial" name="editorial"type="text" >
+
+                 <label for="lugar">Lugar</label>
+                 <input class="form-control" id="lugar" name="lugar"type="text" >
+                     <input type="hidden" name="tabla" value="di" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadi" id="newdi" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+        <div class="modal fade" id="newdk" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                 <label for="nombre">Título</label></p>
+                 <input type="text" class="form-control" id="titulo" name="titulo">
+
+                 <label for="orgfin">Investigador</label></p>
+                 <input type="text" class="form-control" id="investigador" name="investigador">
+
+                 <label for="fechapub">Centro</label>
+                 <input class="form-control" id="centro" name="centro" type="text" >
+
+                 <label for="participacion">País</label>
+                 <input class="form-control" id="pais" name="pais" type="text" >
+
+                 <label for="regional">Fecha de inicio</label>
+                 <input class="form-control" id="inicio" name="inicio" type="date" >
+
+                 <label for="lugar">Fecha de finalización</label>
+                 <input class="form-control" id="fin" name="fin"type="date" >
+
+                     <input type="hidden" name="tabla" value="dk" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertadk" id="newdk" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+  <div class="modal fade" id="newia" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post'>
+ 
+                   <div class="form-group">
+                      <label for="nombre">Nombre del Proyecto</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+                   </div>
+ 				  <br>
+
+                 <label for="subtipo">Subtipo</label></p>
+                    <select name="subtipo">    
+                      <option value="1" selected="selected">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
+                      <option value="2">Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</option>
+                      <option value="3">Proyectos mediante convenios</option>
+                    </select>
+          <br>
+          <br>
+                     <label>Es Director</label></p>
+                     <input id="director" name="director"type="checkbox" value="1">
+                     <br>
+                   <div class="form-group">
+                     <label for="orgfin">Organización Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                   </div>
+ 				  <br>
+ 				  <div class="form-group">
+                     <label for="entcol">Entidades Colaboradoras</label></p>
+                     <input type="text" class="form-control" id="entcol" name="entcol">
+                   </div>
+                   <br>
+                   <div class="form-group">
+                     <label for="fechaini">Fecha inicio</label>
+                     <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                   </div>
+                     <label for="fechafin">Fecha finalización</label>
+                     <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                     <input type="text" class="form-control" id="subtot" name="subtot">
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                     <input type="text" class="form-control" id="investigador" name="investigador" >
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                     <input type="text" class="form-control" id="numinv" name="numinv" >
+                   </div>
+                   <input type="hidden" name="tabla" value="ia" />
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaia" id="newia" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+<div class="modal fade" id="newib" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                   <label for="id">Grupo de Investigación</label></p>
+                    <select name="id">
+                    <?php
+                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                          if ($mysqli->connect_errno) {
+                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                            die("Error: No se pudo conectar");
+                          }
+                          $query = "SELECT * FROM grupoinv";
+                          $resultado = $mysqli->query($query);
+                          while ($lineaBD = $resultado->fetch_assoc())
+                      echo"
+                      <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>
+                      ";
+                    ?>
+                    </select>
+           
+          <br>
+                  <div class="form-group">
+                     <label for="cargo">Cargo</label></p>
+                     <input type="text" class="form-control" id="cargo" name="cargo">
+                   </div>
+          <br>
+                   <div class="form-group">
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                   </div>
+ 				  <br>
+                   <input type="hidden" name="tabla" value="ib" />
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaib" id="newib" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+
+
+
+
+
+      <div class="modal fade" id="newic" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaic" name="newic" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                      <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+ 				           <br>
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+ 				          <br>
+                  <label for="subtipo">Subtipo</label></p>
+                    <select name="subtipo">    
+                      <option value="1" selected="selected">Reconocimiento de la investigación</option>
+                      <option value="2">Publicaciones de investigación indexada</option>
+                      <option value="3">Publicaciones de investigación no indexada</option>
+                    </select>
+                   <br>
+
+                     <label for="fechapub">Fecha de publicación</label>
+                     <input class="form-control" id="fechapub" name="fechapub" type="date" >
+
+                     <label for="autores">Autores</label>
+                     <input class="form-control" id="autores" name="autores"type="text" >
+
+                     <label for="revista">Revista</label>
+                     <input class="form-control" id="revista" name="revista" type="text" >
+
+                     <label for="isbn">ISBN</label>
+                     <input class="form-control" id="isbn" name="isbn"type="text" >
+
+                     <label for="clave">Clave</label>
+                     <input class="form-control" id="clave" name="clave" type="text" >
+
+                     <label for="volumen">Volumen</label>
+                     <input class="form-control" id="volumen" name="volumen"type="text" >
+
+                     <label for="pin">pin</label>
+                     <input class="form-control" id="pin" name="pin"type="text" >
+
+                     <label for="pfin">pfin</label>
+                     <input class="form-control" id="pfin" name="pfin"type="text" >
+
+                     <label for="impacto">Impacto</label>
+                     <input class="form-control" id="impacto" name="impacto" type="text" >
+
+                     <label for="citas">Citas</label>
+                     <input class="form-control" id="citas" name="citas"type="text" >
+
+                     <label for="acta">Acta</label>
+                     <input class="form-control" id="acta" name="acta" type="text" >
+
+                     <label for="editorial">Editorial</label>
+                     <input class="form-control" id="editorial" name="editorial"type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="ic" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaic" id="newic" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+               <div class="modal fade" id="newid" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label for="fechapub">Fecha</label>
+                     <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                     <label for="participacion">Participación</label>
+                     <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                     <label for="regional">Regional</label>
+                     <input class="form-control" id="regional" name="regional" type="text" >
+
+                     <label for="lugar">Lugar</label>
+                     <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="id" >                     
+
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertaid" id="newid" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+               <div class="modal fade" id="newie" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+ 				  
+           
+                   <label for="id">Red de Investigación</label></p>
+                    <select name="id">
+                    <?php
+                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                          if ($mysqli->connect_errno) {
+                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                            die("Error: No se pudo conectar");
+                          }
+                          $query = "SELECT * FROM redinv";
+                          $resultado = $mysqli->query($query);
+                          while ($lineaBD = $resultado->fetch_assoc())
+                      echo"<option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
+                    ?>
+                    </select>
+           
+          <br>
+                   <div class="form-group">
+                     <label for="orgfin">Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                   </div>
+ 				  <br>
+                   <input type="hidden" name="tabla" value="ie" />
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaie" id="newie" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+        <div class="modal fade" id="newiff" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaid" name="newiff" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+
+                     <input type="hidden" name="tabla" value="iff" />                     
+
+                     <div class="modal-footer">
+                     <input type="submit" name="insertaiff" id="newiff" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+               
+
+
+
+
+        <div class="modal fade" id="newig" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaid" name="newig" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Investigador Principal</label></p>
+                     <input type="text" class="form-control" id="investigador" name="investigador">
+
+                     <label>Editor</label>
+                     <input class="form-control" id="editor" name="editor">
+
+                     <label>Revista</label>
+                     <input class="form-control" id="revista" name="revista">
+
+                     <label>Impacto</label>
+                     <input class="form-control" id="impacto" name="impacto">
+
+                     <label>Nacional</label>
+                     <input class="form-control" id="nacional" name="nacional" type="text" >
+
+                     <label>Desde</label>
+                     <input class="form-control" id="desde" name="desde"type="date" >
+
+                     <label>Hasta</label>
+                     <input class="form-control" id="hasta" name="hasta" type="date" >
+
+                     <input type="hidden" name="tabla" value="ig" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaig" id="newig" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+
+               <div class="modal fade" id="newih" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaid" name="newih" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                 <label for="nombre">Título</label></p>
+                 <input type="text" class="form-control" id="titulo" name="titulo">
+
+                 <label for="orgfin">Unidades Docentes</label></p>
+                 <input type="text" class="form-control" id="UD" name="UD">
+
+                 <label for="fechapub">Fecha</label>
+                 <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                 <label for="participacion">Participación</label>
+                 <input class="form-control" id="participacion" name="participacion" type="text" >
+
+                 <label for="regional">Regional</label>
+                 <input class="form-control" id="regional" name="regional" type="text" >
+
+                 <label for="lugar">Lugar</label>
+                 <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <input type="hidden" name="tabla" value="ih" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaih" id="newih" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+               <div class="modal fade" id="newii" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaid" name="newii" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+
+                     <label for="id">Titulo de la tesis</label></p>
+                    <select name="id">
+                     <?php
+                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                          if ($mysqli->connect_errno) {
+                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                            die("Error: No se pudo conectar");
+                          }
+                          $query = "SELECT * FROM tesis";
+                          $resultado = $mysqli->query($query);
+                          while ($lineaBD = $resultado->fetch_assoc())
+                      echo"
+                      <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>
+                      ";
+                    ?>
+                    </select>
+
+
+
+                     <input type="hidden" name="tabla" value="ii" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaii" id="newii" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+               <div class="modal fade" id="newij" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaid" name="newij" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                 <label for="id">Titulo de la tesis</label></p>
+                 <select name="id">
+                  <?php
+                    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
+                       if ($mysqli->connect_errno) {
+                         echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                         die("Error: No se pudo conectar");
+                       }
+                       $query = "SELECT * FROM tesis";
+                       $resultado = $mysqli->query($query);
+                       while ($lineaBD = $resultado->fetch_assoc())
+                   echo"
+                   <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>
+                   ";
+                 ?>
+                 </select>
+
+                     <input type="hidden" name="tabla" value="ij" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaij" id="newij" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+        <div class="modal fade" id="newik" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaik" name="newik" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Organización Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+
+                     <label>Entidades Colaboradoras</label>
+                     <input class="form-control" id="entidades" name="entidades">
+
+                     <label>Fecha de inicio</label>
+                     <input class="form-control" id="desde" name="desde"  type="date">
+
+                     <label>Fecha de finalización</label>
+                     <input class="form-control" id="hasta" name="hasta" type="date">
+
+                     <label>Investigador responsable</label>
+                     <input class="form-control" id="invresponsable" name="invresponsable"type="text" >
+
+                     <label>Número de Investigadores</label>
+                     <input class="form-control" id="numinv" name="numinv" type="text" >
+
+                     <label>Subvención</label>
+                     <input class="form-control" id="subvencion" name="subvencion"type="text" >
+
+                     <input type="hidden" name="tabla" value="ik" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaik" id="newik" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+               <div class="modal fade" id="newil" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                     </div>
+                     <div class="modal-body">
+                         <div class="panel-body">
+                      <form id="insertail" name="newil" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                           <label for="nombre">Título</label></p>
+                          <input type="text" class="form-control" id="titulo" name="titulo">
+                         <br>
+                          <label for="orgfin">Unidades Docentes</label></p>
+                          <input type="text" class="form-control" id="UD" name="orgfin">
+                        <br>
+                          <label for="fechapub">Fecha de concesión</label>
+                          <input class="form-control" id="fecha" name="fecha" type="date" >
+
+                          <label for="autores">Autores</label>
+                          <input class="form-control" id="autores" name="autores"type="text" >
+     
+                          <label for="revista">Pais</label>
+                          <input class="form-control" id="pais" name="pais" type="text" >
+     
+                          <label for="ISBN">Numero de patente</label>
+                          <input class="form-control" id="patente" name="patente"type="text" >
+     
+                          <label for="clave">Entidad titular</label>
+                          <input class="form-control" id="entidad" name="entidad" type="text" >
+     
+                          <label for="volumen">Empresa explotadora</label>
+                          <input class="form-control" id="empresa" name="empresa"type="text" >
+     
+                          <input type="hidden" name="tabla" value="il" />                     
+     
+                        <div class="modal-footer">
+                          <input type="submit" name="insertail" id="newil" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                  <div class="modal-footer">
-                    <input type="submit" name="CVparte1" id="CVparte1" class="btn btn-success" style="width:100%;" value="Crear"/>
+                  <!-- /.modal-content --> 
+               </div>
+               <!-- /.modal-dialog --> 
+            </div></div>
+                    </div></div>
+     
+
+        <div class="modal fade" id="newim" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaim" name="newim" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                    <label>Razón social</label></p>
+                    <input type="text" class="form-control" id="razsocial" name="razsocial">
+                    <input type="hidden" name="tabla" value="im" /> 
+
+                     <label>CIF</label></p>
+                     <input type="text" class="form-control" id="CIF" name="CIF">                    
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaim" id="newim" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+        <div class="modal fade" id="newinn" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertainn" name="newinn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Investigadores</label></p>
+                     <input type="text" class="form-control" id="investigadores" name="investigadores">
+
+                     <label>Entidades</label></p>
+                     <input type="text" class="form-control" id="entidad" name="entidad">
+
+                     <label>Tema</label>
+                     <input class="form-control" id="tema" name="tema">
+
+                     <label>Fecha </label>
+                     <input class="form-control" id="fecha" name="fecha"  type="date">
+
+                     <input type="hidden" name="tabla" value="inn" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertainn" id="newinn" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+        
+        <div class="modal fade" id="newinnn" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Organizacion Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                     <br>
+                     <label>Es Gestor</label></p>
+                     <input id="gestor" name="gestor"type="checkbox" value="1">
+                     <br>
+                     <label>Entidades financiadoras</label></p>
+                     <input type="text" class="form-control" id="entfin" name="entfin">
+
+                     <label>Fecha de inicio</label>
+                     <input class="form-control" id="fechaini" name="fechaini" type="date">
+
+                     <label>Fecha de finalización</label>
+                     <input class="form-control" id="fechafin" name="fechafin" type="date">
+
+                     <label>Subvención</label>
+                     <input class="form-control" id="subvencion" name="subvencion">
+
+                     <label>Investigador principal</label>
+                     <input class="form-control" id="invprincipal" name="invprincipal"type="text" >
+
+                     <label>Numero de investigadores</label>
+                     <input class="form-control" id="numinv" name="numinv" type="text" >
+
+                     <input type="hidden" name="tabla" value="innn" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertainnn" id="newinnn" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+
+               <div class="modal fade" id="newio" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                 <form id="insertaio" name="newio" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Autores</label></p>
+                     <input type="text" class="form-control" id="autores" name="UD">
+
+                     <label>Participación</label></p>
+                     <input type="text" class="form-control" id="participacion" name="participacion">
+
+                     <label>Congreso</label>
+                     <input class="form-control" id="congreso" name="congreso">
+
+                     <label>Regional</label>
+                     <input class="form-control" id="regional" name="regional">
+
+                     <label>Lugar de celebración</label>
+                     <input class="form-control" id="lugar" name="lugar">
+
+                     <label>Fecha de celebración</label>
+                     <input class="form-control" id="fecha" name="fecha"type="date" >
+
+                     <input type="hidden" name="tabla" value="io" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaio" id="newio" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
+
+          <div class="modal fade" id="newga" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Cargo</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="ga" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertaga" id="newga" class="btn btn-success" style="width:100%;" value="Guardar"/>
                   </div>
                 </form>
               </div>
             </div>
             <!-- /.modal-content --> 
-         </div>
-         <!-- /.modal-dialog --> 
+        </div>
+        <!-- /.modal-dialog --> 
       </div></div>
-              </div></p></div></div>
+              </div></div>
+               
+
+              <div class="modal fade" id="newgb" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Cargo sindical</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="gb" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagb" id="newgb" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              
+              <div class="modal fade" id="newgc" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Nombre del órgano</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="gc" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagc" id="newgc" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              <div class="modal fade" id="newgd" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Nombre del comité/comisión</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="gd" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagd" id="newgd" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              <div class="modal fade" id="newge" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Nombre del tribunal/comisión de evaluación del PDI</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <input type="hidden" name="tabla" value="ge" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertage" id="newge" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+              
+              
+              
+              <div class="modal fade" id="newgff" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post'>
+ 
+                   <div class="form-group">
+                      <label for="nombre">Nombre del Proyecto</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+                   </div>
+ 				  <br>
+
+                 <label for="subtipo">Subtipo</label></p>
+                    <select name="subtipo">    
+                      <option value="1" selected="selected">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
+                      <option value="2">Proyectos de convocatoria pública y competitiva concedidos a otra institución científica</option>
+                      <option value="3">Proyectos mediante convenios</option>
+                    </select>
+          <br>
+          <br>
+                     <label>Es Director</label></p>
+                     <input id="director" name="director"type="checkbox" value="1">
+                     <br>
+                   <div class="form-group">
+                     <label for="orgfin">Organización Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                   </div>
+ 				  <br>
+ 				  <div class="form-group">
+                     <label for="entcol">Entidades Colaboradoras</label></p>
+                     <input type="text" class="form-control" id="entcol" name="entcol">
+                   </div>
+                   <br>
+                   <div class="form-group">
+                     <label for="fechaini">Fecha inicio</label>
+                     <input class="form-control" id="fechaini" name="fechaini" type="date" >
+                   </div>
+                     <label for="fechafin">Fecha finalización</label>
+                     <input class="form-control" id="fechafin" name="fechafin"type="date" >
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="subtot">Subvención total</label></p>
+                     <input type="text" class="form-control" id="subtot" name="subtot">
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="investigador">Investigador</label></p>
+                     <input type="text" class="form-control" id="investigador" name="investigador" >
+                   </div>
+                   <div class="form-group">
+                     <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
+                     <input type="text" class="form-control" id="numinv" name="numinv" >
+                   </div>
+                   <input type="hidden" name="tabla" value="gff" />
+                   <div class="modal-footer">
+                     <input type="submit" name="insertaia" id="newia" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+
+              <div class="modal fade" id="newgg" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label>Título</label></p>
+                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label>Unidades Docentes</label></p>
+                     <input type="text" class="form-control" id="UD" name="UD">
+
+                     <label>Organizacion Financiadora</label></p>
+                     <input type="text" class="form-control" id="orgfin" name="orgfin">
+                     <br>
+                     <label>Es Gestor</label></p>
+                     <input id="gestor" name="gestor"type="checkbox" value="1">
+                     <br>
+                     <label>Entidades financiadoras</label></p>
+                     <input type="text" class="form-control" id="entfin" name="entfin">
+
+                     <label>Fecha de inicio</label>
+                     <input class="form-control" id="fechaini" name="fechaini" type="date">
+
+                     <label>Fecha de finalización</label>
+                     <input class="form-control" id="fechafin" name="fechafin" type="date">
+
+                     <label>Subvención</label>
+                     <input class="form-control" id="subvencion" name="subvencion">
+
+                     <label>Investigador principal</label>
+                     <input class="form-control" id="invprincipal" name="invprincipal"type="text" >
+
+                     <label>Numero de investigadores</label>
+                     <input class="form-control" id="numinv" name="numinv" type="text" >
+
+                     <input type="hidden" name="tabla" value="gg" />                     
+
+                   <div class="modal-footer">
+                     <input type="submit" name="insertagg" id="newgg" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                   </form>
+
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+
+              <div class="modal fade" id="newgh" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Título</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <label for="orgfin">Fecha</label></p>
+                    <input type="date" class="form-control" id="fecha" name="fecha">
+
+                    <label for="fechapub">Lugar</label>
+                    <input class="form-control" id="lugar" name="lugar" type="text" >
+
+                    <label for="participacion">Descripcion</label>
+                    <input class="form-control" id="descripcion" name="descripcion" type="text" >
+
+                    <input type="hidden" name="tabla" value="gh" >                     
+
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagh" id="newgh" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+
+              <div class="modal fade" id="newgi" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+
+                    <label for="nombre">Título</label></p>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
+
+                    <label for="orgfin">Descripcion</label></p>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+
+                    <input type="hidden" name="tabla" value="gi" >                     
+
+                    <div class="modal-footer">
+                    <input type="submit" name="insertagi" id="newgi" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+      </div></div>
+              </div></div>
+
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="http://getbootstrap.com/2.3.2/assets/js/jquery.js"></script>
+
+	<script src="http://getbootstrap.com/2.3.2/assets/js/holder/holder.js"></script>
+	<script src="http://getbootstrap.com/2.3.2/assets/js/google-code-prettify/prettify.js"></script>
+	<script src="http://getbootstrap.com/2.3.2/assets/js/application.js"></script>
+  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

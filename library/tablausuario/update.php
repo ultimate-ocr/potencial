@@ -45,12 +45,16 @@ $id = htmlspecialchars($_POST['id']);
 
     case "dg":
         $titulo = htmlspecialchars($_POST['titulo']);
-        $participacion = htmlspecialchars($_POST['participacion']);
-        $regional = htmlspecialchars($_POST['regional']);
-        $lugar = htmlspecialchars($_POST['lugar']);
-        $fecha = htmlspecialchars($_POST['fecha']);
+        $autores = htmlspecialchars($_POST['autores']);
+        $tipo = htmlspecialchars($_POST['tipo']);
+        $pin = htmlspecialchars($_POST['pin']);
+        $pfin = htmlspecialchars($_POST['pfin']);
+        $editorial = htmlspecialchars($_POST['editorial']);
+        $anno = htmlspecialchars($_POST['anno']);
+        $isbn = htmlspecialchars($_POST['isbn']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', participacion='$participacion', regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id='$id'";
+        $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', tipo='$tipo', pin='$pin', pfin='$pfin',
+        editorial='$editorial', anno='$anno', isbn='$isbn' WHERE id='$id'";
 
         break;
 
@@ -449,6 +453,6 @@ $id = htmlspecialchars($_POST['id']);
     echo "Error: " . $mysqli->error . "\n";
     //exit;
 	}
-    //header('location:/potencial/tablausuario12am.php');
+    header('location:/potencial/tablausuario12am.php');
 
   ?>

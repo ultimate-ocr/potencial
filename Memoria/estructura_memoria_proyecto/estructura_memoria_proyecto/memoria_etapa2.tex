@@ -1,0 +1,55 @@
+\chapter[Seguimiento de puntos]{Seguimiento de puntos singulares a través de una secuencia de vídeo}
+
+En este capítulo vamos a estudiar el funcionamiento del proceso de seguimiento de puntos singulares a
+través de una secuencia de vídeo. El seguimiento consiste en hallar la trayectoria de los puntos singulares 
+a través de los distintos frames. La trayectoria de un punto 3d consiste en una lista con las proyecciones 
+de dicho punto en los distintos frames donde es visible.
+
+Este capítulo se divide en tres partes: definición de conceptos, criterios de sucesión y la descripción del
+proceso de seguimiento. El apartado de definición de conceptos es imprescindible para introducir al lector
+en la terminología que se maneja. Los criterios de sucesión definirán el comportamiento que tendrá el proceso
+de seguimiento.
+
+
+
+\section{Proceso del seguimiento}
+\noindent
+
+\subsection{Conceptos}
+\noindent
+
+A lo largo de los siguientes apartados manejaremos una serie de conceptos por lo que necesitaremos
+entenderlos perfectamente. A continuación se definen dichos conceptos:
+
+
+\begin{itemize}
+\item Detector de esquinas:
+\noindent
+Herramienta software que nos identifica un conjunto de esquinas (extremos de curvatura) en una imagen.
+
+\item Frame:
+\noindent
+Instantánea que recoge información captada por una cámara (ya sea de vídeo o de fotografía).
+%Instantánea extraida de un vídeo. En nuestro caso, será una determinada imagen de la secuencia de entrada.
+
+\item Parámetros de Harris:
+\noindent
+El algoritmo de Harris es el detector de esquinas que utilizaremos el seguimiento de los puntos.
+Sus parámetros han sido descritos en el capítulo anterior.
+
+\item Punto sucesor:
+\noindent
+Punto continuación de otro situado en el frame anterior que corresponde al mismo punto 3d.
+
+\item Secuencia de puntos:
+\noindent
+Valor devuelto en el seguimiento, en que se identifica como una lista de puntos aquellas proyecciones de
+frames consecutivos que correspondan al mismo punto 3d.
+
+\item Secuencia de vídeo:
+\noindent
+Conjunto de frames desglosados uno independiente del otro.
+
+\end{itemize}
+
+

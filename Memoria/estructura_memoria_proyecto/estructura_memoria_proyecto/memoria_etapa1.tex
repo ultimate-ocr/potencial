@@ -1,0 +1,40 @@
+\chapter{Etapa1. Algoritmo de Harris}
+
+.........
+
+La primera etapa del proyecto consiste en la implementación de un algoritmo para la extracción de puntos singulares en una imagen. En especial nos centraremos en el algoritmo de Harris. Este detector de puntos destaca por su rapidez de cómputo y la precisión de los datos obtenidos.
+
+En este capítulo haremos una breve introducción a los distintos tipos de detectores de puntos singulares que existen, destacando sus principales características. Describiremos la teoría matemática que subyace al detector de Harris. Por último, se mostrarán y analizarán los resultados experimentales que se han obtenido.
+
+
+\section{Detectores de esquinas}
+\noindent
+
+Una imagen contiene una gran cantidad de datos, la mayoría de los cuales proporciona muy poca información para interpretar la escena. Nuestro proceso debe extraer de la forma más eficaz y robusta posible determinadas características que nos proporcionen la máxima información. Estas características deben cumplir, entre otras, las siguientes condiciones:
+
+\begin{itemize}
+  \item Su extracción a partir de la imagen no debe suponer un coste excesivo. El tiempo total de extracción debe ser lo más   pequeño posible.
+
+  \item Su localización debe ser muy precisa. El error cometido en la estimación de las características también debe ser lo   más pequeño posible.
+
+  \item Deben ser robustas y estables. Deberían permanecer a lo largo de una secuencia.
+
+\end{itemize}
+
+
+Las esquinas de los objetos presentes en la imagen satisfacen estas condiciones. Aparecen de forma natural en la mayoría de escenarios tanto naturales como artificiales. Un punto esquina es un punto del contorno de un objeto donde la curvatura es alta.
+
+Desde el punto de vista computacional, se han propuesto una serie de enfoques para la detección de este tipo de características bidimensionales. Podemos clasificar estos enfoques en dos grupos principales:
+
+\begin{enumerate}
+  \item Métodos que obtienen las aristas de la imagen mediante algún método de detección de aristas, para, a continuación,   detectar puntos de cruce entre aristas o con un cambio sustancial en la dirección de la arista. Estos puntos se clasifican como puntos esquina.
+
+  \item El resto de métodos trabajan directamente sobre las imágenes, es decir, las esquinas no se infieren a partir de la extracción de aristas.
+
+\end{enumerate}
+
+
+\paragraph{Puntos de interés extraídos a partir de aristas}
+\noindent
+
+Todos los métodos de obtención de esquinas y/o uniones dentro de este grupo tienen en común una primera fase de extracción de aristas. Algunos métodos de extracción de aristas pueden ser {\it Torre-Poggio\/}, {\it Canny\/} o {\it Smith-Brady\/}. En general, la eficiencia de estos métodos dependen directamente de la calidad del método empleado para la obtención de aristas: si este último no localiza correctamente los puntos de arista, difícilmente podremos detectar puntos de esquina de forma exacta. Además se añade un tiempo extra de procesamiento que en ciertos sistemas puede ser prohibitivo.

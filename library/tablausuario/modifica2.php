@@ -146,25 +146,40 @@ if ($mysqli->connect_errno) {
                      </div>
              <br>
                      <div>
-                       <label for=\"orgfin\">Participacion</label>
-                       <input type=\"text\" class=\"form-control\" id=\"participacion\" name=\"participacion\" value = \"".$lineaBD['participacion']."\">
+                       <label for=\"orgfin\">Autores</label>
+                       <input type=\"text\" class=\"form-control\" id=\"autores\" name=\"autores\" value = \"".$lineaBD['autores']."\">
                      </div>
              <br>
              <div>
-                       <label for=\"entcol\">Regional</label>
-                       <input type=\"text\" class=\"form-control\" id=\"regional\" name=\"regional\" value = \"".$lineaBD['regional']."\">
+                       <label for=\"entcol\">Tipo de publicación</label>
+                       <input type=\"text\" class=\"form-control\" id=\"tipo\" name=\"tipo\" value = \"".$lineaBD['tipo']."\">
                      </div>
                      <br>
                      <div>
-                       <p class=\"subtitulo\"><label for=\"subtot\">Lugar </label></p>
-                       <input type=\"text\" class=\"form-control\" id=\"lugar\" name=\"lugar\" value = \"".$lineaBD['lugar']."\">
+                       <p class=\"subtitulo\"><label for=\"subtot\">Página de inicio </label></p>
+                       <input type=\"text\" class=\"form-control\" id=\"pin\" name=\"pin\" value = \"".$lineaBD['pin']."\">
                      </div>
                      <br>
                      <div>
-                       <p class=\"subtitulo\"><label for=\"investigador\">Fecha</label></p>
-                       <input type=\"date\" class=\"form-control\" id=\"fecha\" name=\"fecha\" value = \"".$lineaBD['fecha']."\">
+                       <p class=\"subtitulo\"><label for=\"investigador\">Págia de finalización</label></p>
+                       <input type=\"text\" class=\"form-control\" id=\"pfin\" name=\"pfin\" value = \"".$lineaBD['pfin']."\">
                      </div>
-    
+                     <div>
+                     <label for=\"nombre\">Editorial</label>
+                    <input type=\"text\" class=\"form-control\" id=\"editorial\" name=\"editorial\" value = \"".$lineaBD['editorial']."\">
+                  </div>
+                  <br>
+                  <div>
+                    <label for=\"orgfin\">Año</label>
+                    <input type=\"text\" class=\"form-control\" id=\"anno\" name=\"anno\" value = \"".$lineaBD['anno']."\">
+                  </div>
+          <br>
+          <div>
+                    <label for=\"entcol\">ISBN</label>
+                    <input type=\"text\" class=\"form-control\" id=\"isbn\" name=\"isbn\" value = \"".$lineaBD['isbn']."\">
+                  </div>
+                  <br>
+   
                      <input type=\"hidden\" name=\"tabla\" value=\"dg\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                      <div class=\"modal-footer\">
@@ -932,7 +947,7 @@ $lineaBD = $resultado->fetch_assoc();
 echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
 
                  <div>
-                    <label for=\"nombre\">Nombre de la empresa</label>
+                    <label for=\"nombre\">Razón social</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
                  </div>
          <br>
@@ -941,11 +956,6 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                    <input type=\"text\" class=\"form-control\" id=\"CIF\" name=\"CIF\" value = \"".$lineaBD['CIF']."\">
                  </div>
          <br>
-         <div>
-                   <label for=\"entcol\">Razón social</label>
-                   <input type=\"text\" class=\"form-control\" id=\"razsocial\" name=\"razsocial\" value = \"".$lineaBD['titulo']."\">
-                 </div>
-
                  <input type=\"hidden\" name=\"tabla\" value=\"im\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                  <div class=\"modal-footer\">
@@ -1146,7 +1156,9 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  </div>
                </form>
 ";
-break;case "gb":
+break;
+
+case "gb":
 
 $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
@@ -1357,7 +1369,7 @@ echo"
                  </div>
                  <br>
                  <div>
-                   <p class=\"subtitulo\"><label for=\"numinv\">Investigadores principal</label></p>
+                   <p class=\"subtitulo\"><label for=\"numinv\">Investigador principal</label></p>
                    <input type=\"text\" class=\"form-control\" id=\"invprincipal\" name=\"invprincipal\" value = \"".$lineaBD['invprincipal']."\">
                  </div>
                  <br>
@@ -1410,7 +1422,9 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  </div>
                </form>
 ";
-break;case "gi":
+break;
+
+case "gi":
 
 $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);

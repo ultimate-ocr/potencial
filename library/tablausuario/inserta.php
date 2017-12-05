@@ -38,15 +38,17 @@
             break;
 
         case 'dg':
-            $titulo = htmlspecialchars($_POST['titulo']);
-            $participacion = htmlspecialchars($_POST['participacion']);
-            $regional = htmlspecialchars($_POST['regional']);
-            $lugar = htmlspecialchars($_POST['lugar']);
-            $fecha = htmlspecialchars($_POST['fecha']);
+        $titulo = htmlspecialchars($_POST['titulo']);
+        $autores = htmlspecialchars($_POST['autores']);
+        $tipo = htmlspecialchars($_POST['tipo']);
+        $pin = htmlspecialchars($_POST['pin']);
+        $pfin = htmlspecialchars($_POST['pfin']);
+        $editorial = htmlspecialchars($_POST['editorial']);
+        $anno = htmlspecialchars($_POST['anno']);
+        $isbn = htmlspecialchars($_POST['isbn']);
 
-            $query = "INSERT INTO $tabla (userid, UD, titulo, participacion, regional, lugar, fecha)
-                                 VALUES ($userid, '5', '$titulo', '$participacion', '$regional', '$lugar','$fecha')";        
-    
+        $query = "INSERT INTO $tabla (userid, UD, titulo, autores, tipo, pin, pfin, editorial, anno, isbn)
+                             VALUES ('$userid', '5', '$titulo', '$autores', '$tipo', '$pin', '$pfin', '$editorial', '$anno', '$isbn')";        
             break;
 
         case 'dh':

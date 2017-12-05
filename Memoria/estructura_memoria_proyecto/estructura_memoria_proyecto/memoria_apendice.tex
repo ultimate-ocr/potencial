@@ -1,0 +1,60 @@
+\chapter[Detalles de implementación]{Detalles técnicos sobre la implementación del proyecto}
+
+En este capítulo se expone todo lo relacionado con los diferentes detalles técnicos de la implementación del proyecto. Se
+comienza introduciendo las decisiones más importantes que se han tomado a lo largo de las fases de diseño, desarrollo y
+pruebas.
+
+Dada la naturaleza gráfica del proyecto, se escogió para la implementación el sistema operativo Linux y su entorno {\it X
+Window \/}, frente por ejemplo al entorno MS-Windows, tanto por la disponibilidad de máquinas sobre las que trabajar, de las
+cuales he obtenido gran experiencia, como de las ventajas en cuanto a fiabilidad y posibilidad de portar el código a otras
+implementaciones de S.O. que a su vez ofrecen, en su conjunto, un amplio abanico de plataformas hardware.
+
+El XMegaWave es un entorno, con una interfaz gráfica, para el procesamiento gráfico de imágenes. El usuario puede interactuar
+con la interfaz mediante ratón y pop-up menús. Además se puede incluir en el entorno funciones creadas por propio usuario.
+El XMegaWave puede trabajar con vídeos (en un formato especial ) y con imágenes, tanto en color como en escala de grises.
+Está orientado a estaciones UNIX con X11 y librerías gráficas Motif.
+
+
+
+
+\section{Uso de las STL (Standard Template Library)}
+\noindent
+
+La STL es la librería estándar de plantillas. Sus principales componentes son contenedores, algoritmos, iteradores y objetos
+funciones. Esta librería forma parte del Standard ISO C++. En la librería que implementa el seguimiento de puntos se ha
+utilizado los contenedores típicos (listas y vectores) y los iteradores que acceden a los datos (similar a los punteros).
+
+Las principales estructura de almacenamiento se ha utilizado ya que aporta muchas ventajas y pocos inconvenientes:
+
+\paragraph {Ventajas:}
+\begin{enumerate}
+ \item Facilidad de uso y flexibilidad.
+  \noindent
+
+    Las operaciones de inserción, extracción y modificación son intuitivas y con una interfaz de programación muy sencilla.
+    Permite una gran variedad de operaciones y búsquedas de alto nivel dentro de la estructura.
+
+ \item Optimización de recursos.
+  \noindent
+
+    Aleja al programador de toda la complejidad del manejo y conocimiento de la estructura subyacente. Por ello, se puede
+    optimizar las operaciones sobre la estructura de manera transparente al programador.
+
+ \item Fiabilidad.
+  \noindent
+
+    Se trata de una estructura ampliamente probada y que permite al programador centrarse en otros problemas que no sean el
+    almacenamiento de datos, por lo que los esfuerzos de desarrollo y depuración irán destinados en otro sentido.
+
+\end{enumerate}
+
+\paragraph {Inconvenientes:}
+\begin{enumerate}
+ \item Necesario un compilador de C++.
+  \noindent
+
+    Las STL son unas librerías desarrolladas en C++, por lo que cualquier programa que las utilice también debe estar escrito
+    en C++ y necesita un compilador de C++.
+
+\end{enumerate}
+
