@@ -1,4 +1,22 @@
+#container{
 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+
+}
+
+#tablesub{
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+    background: #fefefe;
+    width: 70%;
+    margin: 5% auto 0;
+    border-radius:5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
 
 #titulotabla {
     /*background-color: #33ccff;*/
@@ -28,4 +46,8 @@
 h1{
     text-align: center;
     background-color: #FFCC66;
+}
+
+#main-header{
+    background-color: rgb(01,48,104);
 }

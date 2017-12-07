@@ -94,7 +94,7 @@ function mostrar($tabla){
  echo"
     <div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">
 			<div>
-               <div class=\"table\">
+               <div class=\"table\" id=\"table\">
                   <table id=\"tablenosub\" class=\"table table-bordred table-stripedt\">
                   <thead>
                     <th style=\"text-align:left;\">Titulo</th>
@@ -148,10 +148,6 @@ function mostrar($tabla){
     </div>
     </div>';
     }
-?>
-
-
-<?php
 
   function mostrar_sub($fichero, $num_linea){
 
@@ -170,7 +166,7 @@ function mostrar($tabla){
                 $primera=0;}    
 			echo"
 			<div>
-               <div class=\"table\">
+               <div class=\"table\" id=\"table\">
                   <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";   
                   for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
 
@@ -236,10 +232,28 @@ function mostrar($tabla){
             echo"</div>
 			      </div>";
             return ($num_linea);
-            }
-//esto hay que quitarlo, es solo para pruebas.
-$_SESSION["id"]=8;
-////////////////////////////////////////
+}
+?>
+
+<header id="main-header">
+<div class="row-fluid">
+<div class="col-lg-5">
+  <IMG SRC="images\logoULPGC.jpg"  width="300px">
+</div>
+<br><br><br><br><br>
+<div class="col-lg-6">   
+<form action="/tablausuariobusqueda.php">
+  <input type="text" name="lastname" value="Introduzca dni de usuario">
+  <input type="submit" value="Buscar">
+</form>
+</div>
+<br><br>
+
+</header>
+
+
+<?php
+
 include 'library/libreria.php';
 $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
 $pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];

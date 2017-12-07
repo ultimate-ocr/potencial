@@ -14,7 +14,7 @@
 
 
 function corregir(tabla,id){
-    $.ajax({ 
+    $.ajax({  
          url:"library/tablaadmin/corregi2.php",  
          method:"POST",  
          data : { "id" : id, "tabla": tabla }, 
@@ -116,7 +116,7 @@ function mostrar_pendientes($tabla){
                   <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";   
                   for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
 
-                        $resultado=getmerito_pendiente($tabla_total,$subtipo);
+                        $resultado=getmerito($tabla_total,$subtipo);
                         
                         echo"<thead>
                         <th style=\"text-align:left;\">".$letrat.$subtipo.$linea."</th>
@@ -183,12 +183,12 @@ function mostrar_pendientes($tabla){
 <header id="main-header">
 <div class="row-fluid">
 <div class="col-lg-5">
-  <IMG SRC="/potencial/images/logoULPGC.jpg"  width="300px">
+<IMG SRC="/potencial/images/logoULPGC.jpg"  width="300px">
 </div>
 <br><br><br><br><br>
 <div class="col-lg-6">   
 <form id="buscausuario" name="buscausuario" action="tablaadminbusqueda.php" method="post" class="form-horizontal" autocomplete="on">
-  <input type="text" name="dni" id ="dni" value="Introduzca dni de usuario">
+  <input type="text" name="dni"  value="Introduzca dni de usuario">
   <input type="submit" value="Buscar">
 </form>
 </div>
@@ -198,12 +198,17 @@ function mostrar_pendientes($tabla){
 </div>
 
 </header>
-<?php
 
-////////////////////////////////////////
+
+
+<?php
+$dni = htmlspecialchars($_POST['dni']);
 include 'library/libreria.php';
-$pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
-$pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];
+$_SESSION["id"]=buscarUsuario($dni);
+////////////////////////////////////////
+
+$pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","fin"];
+$pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","fin"];
 $num_linea=0;
 $contador=0;
 $apartado="d";

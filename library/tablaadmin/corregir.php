@@ -176,6 +176,485 @@ $id = htmlspecialchars($_POST['id']);
 
         $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
         break;
+        case "ib":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+        
+        case "ic":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+    
+        case "id":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+        
+        case "ie":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+    
+        case "iff":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+    
+        case "ig":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+    
+        case "ih":
+        $infoestado = htmlspecialchars($_POST['infoestado']);
+        $insertaia = htmlspecialchars($_POST['correccion']);
+        switch ($insertaia){
+            case "No Valido":
+                $estado=3;
+                break;
+            case "Correcto":
+                $estado=1;
+                break;
+            case "Incompleto":
+                $estado=2;
+                break;
+            default:
+                echo "mierda";
+        }
+    
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        break;
+    
+        case "ii":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+    
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+
+            case "ij":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+            
+            case "ik":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+        
+            case "il":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+            
+            case "im":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+        
+            case "inn":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+        
+            case "innn":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+        
+            case "io":
+            $infoestado = htmlspecialchars($_POST['infoestado']);
+            $insertaia = htmlspecialchars($_POST['correccion']);
+            switch ($insertaia){
+                case "No Valido":
+                    $estado=3;
+                    break;
+                case "Correcto":
+                    $estado=1;
+                    break;
+                case "Incompleto":
+                    $estado=2;
+                    break;
+                default:
+                    echo "mierda";
+            }
+        
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            break;
+        
+            case "ga":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+        
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+
+                case "gb":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+                
+                case "gc":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+            
+                case "gd":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+                
+                case "ge":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+            
+                case "gff":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+            
+                case "gg":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+            
+                case "gh":
+                $infoestado = htmlspecialchars($_POST['infoestado']);
+                $insertaia = htmlspecialchars($_POST['correccion']);
+                switch ($insertaia){
+                    case "No Valido":
+                        $estado=3;
+                        break;
+                    case "Correcto":
+                        $estado=1;
+                        break;
+                    case "Incompleto":
+                        $estado=2;
+                        break;
+                    default:
+                        echo "mierda";
+                }
+            
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                break;
+            
+                case "gi":
+                    $infoestado = htmlspecialchars($_POST['infoestado']);
+                    $insertaia = htmlspecialchars($_POST['correccion']);
+                    switch ($insertaia){
+                        case "No Valido":
+                            $estado=3;
+                            break;
+                        case "Correcto":
+                            $estado=1;
+                            break;
+                        case "Incompleto":
+                            $estado=2;
+                            break;
+                        default:
+                            echo "mierda";
+                    }
+            
+                    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                    break;
     }
 
     if (!$resultado = $mysqli->query($query)) {
