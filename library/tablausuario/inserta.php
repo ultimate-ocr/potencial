@@ -458,6 +458,6 @@ if (!$resultado = $mysqli->query($query)) {
     echo "Errno: " . $mysqli->errno . "\n";
     echo "Error: " . $mysqli->error . "\n";
     exit;
-	}
+}
     header('location:/potencial/tablausuario12am.php');
 ?>

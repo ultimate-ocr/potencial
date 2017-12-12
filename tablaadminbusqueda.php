@@ -34,7 +34,7 @@ function mostrar_pendientes($tabla){
     global $contador, $pre, $tabla_total, $apartado;
     $letra=$pre[$contador];
     
-    $resultado=getmerito_pendiente($tabla,'0');
+    $resultado=getmerito_busqueda($tabla,'0');
     while ($lineaBD = $resultado->fetch_assoc()) {
         if ($primera==1){
  echo"
@@ -110,13 +110,15 @@ function mostrar_pendientes($tabla){
             if ($primera=1){
                 echo"<div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">"; 
                 $primera=0;}    
+          $userid=$_SESSION["id"];
+          echo $userid;
 			echo"
 			<div>
                <div class=\"table\">
                   <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";   
                   for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
 
-                        $resultado=getmerito($tabla_total,$subtipo);
+                        $resultado=getmerito_busqueda($tabla_total,$subtipo);
                         
                         echo"<thead>
                         <th style=\"text-align:left;\">".$letrat.$subtipo.$linea."</th>
@@ -226,8 +228,12 @@ if($fichero!=NULL){
 
 
     echo"
-		<div class=\"col-sm-10\" align=\"center\">CONCEPTO</div>
-        </div>";
+    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">DOCENCIA</div>
+    <br><br>
+		<div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+        <div class=\"col-sm-1\" id=\"concepto\"></div>
+        <div class=\"col-sm-1\" id=\"concepto\"></div>
+    </div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
         $tabla_total=$apartado.$pre[$contador];
         switch ($linea['0']) {
@@ -238,7 +244,7 @@ if($fichero!=NULL){
             echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                        <div class=\"col-sm-10\"  id=\"titulotabla\" >".$pret[$contador]."-".$linea."</div>
+                        <div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>
                         <div class=\"col-sm-1\"></div> </div>
                         <div class=\"col-sm-1\">";
                     echo"
@@ -249,15 +255,31 @@ if($fichero!=NULL){
             break;
 
             case '<':
-                
-                if ($apartado=="i"){
-                    $apartado="g";
-                }
-                if ($apartado=="d"){
-                    $apartado="i";
-                }
-                $num_linea++;
-                $contador=0;
+            
+            if ($apartado=="i"){
+                $apartado="g";
+                echo"
+                <br><br>
+                <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">GESTIÓN</div>
+                <br><br><br><br><br><br><br>
+                <div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+                <div class=\"col-sm-1\" id=\"concepto\"></div>
+                <div class=\"col-sm-1\" id=\"concepto\"></div>
+                </div>";
+            }
+            if ($apartado=="d"){
+                $apartado="i";
+                echo"
+                <br><br>
+                <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">INVESTIGACIÓN</div>
+                <br><br><br>
+                <div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+                <div class=\"col-sm-1\" id=\"concepto\"></div>
+                <div class=\"col-sm-1\" id=\"concepto\"></div>
+            </div>";
+            }
+            $num_linea++;
+            $contador=0;
               break;
 
             case '#':
@@ -270,7 +292,7 @@ if($fichero!=NULL){
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                            <div class=\"col-sm-10\"  id=\"titulotabla\">".$pret[$contador].$linea."</div>
+                            <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\"></div> </div>
                             <div class=\"col-sm-1\">";
                         echo"

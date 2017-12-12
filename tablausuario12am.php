@@ -12,6 +12,36 @@
 
 <script>
 
+function cerrarSesion(){
+
+      if(confirm('¿Desea cerrar la sesion?'))
+      {
+
+        $.ajax({
+            // la URL para la petición
+            url : 'library/cerrarsesion.php',
+      
+            // código a ejecutar si la petición es satisfactoria;
+            // la respuesta es pasada como argumento a la función
+            success : function() {
+              location.href="index.php";
+            }
+        });
+
+      }
+      else
+      {
+        return false;
+      }
+ 
+    }
+
+
+    function verUsuario(tabla,id){
+             $.ajax({  
+                  url:"library/tablausuario/usuario.php",  
+             });  
+  } 
 
 function modificar(tabla,id){
              $.ajax({  
@@ -24,6 +54,9 @@ function modificar(tabla,id){
                   }  
              });  
   } 
+
+
+  
 
     function ddelete(tabla,id){
 
@@ -135,8 +168,9 @@ function mostrar($tabla){
                 echo"
                   <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
                   <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>";
-
-                echo"
+              else
+                echo"<td></td>";
+              echo"
               </form>
                             </td>						 
 						</tr>
@@ -209,10 +243,12 @@ function mostrar($tabla){
                 ."</td>";
                 if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
                 echo"
-							<td style=\"text-align:right;\">
+							    <td style=\"text-align:right;\">
                                 <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
                                 <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
-              </td>";
+                  </td>";
+              else
+              echo"<td></td>";
               
 						 echo"
 						</tr>
@@ -237,17 +273,24 @@ function mostrar($tabla){
 
 <header id="main-header">
 <div class="row-fluid">
-<div class="col-lg-5">
+<div class="col-lg-4">
   <IMG SRC="images\logoULPGC.jpg"  width="300px">
 </div>
-<br><br><br><br><br>
-<div class="col-lg-6">   
-<form action="/tablausuariobusqueda.php">
-  <input type="text" name="lastname" value="Introduzca dni de usuario">
-  <input type="submit" value="Buscar">
-</form>
+<br><br><br>
+<div class="col-lg-6" id="titulotabla">   
+Planificacion Académica
 </div>
-<br><br>
+<div class="col-lg-2" id="titulousuario">
+    ¡Hola<a href="#" onclick="verUsuario();">
+    <?php
+      session_start();
+      echo " ".$_SESSION['nombre']."!";
+    ?>
+    </a>
+    <br>
+    <a href="#" onclick="cerrarSesion();">Cerrar sesión</a>
+</div>
+<br><br><br><br>
 
 </header>
 
@@ -266,17 +309,19 @@ if($fichero!=NULL){
     $fichero[0] = substr($fichero[0], 3);
     echo"
     <div id=\"resultadooo\"></div>
-    <div class=\"container-fluid\" >
-    <h1 id=\"titulo\">Planificaci&oacuten Acad&eacutemica</h1>";
+    <div class=\"container-fluid\" >";
     
     
 
 
 
     echo"
-		<div class=\"col-sm-10\" align=\"center\">CONCEPTO</div>
-        <div class=\"col-sm-1\">UAD</div>
-        </div>";
+    <div class=\"col-sm-12\" id=\"apartado\">ACTIVIDADES DE DOCENCIA</div>
+    <br><br>
+		<div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+        <div class=\"col-sm-1\" id=\"concepto\">UAD</div>
+        <div class=\"col-sm-1\" id=\"concepto\">Añadir</div>
+    </div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
         $tabla_total=$apartado.$pre[$contador];
         switch ($linea['0']) {
@@ -285,14 +330,16 @@ if($fichero!=NULL){
             $total=mostrar_total($tabla_total);
             $linea = substr($linea, 1);
             
-            echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
+            echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer; id=\"concepto\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                        <div class=\"col-sm-10\"  id=\"titulotabla\" >".$pret[$contador]."-".$linea."</div>
+                        <div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>
                         <div class=\"col-sm-1\">".$total."</div> </div>
                         <div class=\"col-sm-1\">";
                         if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
                             echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla_total."\"> <i class=\"material-icons\">add</i></button>";
+                        else
+                        echo"<td></td>";
                     echo"
                     </div>
                 </div>";
@@ -304,9 +351,26 @@ if($fichero!=NULL){
                 
                 if ($apartado=="i"){
                     $apartado="g";
+                    echo"
+                    <br><br>
+                    <div class=\"col-sm-12\" id=\"apartado\">ACTIVIDADES DE GESTIÓN</div>
+                    <br><br><br><br><br><br><br>
+                    <div class=\"col-sm-10\" id=\"concepto\">CONCEPTO</div>
+                    <div class=\"col-sm-1\" id=\"concepto\">UAG</div>
+                    <div class=\"col-sm-1\" id=\"concepto\">Añadir</div>
+                </div>";
                 }
                 if ($apartado=="d"){
                     $apartado="i";
+                    echo"
+                    <br><br>
+                    <div class=\"col-sm-12\" id=\"apartado\">ACTIVIDADES DE INVESTIGACIÓN, INNOVACIÓN, TRANSFERENCIA
+                    DEL CONOCIMIENTO, COOPERACION Y FORMACIÓN</div>
+                    <br><br><br>
+                    <div class=\"col-sm-10\" id=\"concepto\">CONCEPTO</div>
+                    <div class=\"col-sm-1\" id=\"concepto\">UAI</div>
+                    <div class=\"col-sm-1\" id=\"concepto\">Añadir</div>
+                </div>";
                 }
                 $num_linea++;
                 $contador=0;
@@ -321,13 +385,15 @@ if($fichero!=NULL){
             default;
                 $total=mostrar_total($tabla_total);
                 $linea = '-'.$linea;
-                echo   "<div class=\"row-fluid\">
+                echo   "<div class=\"row-fluid\" id=\"concepto\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                            <div class=\"col-sm-10\"  id=\"titulotabla\">".$pret[$contador].$linea."</div>
+                            <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\">".$total."</div> </div>
                             <div class=\"col-sm-1\">";
                             if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
                                 echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$apartado.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>";
+                            else
+                            echo"<td></td>";
                         echo"
                         </div>
                     </div>";
@@ -403,6 +469,8 @@ if($fichero!=NULL){
 
                      <label for="lugar">Premios y Menciones de Calidad recibidos</label>
                      <input class="form-control" id="premios" name="premios"type="text" >
+                     <label for="lugar">Subir fichero</label>
+                     <input name="fichero_usuario" type="file" id="archivo"/>
 
                      <input type="hidden" name="tabla" value="de" >                     
 

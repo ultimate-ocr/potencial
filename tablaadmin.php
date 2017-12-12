@@ -12,6 +12,31 @@
 
 <script>
 
+function cerrarSesion(){
+
+      if(confirm('¿Desea cerrar la sesion?'))
+      {
+
+        $.ajax({
+            // la URL para la petición
+            url : 'library/cerrarsesion.php',
+      
+            // código a ejecutar si la petición es satisfactoria;
+            // la respuesta es pasada como argumento a la función
+            success : function() {
+              location.href="index.php";
+            }
+        });
+
+      }
+      else
+      {
+        return false;
+      }
+ 
+    }
+
+
 
 function corregir(tabla,id){
     $.ajax({ 
@@ -182,17 +207,36 @@ function mostrar_pendientes($tabla){
 
 <header id="main-header">
 <div class="row-fluid">
-<div class="col-lg-5">
+<div class="col-lg-3">
   <IMG SRC="/potencial/images/logoULPGC.jpg"  width="300px">
 </div>
-<br><br><br><br><br>
-<div class="col-lg-6">   
+<br><br><br><br>
+
+<div class="col-lg-4">   
 <form id="buscausuario" name="buscausuario" action="tablaadminbusqueda.php" method="post" class="form-horizontal" autocomplete="on">
   <input type="text" name="dni" id ="dni" value="Introduzca dni de usuario">
   <input type="submit" value="Buscar">
 </form>
 </div>
-<br><br>
+<div class="col-lg-3" id="titulousuario">
+   <button id="nuevousuario" style="background-color: #013068" data-toggle="modal" data-target="#usuarionuevo"> <i class="material-icons">person_add</i> Añadir Usuario
+
+</div>
+<div class="col-lg-2" id="titulousuario">
+    ¡Hola<a href="#" onclick="verUsuario();">
+    <?php
+      session_start();
+      echo " ".$_SESSION['nombre']."!";
+    ?>
+    </a>
+    <br>
+    <a href="#" onclick="cerrarSesion();">Cerrar sesión</a>
+</div>
+
+ 
+
+</div>
+<br><br><br>
 </div>
 </div>
 </div>
@@ -221,19 +265,21 @@ if($fichero!=NULL){
 
 
     echo"
-		<div class=\"col-sm-10\" align=\"center\">CONCEPTO</div>
-        </div>";
+    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">DOCENCIA</div>
+    <br><br>
+		<div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+        <div class=\"col-sm-1\" id=\"concepto\"></div>
+        <div class=\"col-sm-1\" id=\"concepto\"></div>
+    </div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
         $tabla_total=$apartado.$pre[$contador];
         switch ($linea['0']) {
             case '-':
-            
             $linea = substr($linea, 1);
-            
-            echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
+            echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer; id=\"concepto\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                        <div class=\"col-sm-10\"  id=\"titulotabla\" >".$pret[$contador]."-".$linea."</div>
+                        <div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>
                         <div class=\"col-sm-1\"></div> </div>
                         <div class=\"col-sm-1\">";
                     echo"
@@ -247,9 +293,25 @@ if($fichero!=NULL){
                 
                 if ($apartado=="i"){
                     $apartado="g";
+                    echo"
+                    <br><br>
+                    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">GESTIÓN</div>
+                    <br><br><br><br><br><br><br>
+                    <div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+                    <div class=\"col-sm-1\" id=\"concepto\"></div>
+                    <div class=\"col-sm-1\" id=\"concepto\"></div>
+                    </div>";
                 }
                 if ($apartado=="d"){
                     $apartado="i";
+                    echo"
+                    <br><br>
+                    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">INVESTIGACIÓN</div>
+                    <br><br><br>
+                    <div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+                    <div class=\"col-sm-1\" id=\"concepto\"></div>
+                    <div class=\"col-sm-1\" id=\"concepto\"></div>
+                </div>";
                 }
                 $num_linea++;
                 $contador=0;
@@ -265,7 +327,7 @@ if($fichero!=NULL){
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                            <div class=\"col-sm-10\"  id=\"titulotabla\">".$pret[$contador].$linea."</div>
+                            <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\"></div> </div>
                             <div class=\"col-sm-1\">";
                         echo"
@@ -304,6 +366,59 @@ if($fichero!=NULL){
 
     //AÑADIR
 ?>
+
+
+
+<div class="modal fade" id="usuarionuevo" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+               <form id="insertaid" name="newid" action="library/tablaadmin/nuevousuario.php" method="post" class="form-horizontal" autocomplete="on">
+ 
+                     <label for="nombre">Nombre</label></p>
+                     <input type="text" class="form-control" id="nombre" name="nombre">
+
+                     <label for="orgfin">Apellidos</label></p>
+                     <input type="text" class="form-control" id="apellidos" name="apellidos">
+
+                     <label for="fechapub">Teléfono</label>
+                     <input class="form-control" id="telefono" name="telefono" type="text" >
+
+                     <label for="participacion">DNI</label>
+                     <input class="form-control" id="dni" name="dni" type="text" >
+
+                     <label for="participacion">Correo electrónico</label>
+                     <input class="form-control" id="correo" name="correo" type="text" >
+
+                     <label for="regional">Fecha de nacimiento</label>
+                     <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" type="date" >
+
+                     <label for="lugar">Contraseña</label>
+                     <input class="form-control" id="pass" name="pass"type="text" >
+
+                     <label for="rol">Cargo del usuario</label></p>
+                     <select name="rol">    
+                       <option value="1" selected="selected">Profesor</option>
+                       <option value="2">Evaluador</option>
+                     </select>
+                     <br>
+
+                     <div class="modal-footer">
+                     <input type="submit" name="nuevousuario" id="nuevousuario" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             <!-- /.modal-content --> 
+          </div>
+          <!-- /.modal-dialog --> 
+       </div></div>
+               </div></div>
 
 <div class="modal fade" id="newde" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
                <div class="modal-dialog">

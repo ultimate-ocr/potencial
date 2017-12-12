@@ -7,7 +7,44 @@
     -webkit-transform: translate(-50%, -50%);
 
 }
+#collapseda{
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+    background: #fefefe;
+    width: auto;
+    margin: 5% auto 0;
+    border-radius:5px;
 
+}
+
+#collapsedff{
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+    background: #fefefe;
+    width: 85%;
+    margin: 5% auto 0;
+    border-radius:5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #000;
+
+}
+
+#apartado{
+    font-size:20px;
+    background-color: #ffffcc;
+    box-shadow: 2px 2px 5px #999;
+    text-align: center;
+}
+
+#concepto{
+    font-size:16px;
+    text-decoration: underline;
+}
+
+#titulousuario{
+    color: white;
+
+}
 #tablesub{
     overflow: hidden;
     border: 1px solid #d3d3d3;
@@ -19,10 +56,8 @@
 }
 
 #titulotabla {
-    /*background-color: #33ccff;*/
-    font-size: 16px;
-    border: 44 ;
-  /*  border: 1.5px solid #000;*/
+    color: white;
+    font-size: 40px;
 }
 
 #tablenosub {
