@@ -318,7 +318,7 @@ if($fichero!=NULL){
     echo"
     <div class=\"col-sm-12\" id=\"apartado\">ACTIVIDADES DE DOCENCIA</div>
     <br><br>
-		<div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
+		<div class=\"col-sm-10\" id=\"concepto\">CONCEPTO</div>
         <div class=\"col-sm-1\" id=\"concepto\">UAD</div>
         <div class=\"col-sm-1\" id=\"concepto\">Añadir</div>
     </div>";
@@ -440,7 +440,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on"  enctype="multipart/form-data">
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -469,14 +469,15 @@ if($fichero!=NULL){
 
                      <label for="lugar">Premios y Menciones de Calidad recibidos</label>
                      <input class="form-control" id="premios" name="premios"type="text" >
-                     <label for="lugar">Subir fichero</label>
-                     <input name="fichero_usuario" type="file" id="archivo"/>
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="de" >                     
 
 
                      <div class="modal-footer">
-                     <input type="submit" name="insertade" id="newde" class="btn btn-success" style="width:100%;" value="Guardar"/>
+                     <input type="submit" name="insertade" id="newde" class="btn btn-success" style="width:100%;" value="Guardar" />
                    </div>
                  </form>
                </div>
@@ -496,7 +497,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on"  enctype="multipart/form-data">
     
                     <label for="nombre">Título</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
@@ -517,10 +518,13 @@ if($fichero!=NULL){
                     <input class="form-control" id="calificacion" name="calificacion"type="text" >
 
                     <label for="lugar">Doctorado Europeo</label>
-                    <input id="doctoradoeuropeo" name="doctoradoeuropeo"type="checkbox" value="1">
+                    <input id="doctoradoeuropeo" name="doctoradoeuropeo"type="checkbox">
                     <br>
                     <label for="lugar">Mención de Calidad</label>
-                    <input id="menciondecalidad" name="menciondecalidad"type="checkbox" value="1">
+                    <input id="menciondecalidad" name="menciondecalidad"type="checkbox">
+                    <br>
+                    <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" >
 
                      <input type="hidden" name="tabla" value="dff" >                     
 
@@ -547,7 +551,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -572,6 +576,9 @@ if($fichero!=NULL){
 
                      <label for="lugar">ISBN</label>
                      <input class="form-control" id="isbn" name="isbn"type="text" >
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" >
 
                      <input type="hidden" name="tabla" value="dg" >                     
 
@@ -598,7 +605,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -617,6 +624,9 @@ if($fichero!=NULL){
 
                      <label for="lugar">Lugar</label>
                      <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="dh" >                     
 
@@ -643,7 +653,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                  <label for="nombre">Título</label></p>
                  <input type="text" class="form-control" id="titulo" name="titulo">
@@ -697,7 +707,11 @@ if($fichero!=NULL){
 
                  <label for="lugar">Lugar</label>
                  <input class="form-control" id="lugar" name="lugar"type="text" >
-                     <input type="hidden" name="tabla" value="di" >                     
+                
+                 <label for="lugar">Subir archivo</label>
+                 <input name="file" type="file" />
+                
+                 <input type="hidden" name="tabla" value="di" >                     
 
 
                      <div class="modal-footer">
@@ -721,7 +735,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                  <label for="nombre">Título</label></p>
                  <input type="text" class="form-control" id="titulo" name="titulo">
@@ -741,7 +755,10 @@ if($fichero!=NULL){
                  <label for="lugar">Fecha de finalización</label>
                  <input class="form-control" id="fin" name="fin"type="date" >
 
-                     <input type="hidden" name="tabla" value="dk" >                     
+                 <label for="lugar">Subir archivo</label>
+                 <input name="file" type="file" />
+                     
+                 <input type="hidden" name="tabla" value="dk" >                     
 
 
                      <div class="modal-footer">
@@ -765,7 +782,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post'>
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post' enctype="multipart/form-data">
  
                    <div class="form-group">
                       <label for="nombre">Nombre del Proyecto</label></p>
@@ -813,6 +830,11 @@ if($fichero!=NULL){
                      <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
                      <input type="text" class="form-control" id="numinv" name="numinv" >
                    </div>
+
+                   
+                   <label for="lugar">Subir archivo</label>
+                   <input name="file" type="file" />
+
                    <input type="hidden" name="tabla" value="ia" />
                    <div class="modal-footer">
                      <input type="submit" name="insertaia" id="newia" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -836,7 +858,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                    <label for="id">Grupo de Investigación</label></p>
                     <select name="id">
@@ -866,6 +888,10 @@ if($fichero!=NULL){
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
                    </div>
  				  <br>
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                    <input type="hidden" name="tabla" value="ib" />
                    <div class="modal-footer">
                      <input type="submit" name="insertaib" id="newib" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -894,7 +920,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaic" name="newic" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaic" name="newic" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                       <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -949,6 +975,9 @@ if($fichero!=NULL){
                      <label for="lugar">Lugar</label>
                      <input class="form-control" id="lugar" name="lugar"type="text" >
 
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                      <input type="hidden" name="tabla" value="ic" />                     
 
                    <div class="modal-footer">
@@ -973,7 +1002,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -992,6 +1021,9 @@ if($fichero!=NULL){
 
                      <label for="lugar">Lugar</label>
                      <input class="form-control" id="lugar" name="lugar"type="text" >
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="id" >                     
 
@@ -1017,7 +1049,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
  				  
            
@@ -1042,6 +1074,10 @@ if($fichero!=NULL){
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
                    </div>
  				  <br>
+           
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                    <input type="hidden" name="tabla" value="ie" />
                    <div class="modal-footer">
                      <input type="submit" name="insertaie" id="newie" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -1065,11 +1101,13 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaid" name="newiff" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newiff" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
 
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="iff" />                     
 
@@ -1098,7 +1136,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaid" name="newig" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newig" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1127,6 +1165,9 @@ if($fichero!=NULL){
                      <label>Hasta</label>
                      <input class="form-control" id="hasta" name="hasta" type="date" >
 
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                      <input type="hidden" name="tabla" value="ig" />                     
 
                    <div class="modal-footer">
@@ -1152,27 +1193,30 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaid" name="newih" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newih" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                  <label for="nombre">Título</label></p>
                  <input type="text" class="form-control" id="titulo" name="titulo">
 
-                 <label for="orgfin">Unidades Docentes</label></p>
-                 <input type="text" class="form-control" id="UD" name="UD">
+                 <label for="fechapub">Investigador principal</label>
+                 <input class="form-control" id="inv" name="investigador" type="text" >
 
-                 <label for="fechapub">Fecha</label>
-                 <input class="form-control" id="fecha" name="fecha" type="date" >
+                 <label for="participacion">Centro</label>
+                 <input class="form-control" id="participacion" name="centro" type="text" >
 
-                 <label for="participacion">Participación</label>
-                 <input class="form-control" id="participacion" name="participacion" type="text" >
+                 <label for="regional">País</label>
+                 <input class="form-control" id="regional" name="pais" type="text" >
 
-                 <label for="regional">Regional</label>
-                 <input class="form-control" id="regional" name="regional" type="text" >
+                 <label for="lugar">Fecha de inicio</label>
+                 <input class="form-control" id="lugar" name="inicio"type="date" >
+                 
+                 <label for="orgfin">Fecha de finalización</label></p>
+                 <input type="date" class="form-control" id="UD" name="fin">
 
-                 <label for="lugar">Lugar</label>
-                 <input class="form-control" id="lugar" name="lugar"type="text" >
+                 <label for="lugar">Subir archivo</label>
+                 <input name="file" type="file" />
 
-                     <input type="hidden" name="tabla" value="ih" />                     
+                 <input type="hidden" name="tabla" value="ih" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaih" id="newih" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -1195,7 +1239,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaid" name="newii" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newii" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
 
                      <label for="id">Titulo de la tesis</label></p>
@@ -1216,6 +1260,8 @@ if($fichero!=NULL){
                     </select>
 
 
+                    <label for="lugar">Subir archivo</label>
+                    <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="ii" />                     
 
@@ -1241,7 +1287,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaid" name="newij" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaid" name="newij" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                  <label for="id">Titulo de la tesis</label></p>
                  <select name="id">
@@ -1260,7 +1306,10 @@ if($fichero!=NULL){
                  ?>
                  </select>
 
-                     <input type="hidden" name="tabla" value="ij" />                     
+                 <label for="lugar">Subir archivo</label>
+                 <input name="file" type="file" />
+                
+                 <input type="hidden" name="tabla" value="ij" />                     
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaij" id="newij" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -1284,7 +1333,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaik" name="newik" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaik" name="newik" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1313,6 +1362,9 @@ if($fichero!=NULL){
                      <label>Subvención</label>
                      <input class="form-control" id="subvencion" name="subvencion"type="text" >
 
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                      <input type="hidden" name="tabla" value="ik" />                     
 
                    <div class="modal-footer">
@@ -1337,7 +1389,7 @@ if($fichero!=NULL){
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
-                      <form id="insertail" name="newil" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                      <form id="insertail" name="newil" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
                            <label for="nombre">Título</label></p>
                           <input type="text" class="form-control" id="titulo" name="titulo">
                          <br>
@@ -1362,6 +1414,9 @@ if($fichero!=NULL){
                           <label for="volumen">Empresa explotadora</label>
                           <input class="form-control" id="empresa" name="empresa"type="text" >
      
+                          <label for="lugar">Subir archivo</label>
+                          <input name="file" type="file" />
+
                           <input type="hidden" name="tabla" value="il" />                     
      
                         <div class="modal-footer">
@@ -1386,7 +1441,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaim" name="newim" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaim" name="newim" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                     <label>Razón social</label></p>
                     <input type="text" class="form-control" id="razsocial" name="razsocial">
@@ -1394,6 +1449,9 @@ if($fichero!=NULL){
 
                      <label>CIF</label></p>
                      <input type="text" class="form-control" id="CIF" name="CIF">                    
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                    <div class="modal-footer">
                      <input type="submit" name="insertaim" id="newim" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -1416,7 +1474,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertainn" name="newinn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertainn" name="newinn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1435,6 +1493,9 @@ if($fichero!=NULL){
 
                      <label>Fecha </label>
                      <input class="form-control" id="fecha" name="fecha"  type="date">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="inn" />                     
 
@@ -1459,7 +1520,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1491,6 +1552,9 @@ if($fichero!=NULL){
                      <label>Numero de investigadores</label>
                      <input class="form-control" id="numinv" name="numinv" type="text" >
 
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                      <input type="hidden" name="tabla" value="innn" />                     
 
                    <div class="modal-footer">
@@ -1515,7 +1579,7 @@ if($fichero!=NULL){
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                 <form id="insertaio" name="newio" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                 <form id="insertaio" name="newio" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1537,6 +1601,9 @@ if($fichero!=NULL){
 
                      <label>Fecha de celebración</label>
                      <input class="form-control" id="fecha" name="fecha"type="date" >
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="io" />                     
 
@@ -1561,10 +1628,13 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Cargo</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="ga" >                     
 
@@ -1590,10 +1660,13 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Cargo sindical</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gb" >                     
 
@@ -1619,10 +1692,13 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Nombre del órgano</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gc" >                     
 
@@ -1647,10 +1723,13 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Nombre del comité/comisión</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gd" >                     
 
@@ -1675,10 +1754,13 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Nombre del tribunal/comisión de evaluación del PDI</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="ge" >                     
 
@@ -1705,7 +1787,7 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post'>
+                 <form id="form_Cv_2" name="form_Cv_2" action="library/tablausuario/inserta.php" method='post' enctype="multipart/form-data">
  
                    <div class="form-group">
                       <label for="nombre">Nombre del Proyecto</label></p>
@@ -1753,6 +1835,10 @@ if($fichero!=NULL){
                      <p class="subtitulo"><label for="numinv">Número de investigadores</label></p>
                      <input type="text" class="form-control" id="numinv" name="numinv" >
                    </div>
+                   
+                   <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
+
                    <input type="hidden" name="tabla" value="gff" />
                    <div class="modal-footer">
                      <input type="submit" name="insertaia" id="newia" class="btn btn-success" style="width:100%;" value="Guardar"/>
@@ -1775,7 +1861,7 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                                 <form id="insertainnn" name="newinnn" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1787,7 +1873,7 @@ if($fichero!=NULL){
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
                      <br>
                      <label>Es Gestor</label></p>
-                     <input id="gestor" name="gestor"type="checkbox" value="1">
+                     <input id="gestor" name="gestor"type="checkbox">
                      <br>
                      <label>Entidades financiadoras</label></p>
                      <input type="text" class="form-control" id="entfin" name="entfin">
@@ -1806,6 +1892,9 @@ if($fichero!=NULL){
 
                      <label>Numero de investigadores</label>
                      <input class="form-control" id="numinv" name="numinv" type="text" >
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="gg" />                     
 
@@ -1832,7 +1921,7 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Título</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
@@ -1845,6 +1934,9 @@ if($fichero!=NULL){
 
                     <label for="participacion">Descripcion</label>
                     <input class="form-control" id="descripcion" name="descripcion" type="text" >
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gh" >                     
 
@@ -1871,13 +1963,16 @@ if($fichero!=NULL){
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
-                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on">
+                <form id="insertaid" name="newid" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
 
                     <label for="nombre">Título</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
                     <label for="orgfin">Descripcion</label></p>
                     <input type="text" class="form-control" id="descripcion" name="descripcion">
+
+                     <label for="lugar">Subir archivo</label>
+                     <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gi" >                     
 

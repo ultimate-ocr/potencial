@@ -127,10 +127,20 @@ if ($mysqli->connect_errno) {
                       ".$lineaBD['calificacion']."
                     </div>
                     <div>
-                      <label for=\"subtot\">Premios y Menciones de Calidad recibidos</label>
+                      <label for=\"subtot\">Premios y Menciones de Calidad recibidos:</label>
                       <br>
                       ".$lineaBD['premios']."
                     </div>
+                    <br>";
+
+                    if ($lineaBD['archivo'])
+                      echo"
+                      <div>
+                      <label for=\"subtot\">Archivos subidos</label><br>
+                      <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >Descargar archivo</a>
+                      </div>";
+
+                    echo"
                     <div>
                     <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                     <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -223,8 +233,15 @@ if ($mysqli->connect_errno) {
                 if ($lineaBD['menciondecalidad']=='1')
                   echo"Sí";
                 else
-              echo"No";
-              echo "</div>
+                  echo"No";
+
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >Descargar archivo</a>
+                  </div>";
+                echo"</div>
                 <input type=\"hidden\" name=\"tabla\" value=\"dff\" />
                 <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                 <div class=\"modal-footer\">
@@ -315,7 +332,16 @@ if ($mysqli->connect_errno) {
                 <label for=\"fechafin\">ISBN</label>
                 <br>
                 ".$lineaBD['isbn']."
-              </div>
+              </div>";
+              
+              if ($lineaBD['archivo'])
+                echo"
+                <div>
+                <label for=\"subtot\">Archivos subidos</label><br>
+                <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                </div>";
+                
+              echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -396,7 +422,16 @@ if ($mysqli->connect_errno) {
                   <label for=\"fechafin\">Fecha</label>
                   <br>
                   ".$lineaBD['fecha']."
-                </div>
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -537,7 +572,16 @@ if ($mysqli->connect_errno) {
               <label for=\"numinv\">Lugar de publicación</label>
               <br>
               ".$lineaBD['lugar']."
-            </div>
+            </div>";
+            
+            if ($lineaBD['archivo'])
+              echo"
+              <div>
+              <label for=\"subtot\">Archivos subidos</label><br>
+              <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+              </div>";
+              
+            echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -624,7 +668,16 @@ if ($mysqli->connect_errno) {
                   <label for=\"investigador\">Fecha de finalización</label>
                   <br>
                   ".$lineaBD['fin']."
-                </div>
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -753,7 +806,16 @@ if ($mysqli->connect_errno) {
                   <label for=\"numinv\">Número de investigadores</label>
                   <br>
                   ".$lineaBD['numinv']."
-                </div>
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -821,7 +883,16 @@ if ($mysqli->connect_errno) {
                       <label for=\"orgfin\">Cargo</label>
                       <br>
                       ".$lineaBD['cargo']."
-                    </div>
+                    </div>";
+                    
+                    if ($lineaBD['archivo'])
+                      echo"
+                      <div>
+                      <label for=\"subtot\">Archivos subidos</label><br>
+                      <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                      </div>";
+                      
+                    echo"
                 <br>
                   <div>
                   <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -964,7 +1035,16 @@ if ($mysqli->connect_errno) {
                 <label for=\"numinv\">Lugar de publicación</label>
                 <br>
                 ".$lineaBD['lugar']."
-              </div>
+              </div>";
+              
+              if ($lineaBD['archivo'])
+                echo"
+                <div>
+                <label for=\"subtot\">Archivos subidos</label><br>
+                <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                </div>";
+                
+              echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1044,7 +1124,16 @@ if ($mysqli->connect_errno) {
                   <label for=\"fechafin\">Lugar de realización</label>
                   <br>
                   ".$lineaBD['lugar']."
-                </div>
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1105,9 +1194,16 @@ if ($mysqli->connect_errno) {
                 $query = "SELECT * FROM redinv WHERE id=$idred";
                 $resultado = $mysqli->query($query);
                 $aux = $resultado->fetch_assoc();
-                echo $aux['nombre'];                           
-           echo"</div>
-             
+                echo $aux['nombre']."</div>";                           
+               
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"             
            <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1165,7 +1261,16 @@ if ($mysqli->connect_errno) {
                          <label for=\"nombre\">TítuloProyecto</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
               <br>
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -1261,7 +1366,16 @@ if ($mysqli->connect_errno) {
                     <label for=\"numinv\">Fecha de finalización</label>
                     <br>
                     ".$lineaBD['hasta']."
-                  </div>
+                  </div>";
+                  
+                  if ($lineaBD['archivo'])
+                    echo"
+                    <div>
+                    <label for=\"subtot\">Archivos subidos</label><br>
+                    <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                    </div>";
+                    
+                  echo"
                   <div>
                   <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                   <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1346,7 +1460,16 @@ if ($mysqli->connect_errno) {
                  <label for=\"fechafin\">Fecha de finalización</label>
                  <br>
                  ".$lineaBD['hasta']."
-               </div>
+               </div>";
+               
+               if ($lineaBD['archivo'])
+                 echo"
+                 <div>
+                 <label for=\"subtot\">Archivos subidos</label><br>
+                 <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                 </div>";
+                 
+               echo"
                <div>
                <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1404,7 +1527,16 @@ if ($mysqli->connect_errno) {
                        <label for=\"nombre\">Título de la tesis</label>
                        <br>
                        ".$lineaBD['titulo']."
-                    </div>
+                    </div>";
+                    
+                    if ($lineaBD['archivo'])
+                      echo"
+                      <div>
+                      <label for=\"subtot\">Archivos subidos</label><br>
+                      <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                      </div>";
+                      
+                    echo"
             <br>
               <div>
               <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -1463,7 +1595,16 @@ if ($mysqli->connect_errno) {
                          <label for=\"nombre\">Título de la Tesis</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
                       <br>
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -1559,7 +1700,16 @@ echo"
               <label for=\"numinv\">Número de investigadores</label>
               <br>
               ".$lineaBD['numinv']."
-            </div>
+            </div>";
+            
+            if ($lineaBD['archivo'])
+              echo"
+              <div>
+              <label for=\"subtot\">Archivos subidos</label><br>
+              <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+              </div>";
+              
+            echo"
             <div>
             <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
             <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1650,7 +1800,16 @@ case "il":
                   <label for=\"investigador\">Empresa explotadora</label>
                   <br>
                   ".$lineaBD['empresa']."
-                </div>
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1714,7 +1873,16 @@ echo"
                     <label for=\"orgfin\">CIF</label>
                     <br>
                     ".$lineaBD['CIF']."
-                  </div>
+                  </div>";
+                  
+                  if ($lineaBD['archivo'])
+                    echo"
+                    <div>
+                    <label for=\"subtot\">Archivos subidos</label><br>
+                    <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                    </div>";
+                    
+                  echo"
           <br>
             <div>
             <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -1795,7 +1963,16 @@ echo"
               <label for=\"fechafin\">Fecha de colabración</label>
               <br>
               ".$lineaBD['fecha']."
-            </div>
+            </div>";
+            
+            if ($lineaBD['archivo'])
+              echo"
+              <div>
+              <label for=\"subtot\">Archivos subidos</label><br>
+              <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+              </div>";
+              
+            echo"
             <div>
             <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
             <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1900,7 +2077,16 @@ echo"
               <label for=\"numinv\">Número de investigadores</label>
               <br>
               ".$lineaBD['numinv']."
-            </div>
+            </div>";
+            
+            if ($lineaBD['archivo'])
+              echo"
+              <div>
+              <label for=\"subtot\">Archivos subidos</label><br>
+              <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+              </div>";
+              
+            echo"
             <div>
             <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
             <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -1991,7 +2177,16 @@ case "io":
                   <label for=\"investigador\">Fecha de celebración</label>
                   <br>
                   ".$lineaBD['fecha']."
-                </div>
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
 
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -2050,7 +2245,16 @@ case "ga":
                          <label for=\"nombre\">Título</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
               
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -2110,7 +2314,16 @@ case "gb":
                          <label for=\"nombre\">Título</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
               
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -2170,7 +2383,16 @@ case "gc":
                          <label for=\"nombre\">Título</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
               
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -2230,7 +2452,16 @@ case "gd":
                          <label for=\"nombre\">Título</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -2289,7 +2520,16 @@ case "ge":
                          <label for=\"nombre\">Título</label>
                          <br>
                          ".$lineaBD['titulo']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -2411,7 +2651,16 @@ case "gff":
                 <label for=\"investigador\">Número de investigadores</label>
                 <br>
                 ".$lineaBD['numinv']."
-              </div>
+              </div>";
+              
+              if ($lineaBD['archivo'])
+                echo"
+                <div>
+                <label for=\"subtot\">Archivos subidos</label><br>
+                <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                </div>";
+                
+              echo"
 
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -2520,7 +2769,16 @@ case "gg":
                 <label for=\"investigador\">Número de investigadores</label>
                 <br>
                 ".$lineaBD['numinv']."
-              </div>
+              </div>";
+              
+              if ($lineaBD['archivo'])
+                echo"
+                <div>
+                <label for=\"subtot\">Archivos subidos</label><br>
+                <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                </div>";
+                
+              echo"
 
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
@@ -2600,7 +2858,16 @@ case "gh":
                   <br>
                   ".$lineaBD['descripcion']."
                   <br>
-
+                </div>";
+                
+                if ($lineaBD['archivo'])
+                  echo"
+                  <div>
+                  <label for=\"subtot\">Archivos subidos</label><br>
+                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                  </div>";
+                  
+                echo"
                 <div>
                 <p class=\"subtitulo\"><label for=\"numinv\">Comentarios</label></p>
                 <textarea rows=\"5\" class=\"form-control\" id=\"infoestado\" name=\"infoestado\">".$lineaBD['infoestado']."</textarea>
@@ -2665,7 +2932,16 @@ case "gi":
                         <label for=\"orgfin\">Descripción</label>
                         <br>
                         ".$lineaBD['descripcion']."
-                      </div>
+                      </div>";
+                      
+                      if ($lineaBD['archivo'])
+                        echo"
+                        <div>
+                        <label for=\"subtot\">Archivos subidos</label><br>
+                        <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\">Descargar archivo</a>
+                        </div>";
+                        
+                      echo"
               <br>
 
                 <div>

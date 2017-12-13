@@ -33,12 +33,13 @@
     font-size:20px;
     background-color: #ffffcc;
     box-shadow: 2px 2px 5px #999;
-    text-align: center;
+    align: center;
 }
 
 #concepto{
     font-size:16px;
     text-decoration: underline;
+    text-align: center;
 }
 
 #titulousuario{

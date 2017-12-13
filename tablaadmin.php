@@ -54,6 +54,7 @@ function corregir(tabla,id){
  
 <?php
 
+
 function mostrar_pendientes($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total, $apartado;
