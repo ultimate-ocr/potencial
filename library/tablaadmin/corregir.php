@@ -3,7 +3,7 @@ print_r($_REQUEST);
 
 
 
-//$userid=$_SESSION["id"];
+$userid=$_SESSION["id"];
 
 $userid=8;
 
@@ -34,7 +34,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado', lastid='$userid', lastid='$userid' WHERE id='$id'";
     break;
     
     case "df":
@@ -54,7 +54,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
     break;
 
     case "dg":
@@ -74,7 +74,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
     break;
     
     case "dh":
@@ -94,7 +94,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
     break;
 
     case "di":
@@ -114,7 +114,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
     break;
 
     case "dk":
@@ -134,7 +134,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
     break;
 
     case "dl":
@@ -154,7 +154,7 @@ $id = htmlspecialchars($_POST['id']);
             echo "mierda";
     }
 
-    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
     break;
 
     case "ia":
@@ -174,7 +174,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
 
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
         case "ib":
         $infoestado = htmlspecialchars($_POST['infoestado']);
@@ -193,7 +193,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
         
         case "ic":
@@ -213,7 +213,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
     
         case "id":
@@ -233,7 +233,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
         
         case "ie":
@@ -253,7 +253,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
     
         case "iff":
@@ -273,7 +273,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
     
         case "ig":
@@ -293,7 +293,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
     
         case "ih":
@@ -313,7 +313,7 @@ $id = htmlspecialchars($_POST['id']);
                 echo "mierda";
         }
     
-        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+        $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
         break;
     
         case "ii":
@@ -333,7 +333,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
     
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
 
             case "ij":
@@ -353,7 +353,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
             
             case "ik":
@@ -373,7 +373,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
         
             case "il":
@@ -393,7 +393,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
             
             case "im":
@@ -413,7 +413,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
         
             case "inn":
@@ -433,7 +433,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
         
             case "innn":
@@ -453,7 +453,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
         
             case "io":
@@ -473,7 +473,7 @@ $id = htmlspecialchars($_POST['id']);
                     echo "mierda";
             }
         
-            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+            $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
             break;
         
             case "ga":
@@ -493,7 +493,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
         
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
 
                 case "gb":
@@ -513,7 +513,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
                 
                 case "gc":
@@ -533,7 +533,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
             
                 case "gd":
@@ -553,7 +553,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
                 
                 case "ge":
@@ -573,7 +573,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
             
                 case "gff":
@@ -593,7 +593,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
             
                 case "gg":
@@ -613,7 +613,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
             
                 case "gh":
@@ -633,7 +633,7 @@ $id = htmlspecialchars($_POST['id']);
                         echo "mierda";
                 }
             
-                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                 break;
             
                 case "gi":
@@ -653,7 +653,7 @@ $id = htmlspecialchars($_POST['id']);
                             echo "mierda";
                     }
             
-                    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' WHERE id='$id'";
+                    $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado' , lastid='$userid' WHERE id='$id'";
                     break;
     }
 

@@ -1,0 +1,24 @@
+﻿A-Dirección y ejecución de proyectos de investigación
+A1.Proyectos de convocatoria pública y competitiva concedidos a la ULPGC
+A2.Proyectos de convocatoria pública y competitiva concedidos a otra institución científica
+A3.Proyectos mediante convenios
+B-Dirección de los grupos de investigación de la ULPGC, así como participación en ellos
+C-Publicaciones, libros, informes u otros medios establecidos en cada disciplina académica
+C1.Reconocimiento de la Investigación
+C2.Publicaciones de investigación indexada
+C3.Publicaciones de investigación no indexada
+D-Dirección, organización y participación en congresos científicos
+E-Gestión y participación en redes de investigación autonómicas, estatales e internacionales
+F-Evaluación por pares de agencias, universidades y publicaciones científicas
+G-Elaboración de informes para instituciones académico/científicas y participación en comités de revistas científicas
+H-Estancias de investigación aprobadas por los órganos de gobiernos de la ULPGC
+I-Dedicación de los Titulares de Escuela Universitaria y Profesores Colaboradores a la tesis doctoral
+J-Dedicación de los Ayudantes a la tesis doctoral
+K-Proyectos técnicos y trabajos aplicados científicos, artísticos, sociales y culturales que supongan innomación o transferencia de conocimientos
+L-Desarrollo y explotación de patentes, licencias, marcas, prototipos y otras formas de protección intelectual e industrial
+M-Creación de empresas de base tecnológica de origen académico y basadas en el conocimiento
+N-Colaboraciones con organismos públicos de investigación, parques científicos y tecnológicos, en proyectos o trabajos de investigación aplicada, desarrollo e innovación
+Ñ-Coordinación y ejecución de proyectos de convocatoria pública, competitiva que hayan sido evaluadas por agencias
+O-Asistencia a cursos y seminarios
+#Reconocimientos
+#Total Actividades Investigación

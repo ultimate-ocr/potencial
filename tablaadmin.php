@@ -60,7 +60,11 @@ function mostrar_pendientes($tabla){
     global $contador, $pre, $tabla_total, $apartado;
     $letra=$pre[$contador];
     
-    $resultado=getmerito_pendiente($tabla,'0');
+    if(isset($_POST['submit']))
+      $resultado=getmerito($tabla,'0', $_POST['estado']);
+    else
+      $resultado=getmerito($tabla,'0','4');
+
     while ($lineaBD = $resultado->fetch_assoc()) {
         if ($primera==1){
  echo"
@@ -141,8 +145,12 @@ function mostrar_pendientes($tabla){
                <div class=\"table\">
                   <table id=\"tablesub\" class=\"table table-bordred table-stripedt\">";   
                   for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
-
-                        $resultado=getmerito_pendiente($tabla_total,$subtipo);
+                    if(isset($_POST['submit'])){
+                      $estado=$_POST['estado'];
+                      $resultado=getmerito($tabla_total,'0',$estado);
+                    }
+                    else
+                      $resultado=getmerito($tabla_total,'0','4');
                         
                         echo"<thead>
                         <th style=\"text-align:left;\">".$letrat.$subtipo.$linea."</th>
@@ -227,7 +235,10 @@ function mostrar_pendientes($tabla){
     ¡Hola<a href="#" onclick="verUsuario();">
     <?php
       session_start();
-      echo " ".$_SESSION['nombre']."!";
+      if(!isset($_SESSION['id']))
+        header('Location: index.php');
+      else
+        echo " ".$_SESSION['nombre']."!";
     ?>
     </a>
     <br>
@@ -241,9 +252,20 @@ function mostrar_pendientes($tabla){
 </div>
 </div>
 </div>
-
 </header>
-<?php
+
+Ver mérito según estado:
+<form action="/Potencial/tablaadmin.php" method="post">
+    <select name='estado'>
+      <option value="0"<?php if(isset($_POST['estado'])&&$_POST['estado']==0) echo" selected";?>    >Pendientes de evaluación</option>
+      <option value="1"<?php if(isset($_POST['estado'])&&$_POST['estado']==1) echo "selected";?>   >Aceptados</option>
+      <option value="2"<?php if(isset($_POST['estado'])&&$_POST['estado']==2) echo "selected";?>    >Pendientes de subsanación por el usuario</option>
+      <option value="3"<?php if(isset($_POST['estado'])&&$_POST['estado']==3) echo "selected";?>    >Rechazados</option>
+      <option value="4"<?php if(isset($_POST['estado'])&&$_POST['estado']==4) echo "selected"; else echo "selected";?>    >Todos</option>
+    </select>
+    <button type="submit" name="submit" value="1" style="color:blue; background-color: #ffffff;border: #ffffff"><i class="material-icons">&#xE8B6;</i></button>
+  </form>
+  <?php
 
 ////////////////////////////////////////
 include 'library/libreria.php';
@@ -326,7 +348,7 @@ if($fichero!=NULL){
             
             default;
                 $linea = '-'.$linea;
-                echo   "<div class=\"row-fluid\">
+                echo   "<div class=\"row-fluid\" id=\"concepto\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
                             <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\"></div> </div>
