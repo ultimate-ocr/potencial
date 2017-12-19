@@ -58,10 +58,7 @@ function buscarUsuario($dni){
 
 }
 function sumaUAD($array){
-	$suma=0;
-	while ($aux = $array->fetch_assoc())
-		$suma+=$aux['ud'];
-	return $suma;
+
 	}
 
 function mostrar_total($tabla,$estado){
@@ -76,34 +73,44 @@ function mostrar_total($tabla,$estado){
     else{
         $query = "SELECT ud FROM $tabla WHERE estado= $estado AND userid=$userid";
     }
+    $resultado = lanzar($query,$mysqli);
 
-    if (!$resultado = $mysqli->query($query)) {
-        // ¡Oh, no! La consulta falló. 
-        echo "Lo sentimos, este sitio web está experimentando problemas.";
-        // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
-        // cómo obtener información del error
-        echo "Error: La ejecución de la consulta falló debido a: \n";
-        echo "Query: " . $query . "\n";
-        echo "Errno: " . $mysqli->errno . "\n";
-        echo "Error: " . $mysqli->error . "\n";
-        exit;
-}
-
-
-return sumaUAD($resultado);
+	$suma=0;
+	while ($aux = $resultado->fetch_assoc())
+        $suma+=$aux['ud'];
+    switch($tabla){
+        case 'da':
+            $_SESSION['da']=$suma;
+            $_SESSION['totalDocencia']+=$suma;
+            break;
+        case 'db':
+            $_SESSION['db']=$suma;
+            $_SESSION['totalDocencia']+=$suma;
+            break;
+        case 'dc':
+            $_SESSION['dc']=$suma;
+            $_SESSION['totalDocencia']+=$suma;
+            break;
+        default:
+            if(($tabla=='dd')||($tabla=='de')||($tabla=='dff')||($tabla=='dg')||($tabla=='dh')||($tabla=='di')||($tabla=='dj')||($tabla=='dk')||($tabla=='dl'))
+                $_SESSION['totalDocencia']+=$suma;
+            elseif (($tabla=='ga')||($tabla=='gb')||($tabla=='gc')||($tabla=='gd')||($tabla=='ge')||($tabla=='gff')||($tabla=='gg')||($tabla=='gh')||($tabla=='gi'))
+                $_SESSION['totalGestion']+=$suma;
+            else
+                $_SESSION['totalInv']+=$suma;
+            break;
+    }
+	return $suma;
 }
 
 function getmerito($tabla,$subtipo,$estado){
-$mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-if ($mysqli->connect_errno) {
-    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-}
+$mysqli = conectar();
 $userid=$_SESSION["id"];
 if($estado==4){
-    $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE userid=$userid";
+    $query = "SELECT titulo, subtipo, estado, infoestado, id, lastid FROM $tabla WHERE userid=$userid";
 } 
 else{
-    $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE estado= $estado AND userid=$userid";
+    $query = "SELECT titulo, subtipo, estado, infoestado, id, lastid FROM $tabla WHERE estado= $estado AND userid=$userid";
 }
 
 if (!$resultado = $mysqli->query($query)) {
@@ -120,24 +127,19 @@ if (!$resultado = $mysqli->query($query)) {
 return $resultado;
 }
 
-function getmerito_pendiente($tabla,$subtipo){
-    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-    if ($mysqli->connect_errno) {
-        echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    }
+function getmerito_admin($tabla,$subtipo,$estado){
+    $mysqli = conectar();
     $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla";
     
-    if (!$resultado = $mysqli->query($query)) {
-        // ¡Oh, no! La consulta falló. 
-        echo "Lo sentimos, este sitio web está experimentando problemas.";
-        // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos
-        // cómo obtener información del error
-        echo "Error: La ejecución de la consulta falló debido a: \n";
-        echo "Query: " . $query . "\n";
-        echo "Errno: " . $mysqli->errno . "\n";
-        echo "Error: " . $mysqli->error . "\n";
-        exit;
-        }
+    if($estado==4){
+        $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla";
+    } 
+    else{
+        $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE estado= $estado";
+    }
+
+
+    $resultado = lanzar($query,$mysqli);
     return $resultado;
     }
 
@@ -146,7 +148,7 @@ function getmerito_pendiente($tabla,$subtipo){
         if ($mysqli->connect_errno) {
             echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
-        $userid=$_SESSION["id"];
+        $userid=$_SESSION["idbusqueda"];
         $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE userid='$userid'";
         
         if (!$resultado = $mysqli->query($query)) {
@@ -165,7 +167,7 @@ function getmerito_pendiente($tabla,$subtipo){
 
     function actualizado($tabla, $userid){
         $mysqli=conectar();
-        $query="SELECT * FROM $tabla where userid='$userid' AND lastid!=1";
+        $query="SELECT lastid FROM $tabla where userid='$userid' AND lastid!=1";
         $resultado=lanzar($query, $mysqli);
         if ($resultado->fetch_assoc())
             return 1;

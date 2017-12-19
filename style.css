@@ -87,3 +87,20 @@ h1{
 #main-header{
     background-color: rgb(01,48,104);
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 60%;
+    margin: 0 auto;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #dddddd;
+}

@@ -61,9 +61,9 @@ function mostrar_pendientes($tabla){
     $letra=$pre[$contador];
     
     if(isset($_POST['submit']))
-      $resultado=getmerito($tabla,'0', $_POST['estado']);
+      $resultado=getmerito_admin($tabla,'0', $_POST['estado']);
     else
-      $resultado=getmerito($tabla,'0','4');
+      $resultado=getmerito_admin($tabla,'0','4');
 
     while ($lineaBD = $resultado->fetch_assoc()) {
         if ($primera==1){
@@ -147,10 +147,10 @@ function mostrar_pendientes($tabla){
                   for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
                     if(isset($_POST['submit'])){
                       $estado=$_POST['estado'];
-                      $resultado=getmerito($tabla_total,'0',$estado);
+                      $resultado=getmerito_admin($tabla_total,'0',$estado);
                     }
                     else
-                      $resultado=getmerito($tabla_total,'0','4');
+                      $resultado=getmerito_admin($tabla_total,'0','4');
                         
                         echo"<thead>
                         <th style=\"text-align:left;\">".$letrat.$subtipo.$linea."</th>
@@ -221,15 +221,14 @@ function mostrar_pendientes($tabla){
 </div>
 <br><br><br><br>
 
-<div class="col-lg-4">   
+<div class="col-lg-3">   
 <form id="buscausuario" name="buscausuario" action="tablaadminbusqueda.php" method="post" class="form-horizontal" autocomplete="on">
   <input type="text" name="dni" id ="dni" value="Introduzca dni de usuario">
   <input type="submit" value="Buscar">
 </form>
 </div>
-<div class="col-lg-3" id="titulousuario">
+<div class="col-lg-4" id="titulousuario">
    <button id="nuevousuario" style="background-color: #013068" data-toggle="modal" data-target="#usuarionuevo"> <i class="material-icons">person_add</i> Añadir Usuario
-
 </div>
 <div class="col-lg-2" id="titulousuario">
     ¡Hola<a href="#" onclick="verUsuario();">
@@ -290,9 +289,7 @@ if($fichero!=NULL){
     echo"
     <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">DOCENCIA</div>
     <br><br>
-		<div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
-        <div class=\"col-sm-1\" id=\"concepto\"></div>
-        <div class=\"col-sm-1\" id=\"concepto\"></div>
+		<div class=\"col-sm-12\" align=\"center\" id=\"concepto\">CONCEPTO</div>
     </div>";
     for ($linea=$fichero[$num_linea];$linea[0]!='/';$linea=$fichero[$num_linea]){
         $tabla_total=$apartado.$pre[$contador];
@@ -302,9 +299,7 @@ if($fichero!=NULL){
             echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer; id=\"concepto\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                        <div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>
-                        <div class=\"col-sm-1\"></div> </div>
-                        <div class=\"col-sm-1\">";
+                        <div class=\"col-sm-12\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>";
                     echo"
                     </div>
                 </div>";
@@ -320,9 +315,7 @@ if($fichero!=NULL){
                     <br><br>
                     <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">GESTIÓN</div>
                     <br><br><br><br><br><br><br>
-                    <div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
-                    <div class=\"col-sm-1\" id=\"concepto\"></div>
-                    <div class=\"col-sm-1\" id=\"concepto\"></div>
+                    <div class=\"col-sm-12\" align=\"center\" id=\"concepto\">CONCEPTO</div>
                     </div>";
                 }
                 if ($apartado=="d"){
@@ -331,9 +324,7 @@ if($fichero!=NULL){
                     <br><br>
                     <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">INVESTIGACIÓN</div>
                     <br><br><br>
-                    <div class=\"col-sm-10\" align=\"center\" id=\"concepto\">CONCEPTO</div>
-                    <div class=\"col-sm-1\" id=\"concepto\"></div>
-                    <div class=\"col-sm-1\" id=\"concepto\"></div>
+                    <div class=\"col-sm-12\" align=\"center\" id=\"concepto\">CONCEPTO</div>
                 </div>";
                 }
                 $num_linea++;
@@ -350,9 +341,7 @@ if($fichero!=NULL){
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\" id=\"concepto\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                            <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
-                            <div class=\"col-sm-1\"></div> </div>
-                            <div class=\"col-sm-1\">";
+                            <div class=\"col-sm-12\"  id=\"aux\">".$pret[$contador].$linea."</div>";
                         echo"
                         </div>
                     </div>";

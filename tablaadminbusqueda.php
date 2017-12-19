@@ -110,8 +110,7 @@ function mostrar_pendientes($tabla){
             if ($primera=1){
                 echo"<div id=\"collapse".$apartado.$letra."\" class=\"row-fluid collapse out\">"; 
                 $primera=0;}    
-          $userid=$_SESSION["id"];
-          echo $userid;
+          $userid=$_SESSION["idbusqueda"];
 			echo"
 			<div>
                <div class=\"table\">
@@ -188,11 +187,8 @@ function mostrar_pendientes($tabla){
 <IMG SRC="/potencial/images/logoULPGC.jpg"  width="300px">
 </div>
 <br><br><br><br><br>
-<div class="col-lg-6">   
-<form id="buscausuario" name="buscausuario" action="tablaadminbusqueda.php" method="post" class="form-horizontal" autocomplete="on">
-  <input type="text" name="dni"  value="Introduzca dni de usuario">
-  <input type="submit" value="Buscar">
-</form>
+<div class="col-lg-6" id="titulousuario">   
+   <button id="nuevousuario" style="background-color: #013068" data-toggle="modal" data-target="#verusuario"> <i class="material-icons">&#xE8B6;</i> Buscar Usuario
 </div>
 <br><br>
 </div>
@@ -206,7 +202,7 @@ function mostrar_pendientes($tabla){
 <?php
 $dni = htmlspecialchars($_POST['dni']);
 include 'library/libreria.php';
-$_SESSION["id"]=buscarUsuario($dni);
+$_SESSION["idbusqueda"]=buscarUsuario($dni);
 ////////////////////////////////////////
 
 $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","fin"];
@@ -330,6 +326,61 @@ if($fichero!=NULL){
 //MODALES DE AQUI EN ADELANTE
 
     //AÑADIR
+
+    $mysqli=conectar();
+    $id=$_SESSION['idbusqueda'];
+    $query = "SELECT * FROM user_profile WHERE id=$id";
+    $resultado = $mysqli->query($query);
+    $lineaBD = $resultado->fetch_assoc();
+
+echo"
+<div class=\"modal fade\" id=\"verusuario\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"new\" aria-hidden=\"true\">
+<div class=\"modal-dialog\">
+   <div class=\"modal-content\">
+      <div class=\"modal-header\">
+         <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>
+         <h4 class=\"modal-title custom_align\" id=\"Heading\">NUEVA ENTRADA</h4>
+      </div>
+      <div class=\"modal-body\">
+          <div class=\"panel-body\">
+     <form id=\"insertaid\" name=\"newid\" action=\"library/tablaadmin/modificarusuario.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+
+           <label for=\"nombre\">Nombre</label></p>
+           <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" value = \"".$lineaBD['nombre']."\">
+
+           <label for=\"orgfin\">Apellidos</label></p>
+           <input type=\"text\" class=\"form-control\" id=\"apellido\" name=\"apellido\" value = \"".$lineaBD['apellido']."\">
+
+           <label for=\"fechapub\">Teléfono</label>
+           <input class=\"form-control\" id=\"phone\" name=\"phone\" type=\"text\" value = \"".$lineaBD['phone']."\">
+
+           <label for=\"participacion\">Correo electrónico</label>
+           <input class=\"form-control\" id=\"email\" name=\"email\" type=\"text\" value = \"".$lineaBD['email']."\">
+
+           <label for=\"regional\">Fecha de nacimiento</label>
+           <input class=\"form-control\" id=\"birthdate\" name=\"birthdate\" type=\"date\" value = \"".$lineaBD['birthdate']."\">
+
+           <label for=\"rol\">Cargo del usuario</label></p>
+           <select name=\"rol\">    
+             <option value=\"1\" selected=\"selected\">Profesor</option>
+             <option value=\"2\">Evaluador</option>
+           </select>
+           <br>
+
+           <input type=\"hidden\" name=\"usuario\" value=\"".$id."\" />
+
+           <div class=\"modal-footer\">
+           <input type=\"submit\" name=\"nuevousuario\" id=\"nuevousuario\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+         </div>
+       </form>
+     </div>
+   </div>
+   <!-- /.modal-content --> 
+</div>
+<!-- /.modal-dialog --> 
+</div></div>
+     </div></div>";
+
 ?>
 
 <div class="modal fade" id="newde" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">

@@ -310,6 +310,9 @@ Ver mérito según estado:
     <button type="submit" name="submit" value="1" style="color:blue; background-color: #ffffff;border: #ffffff"><i class="material-icons">&#xE8B6;</i></button>
   </form>
 <?php
+$_SESSION['totalDocencia']=0;
+$_SESSION['totalInv']=0;
+$_SESSION['totalGestion']=0;
 
 include 'library/libreria.php';
 $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
@@ -347,12 +350,15 @@ if($fichero!=NULL){
               $total=mostrar_total($tabla_total,$_POST['estado']);
             else
               $total=mostrar_total($tabla_total,'4');
-            $linea = substr($linea, 1);
             
             echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer; id=\"concepto\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
-                        data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                        <div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>
+                        data-target=\"#collapse".$apartado.$pre[$contador]."\">";
+                        if(actualizado($tabla_total, $_SESSION['id']))
+                          echo"<div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."*</div>";
+                        else
+                          echo"<div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador].$linea."</div>";
+                        echo"                            
                         <div class=\"col-sm-1\">".$total."</div> </div>
                         <div class=\"col-sm-1\">";
                         if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
@@ -408,8 +414,12 @@ if($fichero!=NULL){
                 $total=mostrar_total($tabla_total,'4');
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\" id=\"concepto\">
-                        <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
-                            <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
+                        <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">";
+                        if(actualizado($tabla_total, $_SESSION['id']))
+                          echo"<div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."*</div>";
+                        else
+                          echo"<div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador].$linea."</div>";
+                        echo"                            
                             <div class=\"col-sm-1\">".$total."</div> </div>
                             <div class=\"col-sm-1\">";
                             if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
@@ -428,7 +438,62 @@ if($fichero!=NULL){
 }
 unset($_POST['estado']);
 ?>
-</div>
+
+<div><br><br><br><br><br></div>
+
+
+<table>
+  <tr>
+    <th>Capacidad Docente</th>
+    <th>Unidades Docentes</th>
+  </tr>
+  <tr>
+    <td>Encargo Docente</td>
+    <td><?php echo $_SESSION['da'];?></td>
+  </tr>
+  <tr>
+    <td>Encargo Tutorías</td>
+    <td><?php echo $_SESSION['db'];?></td>
+  </tr>
+  <tr>
+    <td>Encargo Evaluación</td>
+    <td><?php echo $_SESSION['dc'];?></td>
+  </tr>
+  <tr>
+    <td>Total Docencia</td>
+    <td><?php echo $_SESSION['totalDocencia'];?></td>
+  </tr>
+  <tr>
+    <td>% Docencia</td>
+    <td><?php echo $_SESSION['da'];?></td>
+  </tr>
+  <tr>
+    <td>Total Investigación</td>
+    <td><?php echo $_SESSION['totalInv'];?></td>
+  </tr>
+  <tr>
+    <td>% Investigación</td>
+    <td><?php echo $_SESSION['da'];?></td>
+  </tr>
+  <tr>
+    <td>Total Gestión</td>
+    <td><?php echo $_SESSION['totalGestion'];?></td>
+  </tr>
+  <tr>
+    <td>% Gestión</td>
+    <td><?php echo $_SESSION['da'];?></td>
+  </tr>
+  <tr>
+    <td>Total Actividades</td>
+    <td><?php echo $_SESSION['da'];?></td>
+  </tr>
+  <tr>
+    <td>% Actividades</td>
+    <td><?php echo $_SESSION['da'];?></td>
+  </tr>
+</table>
+
+
 </html>
 
 <div id="dataModal" class="modal fade" data-backdrop="static">  
@@ -902,16 +967,10 @@ unset($_POST['estado']);
            
           <br>
                   <div class="form-group">
-                     <label for="cargo">Cargo</label></p>
-                     <input type="text" class="form-control" id="cargo" name="cargo">
+                  <label>Es Director</label></p>
+                  <input id="director" name="director"type="checkbox" value="1">
                    </div>
           <br>
-                   <div class="form-group">
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="orgfin" name="orgfin">
-                   </div>
- 				  <br>
-
                      <label for="lugar">Subir archivo</label>
                      <input name="file" type="file" />
 
@@ -1949,8 +2008,11 @@ unset($_POST['estado']);
                     <label for="nombre">Título</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
-                    <label for="orgfin">Fecha</label></p>
-                    <input type="date" class="form-control" id="fecha" name="fecha">
+                    <label for="lugar">Fecha de inicio</label>
+                    <input class="form-control" id="lugar" name="inicio"type="date" >
+                 
+                    <label for="orgfin">Fecha de finalización</label></p>
+                    <input type="date" class="form-control" id="fin" name="fin">
 
                     <label for="fechapub">Lugar</label>
                     <input class="form-control" id="lugar" name="lugar" type="text" >
