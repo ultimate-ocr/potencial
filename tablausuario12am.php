@@ -301,11 +301,11 @@ Planificacion Académica
 Ver mérito según estado:
 <form action="/Potencial/tablausuario12am.php" method="post">
     <select name='estado'>
-      <option value="0"<?php if(isset($_POST['estado'])&&$_POST['estado']==0) echo" selected";?>    >Pendientes de evaluación</option>
-      <option value="1"<?php if(isset($_POST['estado'])&&$_POST['estado']==1) echo "selected";?>   >Aceptados</option>
-      <option value="2"<?php if(isset($_POST['estado'])&&$_POST['estado']==2) echo "selected";?>    >Pendientes de subsanación por el usuario</option>
-      <option value="3"<?php if(isset($_POST['estado'])&&$_POST['estado']==3) echo "selected";?>    >Rechazados</option>
-      <option value="4"<?php if(isset($_POST['estado'])&&$_POST['estado']==4) echo "selected"; else echo "selected";?>    >Todos</option>
+      <option value="0"<?php if(isset($_POST['estado'])&&($_POST['estado']==0)) echo " selected";?>    >Pendientes de evaluación</option>
+      <option value="1"<?php if(isset($_POST['estado'])&&($_POST['estado']==1)) echo " selected";?>   >Aceptados</option>
+      <option value="2"<?php if(isset($_POST['estado'])&&($_POST['estado']==2)) echo " selected";?>    >Pendientes de subsanación por el usuario</option>
+      <option value="3"<?php if(isset($_POST['estado'])&&($_POST['estado']==3)) echo " selected";?>    >Rechazados</option>
+      <option value="4"<?php if(isset($_POST['estado'])&&($_POST['estado']==4)) echo " selected";?>    >Todos</option>
     </select>
     <button type="submit" name="submit" value="1" style="color:blue; background-color: #ffffff;border: #ffffff"><i class="material-icons">&#xE8B6;</i></button>
   </form>
@@ -346,11 +346,17 @@ if($fichero!=NULL){
         $tabla_total=$apartado.$pre[$contador];
         switch ($linea['0']) {
             case '-':
-            if(isset($_POST['submit']))
+            if(isset($_POST['estado'])&&($_POST['estado']!=4)){
               $total=mostrar_total($tabla_total,$_POST['estado']);
+              if($total==0){
+                $num_linea++;
+                $contador++;
+                break;
+              }
+            }
             else
               $total=mostrar_total($tabla_total,'4');
-            
+                      
             echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer; id=\"concepto\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">";
@@ -377,12 +383,13 @@ if($fichero!=NULL){
                 if ($apartado=="i"){
                     $apartado="g";
                     echo"
-                    <br><br>
+                    <br><br><br><br>
                     <div class=\"col-sm-12\" id=\"apartado\">ACTIVIDADES DE GESTIÓN</div>
-                    <br><br><br><br><br><br><br>
+                    <br><br>
                     <div class=\"col-sm-10\" id=\"concepto\">CONCEPTO</div>
                     <div class=\"col-sm-1\" id=\"concepto\">UAG</div>
                     <div class=\"col-sm-1\" id=\"concepto\">Añadir</div>
+                    <br><br>
                 </div>";
                 }
                 if ($apartado=="d"){
@@ -395,6 +402,7 @@ if($fichero!=NULL){
                     <div class=\"col-sm-10\" id=\"concepto\">CONCEPTO</div>
                     <div class=\"col-sm-1\" id=\"concepto\">UAI</div>
                     <div class=\"col-sm-1\" id=\"concepto\">Añadir</div>
+                    <br><br>
                 </div>";
                 }
                 $num_linea++;
@@ -406,12 +414,20 @@ if($fichero!=NULL){
             $num_linea++;
             break;
 
-            
+            case '.':
+                $num_linea++;
+                break;
             default;
-                if(isset($_POST['estado']))
+                if(isset($_POST['estado'])&&($_POST['estado']!=4)){
                   $total=mostrar_total($tabla_total,$_POST['estado']);
+                  if($total==0){
+                    $num_linea++;
+                    $contador++;
+                    break;
+                  }
+                }
                 else
-                $total=mostrar_total($tabla_total,'4');
+                  $total=mostrar_total($tabla_total,'4');
                 $linea = '-'.$linea;
                 echo   "<div class=\"row-fluid\" id=\"concepto\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">";
@@ -438,9 +454,6 @@ if($fichero!=NULL){
 }
 unset($_POST['estado']);
 ?>
-
-<div><br><br><br><br><br></div>
-
 
 <table>
   <tr>
