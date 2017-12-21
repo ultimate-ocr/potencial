@@ -1,18 +1,13 @@
 <?php
-print_r($_REQUEST);
+include '../libreria.php';
 
-
-
+session_start();
 $userid=$_SESSION["id"];
 
 $userid=8;
 
 
-$mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-if ($mysqli->connect_errno) {
-    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    die("Error: No se pudo conectar");
-}
+$mysqli = conectar();
 $tabla = htmlspecialchars($_POST['tabla']);
 $id = htmlspecialchars($_POST['id']);
   switch ($tabla) {

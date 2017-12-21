@@ -356,17 +356,15 @@ if($fichero!=NULL){
 </div>
 </html>
 
-<div id="dataModal" class="modal fade" data-backdrop="static">  
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true"> 
   <div class="modal-dialog">  
     <div class="modal-content">  
       <div class="modal-header">    
-        <h4 class="modal-title">Employee Details <button type="button" class="btn btn-default" data-dismiss="modal" style="Position:relative; left:60%">Close</button></h4>  
+      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
+        <h4 class="modal-title">Employee Details </h4>  
         
       </div>  
       <div class="modal-body" id="modal_comming">  
-      </div>  
-      <div class="modal-footer">  
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
       </div>  
     </div>  
   </div>  
@@ -417,6 +415,19 @@ if($fichero!=NULL){
                      <select name="rol">    
                        <option value="1" selected="selected">Profesor</option>
                        <option value="2">Evaluador</option>
+                     </select>
+
+                     <label for="rol">Categoria Profesional</label></p>
+                     <select name="rol">    
+                       <option value="1" selected="selected">Profesor</option>
+                       <option value="2">Evaluador</option>
+                       <option value="3">Evaluador</option>
+                       <option value="4">Evaluador</option>
+                       <option value="5">Evaluador</option>
+                       <option value="6">Evaluador</option>
+                       <option value="7">Evaluador</option>
+                       <option value="8">Evaluador</option>
+                       <option value="9">Evaluador</option>
                      </select>
                      <br>
 
@@ -834,11 +845,7 @@ if($fichero!=NULL){
                    <label for="id">Grupo de Investigación</label></p>
                     <select name="id">
                     <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM grupoinv";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1017,11 +1024,7 @@ if($fichero!=NULL){
                    <label for="id">Red de Investigación</label></p>
                     <select name="id">
                     <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM redinv";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1194,11 +1197,7 @@ if($fichero!=NULL){
                      <label for="id">Titulo de la tesis</label></p>
                     <select name="id">
                      <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM tesis";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1239,11 +1238,7 @@ if($fichero!=NULL){
                  <label for="id">Titulo de la tesis</label></p>
                  <select name="id">
                   <?php
-                    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                       if ($mysqli->connect_errno) {
-                         echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                         die("Error: No se pudo conectar");
-                       }
+                    $mysqli = conectar();
                        $query = "SELECT * FROM tesis";
                        $resultado = $mysqli->query($query);
                        while ($lineaBD = $resultado->fetch_assoc())

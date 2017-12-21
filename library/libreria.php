@@ -12,6 +12,7 @@ function conectar(){
     $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
     if ($mysqli->connect_errno) {
         echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        die("Error: No se pudo conectar");
     }
 return $mysqli;
 
@@ -62,13 +63,10 @@ function sumaUAD($array){
 	}
 
 function mostrar_total($tabla,$estado){
-    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-    if ($mysqli->connect_errno) {
-        echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    }
+    $mysqli = conectar();
     $userid=$_SESSION["id"];
     if($estado==4){
-        $query = "SELECT ud FROM $tabla WHERE userid=$userid";
+        $query = "SELECT ud FROM $tabla WHERE userid=$userid AND estado=1";
     } 
     else{
         $query = "SELECT ud FROM $tabla WHERE estado= $estado AND userid=$userid";
@@ -144,10 +142,7 @@ function getmerito_admin($tabla,$subtipo,$estado){
     }
 
     function getmerito_busqueda($tabla,$subtipo){
-        $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-        if ($mysqli->connect_errno) {
-            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-        }
+        $mysqli = conectar();
         $userid=$_SESSION["idbusqueda"];
         $query = "SELECT titulo, subtipo, estado, infoestado, id FROM $tabla WHERE userid='$userid'";
         
@@ -167,7 +162,7 @@ function getmerito_admin($tabla,$subtipo,$estado){
 
     function actualizado($tabla, $userid){
         $mysqli=conectar();
-        $query="SELECT lastid FROM $tabla where userid='$userid' AND lastid!=1";
+        $query="SELECT lastid FROM $tabla where userid='$userid' AND lastid!=1 AND lastid!=0";
         $resultado=lanzar($query, $mysqli);
         if ($resultado->fetch_assoc())
             return 1;

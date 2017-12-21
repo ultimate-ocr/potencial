@@ -10,11 +10,12 @@
     $pass = htmlspecialchars($_POST['pass']);
     $rol = htmlspecialchars($_POST['rol']);
     $fechaNacimiento = htmlspecialchars($_POST['fechaNacimiento']);
+    $categoria = htmlspecialchars($_POST['categoria']);
 
     $hash=password_hash($pass, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO user_profile (nombre, apellido, phone, email, dni, pass, id_rol, birthdate)
-                                VALUES ('$nombre', '$apellidos', '$telefono', '$correo', '$dni', '$hash', '$rol','$fechaNacimiento')"; 
+    $query = "INSERT INTO user_profile (nombre, apellido, phone, email, dni, pass, id_rol, categoria birthdate)
+                                VALUES ('$nombre', '$apellidos', '$telefono', '$correo', '$dni', '$hash', '$rol', '$categoria', '$fechaNacimiento')"; 
 
     if (!$resultado = $mysqli->query($query)) {
         // ¡Oh, no! La consulta falló. 

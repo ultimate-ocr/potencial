@@ -1,50 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style> 
-#valido {
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    background-color: #00CC00;
-    color: black;
-}
-#incompleto {
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    background-color: #FFFF00;
-    color: black;
-}
-#invalido {
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    background-color: #FF0000;
-    color: black;
-}
-</style>
-</head>
+<link rel="stylesheet" type="text/css" href="Potencial/style.css"/>
 
 <?php
 
-
-//$userid=$_SESSION["id"];
-
-$userid=8;
+include '../libreria.php';
 
 $id = htmlspecialchars($_POST['id']);
 $tabla = htmlspecialchars($_POST['tabla']);
 
 
-$mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-if ($mysqli->connect_errno) {
-    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    die("Error: No se pudo conectar");
-}
+$mysqli = conectar();
   switch ($tabla) {
    
     case "de":
@@ -490,30 +456,11 @@ if ($mysqli->connect_errno) {
                          ".$lineaBD['titulo']."
                       </div>
               <br>
-                      <div>
-                        <label for=\"orgfin\">Autores</label>
-                        <br>
-                        ".$lineaBD['autores']."
-                      </div>
-              <br>
               <div>
-              <label for=\"nombre\">Subtipo</label>
-              <br>";
-              switch ($lineaBD['subtipo']) {
-                case 1:
-                    echo "Reconocimiento de la investigación";
-                    break;
-                case 2:
-                    echo "Publicaciones de investigación indexada";
-                    break;
-                case 3:
-                    echo "Publicaciones de investigación no indexada";
-                    break;
-                default:
-                    echo 'El estado no es correcto. Contacte con el administrador de la base de datos';
-                    break;
-            }
-            echo"
+                  <label for=\"orgfin\">Autores</label>
+                  <br>
+                  ".$lineaBD['autores']."
+              </div>
               <div>
                   <label for=\"entcol\">Revista</label>
                   <br>
@@ -2147,9 +2094,9 @@ case "io":
                       </div>
               <br>
                       <div>
-                        <label for=\"orgfin\">Autores</label>
+                        <label for=\"orgfin\">Organizador</label>
                         <br>
-                        ".$lineaBD['autores']."
+                        ".$lineaBD['organizador']."
                       </div>
               <br>
 

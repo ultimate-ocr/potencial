@@ -12,6 +12,63 @@
 
 <script>
 
+
+
+
+function validar(tabla,id){
+
+  if(confirm('Validar registro seleccionado?'))
+  {
+
+    var parametros = {
+            "tabla" : tabla,
+            "id" : id
+    };
+
+$.ajax({
+// la URL para la petición
+url : 'library/tablausuario/validar.php',
+
+// la información a enviar
+// (también es posible utilizar una cadena de datos)
+data : { "id" : id, "tabla": tabla },
+
+// especifica si será una petición POST o GET
+type : 'POST',
+
+// el tipo de información que se espera de respuesta
+dataType : 'html',
+
+// código a ejecutar si la petición es satisfactoria;
+// la respuesta es pasada como argumento a la función
+success : function() {
+  alert('Registro validado satisfactoriamente');
+  location.reload(true);
+},
+
+// código a ejecutar si la petición falla;
+// son pasados como argumentos a la función
+// el objeto de la petición en crudo y código de estatus de la petición
+error : function() {
+    alert('Disculpe, existió un problema');
+},
+
+// código a ejecutar sin importar si la petición falló o no
+complete : function() {
+
+}
+}); 
+
+  }
+  else
+  {
+    return false;
+  }
+
+}
+
+
+
 function cerrarSesion(){
       if(confirm('¿Desea cerrar la sesion?'))
       {
@@ -79,6 +136,7 @@ $.ajax({
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success : function() {
+      alert('Registro borrado satisfactoriamente');
       location.reload(true);
     },
  
@@ -91,7 +149,7 @@ $.ajax({
  
     // código a ejecutar sin importar si la petición falló o no
     complete : function() {
-        alert('Registro borrado satisfactoriamente');
+
     }
 }); 
 
@@ -109,7 +167,7 @@ $.ajax({
 </script>
  
 <?php
-
+session_start();
 function mostrar($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total, $apartado;
@@ -161,11 +219,20 @@ function mostrar($tabla){
 
 							echo 	$lineaBD['infoestado']."</td>
               <td style=\"text-align:right;\">";
-              if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
-                echo"
-                  <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
-                  <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>";
-              else
+              if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl")){
+
+                if(($lineaBD['estado']==1)&&($lineaBD['lastid']!=0))
+                  echo "
+                          <td style=\"text-align:right;\">
+                          <button onclick=\"validar('$tabla_total',$lineaBD[id])\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"<i class=\"material-icons\">&#xE876;</i></button>Validar
+                          </td>";
+                elseif($lineaBD['lastid']!=0)
+          echo"
+            <td style=\"text-align:right;\">
+                          <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
+                          <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
+            </td>";}
+        else
                 echo"<td></td>";
               echo"
               </form>
@@ -240,15 +307,22 @@ function mostrar($tabla){
 							
 							
 							
-							echo 	$lineaBD['infoestado']
-                ."</td>";
-                if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
-                echo"
-							    <td style=\"text-align:right;\">
-                                <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
-                                <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
-                  </td>";
-              else
+              echo 	$lineaBD['infoestado']."</td>
+              <td style=\"text-align:right;\">";
+              if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl")){
+
+                if(($lineaBD['estado']==1)&&($lineaBD['lastid']!=0))
+                  echo "
+                          <td style=\"text-align:right;\">
+                          <button onclick=\"validar('$tabla_total',$lineaBD[id])\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"<i class=\"material-icons\">&#xE876;</i></button>Validar
+                          </td>";
+                elseif($lineaBD['lastid']!=0)
+          echo"
+            <td style=\"text-align:right;\">
+                          <button onclick=\"modificar('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff; border: #ffffff;\"data-toggle=\"modal\" name='id'; value=\"".$tabla_total."\"> <i class=\"material-icons\">create</i></button>
+                          <button onclick=\"ddelete('$tabla_total','$lineaBD[id]')\" style=\"color:blue; background-color: #ffffff;border: #ffffff\"data-toggle=\"modal\" ><i class=\"material-icons\"; >delete_sweep</i></button>
+            </td>";}
+        else
               echo"<td></td>";
               
 						 echo"
@@ -284,7 +358,6 @@ Planificacion Académica
 <div class="col-lg-2" id="titulousuario">
     ¡Hola<a href="/potencial/library/usuario.php">
     <?php
-      session_start();
       if(!isset($_SESSION['id']))
         header('Location: index.php');
       else
@@ -301,11 +374,11 @@ Planificacion Académica
 Ver mérito según estado:
 <form action="/Potencial/tablausuario12am.php" method="post">
     <select name='estado'>
+      <option value="4"<?php if(isset($_POST['estado'])&&($_POST['estado']==4)) echo " selected";?>    >Todos</option>
       <option value="0"<?php if(isset($_POST['estado'])&&($_POST['estado']==0)) echo " selected";?>    >Pendientes de evaluación</option>
       <option value="1"<?php if(isset($_POST['estado'])&&($_POST['estado']==1)) echo " selected";?>   >Aceptados</option>
       <option value="2"<?php if(isset($_POST['estado'])&&($_POST['estado']==2)) echo " selected";?>    >Pendientes de subsanación por el usuario</option>
       <option value="3"<?php if(isset($_POST['estado'])&&($_POST['estado']==3)) echo " selected";?>    >Rechazados</option>
-      <option value="4"<?php if(isset($_POST['estado'])&&($_POST['estado']==4)) echo " selected";?>    >Todos</option>
     </select>
     <button type="submit" name="submit" value="1" style="color:blue; background-color: #ffffff;border: #ffffff"><i class="material-icons">&#xE8B6;</i></button>
   </form>
@@ -452,74 +525,77 @@ if($fichero!=NULL){
         }
     }
 }
+
+if(!isset($_POST['estado'])||($_POST['estado']==4))
+    echo"
+    <table>
+      <tr>
+        <th>Capacidad Docente</th>
+        <th>Unidades Docentes</th>
+      </tr>
+      <tr>
+        <td>Encargo Docente</td>
+        <td>".$_SESSION['da']."</td>
+      </tr>
+      <tr>
+        <td>Encargo Tutorías</td>
+        <td>".$_SESSION['db']."</td>
+      </tr>
+      <tr>
+        <td>Encargo Evaluación</td>
+        <td>".$_SESSION['dc']."</td>
+      </tr>
+      <tr>
+        <td>Total Docencia</td>
+        <td>".$_SESSION['totalDocencia']."</td>
+      </tr>
+      <tr>
+        <td>% Docencia</td>
+        <td>".round(($_SESSION['totalDocencia'])/30,3)."</td>
+      </tr>
+      <tr>
+        <td>Total Investigación</td>
+        <td>".$_SESSION['totalInv']."</td>
+      </tr>
+      <tr>
+        <td>% Investigación</td>
+        <td>".round(($_SESSION['totalInv'])/30,3)."</td>
+      </tr>
+      <tr>
+        <td>Total Gestión</td>
+        <td>".$_SESSION['totalGestion']."</td>
+      </tr>
+      <tr>
+        <td>% Gestión</td>
+        <td>".round(($_SESSION['totalGestion'])/30,3)."</td>
+      </tr>
+      <tr>
+        <td>Total Actividades</td>
+        <td>".$_SESSION['da']."</td>
+      </tr>
+      <tr>
+        <td>% Actividades</td>
+        <td>".(round(($_SESSION['totalDocencia']+$_SESSION['totalInv']+$_SESSION['totalGestion'])/150,3))."</td>
+      </tr>
+    </table>";
+
 unset($_POST['estado']);
 ?>
-
-<table>
-  <tr>
-    <th>Capacidad Docente</th>
-    <th>Unidades Docentes</th>
-  </tr>
-  <tr>
-    <td>Encargo Docente</td>
-    <td><?php echo $_SESSION['da'];?></td>
-  </tr>
-  <tr>
-    <td>Encargo Tutorías</td>
-    <td><?php echo $_SESSION['db'];?></td>
-  </tr>
-  <tr>
-    <td>Encargo Evaluación</td>
-    <td><?php echo $_SESSION['dc'];?></td>
-  </tr>
-  <tr>
-    <td>Total Docencia</td>
-    <td><?php echo $_SESSION['totalDocencia'];?></td>
-  </tr>
-  <tr>
-    <td>% Docencia</td>
-    <td><?php echo $_SESSION['da'];?></td>
-  </tr>
-  <tr>
-    <td>Total Investigación</td>
-    <td><?php echo $_SESSION['totalInv'];?></td>
-  </tr>
-  <tr>
-    <td>% Investigación</td>
-    <td><?php echo $_SESSION['da'];?></td>
-  </tr>
-  <tr>
-    <td>Total Gestión</td>
-    <td><?php echo $_SESSION['totalGestion'];?></td>
-  </tr>
-  <tr>
-    <td>% Gestión</td>
-    <td><?php echo $_SESSION['da'];?></td>
-  </tr>
-  <tr>
-    <td>Total Actividades</td>
-    <td><?php echo $_SESSION['da'];?></td>
-  </tr>
-  <tr>
-    <td>% Actividades</td>
-    <td><?php echo $_SESSION['da'];?></td>
-  </tr>
-</table>
 
 
 </html>
 
-<div id="dataModal" class="modal fade" data-backdrop="static">  
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
   <div class="modal-dialog">  
     <div class="modal-content">  
-      <div class="modal-header">    
-        <h4 class="modal-title">Employee Details <button type="button" class="btn btn-default" data-dismiss="modal" style="Position:relative; left:60%">Close</button></h4>  
+      <div class="modal-header"> 
+      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
+        <h4 class="modal-title">Employee Details </h4>  
         
       </div>  
       <div class="modal-body" id="modal_comming">  
       </div>  
-      <div class="modal-footer">  
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+      <div class="modal-footer">    
       </div>  
     </div>  
   </div>  
@@ -536,7 +612,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -553,9 +629,6 @@ unset($_POST['estado']);
                     </select>
                     <br>
 
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
-
                      <label for="fechapub">Codirectores</label>
                      <input class="form-control" id="codirectores" name="codirectores" type="text" >
 
@@ -571,7 +644,7 @@ unset($_POST['estado']);
                      <label for="lugar">Premios y Menciones de Calidad recibidos</label>
                      <input class="form-control" id="premios" name="premios"type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="de" >                     
@@ -593,7 +666,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -602,9 +675,6 @@ unset($_POST['estado']);
     
                     <label for="nombre">Título</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
-
-                    <label for="orgfin">Unidades Docentes</label></p>
-                    <input type="text" class="form-control" id="UD" name="UD">
 
                     <label for="fechapub">Codirectores</label>
                     <input class="form-control" id="codirectores" name="codirectores" type="text" >
@@ -624,7 +694,7 @@ unset($_POST['estado']);
                     <label for="lugar">Mención de Calidad</label>
                     <input id="menciondecalidad" name="menciondecalidad"type="checkbox">
                     <br>
-                    <label for="lugar">Subir archivo</label>
+                    <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" >
 
                      <input type="hidden" name="tabla" value="dff" >                     
@@ -647,7 +717,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -678,7 +748,7 @@ unset($_POST['estado']);
                      <label for="lugar">ISBN</label>
                      <input class="form-control" id="isbn" name="isbn"type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" >
 
                      <input type="hidden" name="tabla" value="dg" >                     
@@ -701,7 +771,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -710,9 +780,6 @@ unset($_POST['estado']);
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label for="fechapub">Fecha</label>
                      <input class="form-control" id="fecha" name="fecha" type="date" >
@@ -726,7 +793,7 @@ unset($_POST['estado']);
                      <label for="lugar">Lugar</label>
                      <input class="form-control" id="lugar" name="lugar"type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="dh" >                     
@@ -749,7 +816,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -758,18 +825,7 @@ unset($_POST['estado']);
  
                  <label for="nombre">Título</label></p>
                  <input type="text" class="form-control" id="titulo" name="titulo">
-                <br>
-                 <label for="orgfin">Unidades Docentes</label></p>
-                 <input type="text" class="form-control" id="UD" name="UD">
                <br>
-              <label for="subtipo">Subtipo</label></p>
-                <select name="subtipo">    
-                  <option value="1" selected="selected">Reconocimiento de la investigación</option>
-                  <option value="2">Publicaciones de investigación indexada</option>
-                  <option value="3">Publicaciones de investigación no indexada</option>
-                </select>
-               <br>
-
                  <label for="fechapub">Fecha de publicación</label>
                  <input class="form-control" id="fechapub" name="fechapub" type="date" >
 
@@ -809,7 +865,7 @@ unset($_POST['estado']);
                  <label for="lugar">Lugar</label>
                  <input class="form-control" id="lugar" name="lugar"type="text" >
                 
-                 <label for="lugar">Subir archivo</label>
+                 <label for="lugar">Subir archivo (máximo 2MB)</label>
                  <input name="file" type="file" />
                 
                  <input type="hidden" name="tabla" value="di" >                     
@@ -831,7 +887,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -856,7 +912,7 @@ unset($_POST['estado']);
                  <label for="lugar">Fecha de finalización</label>
                  <input class="form-control" id="fin" name="fin"type="date" >
 
-                 <label for="lugar">Subir archivo</label>
+                 <label for="lugar">Subir archivo (máximo 2MB)</label>
                  <input name="file" type="file" />
                      
                  <input type="hidden" name="tabla" value="dk" >                     
@@ -879,6 +935,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -933,7 +990,7 @@ unset($_POST['estado']);
                    </div>
 
                    
-                   <label for="lugar">Subir archivo</label>
+                   <label for="lugar">Subir archivo (máximo 2MB)</label>
                    <input name="file" type="file" />
 
                    <input type="hidden" name="tabla" value="ia" />
@@ -954,7 +1011,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -964,11 +1021,7 @@ unset($_POST['estado']);
                    <label for="id">Grupo de Investigación</label></p>
                     <select name="id">
                     <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM grupoinv";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -984,7 +1037,7 @@ unset($_POST['estado']);
                   <input id="director" name="director"type="checkbox" value="1">
                    </div>
           <br>
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                    <input type="hidden" name="tabla" value="ib" />
@@ -1010,7 +1063,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1020,9 +1073,6 @@ unset($_POST['estado']);
                       <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
  				           <br>
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
- 				          <br>
                   <label for="subtipo">Subtipo</label></p>
                     <select name="subtipo">    
                       <option value="1" selected="selected">Reconocimiento de la investigación</option>
@@ -1070,7 +1120,7 @@ unset($_POST['estado']);
                      <label for="lugar">Lugar</label>
                      <input class="form-control" id="lugar" name="lugar"type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="ic" />                     
@@ -1092,7 +1142,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -1101,9 +1151,6 @@ unset($_POST['estado']);
  
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label for="fechapub">Fecha</label>
                      <input class="form-control" id="fecha" name="fecha" type="date" >
@@ -1117,7 +1164,7 @@ unset($_POST['estado']);
                      <label for="lugar">Lugar</label>
                      <input class="form-control" id="lugar" name="lugar"type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="id" >                     
@@ -1139,7 +1186,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1151,26 +1198,15 @@ unset($_POST['estado']);
                    <label for="id">Red de Investigación</label></p>
                     <select name="id">
                     <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM redinv";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
                       echo"<option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
                     ?>
                     </select>
-           
-          <br>
-                   <div class="form-group">
-                     <label for="orgfin">Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="orgfin" name="orgfin">
-                   </div>
- 				  <br>
-           
-                     <label for="lugar">Subir archivo</label>
+          <br>           
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                    <input type="hidden" name="tabla" value="ie" />
@@ -1191,7 +1227,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1201,7 +1237,7 @@ unset($_POST['estado']);
                      <label for="nombre">Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="iff" />                     
@@ -1226,7 +1262,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1235,9 +1271,6 @@ unset($_POST['estado']);
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label>Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label>Investigador Principal</label></p>
                      <input type="text" class="form-control" id="investigador" name="investigador">
@@ -1260,7 +1293,7 @@ unset($_POST['estado']);
                      <label>Hasta</label>
                      <input class="form-control" id="hasta" name="hasta" type="date" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="ig" />                     
@@ -1283,7 +1316,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1308,7 +1341,7 @@ unset($_POST['estado']);
                  <label for="orgfin">Fecha de finalización</label></p>
                  <input type="date" class="form-control" id="UD" name="fin">
 
-                 <label for="lugar">Subir archivo</label>
+                 <label for="lugar">Subir archivo (máximo 2MB)</label>
                  <input name="file" type="file" />
 
                  <input type="hidden" name="tabla" value="ih" />                     
@@ -1329,7 +1362,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1340,11 +1373,7 @@ unset($_POST['estado']);
                      <label for="id">Titulo de la tesis</label></p>
                     <select name="id">
                      <?php
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM tesis";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1355,7 +1384,7 @@ unset($_POST['estado']);
                     </select>
 
 
-                    <label for="lugar">Subir archivo</label>
+                    <label for="lugar">Subir archivo (máximo 2MB)</label>
                     <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="ii" />                     
@@ -1377,7 +1406,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1387,11 +1416,7 @@ unset($_POST['estado']);
                  <label for="id">Titulo de la tesis</label></p>
                  <select name="id">
                   <?php
-                    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                       if ($mysqli->connect_errno) {
-                         echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                         die("Error: No se pudo conectar");
-                       }
+                    $mysqli = conectar();
                        $query = "SELECT * FROM tesis";
                        $resultado = $mysqli->query($query);
                        while ($lineaBD = $resultado->fetch_assoc())
@@ -1401,7 +1426,7 @@ unset($_POST['estado']);
                  ?>
                  </select>
 
-                 <label for="lugar">Subir archivo</label>
+                 <label for="lugar">Subir archivo (máximo 2MB)</label>
                  <input name="file" type="file" />
                 
                  <input type="hidden" name="tabla" value="ij" />                     
@@ -1423,7 +1448,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1432,9 +1457,6 @@ unset($_POST['estado']);
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label>Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label>Organización Financiadora</label></p>
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
@@ -1457,7 +1479,7 @@ unset($_POST['estado']);
                      <label>Subvención</label>
                      <input class="form-control" id="subvencion" name="subvencion"type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="ik" />                     
@@ -1479,7 +1501,7 @@ unset($_POST['estado']);
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                         <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                      </div>
                      <div class="modal-body">
@@ -1487,9 +1509,6 @@ unset($_POST['estado']);
                       <form id="insertail" name="newil" action="library/tablausuario/inserta.php" method="post" class="form-horizontal" autocomplete="on" enctype="multipart/form-data">
                            <label for="nombre">Título</label></p>
                           <input type="text" class="form-control" id="titulo" name="titulo">
-                         <br>
-                          <label for="orgfin">Unidades Docentes</label></p>
-                          <input type="text" class="form-control" id="UD" name="orgfin">
                         <br>
                           <label for="fechapub">Fecha de concesión</label>
                           <input class="form-control" id="fecha" name="fecha" type="date" >
@@ -1509,7 +1528,7 @@ unset($_POST['estado']);
                           <label for="volumen">Empresa explotadora</label>
                           <input class="form-control" id="empresa" name="empresa"type="text" >
      
-                          <label for="lugar">Subir archivo</label>
+                          <label for="lugar">Subir archivo (máximo 2MB)</label>
                           <input name="file" type="file" />
 
                           <input type="hidden" name="tabla" value="il" />                     
@@ -1531,7 +1550,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1545,7 +1564,7 @@ unset($_POST['estado']);
                      <label>CIF</label></p>
                      <input type="text" class="form-control" id="CIF" name="CIF">                    
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                    <div class="modal-footer">
@@ -1564,7 +1583,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1573,9 +1592,6 @@ unset($_POST['estado']);
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label>Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label>Investigadores</label></p>
                      <input type="text" class="form-control" id="investigadores" name="investigadores">
@@ -1589,7 +1605,7 @@ unset($_POST['estado']);
                      <label>Fecha </label>
                      <input class="form-control" id="fecha" name="fecha"  type="date">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="inn" />                     
@@ -1610,7 +1626,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1619,9 +1635,6 @@ unset($_POST['estado']);
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label>Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label>Organizacion Financiadora</label></p>
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
@@ -1647,7 +1660,7 @@ unset($_POST['estado']);
                      <label>Numero de investigadores</label>
                      <input class="form-control" id="numinv" name="numinv" type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="innn" />                     
@@ -1669,7 +1682,7 @@ unset($_POST['estado']);
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                   <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                    <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                 </div>
                 <div class="modal-body">
@@ -1679,8 +1692,8 @@ unset($_POST['estado']);
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label>Autores</label></p>
-                     <input type="text" class="form-control" id="autores" name="UD">
+                     <label>Organizador</label></p>
+                     <input type="text" class="form-control" id="organizador" name="organizador">
 
                      <label>Participación</label></p>
                      <input type="text" class="form-control" id="participacion" name="participacion">
@@ -1697,7 +1710,7 @@ unset($_POST['estado']);
                      <label>Fecha de celebración</label>
                      <input class="form-control" id="fecha" name="fecha"type="date" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="io" />                     
@@ -1718,7 +1731,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1728,7 +1741,7 @@ unset($_POST['estado']);
                     <label for="nombre">Cargo</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="ga" >                     
@@ -1750,7 +1763,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1760,7 +1773,7 @@ unset($_POST['estado']);
                     <label for="nombre">Cargo sindical</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gb" >                     
@@ -1782,7 +1795,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1792,7 +1805,7 @@ unset($_POST['estado']);
                     <label for="nombre">Nombre del órgano</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gc" >                     
@@ -1813,7 +1826,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1823,7 +1836,7 @@ unset($_POST['estado']);
                     <label for="nombre">Nombre del comité/comisión</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gd" >                     
@@ -1844,7 +1857,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1854,7 +1867,7 @@ unset($_POST['estado']);
                     <label for="nombre">Nombre del tribunal/comisión de evaluación del PDI</label></p>
                     <input type="text" class="form-control" id="titulo" name="titulo">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="ge" >                     
@@ -1877,7 +1890,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1931,7 +1944,7 @@ unset($_POST['estado']);
                      <input type="text" class="form-control" id="numinv" name="numinv" >
                    </div>
                    
-                   <label for="lugar">Subir archivo</label>
+                   <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                    <input type="hidden" name="tabla" value="gff" />
@@ -1951,7 +1964,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -1960,9 +1973,6 @@ unset($_POST['estado']);
  
                      <label>Título</label></p>
                      <input type="text" class="form-control" id="titulo" name="titulo">
-
-                     <label>Unidades Docentes</label></p>
-                     <input type="text" class="form-control" id="UD" name="UD">
 
                      <label>Organizacion Financiadora</label></p>
                      <input type="text" class="form-control" id="orgfin" name="orgfin">
@@ -1988,7 +1998,7 @@ unset($_POST['estado']);
                      <label>Numero de investigadores</label>
                      <input class="form-control" id="numinv" name="numinv" type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                      <input type="hidden" name="tabla" value="gg" />                     
@@ -2011,7 +2021,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -2033,7 +2043,7 @@ unset($_POST['estado']);
                     <label for="participacion">Descripcion</label>
                     <input class="form-control" id="descripcion" name="descripcion" type="text" >
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gh" >                     
@@ -2056,7 +2066,7 @@ unset($_POST['estado']);
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
                       <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
                     </div>
                     <div class="modal-body">
@@ -2069,7 +2079,7 @@ unset($_POST['estado']);
                     <label for="orgfin">Descripcion</label></p>
                     <input type="text" class="form-control" id="descripcion" name="descripcion">
 
-                     <label for="lugar">Subir archivo</label>
+                     <label for="lugar">Subir archivo (máximo 2MB)</label>
                      <input name="file" type="file" />
 
                     <input type="hidden" name="tabla" value="gi" >                     
