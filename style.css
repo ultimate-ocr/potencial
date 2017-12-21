@@ -1,3 +1,29 @@
+#valido {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #00CC00;
+    color: black;
+}
+#incompleto {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #FFFF00;
+    color: black;
+}
+#invalido {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #FF0000;
+    color: black;
+}
+
+
 #container{
 
     position: absolute;
@@ -17,6 +43,11 @@
 
 }
 
+#cerrar{
+    position: fixed;
+    right: 10%;
+    box-shadow: 2px 2px 5px #999;
+}
 #collapsedff{
     overflow: hidden;
     border: 1px solid #d3d3d3;
@@ -33,13 +64,11 @@
     font-size:20px;
     background-color: #ffffcc;
     box-shadow: 2px 2px 5px #999;
-    align: center;
 }
 
 #concepto{
     font-size:16px;
     text-decoration: underline;
-    text-align: center;
 }
 
 #titulousuario{

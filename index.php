@@ -7,15 +7,11 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </head>
-
-
 <?php
+include 'library/libreria.php';
+
 function login($usuario, $pass){
-    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-        if ($mysqli->connect_errno) {
-            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-            die("Error: No se pudo conectar");
-		}
+    $mysqli = conectar();
 		
 
 	$query = "SELECT * FROM user_profile WHERE dni='$usuario'";
@@ -25,9 +21,6 @@ function login($usuario, $pass){
 	}
 
 	$row = $resultado->fetch_assoc();
-	echo $row['pass'];
-	echo "<br>";
-	echo $pass;
 
     if(password_verify($pass, $row['pass'])) {
 	
@@ -43,16 +36,15 @@ function login($usuario, $pass){
 
 <header id="main-header">
 <div class="row-fluid">
-<div class="col-lg-5">
-<IMG SRC="/potencial/images/logoULPGC.jpg"  width="300px">
+<div class="col-lg-4">
+  <IMG SRC="images\logoULPGC.jpg"  width="300px">
 </div>
-<br><br><br><br><br>
-<div class="col-lg-6">   
+<br><br><br>
+<div class="col-lg-6" id="titulotabla">   
+Planificacion Académica
 </div>
-<br><br>
-</div>
-</div>
-</div>
+
+<br><br><br><br>
 
 </header>
 <body>
@@ -77,6 +69,7 @@ function login($usuario, $pass){
 		switch ($rol) {
 			case 1:
 				header("location:tablausuario12am.php");
+				echo $_POST['usuario'];
 				break;
 			case 2:
 				header("location:tablaadmin.php");
