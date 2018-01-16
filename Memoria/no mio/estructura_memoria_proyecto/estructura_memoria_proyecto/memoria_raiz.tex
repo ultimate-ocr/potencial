@@ -1,0 +1,92 @@
+% Definimos el estilo del documento
+\documentclass[12pt,a4paper,spanish]{book}
+
+% Utilizamos el paquete para utilizar español
+\usepackage[spanish]{babel}
+%\selectlanguage{spanish}
+%\hyphenation{re-cons-trui-do}
+
+% Utilizamos el paquete para gestionar acentos
+%\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+%Utilizamos el paquete para incorporar gráficos postcript
+\usepackage[dvips,final]{epsfig}
+%\usepackage{psfig}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}%
+\usepackage{amssymb}%
+
+% Portada
+%\usepackage{xthesis}  % Chabi Thesis Style
+
+% Definimos la zona de la pagina ocupada por el texto
+%\oddsidemargin 0.1cm \headsep 0.5cm \textwidth=15.5cm
+%\textheight=22cm
+
+% Definimos el formato de la bibliografía (referencias)
+\bibliographystyle{alpha}
+
+\sloppy
+
+%Empieza el documento
+\begin{document}
+
+% ************************************************************
+% Definimos titulo, autor, fecha, generamos titulo e índice de contenidos
+\title{\textsf{Titulo del proyecto} \\ \rule{13cm}{0.1cm} }
+\author{Autor del proyecto}
+\date{}
+\maketitle
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Definimos una primera pagina para los agradecimientos
+\newpage
+\thispagestyle{empty}
+\include{memoria_agradecimientos}
+
+% Empezamos capítulos
+\include{memoria_introduccion}
+
+% *) ESTADO ACTUAL Y OBJETIVOS: situación actual del tema relacionado con el TFT y motivación de los objetivos que se pretenden cubrir con este trabajo.
+\include{memoria_estadodeltema}
+\include{memoria_objetivos}
+
+% *) JUSTIFICACIÓN DE LAS COMPETENCIAS ESPECÍFICAS CUBIERTAS: indicar, para las especialmente relacionadas con el trabajo desarrollado, cómo se han cubierto con este TFT.
+% *) APORTACIONES: justificar qué es lo que este TFT aporta a nuestro entorno socio-económico, técnico o científico.
+\include{memoria_competencias_aportaciones}
+
+\include{memoria_recursos}
+\include{memoria_planificacion}
+
+% *) DESARROLLO (REQUISITOS, DISENO, ...)
+\include{memoria_etapa1}
+\include{memoria_etapa2}
+\include{memoria_etapa3}
+\include{memoria_etapa4}
+\include{memoria_etapa5}
+
+% *) ASPECTOS ECONÓMICOS Y TEMPORALES
+\include{memoria_resultados}
+
+% *) CONCLUSIONES Y TRABAJOS FUTUROS
+\include{memoria_conclusiones}
+\include{memoria_trabajofuturo}
+
+% EMPIEZAN LOS APÉNDICES DEL PROYECTO
+\appendix
+
+% *) MANUAL DE USUARIO Y SOFTWARE
+%\include{memoria_manuales}
+\include{memoria_apendice}
+
+% *) FUENTES DE INFORMACIÓN
+\include{memoria_biblio}
+
+% Termina el documento
+\end{document}
+

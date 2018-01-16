@@ -1,0 +1,210 @@
+% ------------------------------------------------------------------------
+% AMS-LaTeX definitions:     Thesis ++++ Chabi, September 2001 ************
+% ------------------------------------------------------------------------
+% Ph.D. Thesis Defended on October 5, 2001
+% ------------------------------------------------------------------------
+\documentclass[12pt,spanish]{book}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{psfig}
+\usepackage[centertags]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{newlfont}
+\usepackage{xthesis} %Chabi Thesis Style
+%\usepackage{xtocinc} %Include Table of Contents as the first entry in TOC
+%                     Faculty of Grad Studies insists on this!?
+%\usepackage[active]{srcltx}  %SRC Specials for DVI search
+% Fuzz -------------------------------------------------------------------
+\hfuzz2pt % Don't bother to report over-full boxes if over-edge is < 2pt
+% Line spacing -----------------------------------------------------------
+
+\textheight=22cm
+
+\hyphenation{si-guien-te}
+
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\newcommand{\frasesita}[1]
+           {\unitlength=1cm \begin{picture}(0,0)(-7,-5)
+           \shortstack[r]{#1}\end{picture}}
+\newcommand{\setlinespacing}[1]
+           {\setlength{\baselineskip}{#1 \defbaselineskip}}
+\newcommand{\doublespacing}{\setlength{\baselineskip}
+                           {2.0 \defbaselineskip}}
+\newcommand{\singlespacing}{\setlength{\baselineskip}{\defbaselineskip}}
+
+% MATH -------------------------------------------------------------------
+\newcommand{\A}{{\cal A}}
+\newcommand{\h}{{\cal H}}
+\newcommand{\s}{{\cal S}}
+\newcommand{\W}{{\cal W}}
+\newcommand{\BH}{\mathbf B(\cal H)}
+\newcommand{\KH}{\cal  K(\cal H)}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\Complex}{\mathbb C}
+\newcommand{\Field}{\mathbb F}
+\newcommand{\RPlus}{[0,\infty)}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\essnorm}[1]{\norm{#1}_{\text{\rm\normalshape ess}}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\seq}[1]{\left<#1\right>}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\RE}{\operatorname{Re}}
+\newcommand{\IM}{\operatorname{Im}}
+\newcommand{\Poly}{{\cal{P}}(E)}
+\newcommand{\EssD}{{\cal{D}}}
+% THEOREMS ---------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{acknowledgement}[theorem]{Agradecimientos}
+\newtheorem{algorithm}[theorem]{Algoritmo}
+\newtheorem{axiom}[theorem]{Axioma}
+\newtheorem{case}[theorem]{Caso}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusi\'{o}n}
+\newtheorem{condition}[theorem]{Condici\'{o}n}
+\newtheorem{conjecture}[theorem]{Conjetura}
+\newtheorem{corollary}[theorem]{Corollario}
+\newtheorem{criterion}[theorem]{Criterio}
+\newtheorem{definition}[theorem]{Definici\'{o}n}
+\newtheorem{example}[theorem]{Ejemplo}
+\newtheorem{exercise}[theorem]{Ejercicio}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{notation}[theorem]{Notaci\'{o}n}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposici\'{o}n}
+\newtheorem{remark}[theorem]{Nota}
+\newtheorem{solution}[theorem]{Soluci\'{o}n}
+\newtheorem{summary}[theorem]{Resumen}
+%\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+%
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+%%% ----------------------------------------------------------------------
+\setlength{\lineskip}{1.05\baselineskip}
+%%% ----------------------------------------------------------------------
+
+\def\baselinestretch{1}
+
+\begin{document}
+
+%\nobib
+%\draft
+%\nofront
+
+%\permissionfalse
+
+\dedicate{A mi madre}
+
+\nolistoftables \nolistoffigures \phd
+
+
+\copyrightyear{2001} \submitdate{Octubre 2001}
+\convocation{Octubre}{2001}
+
+% ------------------------------------------------------------------------
+
+\title{Inserci\'{o}n de objetos geom\'{e}tricos en una secuencia de video}
+\author{Agust\'{i}n Javier Salgado de la Nuez}
+
+%\title{Estimaci\'{o}n del flujo \'{o}ptico en secuencias de im\'{a}genes y de la cartade disparidad en pares est\'{e}reo: Aplicaci\'{o}n a la reconstrucci\'{o}n tridimensional}
+
+%\author{Javier S\'{a}nchez P\'{e}rez}
+
+\examiner{??}
+
+\firstreader{}
+\secondreader{??}
+% ------------------------------------------------------------------------
+{
+\typeout{:?0000} % Don't bother with over/under-full boxes
+\beforepreface
+\typeout{:?1111} % Process All Errors from Here on
+}
+% ------------------------------------------------------------------------
+%\setcounter{page}{1}
+%\tableofcontents
+% ------------------------------------------------------------------------
+%{ \typeout{Preface}
+%\input{Agradecimientos}
+%}
+
+% ----------------------- AGRADECIMIENTOS --------------------------------
+\setlinespacing{1.1}
+
+{ \typeout{Acknowledgements}
+\input{Agradecimientos}
+}
+\input{PaginaBlanco}
+
+\afterpreface
+
+\pagestyle{headings}
+% ----------------------- INTRODUCCION ---------------------------------
+
+
+ { \typeout{Introduction}
+\input{Introduccion/Introduccion} }
+
+
+% ---------------------- ESTADO DEL ARTE ---------------------------------
+\part{Consideraciones previas y estado del arte}
+\input{EstadoArte/DifusionAnisotropa}
+\input{EstadoArte/FlujoOptico}
+\input{EstadoArte/GeometriaEpipolar}
+\input{EstadoArte/Estereo}
+
+% ---------------------- METODOS DIRECTOS -------------------------------
+\part{Estimaci\'{o}n de correspondencias utilizando una aproximaci\'{o}n variacional}
+\input{MetodosEstandar/Introduccion}
+\input{MetodosEstandar/FlujoOptico}
+\input{MetodosEstandar/Estereo}
+
+% ---------------------- METODOS SIMETRICOS -----------------------------
+\part{Introducci\'{o}n de la simetr\'{\i}a en el c\'{a}lculo de correspondencias}
+\input{MetodosSimetricos/Introduccion}
+\input{MetodosSimetricos/FlujoOptico}
+\input{MetodosSimetricos/Estereo}
+
+% ----------------- CONCLUSIONES Y TRABAJO FUTURO -----------------------
+\input{Conclusiones}
+\input{TrabajoFuturo}
+
+
+% ------------------------- APENDICES -----------------------------------
+\appendix
+\renewcommand{\theequation}{A-\arabic{equation}}
+\setcounter{equation}{0}  % reset counter
+%\part{Ap\'{e}ndices}
+\input{Apendices/Invarianza}
+\renewcommand{\theequation}{B-\arabic{equation}}
+\setcounter{equation}{0}  % reset counter
+\input{Apendices/ExistenciaUnicidad}
+\renewcommand{\theequation}{C-\arabic{equation}}
+\setcounter{equation}{0}
+\input{Apendices/Discretizacion}
+
+
+% ------------------------------------------------------------------------
+%GATHER{Bibliografia\FlowEstimation.bib}   % For Gather Purpose Only
+%GATHER{Bibliografia\DepthFromStereo.bib}   % For Gather Purpose Only
+%GATHER{Bibliografia\Biblio.bib}   % For Gather Purpose Only
+%GATHER{Thesis.bbl} % For Gather Purpose Only
+%GATHER{Thesis.aux} % For Gather Purpose Only
+%GATHER{XThesis.sty} % For Gather Purpose Only
+
+%\setlinespacing{1}
+%\bibliographystyle{plain}
+%\bibliographystyle{unsrt}
+\bibliographystyle{alpha}
+%\bibliographystyle{abbrv}
+%\bibliographystyle{amsplain}
+
+\bibliography{biblio,FlowEstimation,DepthFromStereo}
+\end{document}
+% ------------------------------------------------------------------------

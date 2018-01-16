@@ -69,13 +69,12 @@ Planificacion Académica
 		switch ($rol) {
 			case 1:
 				header("location:tablausuario12am.php");
-				echo $_POST['usuario'];
 				break;
 			case 2:
 				header("location:tablaadmin.php");
 				break;
 			default:
-				echo 'Su usuario es incorrecto, intente nuevamente.';
+				echo '<div id="errorLogin">Su usuario o contraseña es incorrecto, intente nuevamente.<div>';
 				break;
     	}
 	}

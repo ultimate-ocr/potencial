@@ -1,3 +1,16 @@
+#errorLogin{
+    color: red;
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+    background: #fefefe83;
+    width: 30%;
+    margin: 5% auto 0;
+    border-radius:5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #000;
+    text-align: center; 
+}
+
 #valido {
     padding: 12px 20px;
     margin: 8px 0;
@@ -23,6 +36,15 @@
     color: black;
 }
 
+#tablaresumen{
+    text-align: center; 
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: rgb(175, 164, 164);
+    color: black;
+
+}
 
 #container{
 
@@ -69,6 +91,11 @@
 #concepto{
     font-size:16px;
     text-decoration: underline;
+    text-align: left; 
+}
+
+#aux{
+   text-align: left; 
 }
 
 #titulousuario{
