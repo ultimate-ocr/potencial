@@ -237,7 +237,7 @@ if($fichero!=NULL){
             
             $linea = substr($linea, 1);
             
-            echo "<div class=\"row-fluid\"cursor: hand; cursor: pointer;>
+            echo "<div class=\"row-fluid\" cursor: hand; cursor: pointer; id=\"concepto\">
                     <div class=\"accordion-toggle\" data-toggle=\"collapse\"
                         data-target=\"#collapse".$apartado.$pre[$contador]."\">
                         <div class=\"col-sm-10\"  id=\"aux\" >".$pret[$contador]."-".$linea."</div>
@@ -286,7 +286,7 @@ if($fichero!=NULL){
             
             default;
                 $linea = '-'.$linea;
-                echo   "<div class=\"row-fluid\">
+                echo   "<div class=\"row-fluid\"  id=\"concepto\">
                         <div class=\"accordion-toggle\" data-toggle=\"collapse\"data-target=\"#collapse".$apartado.$pre[$contador]."\">
                             <div class=\"col-sm-10\"  id=\"aux\">".$pret[$contador].$linea."</div>
                             <div class=\"col-sm-1\"></div> </div>
@@ -309,6 +309,7 @@ if($fichero!=NULL){
   <div class="modal-dialog">  
     <div class="modal-content">  
       <div class="modal-header">    
+      <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
         <h4 class="modal-title">Employee Details <button type="button" class="btn btn-default" data-dismiss="modal" style="Position:relative; left:60%">Close</button></h4>  
         
       </div>  
@@ -338,8 +339,8 @@ echo"
 <div class=\"modal-dialog\">
    <div class=\"modal-content\">
       <div class=\"modal-header\">
-         <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>
-         <h4 class=\"modal-title custom_align\" id=\"Heading\">NUEVA ENTRADA</h4>
+      <button id=\"cerrar\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">X</button>
+         <h4 class=\"modal-title custom_align\" id=\"Heading\">MODIFICAR USUARIO</h4>
       </div>
       <div class=\"modal-body\">
           <div class=\"panel-body\">
@@ -361,10 +362,31 @@ echo"
            <input class=\"form-control\" id=\"birthdate\" name=\"birthdate\" type=\"date\" value = \"".$lineaBD['birthdate']."\">
 
            <label for=\"rol\">Cargo del usuario</label></p>
-           <select name=\"rol\">    
-             <option value=\"1\" selected=\"selected\">Profesor</option>
-             <option value=\"2\">Evaluador</option>
+           <select name=\"subtipo\">    
+              <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Personal docente</option>
+              <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Evaluador</option>
            </select>
+
+           <label for=\"rol\">Categoria profesional</label></p>
+           <select name=\"subtipo\">    
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+         </select>
+
+
+
            <br>
 
            <input type=\"hidden\" name=\"usuario\" value=\"".$id."\" />

@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>Planificación Académica</title>
 </head>
 
 
@@ -223,7 +224,7 @@ function mostrar_pendientes($tabla){
 
 <div class="col-lg-3">   
 <form id="buscausuario" name="buscausuario" action="tablaadminbusqueda.php" method="post" class="form-horizontal" autocomplete="on">
-  <input type="text" name="dni" id ="dni" value="Introduzca dni de usuario">
+  <input type="text" name="dni" id ="dni" placeholder="Introduzca dni de usuario">
   <input type="submit" value="Buscar">
 </form>
 </div>
@@ -231,7 +232,7 @@ function mostrar_pendientes($tabla){
    <button id="nuevousuario" style="background-color: #013068" data-toggle="modal" data-target="#usuarionuevo"> <i class="material-icons">person_add</i> Añadir Usuario
 </div>
 <div class="col-lg-2" id="titulousuario">
-    ¡Hola<a href="#" onclick="verUsuario();">
+    ¡Hola<a href="/potencial/library/usuario.php">
     <?php
       session_start();
       if(!isset($_SESSION['id']))
@@ -361,7 +362,7 @@ if($fichero!=NULL){
     <div class="modal-content">  
       <div class="modal-header">    
       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-        <h4 class="modal-title">Employee Details </h4>  
+        <h4 class="modal-title">CORREGIR MÉRITO </h4>  
         
       </div>  
       <div class="modal-body" id="modal_comming">  
@@ -383,42 +384,43 @@ if($fichero!=NULL){
           <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO USUARIO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
                <form id="insertaid" name="newid" action="library/tablaadmin/nuevousuario.php" method="post" class="form-horizontal" autocomplete="on">
  
                      <label for="nombre">Nombre</label></p>
-                     <input type="text" class="form-control" id="nombre" name="nombre">
+                     <input type="text" class="form-control" id="nombre" name="nombre" required>
 
                      <label for="orgfin">Apellidos</label></p>
-                     <input type="text" class="form-control" id="apellidos" name="apellidos">
+                     <input type="text" class="form-control" id="apellidos" name="apellidos" required>
 
                      <label for="fechapub">Teléfono</label>
-                     <input class="form-control" id="telefono" name="telefono" type="text" >
+                     <input class="form-control" id="telefono" name="telefono" type="text" required>
 
                      <label for="participacion">DNI</label>
-                     <input class="form-control" id="dni" name="dni" type="text" >
+                     <input class="form-control" id="dni" name="dni" type="text" required>
 
                      <label for="participacion">Correo electrónico</label>
-                     <input class="form-control" id="correo" name="correo" type="text" >
+                     <input class="form-control" id="correo" name="correo" type="text" required>
 
                      <label for="regional">Fecha de nacimiento</label>
-                     <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" type="date" >
+                     <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" type="date" required>
 
                      <label for="lugar">Contraseña</label>
-                     <input class="form-control" id="pass" name="pass"type="text" >
-
+                     <input class="form-control" id="pass" name="pass"type="text" required>
+                      <br>
                      <label for="rol">Cargo del usuario</label></p>
                      <select name="rol">    
                        <option value="1" selected="selected">Profesor</option>
                        <option value="2">Evaluador</option>
                      </select>
-
+                    <br>
+                    <br>
                      <label for="rol">Categoria Profesional</label></p>
-                     <select name="rol">    
+                     <select name="categoria">    
                        <option value="1" selected="selected">Profesor</option>
                        <option value="2">Evaluador</option>
                        <option value="3">Evaluador</option>

@@ -51,11 +51,11 @@ Planificacion Académica
 <div id="container">
 	<form id="login" name="login" method="post" class="form-horizontal" autocomplete="on">
 		<label>ID de Usuario:</label><br>
-	<input type="text" id="usuario" name="usuario">
+	<input type="text" id="usuario" name="usuario" required>
 		<br><br>
 		
 		<label>Contaseña:</label><br>
-		<input name="password" type="password" id="password" required>
+		<input name="password" type="password" id="password">
 		<br><br>
 
 	<input type="submit" name="Submit" value="Entrar">

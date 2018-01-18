@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+include 'library/libreria.php';
+$mysqli=conectar();
+?>
+
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -6,6 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>Planificación Académica</title>
 </head>
 
 
@@ -167,7 +176,7 @@ $.ajax({
 </script>
  
 <?php
-session_start();
+
 function mostrar($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total, $apartado;
@@ -361,7 +370,7 @@ Planificacion Académica
       if(!isset($_SESSION['id']))
         header('Location: index.php');
       else
-        echo " ".$_SESSION['nombre']."!";
+        echo " ".($_SESSION['nombre'])."!";
     ?>
     </a>
     <br>
@@ -387,7 +396,7 @@ $_SESSION['totalDocencia']=0;
 $_SESSION['totalInv']=0;
 $_SESSION['totalGestion']=0;
 
-include 'library/libreria.php';
+
 $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
 $pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];
 $num_linea=0;
@@ -525,10 +534,15 @@ if($fichero!=NULL){
         }
     }
 }
+?>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+
+<?php
 if(!isset($_POST['estado'])||($_POST['estado']==4))
     echo"
     <table>
+    <caption id=\"tablaresumen\">TABLA RESUMEN</caption>
       <tr>
         <th>Capacidad Docente</th>
         <th>Unidades Docentes</th>
@@ -551,7 +565,7 @@ if(!isset($_POST['estado'])||($_POST['estado']==4))
       </tr>
       <tr>
         <td>% Docencia</td>
-        <td>".round(($_SESSION['totalDocencia'])/30,3)."</td>
+        <td>".(100*round(($_SESSION['totalDocencia'])/33,3))."%</td>
       </tr>
       <tr>
         <td>Total Investigación</td>
@@ -559,7 +573,7 @@ if(!isset($_POST['estado'])||($_POST['estado']==4))
       </tr>
       <tr>
         <td>% Investigación</td>
-        <td>".round(($_SESSION['totalInv'])/30,3)."</td>
+        <td>".(100*round(($_SESSION['totalInv'])/33,3))."%</td>
       </tr>
       <tr>
         <td>Total Gestión</td>
@@ -567,7 +581,7 @@ if(!isset($_POST['estado'])||($_POST['estado']==4))
       </tr>
       <tr>
         <td>% Gestión</td>
-        <td>".round(($_SESSION['totalGestion'])/30,3)."</td>
+        <td>".(100*round(($_SESSION['totalGestion'])/33,3))."%</td>
       </tr>
       <tr>
         <td>Total Actividades</td>
@@ -590,7 +604,7 @@ unset($_POST['estado']);
     <div class="modal-content">  
       <div class="modal-header"> 
       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-        <h4 class="modal-title">Employee Details </h4>  
+        <h4 class="modal-title">MODIFICAR MÉRITO </h4>  
         
       </div>  
       <div class="modal-body" id="modal_comming">  
@@ -613,7 +627,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -667,7 +681,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -718,7 +732,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -772,7 +786,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -817,7 +831,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -888,7 +902,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -936,7 +950,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1012,7 +1026,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1021,7 +1035,6 @@ unset($_POST['estado']);
                    <label for="id">Grupo de Investigación</label></p>
                     <select name="id">
                     <?php
-                       $mysqli = conectar();
                           $query = "SELECT * FROM grupoinv";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1064,7 +1077,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1143,7 +1156,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -1187,7 +1200,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1198,7 +1211,6 @@ unset($_POST['estado']);
                    <label for="id">Red de Investigación</label></p>
                     <select name="id">
                     <?php
-                       $mysqli = conectar();
                           $query = "SELECT * FROM redinv";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1228,7 +1240,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1263,7 +1275,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1317,7 +1329,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1363,7 +1375,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1373,7 +1385,7 @@ unset($_POST['estado']);
                      <label for="id">Titulo de la tesis</label></p>
                     <select name="id">
                      <?php
-                       $mysqli = conectar();
+                       
                           $query = "SELECT * FROM tesis";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
@@ -1407,7 +1419,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1416,7 +1428,7 @@ unset($_POST['estado']);
                  <label for="id">Titulo de la tesis</label></p>
                  <select name="id">
                   <?php
-                    $mysqli = conectar();
+                    
                        $query = "SELECT * FROM tesis";
                        $resultado = $mysqli->query($query);
                        while ($lineaBD = $resultado->fetch_assoc())
@@ -1449,7 +1461,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1502,7 +1514,7 @@ unset($_POST['estado']);
                   <div class="modal-content">
                      <div class="modal-header">
                         <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                        <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                        <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                      </div>
                      <div class="modal-body">
                          <div class="panel-body">
@@ -1551,7 +1563,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1584,7 +1596,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1627,7 +1639,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1683,7 +1695,7 @@ unset($_POST['estado']);
              <div class="modal-content">
                 <div class="modal-header">
                    <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                   <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                   <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
@@ -1732,7 +1744,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -1764,7 +1776,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -1796,7 +1808,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -1827,7 +1839,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -1858,7 +1870,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -1891,7 +1903,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -1965,7 +1977,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -2022,7 +2034,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                       <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -2067,7 +2079,7 @@ unset($_POST['estado']);
                 <div class="modal-content">
                     <div class="modal-header">
                     <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">X</button>
-                      <h4 class="modal-title custom_align" id="Heading">NUEVA ENTRADA</h4>
+                      <h4 class="modal-title custom_align" id="Heading">NUEVO MÉRITO</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
