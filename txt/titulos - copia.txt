@@ -6,7 +6,7 @@ Evaluación
 Preparación de clases
 -Dirección de trabajos de fin de Grado o Máster
 .Trabajo fin de Grado
-.Trabajo fin de Máster
+.Trabajo fin de Master
 Dirección de tesis doctorales
 Materiales para la docencia en enseñanza presencial de la ULPGC
 Participación en programas, congresos o jornadas de innovación educativa
@@ -14,6 +14,8 @@ Publicación de innovación educativa en revistas especializadas
 Participación en la coordinación académica de las enseñanzas en todas las etapas
 Participación en programas de intercambio y movilidad internacionales e interuniversitarios con fines docentes
 Uso del Campus Virtual en la actividad docente
+#Reconocimientos. (No contabiliza en Total por estar incorporados a A, B y C
+#Total Actividades de Docencia
 <
 -Dirección y ejecución de proyectos de investigación
 .Proyectos de convocatoria pública y competitiva concedidos a la ULPGC
@@ -31,12 +33,14 @@ Elaboración de informes para instituciones académico/científicas y participac
 Estancias de investigación aprobadas por los órganos de gobiernos de la ULPGC
 Dedicación de los Titulares de Escuela Universitaria y Profesores Colaboradores a la tesis doctoral
 Dedicación de los Ayudantes a la tesis doctoral
-Proyectos técnicos y trabajos aplicados científicos, artísticos, sociales y culturales que supongan innovación o transferencia de conocimientos
+Proyectos técnicos y trabajos aplicados científicos, artísticos, sociales y culturales que supongan innomación o transferencia de conocimientos
 Desarrollo y explotación de patentes, licencias, marcas, prototipos y otras formas de protección intelectual e industrial
 Creación de empresas de base tecnológica de origen académico y basadas en el conocimiento
 Colaboraciones con organismos públicos de investigación, parques científicos y tecnológicos, en proyectos o trabajos de investigación aplicada, desarrollo e innovación
 Coordinación y ejecución de proyectos de convocatoria pública, competitiva que hayan sido evaluadas por agencias
 Asistencia a cursos y seminarios
+#Reconocimientos
+#Total Actividades Investigación
 <
 Desempeñar cargos académicos unipersonales de dirección y gestión
 Representación sindical
@@ -49,4 +53,6 @@ Formar parte de tribunales y comisiones de evaluación del PDI
 Gestión de Proyectos de Cooperación
 Organización de eventos científicos, culturales y artísticos que transmitan a la sociedad los valores y resultados universitarios
 Otras actividades de gestión
+#Reconocimiento
+#Total Actividades de Gestión
 /

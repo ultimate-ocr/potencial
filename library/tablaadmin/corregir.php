@@ -4,9 +4,6 @@ include '../libreria.php';
 session_start();
 $userid=$_SESSION["id"];
 
-$userid=8;
-
-
 $mysqli = conectar();
 $tabla = htmlspecialchars($_POST['tabla']);
 $id = htmlspecialchars($_POST['id']);
@@ -32,7 +29,7 @@ $id = htmlspecialchars($_POST['id']);
     $query = "UPDATE $tabla SET infoestado='$infoestado', estado='$estado', lastid='$userid', lastid='$userid' WHERE id='$id'";
     break;
     
-    case "df":
+    case "dff":
     $infoestado = htmlspecialchars($_POST['infoestado']);
     $insertaia = htmlspecialchars($_POST['correccion']);
     switch ($insertaia){

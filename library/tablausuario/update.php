@@ -1,18 +1,13 @@
 <?php
+session_start();
+$userid=$_SESSION["id"];
+include '../../library/libreria.php';
 
 
-//$userid=$_SESSION["id"];
-
-$userid=8;
-
-
-$mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-if ($mysqli->connect_errno) {
-    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    die("Error: No se pudo conectar");
-}
+$mysqli = conectar();
 $tabla = htmlspecialchars($_POST['tabla']);
 $id = htmlspecialchars($_POST['id']);
+
   switch ($tabla) {
 
     case "de":
@@ -24,8 +19,14 @@ $id = htmlspecialchars($_POST['id']);
         $calificacion = htmlspecialchars($_POST['calificacion']);
         $premios = htmlspecialchars($_POST['premios']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', subtipo='$subtipo', codirectores='$codirectores', universidad='$universidad',
-                                    anno='$anno', calificacion='$calificacion', premios='$premios' WHERE id='$id'";
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', subtipo='$subtipo', codirectores='$codirectores', universidad='$universidad',
+                                    anno='$anno', calificacion='$calificacion', premios='$premios', estado='0', archivo='$ruta', lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', subtipo='$subtipo', codirectores='$codirectores', universidad='$universidad',
+            anno='$anno', calificacion='$calificacion', premios='$premios', estado='0', lastid='1' WHERE id='$id'";
 
         break;
 
@@ -35,11 +36,17 @@ $id = htmlspecialchars($_POST['id']);
         $universidad = htmlspecialchars($_POST['universidad']);
         $anno = htmlspecialchars($_POST['anno']);
         $calificacion = htmlspecialchars($_POST['calificacion']);
-        $doctoradoeuropeo = htmlspecialchars($_POST['doctoradoeuropeo']);
-        $menciondecalidad = htmlspecialchars($_POST['menciondecalidad']);
-
-        $query = "UPDATE $tabla SET titulo='$titulo', codirectores='$codirectores', universidad='$universidad',
-        anno='$anno', calificacion='$calificacion', doctoradoeuropeo='$doctoradoeuropeo', menciondecalidad='$menciondecalidad' WHERE id='$id'";
+        $doctoradoeuropeo = (isset($_POST['doctoradoeuropeo'])) ? 1 : 0;        
+        $menciondecalidad = (isset($_POST['menciondecalidad'])) ? 1 : 0;
+        
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', codirectores='$codirectores', universidad='$universidad',
+            anno='$anno', calificacion='$calificacion', doctoradoeuropeo='$doctoradoeuropeo', menciondecalidad='$menciondecalidad', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', codirectores='$codirectores', universidad='$universidad',
+            anno='$anno', calificacion='$calificacion', doctoradoeuropeo='$doctoradoeuropeo', menciondecalidad='$menciondecalidad', estado='0'  , lastid='1' WHERE id='$id'";
 
         break;
 
@@ -53,8 +60,14 @@ $id = htmlspecialchars($_POST['id']);
         $anno = htmlspecialchars($_POST['anno']);
         $isbn = htmlspecialchars($_POST['isbn']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', tipo='$tipo', pin='$pin', pfin='$pfin',
-        editorial='$editorial', anno='$anno', isbn='$isbn' WHERE id='$id'";
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', tipo='$tipo', pin='$pin', pfin='$pfin',
+            editorial='$editorial', anno='$anno', isbn='$isbn', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', tipo='$tipo', pin='$pin', pfin='$pfin',
+            editorial='$editorial', anno='$anno', isbn='$isbn', estado='0' , lastid='1' WHERE id='$id'";
 
         break;
 
@@ -64,14 +77,17 @@ $id = htmlspecialchars($_POST['id']);
         $regional = htmlspecialchars($_POST['regional']);
         $lugar = htmlspecialchars($_POST['lugar']);
         $fecha = htmlspecialchars($_POST['fecha']);
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', participacion='$participacion', regional='$regional', lugar='$lugar', fecha='$fecha', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', participacion='$participacion', regional='$regional', lugar='$lugar', fecha='$fecha', estado='0' , lastid='1' WHERE id='$id'";
 
-        $query = "UPDATE $tabla SET titulo='$titulo', participacion='$participacion', regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id='$id'";
-        echo $query;
         break;
 
     case "di":
         $titulo = htmlspecialchars($_POST['titulo']);
-        $subtipo = htmlspecialchars($_POST['subtipo']);
         $autores = htmlspecialchars($_POST['autores']);
         $revista = htmlspecialchars($_POST['revista']);
         $isbn = htmlspecialchars($_POST['isbn']);
@@ -86,10 +102,16 @@ $id = htmlspecialchars($_POST['id']);
         $acta = htmlspecialchars($_POST['acta']);
         $lugar = htmlspecialchars($_POST['lugar']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', subtipo ='$subtipo', autores='$autores', revista='$revista', isbn='$isbn', clave='$clave',
-        pin='$pin', pfin='$pfin', fecha='$fecha', volumen='$volumen', impacto='$impacto', citas='$citas', editorial='$editorial', acta='$acta', lugar='$lugar'
-         WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', revista='$revista', isbn='$isbn', clave='$clave',
+            pin='$pin', pfin='$pfin', fecha='$fecha', volumen='$volumen', impacto='$impacto', citas='$citas', editorial='$editorial', acta='$acta', lugar='$lugar', estado='0', archivo='$ruta'
+            , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', revista='$revista', isbn='$isbn', clave='$clave',
+            pin='$pin', pfin='$pfin', fecha='$fecha', volumen='$volumen', impacto='$impacto', citas='$citas', editorial='$editorial', acta='$acta', lugar='$lugar', estado='0'
+            , lastid='1' WHERE id='$id'";
         break;
 
     case "dk":
@@ -101,9 +123,14 @@ $id = htmlspecialchars($_POST['id']);
         $inicio = htmlspecialchars($_POST['inicio']);
         $fin = htmlspecialchars($_POST['fin']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro', pais='$pais', 
-        inicio='$inicio', fin='$fin' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro', pais='$pais', 
+            inicio='$inicio', fin='$fin', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro', pais='$pais', 
+            inicio='$inicio', fin='$fin', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "ia":
@@ -115,25 +142,34 @@ $id = htmlspecialchars($_POST['id']);
         $subtot = htmlspecialchars($_POST['subtot']);
         $investigador = htmlspecialchars($_POST['investigador']);
         $numinv = htmlspecialchars($_POST['numinv']);
-        $director = htmlspecialchars($_POST['director']);
+        $director = (isset($_POST['director'])) ? 1 : 0;
 
-      
-        $query = "UPDATE $tabla SET titulo='$nombre', orgfin='$orgfin', entidades='$entcol', desde='$fechaini', hasta='$fechafin', subvencion='$subtot',
-        invprincipal='$investigador', numinv='$numinv', director='$director' WHERE id='$id'";
-        
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$nombre', orgfin='$orgfin', entidades='$entcol', desde='$fechaini', hasta='$fechafin', subvencion='$subtot',
+            invprincipal='$investigador', numinv='$numinv', director='$director', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$nombre', orgfin='$orgfin', entidades='$entcol', desde='$fechaini', hasta='$fechafin', subvencion='$subtot',
+            invprincipal='$investigador', numinv='$numinv', director='$director', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "ib":
-
-    $cargo = htmlspecialchars($_POST['cargo']);  
+ 
     $idgrupo = htmlspecialchars($_POST['select']);
-    $query="SELECT * FROM grupoinv WHERE id=$idgrupo";
+    $query="SELECT * FROM grupoinv  WHERE id=$idgrupo";
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     $nombre = $lineaBD['nombre'];
-    
-    $query = "UPDATE $tabla SET titulo='$nombre',groupid='$idgrupo', cargo='$cargo' WHERE id='$id'";
-        break;
+    $director = (isset($_POST['director'])) ? 1 : 0;
+
+    if(($_FILES['file']['name'])!=''){
+        $ruta=subirArchivo($tabla);
+        $query = "UPDATE $tabla SET titulo='$nombre',groupid='$idgrupo', director='$director', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+    }
+    else
+        $query = "UPDATE $tabla SET titulo='$nombre',groupid='$idgrupo', director='$director', estado='0' , lastid='1' WHERE id='$id'";
+    break;
 
 
     case 'ic':
@@ -155,9 +191,27 @@ $id = htmlspecialchars($_POST['id']);
             $acta = htmlspecialchars($_POST['acta']);
             $lugar = htmlspecialchars($_POST['lugar']);
     
-            $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', subtipo='$subtipo', autores='$autores',
-            revista='$revista', isbn='$isbn', clave='$clave', volumen='$volumen', pin='$pin',
-            pfin='$pfin',fecha='$fecha', impacto='$impacto', citas='$citas', acta='$acta', editorial='$editorial', lugar='$lugar' WHERE id='$id'";
+            switch($subtipo){
+                case'1':
+                    $ud = 1;
+                    break;
+                case'2':
+                    $ud = 15;
+                    break;
+                case'3':
+                    $ud = 1;
+                    break;
+            }
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', subtipo='$subtipo', autores='$autores',
+                revista='$revista', isbn='$isbn', clave='$clave', volumen='$volumen', pin='$pin',
+                pfin='$pfin',fecha='$fecha', impacto='$impacto', citas='$citas', acta='$acta', editorial='$editorial', lugar='$lugar', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+            }
+            else
+                $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', subtipo='$subtipo', autores='$autores',
+                revista='$revista', isbn='$isbn', clave='$clave', volumen='$volumen', pin='$pin',
+                pfin='$pfin',fecha='$fecha', impacto='$impacto', citas='$citas', acta='$acta', editorial='$editorial', lugar='$lugar', estado='0' , lastid='1' WHERE id='$id'";
             break;
 
 
@@ -169,9 +223,15 @@ $id = htmlspecialchars($_POST['id']);
                     $participacion = htmlspecialchars($_POST['participacion']);
                     $regional = htmlspecialchars($_POST['regional']);
                     $lugar = htmlspecialchars($_POST['lugar']);
-                    $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', participacion='$participacion',
-                     regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id ='$id'";
-            
+
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', participacion='$participacion',
+                        regional='$regional', lugar='$lugar', fecha='$fecha', estado='0', archivo='$ruta' , lastid='1' WHERE id ='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET userid='$userid', UD='$ud', titulo='$titulo', participacion='$participacion',
+                        regional='$regional', lugar='$lugar', fecha='$fecha', estado='0' , lastid='1' WHERE id ='$id'";
                     break;
             
             case 'ie':
@@ -182,17 +242,25 @@ $id = htmlspecialchars($_POST['id']);
             $lineaBD = $resultado->fetch_assoc();
             $nombre = $lineaBD['nombre'];
             
-            $query = "UPDATE $tabla SET titulo='$nombre',redid='$idred' WHERE id='$id'";
-                break;
-                    echo $query;
-                    break;
-            
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "UPDATE $tabla SET titulo='$nombre',redid='$idred', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+            }
+            else
+                $query = "UPDATE $tabla SET titulo='$nombre',redid='$idred', estado='0' , lastid='1' WHERE id='$id'";
+            break;
+
                     case 'iff':
             
                         
                     $titulo = htmlspecialchars($_POST['titulo']);
                     $ud = 4;
-                    $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'ig':
@@ -206,10 +274,15 @@ $id = htmlspecialchars($_POST['id']);
                     $nacional = htmlspecialchars($_POST['nacional']);
                     $desde = htmlspecialchars($_POST['desde']);
                     $hasta = htmlspecialchars($_POST['hasta']);
-            
-                    $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', editor='$editor', revista='$revista', impacto='$impacto', nacional='$nacional', 
-                    desde='$desde', hasta='$hasta' WHERE id='$id'";
-            
+
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', editor='$editor', revista='$revista', impacto='$impacto', nacional='$nacional', 
+                        desde='$desde', hasta='$hasta', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', editor='$editor', revista='$revista', impacto='$impacto', nacional='$nacional', 
+                        desde='$desde', hasta='$hasta', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'ih':
@@ -223,8 +296,14 @@ $id = htmlspecialchars($_POST['id']);
                     $inicio = htmlspecialchars($_POST['inicio']);
                     $fin = htmlspecialchars($_POST['fin']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro',
-                    pais='$pais', inicio='$inicio', fin='$fin' WHERE id='$id'";
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro',
+                        pais='$pais', inicio='$inicio', fin='$fin', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', investigador='$investigador', centro='$centro',
+                        pais='$pais', inicio='$inicio', fin='$fin', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'ii':
@@ -234,7 +313,13 @@ $id = htmlspecialchars($_POST['id']);
                     $resultado = $mysqli->query($query);
                     $lineaBD = $resultado->fetch_assoc();
                     $titulo = $lineaBD['titulo'];
-                    $query = "UPDATE $tabla SET titulo='$titulo', tesisid='$idtesis' WHERE id='$id'";
+
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', tesisid='$idtesis', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', tesisid='$idtesis', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'ij':
@@ -244,7 +329,13 @@ $id = htmlspecialchars($_POST['id']);
                     $resultado = $mysqli->query($query);
                     $lineaBD = $resultado->fetch_assoc();
                     $titulo = $lineaBD['titulo'];
-                    $query = "UPDATE $tabla SET titulo='$titulo', tesisid='$idtesis' WHERE id='$id'";
+
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', tesisid='$idtesis', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', tesisid='$idtesis', estado='0' , lastid='1' WHERE id='$id'";
                     break;
                     
                     case 'ik':
@@ -257,10 +348,15 @@ $id = htmlspecialchars($_POST['id']);
                     $invresponsable = htmlspecialchars($_POST['invresponsable']);
                     $numinv = htmlspecialchars($_POST['numinv']);
                     $subvencion = htmlspecialchars($_POST['subvencion']);
-            
-                    $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
-                    invresponsable='$invresponsable', numinv='$numinv', subvencion='$subvencion' WHERE id='$id'";
-            
+
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
+                        invresponsable='$invresponsable', numinv='$numinv', subvencion='$subvencion', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
+                        invresponsable='$invresponsable', numinv='$numinv', subvencion='$subvencion', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     
@@ -274,9 +370,14 @@ $id = htmlspecialchars($_POST['id']);
                     $entidad = htmlspecialchars($_POST['entidad']);
                     $empresa = htmlspecialchars($_POST['empresa']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', autores='$autores', pais='$pais', patente='$patente',
-                    entidad='$entidad', empresa='$empresa' WHERE id='$id'";
-            
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', autores='$autores', pais='$pais', patente='$patente',
+                        entidad='$entidad', empresa='$empresa', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', autores='$autores', pais='$pais', patente='$patente',
+                        entidad='$entidad', empresa='$empresa', estado='0' , lastid='1' WHERE id='$id'";
                     break;
                     
                     case 'im':
@@ -286,7 +387,12 @@ $id = htmlspecialchars($_POST['id']);
                     $ud = 4;
                     $CIF = htmlspecialchars($_POST['CIF']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', CIF='$CIF' WHERE id='$id'";
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', CIF='$CIF', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', CIF='$CIF', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'inn':
@@ -299,9 +405,14 @@ $id = htmlspecialchars($_POST['id']);
                     $tema = htmlspecialchars($_POST['tema']);
                     $fecha = htmlspecialchars($_POST['fecha']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', entidad='$entidad', investigadores='$investigadores',
-                    tema='$tema', fecha='$fecha' WHERE id='$id'";
-            
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', entidad='$entidad', investigadores='$investigadores',
+                        tema='$tema', fecha='$fecha', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', entidad='$entidad', investigadores='$investigadores',
+                        tema='$tema', fecha='$fecha', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'innn':
@@ -318,9 +429,14 @@ $id = htmlspecialchars($_POST['id']);
                     $numinv = htmlspecialchars($_POST['numinv']);
                     $gestor = htmlspecialchars($_POST['gestor']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
-                    subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', gestor='$gestor' WHERE id='$id'";
-            
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
+                        subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', gestor='$gestor', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', orgfin='$orgfin', entidades='$entidades', desde='$desde', hasta='$hasta',
+                        subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', gestor='$gestor', estado='0' , lastid='1' WHERE id='$id'";
                     break;
             
                     case 'io':
@@ -328,61 +444,86 @@ $id = htmlspecialchars($_POST['id']);
                     
                     $titulo = htmlspecialchars($_POST['titulo']);
                     $ud = 4;
-                    $autores = htmlspecialchars($_POST['autores']);
+                    $organizador = htmlspecialchars($_POST['organizador']);
                     $participacion = htmlspecialchars($_POST['participacion']);
                     $congreso = htmlspecialchars($_POST['congreso']);
                     $regional = htmlspecialchars($_POST['regional']);
                     $lugar = htmlspecialchars($_POST['lugar']);
                     $fecha = htmlspecialchars($_POST['fecha']);
             
-                    $query = "UPDATE $tabla SET titulo='$titulo', autores='$autores', participacion='$participacion', congreso='$congreso',
-                    regional='$regional', lugar='$lugar', fecha='$fecha' WHERE id='$id'";
-            
+                    if(($_FILES['file']['name'])!=''){
+                        $ruta=subirArchivo($tabla);
+                        $query = "UPDATE $tabla SET titulo='$titulo', organizador='$organizador', participacion='$participacion', congreso='$congreso',
+                        regional='$regional', lugar='$lugar', fecha='$fecha', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+                    }
+                    else
+                        $query = "UPDATE $tabla SET titulo='$titulo', organizador='$organizador', participacion='$participacion', congreso='$congreso',
+                        regional='$regional', lugar='$lugar', fecha='$fecha', estado='0' , lastid='1' WHERE id='$id'";
                     break;
 
     case "ga":
         $titulo = htmlspecialchars($_POST['titulo']);
         $ud = 4;
 
-        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "gb":
         $titulo = htmlspecialchars($_POST['titulo']);
         $ud = 4;
 
-        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "gc":
         $titulo = htmlspecialchars($_POST['titulo']);
         $ud = 4;
 
-        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "gd":
         $titulo = htmlspecialchars($_POST['titulo']);
         $ud = 4;
 
-        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "ge":
         $titulo = htmlspecialchars($_POST['titulo']);
         $ud = 4;
 
-        $query = "UPDATE $tabla SET titulo='$titulo' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "gff":
         $titulo = htmlspecialchars($_POST['titulo']);
-        $director = htmlspecialchars($_POST['director']);
+        $director = (isset($_POST['director'])) ? 1 : 0;
         $subtipo = htmlspecialchars($_POST['subtipo']);
         $orgfin = htmlspecialchars($_POST['orgfin']);
         $entidades = htmlspecialchars($_POST['entidades']);
@@ -392,9 +533,14 @@ $id = htmlspecialchars($_POST['id']);
         $invprincipal = htmlspecialchars($_POST['invprincipal']);
         $numinv = htmlspecialchars($_POST['numinv']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', director='$director', subtipo='$subtipo', orgfin='$orgfin', entidades='$entidades', desde='$desde',
-        hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv'WHERE id='$id'";
-        echo $query;
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', director='$director', subtipo='$subtipo', orgfin='$orgfin', entidades='$entidades', desde='$desde',
+            hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', director='$director', subtipo='$subtipo', orgfin='$orgfin', entidades='$entidades', desde='$desde',
+            hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "gg":
@@ -409,20 +555,32 @@ $id = htmlspecialchars($_POST['id']);
         $invprincipal = htmlspecialchars($_POST['invprincipal']);
         $numinv = htmlspecialchars($_POST['numinv']);
 
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', gestor='$gestor', orgfin='$orgfin', entidades='$entidades', desde='$desde',
+            hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id' ";
+        }
+        else
         $query = "UPDATE $tabla SET titulo='$titulo', gestor='$gestor', orgfin='$orgfin', entidades='$entidades', desde='$desde',
-        hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv' WHERE id='$id' ";
-
+        hasta='$hasta', subvencion='$subvencion', invprincipal='$invprincipal', numinv='$numinv', estado='0' , lastid='1' WHERE id='$id' ";
         break;
 
     case "gh":
         $titulo = htmlspecialchars($_POST['titulo']);
-        $ud = 4;
         $fecha = htmlspecialchars($_POST['fecha']);
         $lugar = htmlspecialchars($_POST['lugar']);
         $descripcion = htmlspecialchars($_POST['descripcion']);
 
-        $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', lugar='$lugar', descripcion='$descripcion' WHERE id='$id'";
+        $dias	= (strtotime($inicio)-strtotime($fin))/86400;
+        $dias 	= abs($dias); $dias = floor($dias);	
+        $ud = $dias*1.5;
 
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', ud='$ud' lugar='$lugar', descripcion='$descripcion', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', fecha='$fecha', ud='$ud', lugar='$lugar', descripcion='$descripcion', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
     case "gi":
@@ -430,8 +588,12 @@ $id = htmlspecialchars($_POST['id']);
         $ud = 4;
         $descripcion = htmlspecialchars($_POST['descripcion']);
         
-        $query = "UPDATE $tabla SET titulo='$titulo', descripcion='$descripcion' WHERE id='$id'";
-
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "UPDATE $tabla SET titulo='$titulo', descripcion='$descripcion', estado='0', archivo='$ruta' , lastid='1' WHERE id='$id'";
+        }
+        else
+            $query = "UPDATE $tabla SET titulo='$titulo', descripcion='$descripcion', estado='0' , lastid='1' WHERE id='$id'";
         break;
 
 
@@ -451,8 +613,11 @@ $id = htmlspecialchars($_POST['id']);
     echo "Query: " . $query . "\n";
     echo "Errno: " . $mysqli->errno . "\n";
     echo "Error: " . $mysqli->error . "\n";
-    //exit;
 	}
-    header('location:/potencial/tablausuario12am.php');
+    //header('location:/potencial/tablausuario12am.php');
+
+    echo '<script type="text/javascript">';
+    echo 'location.href ="/potencial/tablausuario12am.php";';
+    echo '</script>';
 
   ?>

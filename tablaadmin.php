@@ -1,3 +1,8 @@
+<?php
+//agregamos la libreria de funciones
+include 'library/libreria.php';
+?>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -222,6 +227,12 @@ function mostrar_pendientes($tabla){
 </div>
 <br><br><br><br>
 
+<?php
+session_start();
+if(!isset($_SESSION['id'])||($_SESSION['rol']!=2))
+  goback("index.php");
+?>
+
 <div class="col-lg-3">   
 <form id="buscausuario" name="buscausuario" action="tablaadminbusqueda.php" method="post" class="form-horizontal" autocomplete="on">
   <input type="text" name="dni" id ="dni" placeholder="Introduzca dni de usuario">
@@ -234,10 +245,11 @@ function mostrar_pendientes($tabla){
 <div class="col-lg-2" id="titulousuario">
     ¡Hola<a href="/potencial/library/usuario.php">
     <?php
-      session_start();
-      if(!isset($_SESSION['id']))
-        header('Location: index.php');
-      else
+     /* if(!isset($_SESSION['id'])||($_SESSION['rol']!=2))
+        echo '<script type="text/javascript"> 
+               window.location="index.php"; 
+              </script>';
+      else*/
         echo " ".$_SESSION['nombre']."!";
     ?>
     </a>
@@ -268,7 +280,6 @@ Ver mérito según estado:
   <?php
 
 ////////////////////////////////////////
-include 'library/libreria.php';
 $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
 $pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];
 $num_linea=0;
@@ -288,7 +299,7 @@ if($fichero!=NULL){
 
 
     echo"
-    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">DOCENCIA</div>
+    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">ACTIVIDADES DE DOCENCIA</div>
     <br><br>
 		<div class=\"col-sm-12\" align=\"center\" id=\"concepto\">CONCEPTO</div>
     </div>";
@@ -314,7 +325,7 @@ if($fichero!=NULL){
                     $apartado="g";
                     echo"
                     <br><br>
-                    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">GESTIÓN</div>
+                    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">ACTIVIDADES DE GESTIÓN</div>
                     <br><br><br><br><br><br><br>
                     <div class=\"col-sm-12\" align=\"center\" id=\"concepto\">CONCEPTO</div>
                     </div>";
@@ -323,7 +334,8 @@ if($fichero!=NULL){
                     $apartado="i";
                     echo"
                     <br><br>
-                    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">INVESTIGACIÓN</div>
+                    <div class=\"col-sm-12\" align=\"center\" id=\"apartado\">ACTIVIDADES DE INVESTIGACIÓN, INNOVACIÓN, TRANSFERENCIA
+                    DEL CONOCIMIENTO, COOPERACION Y FORMACIÓN</div>
                     <br><br><br>
                     <div class=\"col-sm-12\" align=\"center\" id=\"concepto\">CONCEPTO</div>
                 </div>";
@@ -421,15 +433,24 @@ if($fichero!=NULL){
                     <br>
                      <label for="rol">Categoria Profesional</label></p>
                      <select name="categoria">    
-                       <option value="1" selected="selected">Profesor</option>
-                       <option value="2">Evaluador</option>
-                       <option value="3">Evaluador</option>
-                       <option value="4">Evaluador</option>
-                       <option value="5">Evaluador</option>
-                       <option value="6">Evaluador</option>
-                       <option value="7">Evaluador</option>
-                       <option value="8">Evaluador</option>
-                       <option value="9">Evaluador</option>
+                       <option value="1" selected="selected">Catedrático de Universidad</option>
+                       <option value="2">Catedrático de Universidad Vinculado</option>
+                       <option value="3">Titular de Universidad</option>
+                       <option value="4">Catedrático de Escuela Universitaria</option>
+                       <option value="5">Titular de Escuela Vinculado</option>
+                       <option value="6">Titular de Escuela Universitaria</option>
+                       <option value="7">Profesor Contratado Doctor</option>
+                       <option value="8">Profesor Ayudante Doctor</option>
+                       <option value="9">Profesor Colaborador</option>
+                       <option value="10">Ayudante</option>
+                       <option value="11">Asociado a Tiempo Parcial 3 horas</option>
+                       <option value="12">Asociado a Tiempo Parcial 4 horas</option>
+                       <option value="13">Asociado a Tiempo Parcial 5 horas</option>
+                       <option value="14">Asociado a Tiempo Parcial 6 horas</option>
+                       <option value="15">Asociado Ciencias de la Salud 3 horas</option>
+                       <option value="16">Asociado Ciencias de la Salud 4 horas</option>
+                       <option value="17">Asociado Ciencias de la Salud 5 horas</option>
+                       <option value="18">Asociado Ciencias de la Salud 6 horas</option>
                      </select>
                      <br>
 

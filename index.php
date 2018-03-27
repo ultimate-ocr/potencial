@@ -9,24 +9,26 @@
 </head>
 <?php
 include 'library/libreria.php';
-
+//funcion para comprobar par usuario/contraseña
 function login($usuario, $pass){
+	//conecta con la base de datos
     $mysqli = conectar();
 		
-
 	$query = "SELECT * FROM user_profile WHERE dni='$usuario'";
 	if (!$resultado = $mysqli->query($query)) {
-    	// ¡Oh, no! La consulta falló. 
-    	echo "Lo sentimos, este sitio web está experimentando problemas.";
+		// ¡Oh, no! La consulta falló. 
+		echo "Lo sentimos, este sitio web está experimentando problemas.";
+		exit;
 	}
 
 	$row = $resultado->fetch_assoc();
-
+//funcion interna PHP para comprobación de contraseña
     if(password_verify($pass, $row['pass'])) {
 	
 		session_start();
 		$_SESSION['id']=$row['id'];
 		$_SESSION['nombre']=$row['nombre'];
+		$_SESSION['rol']=$row['id_rol'];
 		return $row['id_rol'];
 	}
 	else 
@@ -66,12 +68,13 @@ Planificacion Académica
     if(isset($_POST['usuario']))
     {
 		$rol = login($_POST['usuario'],$_POST['password']);
+		//redirige en función de qué usuario se halla logueado
 		switch ($rol) {
 			case 1:
-				header("location:tablausuario12am.php");
+				header("Location: tablausuario12am.php");
 				break;
 			case 2:
-				header("location:tablaadmin.php");
+				header("Location: tablaadmin.php");
 				break;
 			default:
 				echo '<div id="errorLogin">Su usuario o contraseña es incorrecto, intente nuevamente.<div>';

@@ -8,6 +8,15 @@ function msjerror(msj){
 
 <?php
 
+function goback($url){
+    echo '<script type="text/javascript"> 
+            window.location="'.$url.'"; 
+          </script>';
+    session_start();
+    session_destroy();
+          return 0;
+  }
+
 function conectar(){
     $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
     if ($mysqli->connect_errno) {
@@ -19,7 +28,7 @@ return $mysqli;
 }
 
 function lanzar($query, $mysqli){
-    if (!$resultado = $mysqli->query($query)) {
+    if (!$resultado = mysqli_query($mysqli,$query)) {
         // ¡Oh, no! La consulta falló. 
         echo "Lo sentimos, este sitio web está experimentando problemas.";
         // De nuevo, no hacer esto en un sitio público, aunque nosotros mostraremos

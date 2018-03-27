@@ -363,26 +363,26 @@ echo"
 
            <label for=\"rol\">Cargo del usuario</label></p>
            <select name=\"subtipo\">    
-              <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Personal docente</option>
-              <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Evaluador</option>
+              <option value=\"1\" "; if($lineaBD['id_rol']==1) echo" selected"; echo">Personal docente</option>
+              <option value=\"2\" "; if($lineaBD['id_rol']==2) echo" selected"; echo">Evaluador</option>
            </select>
-
+           <br>
            <label for=\"rol\">Categoria profesional</label></p>
            <select name=\"subtipo\">    
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
-           <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
-           <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Doctorado Titular</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
+           <option value=\"1\" "; if($lineaBD['categoria']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+           <option value=\"2\" "; if($lineaBD['categoria']==2) echo" selected"; echo">Trabajo fin de Máster</option>
          </select>
 
 

@@ -1,5 +1,5 @@
 <?php
-
+//iniciamos sesión y conectamos con la BDD
 session_start();
 include 'library/libreria.php';
 $mysqli=conectar();
@@ -16,14 +16,11 @@ $mysqli=conectar();
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title>Planificación Académica</title>
 </head>
-
-
-
 <script>
 
 
 
-
+//funcion para validar una correcion ya realizada por un usuario corrector
 function validar(tabla,id){
 
   if(confirm('Validar registro seleccionado?'))
@@ -77,7 +74,7 @@ complete : function() {
 }
 
 
-
+//funcion para cerrar sesión de usuario. Pide confirmación antes de hacerlo
 function cerrarSesion(){
       if(confirm('¿Desea cerrar la sesion?'))
       {
@@ -96,13 +93,15 @@ function cerrarSesion(){
         return false;
     }
 
-
-    function verUsuario(tabla,id){
-             $.ajax({  
-                  url:"library/tablausuario/usuario.php",  
-             });  
+//funcion para ver nuestro perfil de usuario
+  function verUsuario(tabla,id){
+       $.ajax({  
+          url:"library/tablausuario/usuario.php",  
+       });  
   } 
 
+
+//funcion llamada para modificar un registro previamente añadido
 function modificar(tabla,id){
              $.ajax({  
                   url:"library/tablausuario/modifica2.php",  
@@ -117,7 +116,7 @@ function modificar(tabla,id){
 
 
   
-
+//funcion para borrar registro. Pide confirmación antes de hacerlo.
     function ddelete(tabla,id){
 
       if(confirm('¿Borrar registro seleccionado?'))
@@ -131,37 +130,30 @@ function modificar(tabla,id){
 $.ajax({
     // la URL para la petición
     url : 'library/tablausuario/delete.php',
- 
     // la información a enviar
     // (también es posible utilizar una cadena de datos)
     data : { "id" : id, "tabla": tabla },
- 
     // especifica si será una petición POST o GET
     type : 'POST',
- 
     // el tipo de información que se espera de respuesta
     dataType : 'html',
- 
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success : function() {
       alert('Registro borrado satisfactoriamente');
       location.reload(true);
     },
- 
     // código a ejecutar si la petición falla;
     // son pasados como argumentos a la función
     // el objeto de la petición en crudo y código de estatus de la petición
     error : function() {
         alert('Disculpe, existió un problema');
     },
- 
     // código a ejecutar sin importar si la petición falló o no
     complete : function() {
 
     }
 }); 
-
       }
       else
       {
@@ -169,14 +161,15 @@ $.ajax({
       }
  
     }
-
-
-
-
 </script>
  
-<?php
 
+
+
+<?php
+//funcion encargada de construir la tabla. Se encarga de los apartados que no tengan subapartados.
+
+//llama a otra funcion para cargar los méritos del usuario.
 function mostrar($tabla){
     $primera=1;
     global $contador, $pre, $tabla_total, $apartado;
@@ -255,9 +248,11 @@ function mostrar($tabla){
     </div>
     </div>';
     }
+//funcion encargada de construir la tabla. Se encarga de los apartados que no tengan subapartados.
 
+//llama a otra funcion para cargar los méritos del usuario.
   function mostrar_sub($fichero, $num_linea){
-
+//variables globales usadas.
         global $contador, $pre, $pret, $tabla, $tabla_total, $apartado;
         
         $letra=$pre[$contador];
@@ -278,9 +273,11 @@ function mostrar($tabla){
                   for ($subtipo = 1,$linea=$fichero[$num_linea]; $linea[0]=='.'; $subtipo++,$linea=$fichero[++$num_linea] ){
                         if(isset($_POST['submit'])){
                           $estado=$_POST['estado'];
+                          //carga los méritos en funcion del estado
                           $resultado=getmerito($tabla_total,'0',$estado);
                         }
                       else
+                        //carga todos los meritos.
                         $resultado=getmerito($tabla_total,'0','4');
                         
                         echo"<thead>
@@ -295,7 +292,8 @@ function mostrar($tabla){
 							<td style=\"text-align:left;\">
 								 " . $lineaBD['titulo']."
 							</td>
-							<td style=\"text-align:left;\">";
+              <td style=\"text-align:left;\">";
+              //muestra un circulito de un color dependiendo del estado del mérito.
 							switch ($lineaBD['estado']) {
 								case 0:
 									echo"<i class=\"material-icons\" style=\"font-size:24px;color:grey\">fiber_manual_record</i>";
@@ -367,19 +365,20 @@ Planificacion Académica
 <div class="col-lg-2" id="titulousuario">
     ¡Hola<a href="/potencial/library/usuario.php">
     <?php
-      if(!isset($_SESSION['id']))
-        header('Location: index.php');
+      if(!isset($_SESSION['id'])||($_SESSION['rol']!=1))
+        goback("index.php");
       else
         echo " ".($_SESSION['nombre'])."!";
     ?>
     </a>
     <br>
+    <!--enlace para cerrar sesión.-->
     <a href="#" onclick="cerrarSesion();">Cerrar sesión</a>
 </div>
 <br><br><br><br>
 
 </header>
-
+<!--menu desplegable para discriminar entre los distintos estados de los méritos del usuario-->
 Ver mérito según estado:
 <form action="/Potencial/tablausuario12am.php" method="post">
     <select name='estado'>
@@ -396,12 +395,13 @@ $_SESSION['totalDocencia']=0;
 $_SESSION['totalInv']=0;
 $_SESSION['totalGestion']=0;
 
-
+//variable global con los sufijos de la base de datos
 $pre=["a","b","c","d","e","ff","g","h","i","j","k","l","m","nn","nnn","o","p","q","r","s"];
 $pret=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S"];
 $num_linea=0;
 $contador=0;
 $apartado="d";
+//si no hay sesión iniciada, redirige a index.php
 if(!isset($_SESSION))
   header('Location: index.php');
 
@@ -452,12 +452,12 @@ if($fichero!=NULL){
                         if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
                             echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$tabla_total."\"> <i class=\"material-icons\">add</i></button>";
                         else
-                        echo"<td></td>";
-                    echo"
-                    </div>
+                          echo"<td></td>";
+                        echo"
+                        </div>
                 </div>";
-            $num_linea=mostrar_sub($fichero, $num_linea);
-            $contador++;
+              $num_linea=mostrar_sub($fichero, $num_linea);
+              $contador++;
             break;
 
             case '<':
@@ -521,7 +521,8 @@ if($fichero!=NULL){
                             <div class=\"col-sm-1\">".$total."</div> </div>
                             <div class=\"col-sm-1\">";
                             if(($tabla_total!="da")&&($tabla_total!="db")&&($tabla_total!="dc")&&($tabla_total!="dd")&&($tabla_total!="dj")&&($tabla_total!="dl"))
-                                echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$apartado.$pre[$contador]."\"> <i class=\"material-icons\">add</i></button>";
+                                echo"<button style=\"color:blue; background-color: #ffffff;border: #ffffff\" data-toggle=\"modal\" data-target=\"#new".$apartado.$pre[$contador]."\"> 
+                                    <i class=\"material-icons\">add</i></button>";
                             else
                             echo"<td></td>";
                         echo"
@@ -530,7 +531,7 @@ if($fichero!=NULL){
                 mostrar($tabla_total);
                 $num_linea++;
                 $contador++;
-                break;
+             break;
         }
     }
 }

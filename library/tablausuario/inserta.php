@@ -1,26 +1,35 @@
 <?php
-    $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-    if ($mysqli->connect_errno) {
-        echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-        die("Error: No se pudo conectar");
-    }
+include '../../library/libreria.php';
+
+    $mysqli = conectar();
     $tabla = htmlspecialchars($_POST['tabla']);
-    $userid=8;
+    session_start();
+    $userid=$_SESSION['id'];
 
     switch ($tabla){
         
         case 'de':
-            $titulo = htmlspecialchars($_POST['titulo']);
+            $titulo = ($_POST['titulo']);
             $subtipo = htmlspecialchars($_POST['subtipo']);
             $codirectores = htmlspecialchars($_POST['codirectores']);
             $universidad = htmlspecialchars($_POST['universidad']);
             $anno = htmlspecialchars($_POST['anno']);
             $calificacion = htmlspecialchars($_POST['calificacion']);
             $premios = htmlspecialchars($_POST['premios']);
+            if($subtipo==1)
+                $UD=0.75;
+            else
+                $ud=0.75;
 
-            $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, codirectores, universidad, anno, calificacion, premios)
-                                VALUES ($userid, $subtipo, '5', '$titulo', '$codirectores', '$universidad', '$anno', '$calificacion', '$premios')";
-        
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, codirectores, universidad, anno, calificacion, premios, archivo)
+                                    VALUES ($userid, $subtipo, '$ud', '$titulo', '$codirectores', '$universidad', '$anno', '$calificacion', '$premios', '$ruta')";
+            }
+            else
+
+                $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, codirectores, universidad, anno, calificacion, premios)
+                VALUES ($userid, $subtipo, '5', '$titulo', '$codirectores', '$universidad', '$anno', '$calificacion', '$premios')";
             break;
 
         case 'dff':
@@ -29,11 +38,18 @@
             $universidad = htmlspecialchars($_POST['universidad']);
             $anno = htmlspecialchars($_POST['anno']);
             $calificacion = htmlspecialchars($_POST['calificacion']);
-            $doctoradoeuropeo = htmlspecialchars($_POST['doctoradoeuropeo']);
-            $menciondecalidad = htmlspecialchars($_POST['menciondecalidad']);
+            $doctoradoeuropeo = (isset($_POST['doctoradoeuropeo'])) ? 1 : 0;
+            $menciondecalidad = (isset($_POST['menciondecalidad'])) ? 1 : 0;
+            
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, codirectores, universidad, anno, calificacion, doctoradoeuropeo, menciondecalidad, archivo)
+                                    VALUES ($userid, '6', '$titulo', '$codirectores', '$universidad', '$anno', '$calificacion', '$doctoradoeuropeo', '$menciondecalidad', '$ruta')";
+            }
+            else
 
             $query = "INSERT INTO $tabla (userid, UD, titulo, codirectores, universidad, anno, calificacion, doctoradoeuropeo, menciondecalidad)
-                                VALUES ($userid, '5', '$titulo', '$codirectores', '$universidad', '$anno', '$calificacion', '$doctoradoeuropeo', '$menciondecalidad')";         
+                                VALUES ($userid, '6', '$titulo', '$codirectores', '$universidad', '$anno', '$calificacion', '$doctoradoeuropeo', '$menciondecalidad')";         
     
             break;
 
@@ -47,8 +63,15 @@
         $anno = htmlspecialchars($_POST['anno']);
         $isbn = htmlspecialchars($_POST['isbn']);
 
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "INSERT INTO $tabla (userid, UD, titulo, autores, tipo, pin, pfin, editorial, anno, isbn, archivo)
+                                VALUES ($userid, '1', '$titulo', '$autores', '$tipo', '$pin', '$pfin', '$editorial', '$anno', '$isbn', '$ruta')";
+        }
+        else
+
         $query = "INSERT INTO $tabla (userid, UD, titulo, autores, tipo, pin, pfin, editorial, anno, isbn)
-                             VALUES ('$userid', '5', '$titulo', '$autores', '$tipo', '$pin', '$pfin', '$editorial', '$anno', '$isbn')";        
+                             VALUES ('$userid', '1', '$titulo', '$autores', '$tipo', '$pin', '$pfin', '$editorial', '$anno', '$isbn')";        
             break;
 
         case 'dh':
@@ -58,8 +81,14 @@
             $lugar = htmlspecialchars($_POST['lugar']);
             $fecha = htmlspecialchars($_POST['fecha']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, participacion, regional, lugar, fecha, archivo)
+                                    VALUES ($userid, '1', '$titulo', '$participacion', '$regional', '$lugar', '$fecha', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, participacion, regional, lugar, fecha)
-                                 VALUES ('$userid', '5', '$titulo', '$participacion', '$regional', '$lugar', '$fecha')";        
+                                 VALUES ('$userid', '1', '$titulo', '$participacion', '$regional', '$lugar', '$fecha')";        
     
             break;
 
@@ -67,7 +96,6 @@
         
             $titulo = htmlspecialchars($_POST['titulo']);
             $ud = 4;
-            $subtipo = htmlspecialchars($_POST['subtipo']);
             $autores = htmlspecialchars($_POST['autores']);
             $revista = htmlspecialchars($_POST['revista']);
             $isbn = htmlspecialchars($_POST['isbn']);
@@ -82,8 +110,16 @@
             $acta = htmlspecialchars($_POST['acta']);
             $lugar = htmlspecialchars($_POST['lugar']);
 
-            $query = "INSERT INTO $tabla (userid, UD, titulo, subtipo, autores, revista, isbn, clave, volumen, pin, pfin,
-            fecha, impacto, citas, acta, editorial, lugar) VALUES ($userid,'5', '$titulo', '$subtipo', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$pin',
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, autores, revista, isbn, clave, volumen, pin, pfin, fecha, impacto,
+                 citas, acta, editorial, lugar, archivo)
+                                    VALUES ($userid, '1', '$titulo', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$pin',
+                                    '$pfin', '$fecha', '$impacto', '$citas', '$acta', '$editorial','$lugar' ,'$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, UD, titulo, autores, revista, isbn, clave, volumen, pin, pfin,
+            fecha, impacto, citas, acta, editorial, lugar) VALUES ($userid,'1', '$titulo', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$pin',
             '$pfin', '$fecha', '$impacto', '$citas', '$acta', '$editorial','$lugar')";
             break;
 
@@ -97,14 +133,24 @@
             $inicio = htmlspecialchars($_POST['inicio']);
             $fin = htmlspecialchars($_POST['fin']);
 
+            $dias	= (strtotime($inicio)-strtotime($fin))/86400;
+            $dias 	= abs($dias); $dias = floor($dias);	
+            $ud = $dias*0.75;
+
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, investigador, centro, pais, inicio, fin, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$investigador', '$centro', '$pais', '$inicio', '$fin', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, investigador, centro, pais, inicio, fin) 
-                                VALUES ($userid,'5', '$titulo', '$investigador', '$centro', '$pais', '$inicio', '$fin')";        
+                                VALUES ($userid,'$ud', '$titulo', '$investigador', '$centro', '$pais', '$inicio', '$fin')";        
     
             break;
 
         case 'ia':
             $titulo = htmlspecialchars($_POST['titulo']);
-            $director = htmlspecialchars($_POST['director']);
+            $director = (isset($_POST['director'])) ? 1 : 0;
             $subtipo = htmlspecialchars($_POST['subtipo']);
             $orgfin = htmlspecialchars($_POST['orgfin']);
             $entcol = htmlspecialchars($_POST['entcol']);
@@ -114,8 +160,29 @@
             $investigador = htmlspecialchars($_POST['investigador']);
             $numinv = htmlspecialchars($_POST['numinv']);
     
+
+            switch ($subtipo){
+                case '1':
+                    $ud=6;
+                    break;
+                case '2':
+                    $ud=12;
+                    break;
+                case '3':
+                    $ud=4;
+                    break;
+            }
+
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, director, orgfin, entidades, desde, hasta, subvencion, invprincipal,
+                numinv, archivo)
+                                    VALUES ($userid, $subtipo, '$ud', '$titulo',  '$director', '$orgfin', '$entcol', '$fechaini',
+                                            '$fechafin', '$subtot', '$investigador', '$numinv', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, director, orgfin, entidades, desde, hasta, subvencion,
-            invprincipal, numinv) VALUES ($userid, $subtipo, '5', '$titulo', '$director', '$orgfin', '$entcol', '$fechaini',
+            invprincipal, numinv) VALUES ($userid, $subtipo, '$ud', '$titulo', '$director', '$orgfin', '$entcol', '$fechaini',
             '$fechafin', '$subtot', '$investigador', '$numinv')";
 
             break;
@@ -125,18 +192,28 @@
             $id = htmlspecialchars($_POST['id']);
             $query="SELECT * FROM grupoinv WHERE id=$id";
             $resultado = $mysqli->query($query);
+            $director = (isset($_POST['director'])) ? 1 : 0;
             $lineaBD = $resultado->fetch_assoc();
-            $cargo = htmlspecialchars($_POST['cargo']);
             $titulo = $lineaBD['nombre'];
             $grupoinv = $lineaBD['id'];
 
-            $query = "INSERT INTO $tabla (userid, titulo, UD, groupid, cargo) VALUES ('$userid', '$titulo', '5', '$grupoinv', '$cargo')";
+            if($director)
+                $ud=1;
+            else
+                $ud=2;
+
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, director, groupid, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$director', '$id', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, titulo, director, UD, groupid) VALUES ('$userid', '$titulo', '$director', '$ud', '$grupoinv')";
         break;
 
         case 'ic':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
             $subtipo = htmlspecialchars($_POST['subtipo']);
             $fechapub = htmlspecialchars($_POST['fechapub']);
             $autores = htmlspecialchars($_POST['autores']);
@@ -153,21 +230,48 @@
             $acta = htmlspecialchars($_POST['acta']);
             $lugar = htmlspecialchars($_POST['lugar']);
 
+
+            switch($subtipo){
+                case'1':
+                    $ud = 1;
+                    break;
+                case'2':
+                    $ud = 15;
+                    break;
+                case'3':
+                    $ud = 1;
+                    break;
+            }
+
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, subtipo, autores, revista, isbn, clave, volumen, pin, pfin,
+                    fecha, impacto, citas, acta, editorial, lugar, archivo)
+                    VALUES ($userid, $subtipo, '$ud', '$titulo', '$subtipo', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$pin',
+                    '$pfin', '$fecha', '$impacto', '$citas', '$acta', '$editorial','$lugar', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, subtipo, autores, revista, isbn, clave, volumen, pin, pfin,
-            fecha, impacto, citas, acta, editorial, lugar) VALUES ($userid,'5', '$titulo', '$subtipo', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$pin',
+            fecha, impacto, citas, acta, editorial, lugar) VALUES ($userid,'$ud', '$titulo', '$subtipo', '$autores', '$revista', '$isbn', '$clave', '$volumen', '$pin',
             '$pfin', '$fecha', '$impacto', '$citas', '$acta', '$editorial','$lugar')";
             break;
 
         case 'id':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 1;
             $fecha = htmlspecialchars($_POST['fecha']);
             $participacion = htmlspecialchars($_POST['participacion']);
             $congreso = htmlspecialchars($_POST['congreso']);
             $regional = htmlspecialchars($_POST['regional']);
             $lugar = htmlspecialchars($_POST['lugar']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, participacion, regional, lugar, fecha, archivo)
+                                    VALUES ($userid, '5', '$titulo', '$participacion', '$regional', '$lugar', '$fecha', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, participacion, regional, lugar, fecha) VALUES 
                                         ($userid,'5', '$titulo', '$participacion', '$regional', '$lugar', '$fecha')";
 
@@ -180,22 +284,35 @@
             $resultado = $mysqli->query($query);
             $lineaBD = $resultado->fetch_assoc();
             $titulo = $lineaBD['nombre'];
+            $ud=8;
 
-            $query = "INSERT INTO $tabla (userid, titulo, UD, redid) VALUES ('$userid', '$titulo', '5', '$id')";
-            echo $query;
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, redid, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$id', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, titulo, UD, redid) VALUES ('$userid', '$titulo', '$ud', '$id')";
             break;
 
         case 'iff':
             
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
-            $query = "INSERT INTO $tabla (userid, UD, titulo) VALUES ($userid,'5', '$titulo')";
+            $ud = 1;
+            
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, UD, titulo) VALUES ($userid,'$ud', '$titulo')";
             break;
 
         case 'ig':
         
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 2;
             $investigador = htmlspecialchars($_POST['investigador']);
             $editor = htmlspecialchars($_POST['editor']);
             $revista = htmlspecialchars($_POST['revista']);
@@ -204,8 +321,14 @@
             $desde = htmlspecialchars($_POST['desde']);
             $hasta = htmlspecialchars($_POST['hasta']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, investigador,  editor, revista, impacto, nacional, desde, hasta, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$investigador', '$editor', '$revista', '$impacto', '$nacional', '$desde', '$hasta', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, investigador,  editor, revista, impacto, nacional, desde, hasta)
-                                VALUES ($userid, '5', '$titulo', '$investigador', '$editor', '$revista', '$impacto', '$nacional', '$desde', '$hasta')";
+                                VALUES ($userid, '$ud', '$titulo', '$investigador', '$editor', '$revista', '$impacto', '$nacional', '$desde', '$hasta')";
 
             break;
 
@@ -219,8 +342,18 @@
             $inicio = htmlspecialchars($_POST['inicio']);
             $fin = htmlspecialchars($_POST['fin']);
 
+            $dias	= (strtotime($inicio)-strtotime($fin))/86400;
+            $dias 	= abs($dias); $dias = floor($dias);	
+            $ud = $dias/7;
+
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, investigador, centro, pais, inicio, fin, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$investigador', '$centro', '$pais', '$inicio', '$fin', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, investigador, centro, pais, inicio, fin) 
-                                VALUES ($userid,'5', '$titulo', '$investigador', '$centro', '$pais', '$inicio', '$fin')";
+                                VALUES ($userid, '$ud', '$titulo', '$investigador', '$centro', '$pais', '$inicio', '$fin')";
             break;
 
         case 'ii':
@@ -231,8 +364,15 @@
             $lineaBD = $resultado->fetch_assoc();
             $titulo = $lineaBD['titulo'];
             $tesisid = $lineaBD['id'];
-            $ud = 4;
-            $query = "INSERT INTO $tabla (userid, titulo, UD, tesisid) VALUES ('$userid', '$titulo', '5', '$tesisid')";
+            $ud = 15;
+            
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, tesisid, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$tesisid', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, titulo, UD, tesisid) VALUES ('$userid', '$titulo', '$ud', '$tesisid')";
             break;
 
         case 'ij':
@@ -243,14 +383,21 @@
             $lineaBD = $resultado->fetch_assoc();
             $titulo = $lineaBD['titulo'];
             $tesisid = $lineaBD['id'];
-            $ud = 4;
-            $query = "INSERT INTO $tabla (userid, titulo, UD, tesisid) VALUES ('$userid', '$titulo', '5', '$tesisid')";
+            $ud = 54;
+            
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, tesisid, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$tesisid', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, titulo, UD, tesisid) VALUES ('$userid', '$titulo', '$ud', '$tesisid')";
             break;
         
         case 'ik':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 6;
             $orgfin = htmlspecialchars($_POST['orgfin']);
             $entidades = htmlspecialchars($_POST['entidades']);
             $desde = htmlspecialchars($_POST['desde']);
@@ -259,8 +406,14 @@
             $numinv = htmlspecialchars($_POST['numinv']);
             $subvencion = htmlspecialchars($_POST['subvencion']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, orgfin, entidades, desde, hasta, invresponsable, numinv, subvencion, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$orgfin', '$entidades', '$desde', '$hasta', '$invresponsable', '$numinv', '$subvencion', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, orgfin, entidades, desde, hasta, invresponsable, numinv, subvencion)
-                                VALUES ($userid,'5', '$titulo', '$orgfin', '$entidades', '$desde', '$hasta', '$invresponsable', '$numinv', '$subvencion')";
+                                VALUES ($userid,'$ud', '$titulo', '$orgfin', '$entidades', '$desde', '$hasta', '$invresponsable', '$numinv', '$subvencion')";
 
             break;
 
@@ -268,7 +421,7 @@
         case 'il':
             
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 15;
             $fecha = htmlspecialchars($_POST['fecha']);
             $autores = htmlspecialchars($_POST['autores']);
             $pais = htmlspecialchars($_POST['pais']);
@@ -276,40 +429,58 @@
             $entidad = htmlspecialchars($_POST['entidad']);
             $empresa = htmlspecialchars($_POST['empresa']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, fecha, autores, pais, patente, entidad, empresa, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$fecha', '$autores', '$pais', '$patente', '$entidad', '$empresa', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, fecha, autores, pais, patente, entidad, empresa)
-                                VALUES ($userid,'5', '$titulo', '$fecha', '$autores', '$pais', '$patente', '$entidad', '$empresa')";
+                                VALUES ($userid,'$ud', '$titulo', '$fecha', '$autores', '$pais', '$patente', '$entidad', '$empresa')";
 
             break;
         
         case 'im':
             
             $titulo = htmlspecialchars($_POST['razsocial']);
-            $ud = 4;
+            $ud = 12;
             $CIF = htmlspecialchars($_POST['CIF']);
 
-            $query = "INSERT INTO $tabla (userid, UD, titulo, CIF) VALUES ($userid,'5', '$titulo', '$CIF')";
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, CIF, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$CIF', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, UD, titulo, CIF) VALUES ($userid, '$ud', '$titulo', '$CIF')";
             break;
 
         case 'inn':
         
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 5;
             $inv = htmlspecialchars($_POST['inv']);
             $entidad = htmlspecialchars($_POST['entidad']);
             $investigadores = htmlspecialchars($_POST['investigadores']);
             $tema = htmlspecialchars($_POST['tema']);
             $fecha = htmlspecialchars($_POST['fecha']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, entidad, tema, fecha, calificacion, premios, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$entidad', '$tema', '$fecha', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, investigadores, entidad, tema, fecha) 
-                                VALUES ($userid,'5', '$titulo', '$investigadores','$entidad', '$tema', '$fecha')";
+                                VALUES ($userid,'$ud', '$titulo', '$investigadores','$entidad', '$tema', '$fecha')";
 
             break;
 
         case 'innn':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
-            $gestor = htmlspecialchars($_POST['gestor']);
+            $ud = 6;
+            $gestor = (isset($_POST['gestor'])) ? 1 : 0;
             $orgfin = htmlspecialchars($_POST['orgfin']);
             $entfin = htmlspecialchars($_POST['entfin']);
             $fechaini = htmlspecialchars($_POST['fechaini']);
@@ -318,8 +489,14 @@
             $invprincipal = htmlspecialchars($_POST['invprincipal']);
             $numinv = htmlspecialchars($_POST['numinv']);
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, gestor, entidades, desde, hasta, subvencion, invprincipal, numinv, archivo)
+                                VALUES ($userid, '$ud', '$titulo', '$gestor', '$entfin', '$fechaini', '$fechafin', '$subvencion', '$invprincipal', '$numinv', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, gestor, entidades, desde, hasta, subvencion, invprincipal, numinv)
-                                    VALUES ($userid, '5', '$titulo', '$gestor', '$entfin', '$fechaini', '$fechafin', '$subvencion', '$invprincipal', '$numinv')";
+                                    VALUES ($userid, '$ud', '$titulo', '$gestor', '$entfin', '$fechaini', '$fechafin', '$subvencion', '$invprincipal', '$numinv')";
 
             break;
 
@@ -327,67 +504,103 @@
 
             $titulo = htmlspecialchars($_POST['titulo']);
             $ud = 4;
-            $autores = htmlspecialchars($_POST['autores']);
+            $organizador = htmlspecialchars($_POST['organizador']);
             $participacion = htmlspecialchars($_POST['participacion']);
             $congreso = htmlspecialchars($_POST['congreso']);
             $regional = htmlspecialchars($_POST['regional']);
             $lugar = htmlspecialchars($_POST['lugar']);
             $fecha = htmlspecialchars($_POST['fecha']);
 
-            $query = "INSERT INTO $tabla (userid, UD, titulo, autores, participacion, congreso, regional, lugar, fecha)
-                                VALUES ($userid,'5', '$titulo', '$autores', '$participacion', '$congreso', '$regional', '$lugar', '$fecha')";
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, organizador, participacion, congreso, regional, lugar, fecha, archivo)
+                                    VALUES ($userid, '5', '$titulo', '$organizador', '$participacion', '$congreso', '$regional', '$lugar', '$fecha', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, UD, titulo, organizador, participacion, congreso, regional, lugar, fecha)
+                                VALUES ($userid,'5', '$titulo', '$organizador', '$participacion', '$congreso', '$regional', '$lugar', '$fecha')";
 
             break;
 
         case 'ga':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 8;
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo)
-                                  VALUES ($userid,'5', '$titulo')";
+                                  VALUES ($userid,'$ud', '$titulo')";
 
             break;
         case 'gb':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 8;
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo)
-                                  VALUES ($userid,'5', '$titulo')";
+                                  VALUES ($userid,'$ud', '$titulo')";
 
             break;
         case 'gc':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 5;
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo)
-                                  VALUES ($userid,'5', '$titulo')";
+                                  VALUES ($userid,'$ud', '$titulo')";
 
             break;
         case 'gd':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 5;
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo)
-                                VALUES ($userid,'5', '$titulo')";
+                                VALUES ($userid, '$ud', '$titulo')";
 
             break;
         case 'ge':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 1;
 
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo)
-                                  VALUES ($userid,'5', '$titulo')";
+                                  VALUES ($userid,'$ud', '$titulo')";
 
             break;
         case 'gff':
 
         $titulo = htmlspecialchars($_POST['titulo']);
-        $director = htmlspecialchars($_POST['director']);
+        $director = (isset($_POST['director'])) ? 1 : 0;
         $subtipo = htmlspecialchars($_POST['subtipo']);
         $orgfin = htmlspecialchars($_POST['orgfin']);
         $entcol = htmlspecialchars($_POST['entcol']);
@@ -397,15 +610,29 @@
         $investigador = htmlspecialchars($_POST['investigador']);
         $numinv = htmlspecialchars($_POST['numinv']);
 
+        if($subtipo==1)
+            $ud=3;
+        else
+            $ud=2;
+            
+
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, director, orgfin, entidades, desde, hasta, subvencion,
+            invprincipal, numinv, archivo)
+                                VALUES ($userid, $subtipo, '$ud', '$titulo', '$director', '$orgfin', '$entcol', '$fechaini',
+        '$fechafin', '$subtot', '$investigador', '$numinv', '$ruta')";
+        }
+        else
         $query = "INSERT INTO $tabla (userid, subtipo, UD, titulo, director, orgfin, entidades, desde, hasta, subvencion,
-        invprincipal, numinv) VALUES ($userid, $subtipo, '5', '$titulo', '$director', '$orgfin', '$entcol', '$fechaini',
+        invprincipal, numinv) VALUES ($userid, $subtipo, '$ud', '$titulo', '$director', '$orgfin', '$entcol', '$fechaini',
         '$fechafin', '$subtot', '$investigador', '$numinv')";
             break;
         case 'gg':
 
         $titulo = htmlspecialchars($_POST['titulo']);
-        $ud = 4;
-        $gestor = htmlspecialchars($_POST['gestor']);
+        $ud = 3;
+        $gestor = (isset($_POST['gestor'])) ? 1 : 0;
         $orgfin = htmlspecialchars($_POST['orgfin']);
         $entfin = htmlspecialchars($_POST['entfin']);
         $fechaini = htmlspecialchars($_POST['fechaini']);
@@ -414,31 +641,54 @@
         $invprincipal = htmlspecialchars($_POST['invprincipal']);
         $numinv = htmlspecialchars($_POST['numinv']);
 
+        if(($_FILES['file']['name'])!=''){
+            $ruta=subirArchivo($tabla);
+            $query = "INSERT INTO $tabla (userid, UD, titulo, gestor, entidades, desde, hasta, subvencion, invprincipal, numinv, archivo)
+                                VALUES ($userid, '$ud', '$titulo', '$gestor', '$entfin', '$fechaini', '$fechafin', '$subvencion', '$invprincipal', '$numinv', '$ruta')";
+        }
+        else
         $query = "INSERT INTO $tabla (userid, UD, titulo, gestor, entidades, desde, hasta, subvencion, invprincipal, numinv)
-                                VALUES ($userid, '5', '$titulo', '$gestor', '$entfin', '$fechaini', '$fechafin', '$subvencion', '$invprincipal', '$numinv')";
+                                VALUES ($userid, '$ud', '$titulo', '$gestor', '$entfin', '$fechaini', '$fechafin', '$subvencion', '$invprincipal', '$numinv')";
 
         break;
 
         case 'gh':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
-            $fecha = htmlspecialchars($_POST['fecha']);
+            $inicio = htmlspecialchars($_POST['inicio']);
+            $fin = htmlspecialchars($_POST['fin']);
             $lugar = htmlspecialchars($_POST['lugar']);
             $descripcion = htmlspecialchars($_POST['descripcion']);
 
-            $query = "INSERT INTO $tabla (userid, UD, titulo, fecha, lugar, descripcion)
-                                VALUES ($userid,'5', '$titulo', '$fecha', '$lugar', '$descripcion')";
+            $dias	= (strtotime($inicio)-strtotime($fin))/86400;
+            $dias 	= abs($dias); $dias = floor($dias);	
+            $ud = $dias*1.5;
+            echo $dias;
+
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, inicio, fin, lugar, descripcion, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$inicio', '$fin', '$lugar', '$descripcion', '$ruta')";
+            }
+            else
+            $query = "INSERT INTO $tabla (userid, UD, titulo, inicio, fin, lugar, descripcion)
+                                VALUES ($userid,'$ud', '$titulo', '$inicio', '$fin', '$lugar', '$descripcion')";
 
             break;
         case 'gi':
 
             $titulo = htmlspecialchars($_POST['titulo']);
-            $ud = 4;
+            $ud = 2;
             $descripcion = htmlspecialchars($_POST['descripcion']);
             
+            if(($_FILES['file']['name'])!=''){
+                $ruta=subirArchivo($tabla);
+                $query = "INSERT INTO $tabla (userid, UD, titulo, descripcion, archivo)
+                                    VALUES ($userid, '$ud', '$titulo', '$descripcion', '$ruta')";
+            }
+            else
             $query = "INSERT INTO $tabla (userid, UD, titulo, descripcion)
-                                VALUES ($userid,'5', '$titulo', '$descripcion')";
+                                VALUES ($userid,'$ud', '$titulo', '$descripcion')";
 
             break;
 
@@ -448,6 +698,7 @@
     //fin del switch.
         }
 
+        
 if (!$resultado = $mysqli->query($query)) {
 	// ¡Oh, no! La consulta falló. 
     echo "Lo sentimos, este sitio web está experimentando problemas.";
@@ -459,5 +710,9 @@ if (!$resultado = $mysqli->query($query)) {
     echo "Error: " . $mysqli->error . "\n";
     exit;
 }
-    header('location:/potencial/tablausuario12am.php');
+    $_POST = array();
+
+    echo '<script type="text/javascript">';
+    echo 'location.href ="/potencial/tablausuario12am.php";';
+    echo '</script>';
 ?>

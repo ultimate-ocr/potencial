@@ -1,21 +1,15 @@
-
-
 <?php
+include '../../library/libreria.php';
 
-
-//$userid=$_SESSION["id"];
-
-$userid=8;
+if(session_status() === PHP_SESSION_NONE)
+  session_start();
+$userid=$_SESSION["id"];
 
 $id = htmlspecialchars($_POST['id']);
 $tabla = htmlspecialchars($_POST['tabla']);
 
 
-$mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-if ($mysqli->connect_errno) {
-    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    die("Error: No se pudo conectar");
-}
+$mysqli = conectar();
   switch ($tabla) {
 
     case "de":
@@ -24,8 +18,9 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
-    
+    echo"    
+    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
+                     <br>
                      <div>
                         <label for=\"nombre\">Título</label>
                        <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
@@ -39,8 +34,8 @@ if ($mysqli->connect_errno) {
 
              <label for=\"subtipo\">Tipo de proyecto</label></p>
                <select name=\"subtipo\">    
-                 <option value=\"1\" selected=\"selected\">Trabajo fin de Grado</option>
-                 <option value=\"2\">Trabajo fin de Máster</option>
+                 <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Trabajo fin de Grado</option>
+                 <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Trabajo fin de Máster</option>
                </select>
               <br>
              <div>
@@ -61,8 +56,14 @@ if ($mysqli->connect_errno) {
                      <div>
                        <p class=\"subtitulo\"><label for=\"numinv\">Premios y Menciones de Calidad recibidos</label></p>
                        <input type=\"text\" class=\"form-control\" id=\"premios\" name=\"premios\" value = \"".$lineaBD['premios']."\">
-                     </div>
-    
+                     </div>";
+
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
                      <input type=\"hidden\" name=\"tabla\" value=\"de\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                      <div class=\"modal-footer\">
@@ -78,7 +79,7 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
     
                      <div>
                         <label for=\"nombre\">Título</label>
@@ -121,7 +122,14 @@ if ($mysqli->connect_errno) {
                        echo"<input type=\"checkbox\" id=\"menciondecalidad\" name=\"menciondecalidad\" checked value=\"1\">";
                     else
                        echo"<input type=\"checkbox\" id=\"menciondecalidad\" name=\"menciondecalidad\" value=\"1\">";
-                   echo"
+
+                    if($lineaBD['archivo'])
+                        echo"<br>Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
+                   
                    </div>
                      <input type=\"hidden\" name=\"tabla\" value=\"dff\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -138,7 +146,7 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
     
                      <div>
                         <label for=\"nombre\">Título</label>
@@ -178,7 +186,14 @@ if ($mysqli->connect_errno) {
                     <label for=\"entcol\">ISBN</label>
                     <input type=\"text\" class=\"form-control\" id=\"isbn\" name=\"isbn\" value = \"".$lineaBD['isbn']."\">
                   </div>
-                  <br>
+                  <br>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
    
                      <input type=\"hidden\" name=\"tabla\" value=\"dg\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -195,7 +210,7 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
     
                      <div>
                         <label for=\"nombre\">Título</label>
@@ -220,7 +235,14 @@ if ($mysqli->connect_errno) {
                      <div>
                        <p class=\"subtitulo\"><label for=\"investigador\">Fecha</label></p>
                        <input type=\"date\" class=\"form-control\" id=\"fecha\" name=\"fecha\" value = \"".$lineaBD['fecha']."\">
-                     </div>
+                     </div>";
+                     
+                       if($lineaBD['archivo'])
+                           echo"Archivo actual: <br>
+                               <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                       
+                       echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                       <input name=\"file\" type=\"file\" />
 
                      <input type=\"hidden\" name=\"tabla\" value=\"dh\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -237,7 +259,7 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
     
                      <div>
                         <label for=\"nombre\">Título</label>
@@ -248,13 +270,6 @@ if ($mysqli->connect_errno) {
                        <label for=\"orgfin\">Autores</label>
                        <input type=\"text\" class=\"form-control\" id=\"autores\" name=\"autores\" value = \"".$lineaBD['autores']."\">
                      </div>
-             <br>
-             <select name=\"subtipo\">    
-             <option value=\"1\" selected=\"selected\">Reconocimiento de la investigación</option>
-             <option value=\"2\">Publicaciones de investigación indexada</option>
-             <option value=\"3\">Publicaciones de investigación no indexada</option>
-           </select>
-            <br>
             <br>
              <div>
                        <label for=\"entcol\">Revista</label>
@@ -314,7 +329,14 @@ if ($mysqli->connect_errno) {
                      <div>
                        <p class=\"subtitulo\"><label for=\"numinv\">Lugar de publicación</label></p>
                        <input type=\"text\" class=\"form-control\" id=\"lugar\" name=\"lugar\" value = \"".$lineaBD['lugar']."\">
-                     </div>
+                     </div>";
+                     
+                       if($lineaBD['archivo'])
+                           echo"Archivo actual: <br>
+                               <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                       
+                       echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                       <input name=\"file\" type=\"file\" />
     
                      <input type=\"hidden\" name=\"tabla\" value=\"di\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -331,7 +353,7 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
     
-    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
     
                      <div>
                         <label for=\"nombre\">Título</label>
@@ -361,7 +383,14 @@ if ($mysqli->connect_errno) {
                      <div>
                        <p class=\"subtitulo\"><label for=\"numinv\">Fecha de finalización</label></p>
                        <input type=\"date\" class=\"form-control\" id=\"fin\" name=\"fin\" value = \"".$lineaBD['fin']."\">
-                     </div>
+                     </div>";
+                     
+                       if($lineaBD['archivo'])
+                           echo"Archivo actual: <br>
+                               <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                       
+                       echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                       <input name=\"file\" type=\"file\" />
     
                      <input type=\"hidden\" name=\"tabla\" value=\"dk\" />
                      <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -379,7 +408,7 @@ if ($mysqli->connect_errno) {
 
     echo"
 
-    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
     
                       <div>
                          <label for=\"nombre\">Nombre del Proyecto</label>
@@ -423,7 +452,15 @@ if ($mysqli->connect_errno) {
                       <div>
                         <p class=\"subtitulo\"><label for=\"numinv\">Número de investigadores</label></p>
                         <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['numinv']."\">
-                      </div>
+                      </div>";
+                      
+                        if($lineaBD['archivo'])
+                            echo"Archivo actual: <br>
+                                <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                        
+                        echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                        <input name=\"file\" type=\"file\" />
+
                       <input type=\"hidden\" name=\"tabla\" value=\"ia\" />
                       <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                       <div class=\"modal-footer\">
@@ -436,38 +473,44 @@ if ($mysqli->connect_errno) {
 
       case "ib":
       
-     echo"   <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+     echo"   <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\"  enctype=\"multipart/form-data\">";
      
-                        <label for=\"id\">Grupo de Investigación</label></p>
-                         <select name=\"select\">";
-                            $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                               if ($mysqli->connect_errno) {
-                                 echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                                 die("Error: No se pudo conectar");
-                               }
-                               $query = "SELECT * FROM grupoinv";
-                               $resultado = $mysqli->query($query);
-                               while ($lineaBD = $resultado->fetch_assoc())
-                           echo"
-                           <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
-                           
-                        echo" </select>";
-                         $query = "SELECT * FROM $tabla WHERE id=$id ";
-                         $resultado = $mysqli->query($query);
-                         $lineaBD = $resultado->fetch_assoc();
+                        $query = "SELECT * FROM $tabla WHERE id=$id";
+                        $resultado = lanzar($query,$mysqli);
+                        $lineaBD = $resultado->fetch_assoc();
+                        $red=$lineaBD['groupid'];
                 echo" 
-               <br>
-                       <div class=\"form-group\">
-                          <label for=\"orgfin\">Cargo</label></p>
-                          <input type=\"text\" class=\"form-control\" id=\"cargo\" name=\"cargo\" value =".$lineaBD['cargo'].">
-                        </div>
-               <br>
-                        <div class=\"form-group\">
-                          <label for=\"orgfin\">Unidades Docentes</label></p>
-                          <input type=\"text\" class=\"form-control\" id=\"orgfin\" name=\"orgfin\" value=".$lineaBD['UD'].">
-                        </div>
-                <br>
-                        <input type=\"hidden\" name=\"tabla\" value=\"ib\" />
+               <div>
+               <p class=\"subtitulo\"><label for=\"numinv\">Es Director</label></p>";
+               if ($lineaBD['director'])
+                 echo"<input type=\"checkbox\" id=\"director\" name=\"director\" checked value=\"1\">";
+               else
+                 echo"<input type=\"checkbox\" id=\"director\" name=\"director\" value=\"1\">";
+             echo"
+             </div>";
+             if($lineaBD['archivo'])
+             echo"Archivo actual: <br>
+                 <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+         
+         echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+         <input name=\"file\" type=\"file\" />
+                           <br>
+
+                           <label for=\"id\">Grupo de Investigación</label></p>
+                           <select name=\"select\">";
+                                 $mysqli=conectar();
+                                 $query = "SELECT * FROM grupoinv";
+                                 $resultado = $mysqli->query($query);
+                                 while ($lineaBD = $resultado->fetch_assoc())
+                                    if($lineaBD['id']==$red)
+                                        echo" <option value=".$lineaBD['id']." selected >".$lineaBD['grupoid']."</option>";
+                                    else
+                                        echo" <option value=".$lineaBD['id'].">".$lineaBD['grupoid']."</option>";
+                             
+                          echo" </select>";
+                  
+
+                        echo" <input type=\"hidden\" name=\"tabla\" value=\"ib\" />
                         <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                         <div class=\"modal-footer\">
                           <input type=\"submit\" name=\"insertaib\" id=\"newib\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
@@ -484,20 +527,17 @@ if ($mysqli->connect_errno) {
     $resultado = $mysqli->query($query);
     $lineaBD = $resultado->fetch_assoc();
 
-    echo"    <form id=\"insertaic\" name=\"newic\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+    echo"    <form id=\"insertaic\" name=\"newic\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\" enctype=\"multipart/form-data\">
     
    
                          <label for=\"nombre\">Título</label></p>
                         <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value=".$lineaBD['titulo'].">
                        <br>
-                        <label for=\"orgfin\">Unidades Docentes</label></p>
-                        <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value=".$lineaBD['UD'].">
-                      <br>
                      <label for=\"subtipo\">Subtipo</label></p>
                        <select name=\"subtipo\">    
-                         <option value=\"1\" selected=\"selected\">Reconocimiento de la investigación</option>
-                         <option value=\"2\">Publicaciones de investigación indexada</option>
-                         <option value=\"3\">Publicaciones de investigación no indexada</option>
+                         <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo"selected=\"selected\">Reconocimiento de la investigación</option>
+                         <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Publicaciones de investigación indexada</option>
+                         <option value=\"3\" "; if($lineaBD['subtipo']==3) echo" selected"; echo">Publicaciones de investigación no indexada</option>
                        </select>
                       <br>
    
@@ -538,7 +578,15 @@ if ($mysqli->connect_errno) {
                         <input class=\"form-control\" id=\"editorial\" name=\"editorial\"type=\"text\"  value=".$lineaBD['editorial'].">
    
                         <label for=\"lugar\">Lugar</label>
-                        <input class=\"form-control\" id=\"lugar\" name=\"lugar\"type=\"text\"  value=".$lineaBD['lugar'].">
+                        <input class=\"form-control\" id=\"lugar\" name=\"lugar\"type=\"text\"  value=".$lineaBD['lugar'].">";
+                        
+                          if($lineaBD['archivo'])
+                              echo"Archivo actual: <br>
+                                  <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                          
+                          echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                          <input name=\"file\" type=\"file\" />
+                        
    
                         <input type=\"hidden\" name=\"tabla\" value=\"ic\" />
                         <input type=\"hidden\" name=\"id\" value=\"".$id."\" />                     
@@ -556,13 +604,10 @@ if ($mysqli->connect_errno) {
    $resultado = $mysqli->query($query);
    $lineaBD = $resultado->fetch_assoc();
 
-   echo"    <form id=\"insertaid\" name=\"newid\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+   echo"    <form id=\"insertaid\" name=\"newid\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\" enctype=\"multipart/form-data\">
   
                        <label for=\"nombre\">Nombre del Congreso</label>
                        <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-
-                       <label for=\"orgfin\">Unidades Docentes</label></p>
-                       <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
   
                        <label for=\"fechapub\">Fecha</label>
                        <input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" value = \"".$lineaBD['fecha']."\">
@@ -574,7 +619,14 @@ if ($mysqli->connect_errno) {
                        <input class=\"form-control\" id=\"regional\" name=\"regional\" type=\"text\"  value = \"".$lineaBD['regional']."\">
   
                        <label for=\"lugar\">Lugar</label>
-                       <input class=\"form-control\" id=\"lugar\" name=\"lugar\"type=\"text\"  value = \"".$lineaBD['lugar']."\">
+                       <input class=\"form-control\" id=\"lugar\" name=\"lugar\"type=\"text\"  value = \"".$lineaBD['lugar']."\">";
+                       
+                         if($lineaBD['archivo'])
+                             echo"Archivo actual: <br>
+                                 <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                         
+                         echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                         <input name=\"file\" type=\"file\" />
   
                        <input type=\"hidden\" name=\"tabla\" value=\"id\" >
                        <input type=\"hidden\" name=\"id\" value=\"".$id."\" />                     
@@ -588,32 +640,36 @@ if ($mysqli->connect_errno) {
 
 
       break;
+      
     case "ie":
           
    $query = "SELECT * FROM $tabla WHERE id=$id";
    $resultado = $mysqli->query($query);
    $lineaBD = $resultado->fetch_assoc();
-
+   $red=$lineaBD['redid'];
       
-   echo"   <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+   echo"   <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\" enctype=\"multipart/form-data\">";
    
+     if($lineaBD['archivo'])
+         echo"Archivo actual: <br>
+             <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+     
+     echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+     <input name=\"file\" type=\"file\" />
+
+
                       <label for=\"id\">Grupo de Investigación</label></p>
                        <select name=\"select\">";
-                          $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                             if ($mysqli->connect_errno) {
-                               echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                               die("Error: No se pudo conectar");
-                             }
+                          $mysqli = conectar();
                              $query = "SELECT * FROM redinv";
                              $resultado = $mysqli->query($query);
                              while ($lineaBD = $resultado->fetch_assoc())
-                         echo"
-                         <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
+                                if($lineaBD['id']==$red)
+                                  echo" <option value=".$lineaBD['id']." selected >".$lineaBD['nombre']."</option>";
+                                else
+                                  echo" <option value=".$lineaBD['id'].">".$lineaBD['nombre']."</option>";
                          
                       echo" </select>";
-                       $query = "SELECT * FROM $tabla WHERE id=$id ";
-                       $resultado = $mysqli->query($query);
-                       $lineaBD = $resultado->fetch_assoc();
               echo" 
              <br>
 
@@ -634,13 +690,21 @@ if ($mysqli->connect_errno) {
      $resultado = $mysqli->query($query);
      $lineaBD = $resultado->fetch_assoc();
  
-     echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+     echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
      
                        <div>
                           <label for=\"nombre\">Título</label>
                          <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
                        </div>
-               <br>
+               <br>";
+               
+                 if($lineaBD['archivo'])
+                     echo"Archivo actual: <br>
+                         <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                 
+                 echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                 <input name=\"file\" type=\"file\" />
+
                        <input type=\"hidden\" name=\"tabla\" value=\"iff\" />
                        <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                        <div class=\"modal-footer\">
@@ -656,16 +720,11 @@ if ($mysqli->connect_errno) {
      $resultado = $mysqli->query($query);
      $lineaBD = $resultado->fetch_assoc();
  
-     echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+     echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
      
                        <div>
                           <label for=\"nombre\">Título</label>
                          <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                       </div>
-               <br>
-                       <div>
-                         <label for=\"orgfin\">Unidades Docentes</label>
-                         <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
                        </div>
                <br>
                <div>
@@ -701,7 +760,14 @@ if ($mysqli->connect_errno) {
                        <div>
                          <p class=\"subtitulo\"><label for=\"numinv\">Fecha de finalización</label></p>
                          <input type=\"date\" class=\"form-control\" id=\"hasta\" name=\"hasta\" value = \"".$lineaBD['hasta']."\">
-                       </div>
+                       </div>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
                       
                        <input type=\"hidden\" name=\"tabla\" value=\"ig\" />
                        <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -718,16 +784,11 @@ if ($mysqli->connect_errno) {
   $resultado = $mysqli->query($query);
   $lineaBD = $resultado->fetch_assoc();
 
-  echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+  echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
   
                     <div>
                        <label for=\"nombre\">Título</label>
                       <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                    </div>
-            <br>
-                    <div>
-                      <label for=\"orgfin\">Unidades Docentes</label>
-                      <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
                     </div>
             <br>
             <div>
@@ -753,7 +814,15 @@ if ($mysqli->connect_errno) {
                     <div>
                       <p class=\"subtitulo\"><label for=\"numinv\">Fecha de finalización</label></p>
                       <input type=\"date\" class=\"form-control\" id=\"fin\" name=\"fin\" value = \"".$lineaBD['fin']."\">
-                    </div>
+                    </div>";
+                    
+                      if($lineaBD['archivo'])
+                          echo"Archivo actual: <br>
+                              <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                      
+                      echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                      <input name=\"file\" type=\"file\" />
+                      
                     <input type=\"hidden\" name=\"tabla\" value=\"ih\" />
                     <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                     <div class=\"modal-footer\">
@@ -768,26 +837,31 @@ if ($mysqli->connect_errno) {
  $query = "SELECT * FROM $tabla WHERE id=$id";
  $resultado = $mysqli->query($query);
  $lineaBD = $resultado->fetch_assoc();
+ $tesis=$lineaBD['tesisid'];
 
- echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\" enctype=\"multipart/form-data\">";
  
+   if($lineaBD['archivo'])
+       echo"Archivo actual: <br>
+           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+   
+   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+   <input name=\"file\" type=\"file\" />
+ 
+
+
                     <label for=\"id\">Tesis</label></p>
                      <select name=\"select\">";
-                        $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                           if ($mysqli->connect_errno) {
-                             echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                             die("Error: No se pudo conectar");
-                           }
+                        $mysqli=conectar();
                            $query = "SELECT * FROM tesis";
                            $resultado = $mysqli->query($query);
                            while ($lineaBD = $resultado->fetch_assoc())
-                       echo"
-                       <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>";
+                              if($lineaBD['id']==$tesis)
+                                echo" <option value=".$lineaBD['id']." selected >".$lineaBD['titulo']."</option>";
+                              else
+                                echo" <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>";
                        
                     echo" </select>";
-                     $query = "SELECT * FROM $tabla WHERE id=$id ";
-                     $resultado = $mysqli->query($query);
-                     $lineaBD = $resultado->fetch_assoc();
             echo" 
           
                     <input type=\"hidden\" name=\"tabla\" value=\"ii\" />
@@ -804,21 +878,27 @@ if ($mysqli->connect_errno) {
 $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
+$tesisid=$lineaBD['tesisid'];
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\" enctype=\"multipart/form-data\">";
+
+  if($lineaBD['archivo'])
+      echo"Archivo actual: <br>
+          <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+  
+  echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+  <input name=\"file\" type=\"file\" />
 
                    <label for=\"id\">Tesis</label></p>
                     <select name=\"select\">";
-                       $mysqli = new mysqli("localhost", "vrodriguez", "7672", "potencial");
-                          if ($mysqli->connect_errno) {
-                            echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-                            die("Error: No se pudo conectar");
-                          }
+                       $mysqli = conectar();
                           $query = "SELECT * FROM tesis";
                           $resultado = $mysqli->query($query);
                           while ($lineaBD = $resultado->fetch_assoc())
-                      echo"
-                      <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>";
+                            if($lineaBD['id']==$tesisid)
+                              echo" <option value=".$lineaBD['id']." selected >".$lineaBD['titulo']."</option>";
+                            else
+                              echo" <option value=".$lineaBD['id'].">".$lineaBD['titulo']."</option>";
                       
                    echo" </select>";
                     $query = "SELECT * FROM $tabla WHERE id=$id ";
@@ -841,16 +921,11 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
-         <br>
-                 <div>
-                   <label for=\"orgfin\">Unidades Docentes</label>
-                   <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
                  </div>
          <br>
          <div>
@@ -885,7 +960,15 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Subvencion</label></p>
                    <input type=\"text\" class=\"form-control\" id=\"subvencion\" name=\"subvencion\" value = \"".$lineaBD['subvencion']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
+
                  <input type=\"hidden\" name=\"tabla\" value=\"ik\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                  <div class=\"modal-footer\">
@@ -902,40 +985,44 @@ $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
 echo"
-<form id=\"insertail\" name=\"newil\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\">
-<label for=\"nombre\">Título</label></p>
-<input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-<br>
-<label for=\"orgfin\">Unidades Docentes</label></p>
-<input type=\"text\" class=\"form-control\" id=\"UD\" name=\"orgfin\" value = \"".$lineaBD['UD']."\">
-<br>
-<label for=\"fechapub\">Fecha de concesión</label>
-<input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" value = \"".$lineaBD['fecha']."\">
+  <form id=\"insertail\" name=\"newil\" action=\"library/tablausuario/update.php\" method=\"post\" class=\"form-horizontal\" autocomplete=\"on\" enctype=\"multipart/form-data\">
+  <label for=\"nombre\">Título</label></p>
+  <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
+  <br>
+  <label for=\"fechapub\">Fecha de concesión</label>
+  <input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" value = \"".$lineaBD['fecha']."\">
 
-<label for=\"autores\">Autores</label>
-<input class=\"form-control\" id=\"autores\" name=\"autores\"type=\"text\" value = \"".$lineaBD['autores']."\">
+  <label for=\"autores\">Autores</label>
+  <input class=\"form-control\" id=\"autores\" name=\"autores\"type=\"text\" value = \"".$lineaBD['autores']."\">
 
-<label for=\"revista\">Pais</label>
-<input class=\"form-control\" id=\"pais\" name=\"pais\" type=\"text\" value = \"".$lineaBD['pais']."\">
+  <label for=\"revista\">Pais</label>
+  <input class=\"form-control\" id=\"pais\" name=\"pais\" type=\"text\" value = \"".$lineaBD['pais']."\">
 
-<label for=\"ISBN\">Numero de patente</label>
-<input class=\"form-control\" id=\"patente\" name=\"patente\"type=\"text\" value = \"".$lineaBD['patente']."\">
+  <label for=\"ISBN\">Numero de patente</label>
+  <input class=\"form-control\" id=\"patente\" name=\"patente\"type=\"text\" value = \"".$lineaBD['patente']."\">
 
-<label for=\"clave\">Entidad titular</label>
-<input class=\"form-control\" id=\"entidad\" name=\"entidad\" type=\"text\" value = \"".$lineaBD['entidad']."\">
+  <label for=\"clave\">Entidad titular</label>
+  <input class=\"form-control\" id=\"entidad\" name=\"entidad\" type=\"text\" value = \"".$lineaBD['entidad']."\">
 
-<label for=\"volumen\">Empresa explotadora</label>
-<input class=\"form-control\" id=\"empresa\" name=\"empresa\"type=\"text\" value = \"".$lineaBD['empresa']."\">
+  <label for=\"volumen\">Empresa explotadora</label>
+  <input class=\"form-control\" id=\"empresa\" name=\"empresa\"type=\"text\" value = \"".$lineaBD['empresa']."\">";
+                    
+  if($lineaBD['archivo'])
+      echo"Archivo actual: <br>
+          <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
 
-<input type=\"hidden\" name=\"tabla\" value=\"il\" />
-<input type=\"hidden\" name=\"id\" value=\"".$id."\" />                    
+  echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+  <input name=\"file\" type=\"file\" />
 
-<div class=\"modal-footer\">
-<input type=\"submit\" name=\"insertail\" id=\"newil\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
-</div>
-</form>
+  <input type=\"hidden\" name=\"tabla\" value=\"il\" />
+  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />                    
 
-";
+  <div class=\"modal-footer\">
+  <input type=\"submit\" name=\"insertail\" id=\"newil\" class=\"btn btn-success\" style=\"width:100%;\" value=\"Guardar\"/>
+  </div>
+  </form>
+
+  ";
 break;
       
 case "im":
@@ -944,7 +1031,7 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Razón social</label>
@@ -955,7 +1042,15 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                    <label for=\"orgfin\">CIF</label>
                    <input type=\"text\" class=\"form-control\" id=\"CIF\" name=\"CIF\" value = \"".$lineaBD['CIF']."\">
                  </div>
-         <br>
+         <br>";
+         
+           if($lineaBD['archivo'])
+               echo"Archivo actual: <br>
+                   <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+           
+           echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+           <input name=\"file\" type=\"file\" />
+
                  <input type=\"hidden\" name=\"tabla\" value=\"im\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                  <div class=\"modal-footer\">
@@ -971,16 +1066,11 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
-         <br>
-                 <div>
-                   <label for=\"orgfin\">Unidades Docentes</label>
-                   <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
                  </div>
          <br>
          <div>
@@ -1001,7 +1091,15 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Fecha de colaboración</label></p>
                    <input type=\"text\" class=\"form-control\" id=\"fecha\" name=\"fecha\" value = \"".$lineaBD['fecha']."\">
-                 </div>
+                 </div>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
+
 
                  <input type=\"hidden\" name=\"tabla\" value=\"inn\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1020,16 +1118,11 @@ $lineaBD = $resultado->fetch_assoc();
 
 echo"    
 
-<form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+<form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
-         <br>
-                 <div>
-                   <label for=\"orgfin\">Unidades Docentes</label>
-                   <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
                  </div>
          <br>
          <div>
@@ -1073,7 +1166,15 @@ echo"
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Núnero de investigadores</label></p>
                    <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['numinv']."\">
-                 </div>
+                 </div>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
+
 
                  <input type=\"hidden\" name=\"tabla\" value=\"innn\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1090,7 +1191,7 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
@@ -1098,8 +1199,8 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  </div>
          <br>
                  <div>
-                   <label for=\"orgfin\">Autores</label>
-                   <input type=\"text\" class=\"form-control\" id=\"autores\" name=\"autores\" value = \"".$lineaBD['autores']."\">
+                   <label for=\"orgfin\">Organizador</label>
+                   <input type=\"text\" class=\"form-control\" id=\"organizador\" name=\"organizador\" value = \"".$lineaBD['organizador']."\">
                  </div>
          <br>
          <div>
@@ -1125,7 +1226,14 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Fecha de celebración</label></p>
                    <input type=\"date\" class=\"form-control\" id=\"fecha\" name=\"fecha\" value = \"".$lineaBD['fecha']."\">
-                 </div>
+                 </div>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
 
                  <input type=\"hidden\" name=\"tabla\" value=\"io\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1142,12 +1250,19 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Cargo</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
          
                  <input type=\"hidden\" name=\"tabla\" value=\"ga\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1164,12 +1279,19 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
          
                  <input type=\"hidden\" name=\"tabla\" value=\"gb\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1186,12 +1308,19 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
 
                  <input type=\"hidden\" name=\"tabla\" value=\"gc\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1208,12 +1337,19 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'  enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
          
                  <input type=\"hidden\" name=\"tabla\" value=\"gd\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1231,12 +1367,19 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
 
                  <input type=\"hidden\" name=\"tabla\" value=\"ge\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1255,7 +1398,7 @@ $lineaBD = $resultado->fetch_assoc();
 
 echo"   
 
-<form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+<form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                   <div>
                      <label for=\"nombre\">Nombre del Proyecto</label>
@@ -1269,16 +1412,16 @@ echo"
           <br>
           <label for=\"subtipo\">Subtipo</label></p>
           <select name=\"subtipo\">    
-            <option value=\"1\" selected=\"selected\">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
-            <option value=\"2\">Proyectos mediante convenios</option>
+            <option value=\"1\" "; if($lineaBD['subtipo']==1) echo" selected"; echo">Proyectos de convocatoria pública y competitiva concedidos a la ULPGC</option>
+            <option value=\"2\" "; if($lineaBD['subtipo']==2) echo" selected"; echo">Proyectos mediante convenios</option>
           </select>
          <br>
           <div>
           <p class=\"subtitulo\"><label for=\"director\">Es Director</label></p>";
-          if ($lineaBD['director'])
-          echo"<input type=\"checkbox\" id=\"director\" name=\"director\" checked value=\"1\">";
+          if ($lineaBD['director']==1)
+          echo"<input type=\"checkbox\" id=\"director\" name=\"director\" checked value=\"1\"> si";
         else
-          echo"<input type=\"checkbox\" id=\"director\" name=\"director\" value=\"1\">";
+          echo"<input type=\"checkbox\" id=\"director\" name=\"director\" value=\"1\">no";
       echo"
         </div>
 
@@ -1304,7 +1447,15 @@ echo"
                   <div>
                     <p class=\"subtitulo\"><label for=\"numinv\">Número de investigadores</label></p>
                     <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['numinv']."\">
-                  </div>
+                  </div>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
+
                   <input type=\"hidden\" name=\"tabla\" value=\"gff\" />
                   <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
                   <div class=\"modal-footer\">
@@ -1323,16 +1474,11 @@ $lineaBD = $resultado->fetch_assoc();
 
 echo"     
 
-<form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+<form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
                    <input type=\"text\" class=\"form-control\" id=\"titulo\" name=\"titulo\" value = \"".$lineaBD['titulo']."\">
-                 </div>
-         <br>
-                 <div>
-                   <label for=\"orgfin\">Unidades Docentes</label>
-                   <input type=\"text\" class=\"form-control\" id=\"UD\" name=\"UD\" value = \"".$lineaBD['UD']."\">
                  </div>
          <br>
          <div>
@@ -1376,7 +1522,14 @@ echo"
                  <div>
                    <p class=\"subtitulo\"><label for=\"numinv\">Núnero de investigadores</label></p>
                    <input type=\"text\" class=\"form-control\" id=\"numinv\" name=\"numinv\" value = \"".$lineaBD['numinv']."\">
-                 </div>
+                 </div>";
+                  
+                    if($lineaBD['archivo'])
+                        echo"Archivo actual: <br>
+                            <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                    
+                    echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                    <input name=\"file\" type=\"file\" />
 
                  <input type=\"hidden\" name=\"tabla\" value=\"gg\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1393,7 +1546,7 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
@@ -1404,7 +1557,18 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                    <label for=\"orgfin\">Fecha</label>
                    <input type=\"date\" class=\"form-control\" id=\"fecha\" name=\"fecha\" value = \"".$lineaBD['fecha']."\">
                  </div>
-         <br>
+                 <br>
+                 <div>
+                   <p class=\"subtitulo\"><label for=\"numinv\">Fecha de inicio</label></p>
+                   <input type=\"date\" class=\"form-control\" id=\"desde\" name=\"desde\" value = \"".$lineaBD['desde']."\">
+                 </div>
+                 <br>
+                 <div>
+                   <p class=\"subtitulo\"><label for=\"numinv\">Fecha de finalización</label></p>
+                   <input type=\"date\" class=\"form-control\" id=\"hasta\" name=\"hasta\" value = \"".$lineaBD['hasta']."\">
+                 </div>
+
+                 <br>
          <div>
                    <label for=\"entcol\">Lugar</label>
                    <input type=\"text\" class=\"form-control\" id=\"lugar\" name=\"lugar\" value = \"".$lineaBD['lugar']."\">
@@ -1413,7 +1577,14 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <div>
                    <p class=\"subtitulo\"><label for=\"subtot\">Descripcion </label></p>
                    <input type=\"text\" class=\"form-control\" id=\"descripcion\" name=\"descripcion\" value = \"".$lineaBD['descripcion']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
                 
                  <input type=\"hidden\" name=\"tabla\" value=\"gh\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
@@ -1430,7 +1601,7 @@ $query = "SELECT * FROM $tabla WHERE id=$id";
 $resultado = $mysqli->query($query);
 $lineaBD = $resultado->fetch_assoc();
 
-echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post'>
+echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario/update.php\" method='post' enctype=\"multipart/form-data\">
 
                  <div>
                     <label for=\"nombre\">Título</label>
@@ -1440,7 +1611,14 @@ echo"    <form id=\"form_Cv_2\" name=\"form_Cv_2\" action=\"library/tablausuario
                  <div>
                    <label for=\"orgfin\">Descripcion</label>
                    <input type=\"text\" class=\"form-control\" id=\"descripcion\" name=\"descripcion\" value = \"".$lineaBD['descripcion']."\">
-                 </div>
+                 </div>";
+                 
+                   if($lineaBD['archivo'])
+                       echo"Archivo actual: <br>
+                           <a href=\"library/tablausuario/".$lineaBD['archivo']."\" target=\"_blank\" >".$lineaBD['archivo']."</a><br>";
+                   
+                   echo"<p class=\"subtitulo\"><label for=\"numinv\">Subir archivo.</label></p>
+                   <input name=\"file\" type=\"file\" />
         
                  <input type=\"hidden\" name=\"tabla\" value=\"gi\" />
                  <input type=\"hidden\" name=\"id\" value=\"".$id."\" />
